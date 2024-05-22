@@ -1,0 +1,37 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <h2>Complaints</h2>
+    <div>
+        {% for complaint in complaints %}
+            <div>
+                <a href="{% url 'complaint_detail' complaint.company.slug complaint.slug %}">
+                    <h3>{{ complaint.title }}</h3>
+                </a>
+                <p><strong>Company:</strong> <a href="{% url 'company_detail' complaint.company.slug %}">{{ complaint.company.name }}</a></p>
+                
+                <p><strong>Posted on:</strong> {{ complaint.created_at }}</p>
+                <p>{{ complaint.text|truncatechars:100 }} <a href="{% url 'complaint_detail' complaint.company.slug complaint.slug %}">More</a></p>
+            </div>
+        {% empty %}
+            <p>No complaints yet.</p>
+        {% endfor %}
+    </div>
+    <div class="pagination">
+        <span class="step-links">
+            {% if complaints.has_previous %}
+                <a href="?page=1">&laquo; first</a>
+                <a href="?page={{ complaints.previous_page_number }}">previous</a>
+            {% endif %}
+            
+            <span class="current">
+                Page {{ complaints.number }} of {{ complaints.paginator.num_pages }}.
+            </span>
+            
+            {% if complaints.has_next %}
+                <a href="?page={{ complaints.next_page_number }}">next</a>
+                <a href="?page={{ complaints.paginator.num_pages }}">last &raquo;</a>
+            {% endif %}
+        </span>
+    </div>
+{% endblock %}
