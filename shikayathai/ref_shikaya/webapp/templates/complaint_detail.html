@@ -1,0 +1,7 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h1>{{ complaint.title }}</h1>
+<p>Complaint by {{ complaint.user.username }} on {{ complaint.created_at }}</p>
+<p>{{ complaint.text }}</p>
+{% endblock %}
