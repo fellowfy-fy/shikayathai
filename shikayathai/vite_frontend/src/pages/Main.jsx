@@ -1,6 +1,8 @@
 import React from "react";
 import PropTypes from "prop-types";
-import "./Main.css";
+import "../styles/Main.css";
+import FrameComponent from "../components/FrameComponent";
+import FrameComponent1 from "../components/FrameComponent1";
 
 const Header = () => (
   <header className="header">
