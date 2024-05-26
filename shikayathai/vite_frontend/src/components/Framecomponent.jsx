@@ -1,6 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
-import "../FrameComponent.css";
+import "../styles/FrameComponent.css";
 
 const FrameComponent = ({ className = "", onReadMoreClick }) => {
   // Функция для демонстрации нажатия на кнопку

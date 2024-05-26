@@ -1,6 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
-import "./FrameComponent1.css";
+import "../styles/FrameComponent1.css";
 
 const FrameComponent1 = ({ className = "", title }) => {
   return (
