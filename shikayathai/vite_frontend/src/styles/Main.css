@@ -1,0 +1,123 @@
+/* Basic Styles */
+.rounded-photo {
+    width: 24px;
+    height: 24px;
+    border-radius: var(--br-rounded);
+    overflow: hidden;
+    flex-shrink: 0;
+  }
+  
+  .relative-positioning {
+    position: relative;
+  }
+  
+  /* Flexbox Containers */
+  .flex-row {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-start;
+    gap: var(--gap-small);
+  }
+  
+  .flex-column {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    gap: var(--gap-small);
+  }
+  
+  /* Typography */
+  body {
+    font-family: var(--font-primary);
+  }
+  
+  .nav-item {
+    font-weight: 500;
+  }
+  
+  .accent-text {
+    color: var(--color-accent);
+  }
+  
+  .heading-large {
+    font-size: 64px;
+  }
+  
+  .heading-xlarge {
+    font-size: 128px;
+  }
+  
+  .text-medium {
+    font-size: var(--font-size-medium);
+  }
+  
+  /* Layout */
+  .header {
+    width: 100%;
+    background-color: var(--color-dark-blue);
+    justify-content: space-between;
+    padding: var(--padding-small) var(--padding-large);
+    box-sizing: border-box;
+    color: var(--color-white);
+  }
+  
+  .hero-section {
+    width: 100%;
+    background-color: var(--color-white);
+    padding: var(--padding-xlarge) var(--padding-large);
+    text-align: center;
+  }
+  
+  .hero-image {
+    border-radius: 50%;
+    background-color: var(--color-light-green);
+    width: 50%;
+    padding-bottom: 50%;
+  }
+  
+  .hero-content {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  
+  .cta-button {
+    border-radius: var(--br-small);
+    background-color: var(--color-warm-green);
+    padding: var(--padding-small);
+    font-size: var(--font-size-large);
+  }
+  
+  .features-section {
+    width: 100%;
+    border-radius: 0 0 var(--br-large) var(--br-large);
+    background-color: var(--color-orange);
+    height: 800px;
+    overflow: hidden;
+  }
+  
+  .feature-text {
+    font-family: var(--font-secondary);
+    white-space: pre-wrap;
+    text-align: left;
+  }
+  
+  .feature-description {
+    flex: 1;
+    font-weight: 500;
+  }
+  
+  .icon-large {
+    width: 48px;
+    height: 48px;
+  }
+  
+  .button {
+    width: 312px;
+    border-radius: var(--br-small);
+    height: 56px;
+    padding: var(--padding-small);
+    font-size: var(--font-size-large);
+  }
