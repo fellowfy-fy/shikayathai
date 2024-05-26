@@ -1,8 +1,18 @@
 import React from "react";
 import PropTypes from "prop-types";
-import "./FrameComponent.css";
+import "../FrameComponent.css";
 
-const FrameComponent = ({ className = "" }) => {
+const FrameComponent = ({ className = "", onReadMoreClick }) => {
+  // Функция для демонстрации нажатия на кнопку
+  const handleReadMoreClick = () => {
+    // Вызов переданной функции onReadMoreClick, если она есть
+    if (onReadMoreClick) {
+      onReadMoreClick();
+    } else {
+      alert("Read more clicked!"); // Запасной вариант, если функция не передана
+    }
+  };
+
   return (
     <div className={`review-card ${className}`}>
       <div className="user-info">
@@ -22,15 +32,16 @@ const FrameComponent = ({ className = "" }) => {
       <div className="review-text">
         sampletext
       </div>
-      <div className="read-more-button">
-        <div className="read-more-text">read more</div>
-      </div>
+      <button className="read-more-button" onClick={handleReadMoreClick}>
+        Read more
+      </button>
     </div>
   );
 };
 
 FrameComponent.propTypes = {
   className: PropTypes.string,
+  onReadMoreClick: PropTypes.func, // Добавлен новый проп для обработчика клика
 };
 
 export default FrameComponent;
