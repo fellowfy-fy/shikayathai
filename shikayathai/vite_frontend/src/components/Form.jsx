@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom";
 import { ACCESS_TOKEN, REFRESH_TOKEN } from "../constants";
 import "../styles/Form.css";
 import LoadingIndicator from "./LoadingIndicator";
+import RedirectButton from "./RedirectButton";
 
 function Form({ route, method }) {
     const [email, setEmail] = useState("");
@@ -27,7 +28,7 @@ function Form({ route, method }) {
             if (method === "login") {
                 localStorage.setItem(ACCESS_TOKEN, res.data.access);
                 localStorage.setItem(REFRESH_TOKEN, res.data.refresh);
-                navigate("/main");
+                navigate("/");
             } else {
                 navigate("/login");
             }
@@ -68,7 +69,11 @@ function Form({ route, method }) {
             <button className="form-button" type="submit">
                 {formName}
             </button>
+                
+                <RedirectButton method={method} />
+            
         </form>
+        
     );
 }
 

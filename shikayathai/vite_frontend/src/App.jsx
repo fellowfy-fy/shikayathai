@@ -26,7 +26,7 @@ function App() {
           path="/"
           element={
             <ProtectedRoute>
-              <Home />
+              <Main />
             </ProtectedRoute>
           }
         />
@@ -34,14 +34,6 @@ function App() {
         <Route path="/logout" element={<Logout />} />
         <Route path="/register" element={<RegisterAndLogout />} />
         <Route path="*" element={<NotFound />}></Route>
-        <Route
-          path="/main"
-          element={
-            <ProtectedRoute>
-              <Main />
-            </ProtectedRoute>
-          }
-        />
       </Routes>
     </BrowserRouter>
   )
