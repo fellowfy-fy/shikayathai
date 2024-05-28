@@ -135,5 +135,6 @@ SIMPLE_JWT = {
 AUTH_USER_MODEL = 'api.User'
 
 AUTHENTICATION_BACKENDS = [
+    'api.authentication.EmailOrNameBackend', 
     'django.contrib.auth.backends.ModelBackend',
 ]
