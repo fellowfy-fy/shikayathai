@@ -47,6 +47,7 @@ class Company(models.Model):
         return self.name
 
 class Complaint(models.Model):
+    author = models.ForeignKey(User, on_delete=models.CASCADE, related_name='complaints')
     title = models.CharField(max_length=255)
     description = models.TextField()
     private_description = models.TextField(blank=True, null=True)
