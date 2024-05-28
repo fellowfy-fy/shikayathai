@@ -1,22 +1,35 @@
-import React from "react";
-import RequestItem from "./RequestItem";
+// RecentRequestSection.jsx
+import React, { useEffect, useState } from "react";
+import FrameComponent from "./FrameComponent";
+import "../../styles/RecentRequestSection.css"
 
-const RecentRequestsSection = ({ title }) => (
-    <section className="recent-requests-section">
-      <h2 className="section-title">{title}</h2>
-      <div className="request-list">
-        <RequestItem 
-          userInitials="An" 
-          userName="Anjali" 
-          companyName="SuryaTech" 
-          complaintText="sampletext"
-        />
+const RecentRequestSection = () => {
+  const [requests, setRequests] = useState([]);
+
+  useEffect(() => {
+    fetchRequests();
+  }, []);
+
+  const fetchRequests = async () => {
+    try {
+      const response = await fetch('https://api.yourdomain.com/requests'); // Adjust the API endpoint as needed
+      const data = await response.json();
+      setRequests(data);
+    } catch (error) {
+      console.error("Failed to fetch requests:", error);
+    }
+  };
+
+  return (
+    <div className="recent-requests-section">
+      <h2>Recent Requests</h2>
+      <div className="request-grid">
+        {requests.map((request, index) => (
+          <FrameComponent key={index} data={request} />
+        ))}
       </div>
-      <div className="pagination-buttons">
-        <button onClick={() => alert("Previous page")}>Previous</button>
-        <button onClick={() => alert("Next page")}>Next</button>
-      </div>
-    </section>
+    </div>
   );
+};
 
-  export default RecentRequestsSection
+export default RecentRequestSection;

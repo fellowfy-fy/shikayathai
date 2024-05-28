@@ -1,4 +1,5 @@
 import React from "react";
+import "../../styles/RecentRR.css"
 
 const RequestItem = ({ userInitials, userName, companyName, complaintText }) => (
     <div className="request-item">

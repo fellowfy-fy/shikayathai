@@ -1,114 +1,40 @@
-/* User Photo */
-.user-photo {
-  width: 44px;
-  height: 44px;
-  border-radius: var(--br-rounded);
-  background-color: var(--color-lightcoral);
-  position: relative;
-}
-
-/* User Info */
-.user-name {
-  position: relative;
-  font-weight: 500;
-}
-
-.user-initial {
-  position: absolute;
-  top: 6px;
-  left: 3px;
-}
-
-.user-initial-wrapper {
-  width: 24px;
-  height: 24px;
-  border-radius: var(--br-round);
-  background-color: var(--color-blueviolet);
-  position: relative;
-  overflow: hidden;
-  flex-shrink: 0;
-}
-
-.user-company {
-  position: relative;
-  font-size: var(--font-size-small);
-  font-weight: 500;
-  font-family: var(--font-secondary);
-  color: var(--color-dark-blue-70);
+/* FrameComponent.css */
+.request-card {
+  background-color: #fff; /* White background for the card */
+  border-radius: 8px; /* Rounded corners */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+  overflow: hidden; /* Ensures no content spills out */
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between; /* Space elements evenly */
+  padding: 20px; /* Padding inside the card */
+  margin-bottom: 20px; /* Space between cards */
 }
 
 .user-info {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  justify-content: flex-start;
-  gap: var(--gap-xsmall);
+  font-size: 0.9rem; /* Smaller font size for user info */
+  color: #666; /* Grey color for text */
+  margin-bottom: 10px; /* Space below the user info */
 }
 
-.user-container {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: flex-start;
-  gap: var(--gap-small);
-  position: absolute;
-  top: 16px;
-  left: 16px;
-  font-size: var(--font-size-large);
-  color: var(--color-white);
-}
-
-/* Review */
-.review-text {
-  position: absolute;
-  top: 76px;
-  left: 16px;
-  display: inline-block;
-  width: 248px;
-}
-
-.review-gradient {
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  width: 100%;
-  height: 53px;
-  background: linear-gradient(
-    180deg,
-    rgba(242, 243, 245, 0.5),
-    var(--color-light-gray) 79%,
-    var(--color-light-gray)
-  );
-}
-
-.read-more {
-  position: relative;
+.request-text {
+  font-size: 1rem; /* Standard font size for request text */
+  color: #333; /* Darker text for better readability */
+  margin-bottom: 20px; /* Space below the request text */
 }
 
 .read-more-button {
-  position: absolute;
-  bottom: 16px;
-  left: 50%;
-  transform: translateX(-50%);
-  border-radius: var(--br-medium);
-  background-color: var(--color-white);
-  padding: var(--padding-small);
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  align-self: center; /* Center button horizontally in the card */
+  background-color: #0056b3; /* Button color */
+  color: white;
+  border: none;
+  border-radius: 4px;
+  padding: 10px 20px;
+  cursor: pointer;
+  font-size: 1rem;
+  text-transform: uppercase; /* Makes the button text uppercase */
 }
 
-/* Review Card */
-.review-card {
-  width: 280px;
-  height: 320px;
-  border-radius: var(--br-base);
-  background-color: var(--color-dark-blue-5);
-  position: relative;
-  overflow: hidden;
-  flex-shrink: 0;
-  text-align: left;
-  font-size: var(--font-size-base);
-  color: var(--color-dark-blue);
-  font-family: var(--font-primary);
+.read-more-button:hover {
+  background-color: #004494; /* Darker shade on hover */
 }

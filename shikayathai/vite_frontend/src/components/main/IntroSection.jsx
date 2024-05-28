@@ -13,7 +13,9 @@ const IntroSection = () => (
           Your Complaint Easily:
         </div>
       </div>
-      <button onClick={() => alert("Step to filing a complaint clicked!")}>Describe Your Issue</button>
+      <button className="cta-button" onClick={onFileComplaintClick}>
+        {DESCRIBE_YOUR_ISSUE}
+      </button>
     </section>
   );
 

@@ -1,5 +1,6 @@
 import React from "react";
 import { BRAND_NAME } from "../../constants";
+import "../../styles/StatisticsSection.css"
 
 
 const StatisticsSection = () => (

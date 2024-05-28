@@ -1,5 +1,6 @@
 import React from "react";
 import { FREE_COMPLAINT_PLATFORM, FILE_A_COMPLAINT } from "../../constants";
+import "../../styles/HeroSection.css"
 
 const HeroSection = ({ onFileComplaintClick }) => (
     <section className="hero-section">
