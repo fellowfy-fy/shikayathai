@@ -5,12 +5,13 @@ from .serializers import UserSerializer, CompanySerializer, ComplaintSerializer,
 from rest_framework.generics import RetrieveUpdateDestroyAPIView, ListCreateAPIView
 from rest_framework.views import APIView
 from rest_framework.response import Response
+from rest_framework.parsers import MultiPartParser, FormParser
     
 
 class UserDetailUpdateDeleteView(RetrieveUpdateDestroyAPIView):
     queryset = User.objects.all()
     serializer_class = UserSerializer
-    permission_classes = [IsAdminUser]  # Typically, only admins can update/delete users, adjust as needed.
+    permission_classes = [IsAuthenticated]  # Typically, only admins can update/delete users, adjust as needed.
 
     def get_queryset(self):
         # Optionally, restrict to only allow users to update/delete their own profile
@@ -54,15 +55,13 @@ class CreateUserView(ListCreateAPIView):
 class CreateComplaintView(ListCreateAPIView): 
     serializer_class = ComplaintSerializer
     permission_classes = [IsAuthenticated]
-    
+    parser_classes = (MultiPartParser, FormParser)  # Needed for file uploads
+
     def get_queryset(self):
-        return Complaint.objects.filter(author = self.request.user)
+        return Complaint.objects.filter(author=self.request.user)
     
     def perform_create(self, serializer):
-        if serializer.is_valid():
-            serializer.save(author=self.request.user)
-        else:
-            print(serializer.errors)
+        serializer.save(author=self.request.user)
             
 
 
