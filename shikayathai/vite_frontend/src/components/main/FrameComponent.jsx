@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import PropTypes from "prop-types";
-import "../styles/FrameComponent.css";
-import "../styles/Modal.css";
+import "../../styles/FrameComponent.css";
+import "../../styles/Modal.css"
 
 // Simple modal component
 const Modal = ({ isOpen, onClose, content }) => {
@@ -21,17 +21,27 @@ const FrameComponent = ({ className = "", data }) => {
   const [isModalOpen, setModalOpen] = useState(false);
 
   const handleReadMoreClick = () => {
-    setModalOpen(true);
+    // Only open modal if fullText is available
+    if (data?.fullText) {
+      setModalOpen(true);
+    } else {
+      console.log("No full text available for modal.");
+    }
   };
 
   const handleCloseModal = () => {
     setModalOpen(false);
   };
 
+  // Check if data and data.text are available before rendering
+  if (!data?.text) {
+    return <div>Loading or no data available...</div>;
+  }
+
   return (
     <div className={`review-card ${className}`}>
       <div className="user-info">
-        {/* инфа юзера */}
+        {/* User info goes here */}
       </div>
       <div className="review-text">
         {data.text}
@@ -48,7 +58,7 @@ FrameComponent.propTypes = {
   className: PropTypes.string,
   data: PropTypes.shape({
     text: PropTypes.string,
-    fullText: PropTypes.string 
+    fullText: PropTypes.string // Ensure this prop is available
   })
 };
 
