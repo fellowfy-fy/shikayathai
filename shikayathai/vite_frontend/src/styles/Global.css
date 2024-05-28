@@ -12,6 +12,11 @@
 body {
   margin: 0;
   line-height: normal;
+  display: flex; 
+  justify-content: center; 
+  align-items: center; 
+  height: 100vh; 
+  font-family: var(--font-primary); 
 }
 
 /* Переменные CSS */

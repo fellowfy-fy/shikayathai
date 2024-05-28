@@ -8,6 +8,7 @@ import StatisticsSection from "../components/main/StatisticsSection";
 import FAQSection from "../components/main/FAQSection";
 import OrganizationSection from "../components/main/OrganizationSection";
 import Footer from "../components/main/Footer";
+import FrameComponent from "../components/main/FrameComponent";
 import "../styles/Main.css";
 
 const Main = () => {
@@ -17,6 +18,7 @@ const Main = () => {
       <HeroSection />
       <IntroSection />
       <RecentRequestsSection title="Recent requests" />
+      <FrameComponent />
       <RecentRequestsSection title="Recent reactions" />
       <TopRatedCompaniesSection />
       <StatisticsSection />
