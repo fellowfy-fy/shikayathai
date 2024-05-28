@@ -1,0 +1,59 @@
+/* IntroSection.css */
+.intro-section {
+    background-color: #ffffff; /* Adjust color based on your theme */
+    padding: 40px 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+  
+  .intro-title {
+    font-size: 2rem;
+    color: var(--color-dark-blue); /* Ensure you have this variable defined, or replace with a hex code */
+    margin-bottom: 1rem;
+  }
+  
+  .intro-text {
+    font-size: 1.5rem;
+    margin-bottom: 2rem;
+    color: var(--color-dark-slate-gray); /* As above, ensure this variable is defined */
+  }
+  
+  .intro-steps {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+  }
+  
+  .intro-step {
+    flex: 1;
+    padding: 20px;
+    text-align: left;
+  }
+  
+  .intro-step-number {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: var(--primary-color); /* Define this or replace it */
+  }
+  
+  .intro-step-detail {
+    font-size: 1.25rem;
+    margin-top: 0.5rem;
+  }
+  
+  @media (max-width: 768px) {
+    .intro-steps {
+      flex-direction: column;
+    }
+  
+    .intro-step {
+      margin-bottom: 20px;
+    }
+  
+    .intro-step-number {
+      display: block;
+    }
+  }
+  
