@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import Header from "../components/main/Header"
 import HeroSection from "../components/main/HeroSection";
 import IntroSection from "../components/main/IntroSection";
@@ -9,13 +9,20 @@ import FAQSection from "../components/main/FAQSection";
 import OrganizationSection from "../components/main/OrganizationSection";
 import Footer from "../components/main/Footer";
 import FrameComponent from "../components/main/FrameComponent";
+import FileComplaintForm from "../components/main/FileComplaintForm";
 import "../styles/Main.css";
 
 const Main = () => {
+  const [isFormVisible, setIsFormVisible] = useState(false);
+
+  const toggleFormVisibility = () => {
+    setIsFormVisible(!isFormVisible);
+  };
+
   return (
     <main className="main">
       <Header />
-      <HeroSection />
+      <HeroSection onFileComplaintClick={toggleFormVisibility} />
       <IntroSection />
       <RecentRequestsSection title="Recent requests" />
       <FrameComponent />
@@ -25,6 +32,7 @@ const Main = () => {
       <FAQSection />
       <OrganizationSection />
       <Footer />
+      {isFormVisible && <FileComplaintForm closeForm={toggleFormVisibility} />}
     </main>
   );
 };
