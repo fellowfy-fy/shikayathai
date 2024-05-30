@@ -95,6 +95,7 @@ const FileComplaintForm = ({ isAuthenticated }) => {
         <input type="file" name="documents" multiple onChange={handleFileChange} />
       </label>
       <button type="submit">Add Complaint</button>
+      <button type="button" class="btn-close" aria-label="Close"></button>
     </form>
   );
 };

@@ -1,26 +1,39 @@
 import React from "react";
 import { BRAND_NAME } from "../../constants";
+import '../../styles/Header.css';
+import logo from '../../assets/logo.svg'; 
+
 
 function Header() {
-    return (
-      <header className="header">
-        <div className="logo">
-          <img className="logo-icon" alt="Logo" src="/frame-7.svg" />
-          <b className="brand-name">{BRAND_NAME}</b>
+  return (
+    <nav className="navbar navbar-expand-lg fixed-top">
+      <div className="container-fluid">
+        <a className="navbar-brand" href="#">
+          <img src={logo} alt="Logo" style={{ height: '40px' }} /> {/* Adjust size as needed */}
+          {BRAND_NAME}
+        </a>
+        <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+          <span className="navbar-toggler-icon"></span>
+        </button>
+        <div className="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul className="navbar-nav me-auto mb-2 mb-lg-0">
+            <li className="nav-item">
+              <a className="nav-link" href="/home">Home</a>
+            </li>
+            <li className="nav-item">
+              <a className="nav-link" href="/complaints">All complaints</a>
+            </li>
+            <li className="nav-item">
+              <a className="nav-link" href="/brands">All brands</a>
+            </li>
+          </ul>
+          <div class="d-flex ms-auto"> {/* This will push the Profile to the right */}
+            <a href="/profile" className="btn btn-outline-light">Profile</a>
+          </div>
         </div>
-        <nav className="navigation">
-          <button className="nav-item accent-text">Home</button>
-          <button className="nav-item">All complaints</button>
-          <button className="nav-item">All brand</button>
-        </nav>
-        <div className="user-profile">
-          <img className="user-photo" alt="User Profile" src="/user-photo@2x.png" />
-          <div className="nav-item">Profile</div>
-        </div>
-      </header>
-    );
-  }
+      </div>
+    </nav>
+  );
+}
 
-
-  export default Header;
-
+export default Header;

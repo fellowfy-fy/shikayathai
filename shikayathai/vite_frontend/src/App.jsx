@@ -7,6 +7,7 @@ import NotFound from "./pages/NotFound"
 import ProtectedRoute from "./components/ProtectedRoute"
 import Main from "./pages/Main"
 import 'bootstrap/dist/css/bootstrap.min.css'
+import './styles/global.css'
 
 function Logout() {
   localStorage.clear()
