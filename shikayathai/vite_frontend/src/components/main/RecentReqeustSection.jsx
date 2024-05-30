@@ -1,7 +1,6 @@
 // RecentRequestSection.jsx
 import React, { useEffect, useState } from "react";
 import FrameComponent from "./FrameComponent";
-import "../../styles/RecentRequestSection.css"
 import axios from 'axios';  // Import Axios
 
 function RecentRequestSection({ route }){

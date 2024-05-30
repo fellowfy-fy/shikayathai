@@ -1,7 +1,5 @@
 import React, { useState } from "react";
 import PropTypes from "prop-types";
-import "../../styles/FrameComponent.css";
-import "../../styles/Modal.css";
 
 // Simple modal component
 const Modal = ({ isOpen, onClose, content }) => {

@@ -1,7 +1,5 @@
 import React from "react";
 import { BRAND_NAME } from "../../constants";
-import "../../styles/IntroSection.css"
-
 const IntroSection = () => (
     <section className="intro-section">
       <div className="intro-content">

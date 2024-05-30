@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import "../../styles/FileComplaintForm.css"
 
 const FileComplaintForm = ({ isAuthenticated }) => {
   const [formData, setFormData] = useState({

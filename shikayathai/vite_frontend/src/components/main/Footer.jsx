@@ -1,6 +1,5 @@
 import React from "react";
 import { BRAND_NAME } from "../../constants";
-import "../../styles/Footer.css"
 
 const Footer = () => (
     <footer className="footer">

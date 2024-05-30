@@ -10,8 +10,6 @@ import OrganizationSection from "../components/main/OrganizationSection";
 import Footer from "../components/main/Footer";
 import FrameComponent from "../components/main/FrameComponent";
 import FileComplaintForm from "../components/main/FileComplaintForm";
-import "../styles/Main.css";
-
 const Main = () => {
   const [isFormVisible, setIsFormVisible] = useState(false);
 
