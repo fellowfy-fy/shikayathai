@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import PropTypes from "prop-types";
 import "../../styles/FrameComponent.css";
-import "../../styles/Modal.css"
+import "../../styles/Modal.css";
 
 // Simple modal component
 const Modal = ({ isOpen, onClose, content }) => {
@@ -22,7 +22,7 @@ const FrameComponent = ({ className = "", data }) => {
 
   const handleReadMoreClick = () => {
     // Only open modal if fullText is available
-    if (data?.fullText) {
+    if (data?.description) {
       setModalOpen(true);
     } else {
       console.log("No full text available for modal.");
@@ -33,8 +33,8 @@ const FrameComponent = ({ className = "", data }) => {
     setModalOpen(false);
   };
 
-  // Check if data and data.text are available before rendering
-  if (!data?.text) {
+  // Check if data and data.title are available before rendering
+  if (!data?.title) {
     return <div>Loading or no data available...</div>;
   }
 
@@ -44,12 +44,19 @@ const FrameComponent = ({ className = "", data }) => {
         {/* User info goes here */}
       </div>
       <div className="review-text">
-        {data.text}
+        {data.title} {/* Adjusted to display title */}
       </div>
-      <button className="read-more-button" onClick={handleReadMoreClick}>
-        Read more
-      </button>
-      <Modal isOpen={isModalOpen} onClose={handleCloseModal} content={data.fullText} />
+      <div className="review-text">
+        {data.author_name} {/* Adjusted to display title */}
+      </div>
+      {data.description && (
+        <>
+          <button className="read-more-button" onClick={handleReadMoreClick}>
+            Read more
+          </button>
+          <Modal isOpen={isModalOpen} onClose={handleCloseModal} content={data.description} />
+        </>
+      )}
     </div>
   );
 };
@@ -57,8 +64,9 @@ const FrameComponent = ({ className = "", data }) => {
 FrameComponent.propTypes = {
   className: PropTypes.string,
   data: PropTypes.shape({
-    text: PropTypes.string,
-    fullText: PropTypes.string // Ensure this prop is available
+    title: PropTypes.string.isRequired, // Updated to ensure title is required
+    author_name: PropTypes.string,             // Marked as optional
+    description: PropTypes.string          // Ensure this prop is available
   })
 };
 

@@ -26,7 +26,7 @@ const Main = () => {
       <IntroSection />
       <RecentRequestsSection title="Recent requests" />
       <FrameComponent />
-      <RecentRequestsSection title="Recent reactions" />
+      <RecentRequestsSection title="Recent reactions" route="/api/complaints/"/>
       <TopRatedCompaniesSection />
       <StatisticsSection />
       <FAQSection />

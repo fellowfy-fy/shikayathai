@@ -34,9 +34,10 @@ class CompanySerializer(serializers.ModelSerializer):
         fields = ['id', 'name', 'website']
 
 class ComplaintSerializer(serializers.ModelSerializer):
+    author_name = serializers.SerializerMethodField()
     class Meta:
         model = Complaint
-        fields = ['id', 'title', 'description', 'private_description', 'company', 'photos', 'documents', 'resolution_rating', 'resolution_comment']
+        fields = ['id', 'author_name', 'title', 'description', 'private_description', 'company', 'photos', 'documents', 'resolution_rating', 'resolution_comment']
         
     def create(self, validated_data):
         photos_data = validated_data.pop('photos', [])
@@ -49,6 +50,9 @@ class ComplaintSerializer(serializers.ModelSerializer):
             Document.objects.create(complaint=complaint, **document_data)
 
         return complaint
+    
+    def get_author_name(self, obj):
+        return obj.author.name
 
 class CommentSerializer(serializers.ModelSerializer):
     class Meta:

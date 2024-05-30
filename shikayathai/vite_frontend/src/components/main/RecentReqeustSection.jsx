@@ -2,8 +2,9 @@
 import React, { useEffect, useState } from "react";
 import FrameComponent from "./FrameComponent";
 import "../../styles/RecentRequestSection.css"
+import axios from 'axios';  // Import Axios
 
-const RecentRequestSection = () => {
+function RecentRequestSection({ route }){
   const [requests, setRequests] = useState([]);
 
   useEffect(() => {
@@ -12,11 +13,15 @@ const RecentRequestSection = () => {
 
   const fetchRequests = async () => {
     try {
-      const response = await fetch('https://api.yourdomain.com/requests'); // Adjust the API endpoint as needed
-      const data = await response.json();
-      setRequests(data);
+      const url = "http://127.0.0.1:8000/api/complaints/get/"
+      const data = await axios.get(url);
+      console.log(data.data)
+      setRequests(data.data);
+
     } catch (error) {
+
       console.error("Failed to fetch requests:", error);
+
     }
   };
 
