@@ -6,6 +6,8 @@ from rest_framework.generics import RetrieveUpdateDestroyAPIView, ListCreateAPIV
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework.parsers import MultiPartParser, FormParser
+from rest_framework import status
+from rest_framework.exceptions import ValidationError
     
 
 class UserDetailUpdateDeleteView(RetrieveUpdateDestroyAPIView):
@@ -51,6 +53,26 @@ class CreateUserView(ListCreateAPIView):
     queryset = User.objects.all()
     serializer_class = UserSerializer
     permission_classes = [AllowAny]
+    
+    def post(self, request, *args, **kwargs):
+        name = request.data.get('name')
+        password = request.data.get('password')
+        email = request.data.get('email')
+        if not name:
+            raise ValidationError({'username': 'Username is required.'})
+        if not password:
+            raise ValidationError({'password': 'Password is required.'})
+        if not email:
+            raise ValidationError({'email': 'Email is required.'})
+
+        # Check if user already exists
+        if User.objects.filter(name=name).exists():
+            raise ValidationError({'username': 'Username already exists.'})
+
+        # Create the user
+        user = User.objects.create_user(name=name, password=password, email=email)
+
+        return Response({'message': 'User created successfully'}, status=status.HTTP_201_CREATED)
     
 class CreateComplaintView(ListCreateAPIView): 
     serializer_class = ComplaintSerializer

@@ -2,8 +2,8 @@ import { useState } from "react";
 import api from "../api/axios";
 import { useNavigate } from "react-router-dom";
 import { ACCESS_TOKEN, REFRESH_TOKEN } from "../constants";
-import LoadingIndicator from "./LoadingIndicator";
-import RedirectButton from "./RedirectButton";
+import LoadingIndicator from "./archive/LoadingIndicator";
+import RedirectButton from "./archive/RedirectButton";
 
 function Form({ route, method }) {
     const [email, setEmail] = useState("");
