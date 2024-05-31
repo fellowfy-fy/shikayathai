@@ -1,4 +1,4 @@
-/* Base styles for the Hero section */
+/* стили для HeroSection */
 .hero-section {
     display: flex;
     align-items: center;
@@ -84,4 +84,57 @@
       font-size: 1rem;
     }
   }
+
+
+
+  /* стили для IntroSection */
+  .intro-section {
+    background-color: #fff; /* Assuming a white background; adjust as needed */
+    padding-top: 80px;
+    padding-bottom: 80px;
+    text-align: center; /* Centers the content */
+    font-family: 'YourFontFamily', sans-serif; /* Replace 'YourFontFamily' with your actual font family */
+  }
+  
+  .intro-content {
+    max-width: 1200px; /* Limit width for better readability */
+    margin: 0 auto; /* Center the content horizontally */
+  }
+  
+  .intro-title {
+    font-size: 32px; /* Large text for the title */
+    color: #000; /* Black color for the text */
+    margin-bottom: 32px; /* Space between title and text */
+  }
+  
+  .intro-text {
+    font-size: 18px;
+    color: #001A45; /* Dark grey for the text */
+    margin-bottom: 64px; /* Space between text and steps */
+  }
+  
+  .intro-steps {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr); /* Three columns of equal width */
+    gap: 32px; /* Space between columns */
+  }
+  
+  .intro-step {
+    background-color: #f0f0f0; /* Light grey background for each step */
+    padding: 20px;
+    border-radius: 8px; /* Rounded corners for the steps */
+  }
+  
+  .intro-step-number {
+    font-size: 24px;
+    color: #001A45;
+    font-weight: bold; /* Bold font for the step number */
+    margin-right: 10px; /* Space between number and detail */
+  }
+  
+  .intro-step-detail {
+    font-size: 16px;
+    color: #001A45; /* Slightly lighter black for details */
+  }
+  
   
