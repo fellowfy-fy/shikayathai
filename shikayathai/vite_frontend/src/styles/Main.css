@@ -120,7 +120,7 @@
   }
   
   .intro-step {
-    background-color: #f0f0f0; /* Light grey background for each step */
+    background-color: white; /* Light grey background for each step */
     padding: 20px;
     border-radius: 8px; /* Rounded corners for the steps */
   }
@@ -135,6 +135,55 @@
   .intro-step-detail {
     font-size: 16px;
     color: #001A45; /* Slightly lighter black for details */
+  }
+  
+  /* Стили для ФАК */
+
+  .faq-section {
+    background-color: white; /* Light grey background for the entire section */
+    padding: 40px; /* Padding around the section */
+    font-family: 'YourFontFamily', sans-serif; /* Replace with your actual font family */
+  }
+  
+  .section-header {
+    text-align: center; /* Center the title and subtitle */
+    margin-bottom: 30px; /* Space below the header */
+  }
+  
+  .section-title {
+    font-size: 32px; /* Font size for the title */
+    color: #001A45; /* Black color for text */
+  }
+  
+  .section-subtitle {
+    font-size: 20px; /* Font size for the subtitle */
+    color: #001A45; /* Grey color for text */
+    margin-top: 10px; /* Space between title and subtitle */
+  }
+  
+  .faq-list {
+    background-color: #fff; /* White background for the list container */
+    padding: 20px; /* Padding inside the list container */
+  }
+  
+  .faq-item {
+    background-color: #f4f4f4; /* White background for each item */
+    border: 1px solid #eaeaea; /* Light grey border for the card */
+    padding: 20px; /* Padding inside each card */
+    margin-bottom: 20px; /* Space between cards */
+    border-radius: 8px; /* Rounded corners for the cards */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+  }
+  
+  .faq-question {
+    font-size: 18px; /* Font size for questions */
+    color: #001A45; /* Dark color for question text */
+  }
+  
+  .faq-answer {
+    font-size: 16px; /* Font size for answers */
+    color: #001A45; /* Grey color for answer text */
+    margin-top: 10px; /* Space between question and answer */
   }
   
   

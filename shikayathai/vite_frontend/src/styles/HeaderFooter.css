@@ -1,0 +1,111 @@
+/* хэдер */
+
+/* Basic navbar styling */
+.navbar {
+  background-color: #001A45; /* Deep blue background for navbar */
+  position: fixed; /* Fix navbar at the top of the viewport */
+  width: 100%; /* Ensure navbar spans full width */
+  z-index: 1050; /* Sit on top of other content */
+  border-bottom: 2px solid #cbd3e6; /* Optional border for aesthetic */
+}
+
+.navbar-brand {
+  color: white; /* Brand text color */
+  display: flex;
+  align-items: center; /* Align logo and text vertically */
+}
+
+.navbar-brand img {
+  height: 40px; /* Set logo size */
+  margin-right: 10px; /* Space between logo and text */
+}
+
+/* Navbar links styling */
+.navbar-nav {
+  display: flex; /* Ensures flex properties apply to children */
+  justify-content: center; /* Center navbar items horizontally */
+  width: 100%; /* Take full width to distribute space */
+}
+
+/* Adjusted navbar link styles for hover */
+.navbar-nav .nav-link {
+  color: white; /* Default color */
+  transition: color 0.3s ease; /* Smooth transition for color change */
+  text-decoration: none; /* No underline by default */
+}
+
+/* Hover state that changes only the text color */
+.navbar-nav .nav-link:hover,
+.navbar-nav .nav-link:focus {
+  color: #FFD2BE; /* Light gray on hover, adjust if needed */
+  background-color: transparent; /* Keeps the background unchanged */
+}
+
+/* Active state management */
+.navbar-nav .nav-link.active,
+.navbar-nav .nav-link:active {
+  color: #cbd3e6; /* Color for active or clicked link */
+}
+
+/* футер */
+
+.footer {
+  background-color: #001A45; /* Dark blue background */
+  color: #ffffff; /* White text color */
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  padding: 20px 0; /* Vertical padding */
+  font-family: 'YourFontFamily', sans-serif; /* Specify your font family */
+}
+
+.footer-logo {
+  display: flex;
+  align-items: center;
+}
+
+.logo-icon {
+  width: 50px; /* Adjust the size as needed */
+  height: auto;
+  margin-right: 10px; /* Space between logo and brand name */
+}
+
+.brand-name {
+  font-size: 24px; /* Adjust the size as needed */
+  font-weight: bold;
+}
+
+.footer-links {
+  display: flex;
+  gap: 20px; /* Space between buttons */
+}
+
+.link {
+  background: none;
+  border: none;
+  color: #ffffff;
+  font-size: 16px; /* Adjust the size as needed */
+  cursor: pointer;
+}
+
+.link:hover, .link:focus {
+  text-decoration: underline; /* Style for hover and focus */
+}
+
+.footer-text {
+  font-size: 14px; /* Adjust the size as needed */
+}
+
+
+
+/* Right-aligned profile button */
+.btn-profile {
+  margin-left: auto; /* Pushes the profile button to the right */
+  color: white;
+  border-color: white; /* White border for the button */
+}
+
+.btn-profile:hover {
+  color: #002366; /* Dark blue text on hover */
+  background-color: #f8f9fa; /* Light background on hover */
+}
