@@ -1,3 +1,5 @@
+import React from "react";
+import { FREE_COMPLAINT_PLATFORM, FILE_A_COMPLAINT } from "../../constants";
 import man from "../../assets/man.jpg"; 
 import '../../styles/Main.css';
 
