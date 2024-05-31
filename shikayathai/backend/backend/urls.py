@@ -7,6 +7,7 @@ from rest_framework_simplejwt.views import (
 from api.views import CreateUserView
 from django.conf import settings
 from django.conf.urls.static import static
+from .views import logout_view
 
 
 urlpatterns = [
@@ -16,6 +17,7 @@ urlpatterns = [
     path('api/token/refresh/', TokenRefreshView.as_view(), name='token_refresh'),
     path("api-auth/", include("rest_framework.urls")),
     path("api/user/register/", CreateUserView.as_view(), name="register"),
+    path('api/logout/', logout_view, name='logout'),
 ]
 
 

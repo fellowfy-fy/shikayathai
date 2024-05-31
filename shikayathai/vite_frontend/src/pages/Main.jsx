@@ -20,7 +20,7 @@ const Main = () => {
 
   return (
     <main className="main">
-      <Header />
+      {/* <Header /> */}
       <HeroSection onFileComplaintClick={toggleFormVisibility} />
       <IntroSection />
       <RecentRequestsSection title="Recent requests" />
@@ -30,7 +30,7 @@ const Main = () => {
       <StatisticsSection />
       <FAQSection />
       <OrganizationSection />
-      <Footer />
+      {/* <Footer /> */}
       {isFormVisible && <FileComplaintForm closeForm={toggleFormVisibility} />}
     </main>
   );

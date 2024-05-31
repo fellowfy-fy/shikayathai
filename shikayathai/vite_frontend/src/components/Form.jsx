@@ -1,5 +1,5 @@
 import { useState } from "react";
-import api from "../api";
+import api from "../api/axios";
 import { useNavigate } from "react-router-dom";
 import { ACCESS_TOKEN, REFRESH_TOKEN } from "../constants";
 import LoadingIndicator from "./LoadingIndicator";
@@ -72,7 +72,6 @@ function Form({ route, method }) {
                 <RedirectButton method={method} />
             
         </form>
-        
     );
 }
 
