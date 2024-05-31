@@ -1,5 +1,5 @@
 import man from "../../assets/man.jpg"; 
-import '../../styles/HeroSection.css';
+import '../../styles/Main.css';
 
 const HeroSection = ({ onFileComplaintClick }) => (
   <section className="hero-section">
