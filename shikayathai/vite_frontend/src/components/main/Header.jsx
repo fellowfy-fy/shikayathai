@@ -1,10 +1,13 @@
-import React from "react";
+import { Link } from "react-router-dom";
+import { useContext } from "react";
 import { BRAND_NAME } from "../../constants";
 import '../../styles/HeaderFooter.css';
 import logo from '../../assets/logo.svg'; 
-
+import AuthContext from "../../context/AuthProvider";
 
 function Header() {
+  const { auth } = useContext(AuthContext)
+
   return (
     <nav className="navbar navbar-expand-lg fixed-top">
       <div className="container-fluid">
@@ -18,17 +21,20 @@ function Header() {
         <div className="collapse navbar-collapse" id="navbarSupportedContent">
           <ul className="navbar-nav me-auto mb-2 mb-lg-0">
             <li className="nav-item">
-              <a className="nav-link" href="/home">Home</a>
+              <Link className="nav-link" to="/">Home</Link>
             </li>
             <li className="nav-item">
-              <a className="nav-link" href="/complaints">All complaints</a>
+              <Link className="nav-link" to="/complaints">All complaints</Link>
             </li>
             <li className="nav-item">
-              <a className="nav-link" href="/brands">All brands</a>
+              <Link className="nav-link" to="/brands">All brands</Link>
             </li>
           </ul>
-          <div class="d-flex ms-auto"> {/* This will push the Profile to the right */}
-            <a href="/profile" className="btn btn-outline-light">Profile</a>
+          <div className="d-flex ms-auto"> {/* This will push the Profile to the right */}
+            { auth.username ?
+            (<Link to="/profile" className="btn btn-outline-light">{auth.username}</Link>)
+            : (<Link to="/profile" className="btn btn-outline-light">Profile</Link>)
+          }
           </div>
         </div>
       </div>
