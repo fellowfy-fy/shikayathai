@@ -1,45 +1,49 @@
-import { Link } from "react-router-dom";
-import { useContext } from "react";
-import { BRAND_NAME } from "../../constants";
-import '../../styles/HeaderFooter.css';
-import logo from '../../assets/logo.svg'; 
-import AuthContext from "../../context/AuthProvider";
+import React from 'react';
+import { useModal } from '../../context/ModalContext';
+import RegistrationComponent from './RegistrationComponent';
+import LoginComponent from './LoginComponent';
+import "../../styles/HeaderFooter.css";
 
-function Header() {
-  const { auth } = useContext(AuthContext)
+const Header = () => {
+  const { showModal } = useModal();
+
+  const handleRegisterClick = () => {
+    showModal(<RegistrationComponent />);
+  };
+
+  const handleLoginClick = () => {
+    showModal(<LoginComponent />);
+  };
 
   return (
-    <nav className="navbar navbar-expand-lg fixed-top">
-      <div className="container-fluid">
-        <a className="navbar-brand" href="#">
-          <img src={logo} alt="Logo" style={{ height: '40px' }} /> {/* Adjust size as needed */}
-          {BRAND_NAME}
-        </a>
-        <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-          <span className="navbar-toggler-icon"></span>
-        </button>
-        <div className="collapse navbar-collapse" id="navbarSupportedContent">
-          <ul className="navbar-nav me-auto mb-2 mb-lg-0">
-            <li className="nav-item">
-              <Link className="nav-link" to="/">Home</Link>
-            </li>
-            <li className="nav-item">
-              <Link className="nav-link" to="/complaints">All complaints</Link>
-            </li>
-            <li className="nav-item">
-              <Link className="nav-link" to="/brands">All brands</Link>
-            </li>
-          </ul>
-          <div className="d-flex ms-auto"> {/* This will push the Profile to the right */}
-            { auth.username ?
-            (<Link to="/profile" className="btn btn-outline-light">{auth.username}</Link>)
-            : (<Link to="/profile" className="btn btn-outline-light">Profile</Link>)
-          }
+    <header>
+      <nav className="navbar navbar-expand-lg">
+        <div className="container-fluid">
+          <a className="navbar-brand" href="/">Shikayathai</a>
+          <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span className="navbar-toggler-icon"></span>
+          </button>
+          <div className="collapse navbar-collapse" id="navbarNav">
+            <ul className="navbar-nav me-auto mb-2 mb-lg-0">
+              <li className="nav-item">
+                <a className="nav-link active" aria-current="page" href="/">Home</a>
+              </li>
+              <li className="nav-item">
+                <a className="nav-link" href="/brands">All rands</a>
+              </li>
+              <li className="nav-item">
+                <a className="nav-link" href="/complaints">All Complaints</a>
+              </li>
+            </ul>
+            <div className="d-flex">
+              <button onClick={handleRegisterClick} className="btn btn-primary me-2">Register</button>
+              <button onClick={handleLoginClick} className="btn btn-secondary">Login</button>
+            </div>
           </div>
         </div>
-      </div>
-    </nav>
+      </nav>
+    </header>
   );
-}
+};
 
 export default Header;

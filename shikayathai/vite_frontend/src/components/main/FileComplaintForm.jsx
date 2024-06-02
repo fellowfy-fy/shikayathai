@@ -21,7 +21,7 @@ const FileComplaintForm = () => {
     documents.forEach((document, index) => formData.append(`documents[${index}]`, document));
 
     try {
-      await axios.post('/complaints/', formData, {
+      await axios.post('api/complaints/', formData, {
         headers: {
           'Content-Type': 'multipart/form-data'
         }
