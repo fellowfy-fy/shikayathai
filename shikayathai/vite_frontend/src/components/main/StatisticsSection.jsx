@@ -1,31 +1,33 @@
 import React from "react";
 import { BRAND_NAME } from "../../constants";
+import '../../styles/Main.css';
+import logo from '../../assets/logo.svg'; // Adjust the path to your logo image
 
+const StatisticSection = () => {
+    return (
+        <section className="statistic-section">
+            <div className="statistic-section-logo">
+                <img src={logo} alt="Shikayathai Logo" />
+                <h2>Shikayathai</h2>
+            </div>
+            <h3>in numbers</h3>
+            <div className="statistic-items">
+                <div className="statistic-item">
+                    <h3>1 500 000+</h3>
+                    <p>active users</p>
+                </div>
+                <div className="statistic-item">
+                    <h3>32 000+</h3>
+                    <p>active companies</p>
+                </div>
+                <div className="statistic-item">
+                    <h3>8 000 000+</h3>
+                    <p>resolved requests</p>
+                </div>
+            </div>
+            <a href="/complaints" className="file-complaint-button">File a complaint</a>
+        </section>
+    );
+};
 
-const StatisticsSection = () => (
-    <section className="statistics-section">
-      <div className="section-header">
-        <div className="section-logo">
-          <img className="logo-icon" alt="" src="/frame-71.svg" />
-          <b className="brand-name">{BRAND_NAME}</b>
-        </div>
-        <div className="section-title-wrapper">
-          <b className="section-title">in numbers</b>
-        </div>
-      </div>
-      <div className="statistics-content">
-        <div className="statistics-list">
-          <div className="statistic-item">
-            <b className="statistic-value">1 500 000+</b>
-            <b className="statistic-label">active users</b>
-          </div>
-        </div>
-        <button className="cta-button" onClick={() => alert('Statistical data clicked!')}>
-          More Statistics
-        </button>
-      </div>
-    </section>
-  );
-  
-
-  export default StatisticsSection
+export default StatisticSection;

@@ -88,54 +88,285 @@
 
 
   /* стили для IntroSection */
-  .intro-section {
-    background-color: #fff; /* Assuming a white background; adjust as needed */
-    padding-top: 80px;
-    padding-bottom: 80px;
-    text-align: center; /* Centers the content */
-    font-family: 'YourFontFamily', sans-serif; /* Replace 'YourFontFamily' with your actual font family */
-  }
-  
-  .intro-content {
-    max-width: 1200px; /* Limit width for better readability */
-    margin: 0 auto; /* Center the content horizontally */
-  }
-  
-  .intro-title {
-    font-size: 32px; /* Large text for the title */
-    color: #000; /* Black color for the text */
-    margin-bottom: 32px; /* Space between title and text */
-  }
-  
-  .intro-text {
-    font-size: 18px;
-    color: #001A45; /* Dark grey for the text */
-    margin-bottom: 64px; /* Space between text and steps */
-  }
-  
+.intro-section {
+  text-align: center;
+  padding: 2rem 1rem;
+}
+
+.intro-section h1 {
+  font-size: 3rem;
+  font-weight: bold;
+  color: #1a1a1a;
+}
+
+.intro-section p {
+  font-size: 1.2rem;
+  color: #555;
+  margin-bottom: 2rem;
+}
+
+.intro-steps {
+  display: flex;
+  justify-content: center;
+  gap: 2rem;
+  margin-bottom: 2rem;
+}
+
+.intro-step {
+  max-width: 200px;
+  text-align: center;
+}
+
+.intro-step h2 {
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: #1a1a1a;
+  margin-bottom: 0.5rem;
+}
+
+.intro-step p {
+  font-size: 1rem;
+  color: #777;
+}
+
+.intro-step .step-number {
+  font-size: 2rem;
+  font-weight: bold;
+  color: #007bff;
+  margin-bottom: 0.5rem;
+}
+
+.intro-highlight {
+  background-color: #f0f8ff;
+  padding: 1rem;
+  border-radius: 0.5rem;
+  font-size: 1rem;
+  color: #555;
+}
+
+/* стили для реквестов */
+.recent-requests-section {
+  text-align: center;
+  padding: 2rem 1rem;
+  background-color: white;
+}
+
+.recent-requests-section h2 {
+  font-size: 2rem;
+  font-weight: bold;
+  color: #1a1a1a;
+  margin-bottom: 1rem;
+}
+
+.recent-requests-section .watch-all {
+  font-size: 1rem;
+  color: #007bff;
+  text-decoration: none;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.recent-requests-section .watch-all:hover {
+  text-decoration: underline;
+}
+
+.watch-all-icon {
+  margin-left: 0.5rem;
+  font-size: 1.2rem;
+}
+
+@media (max-width: 768px) {
   .intro-steps {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr); /* Three columns of equal width */
-    gap: 32px; /* Space between columns */
+      flex-direction: column;
+      align-items: center;
   }
-  
+
   .intro-step {
-    background-color: white; /* Light grey background for each step */
-    padding: 20px;
-    border-radius: 8px; /* Rounded corners for the steps */
+      max-width: none;
+      margin-bottom: 1rem;
   }
-  
-  .intro-step-number {
-    font-size: 24px;
-    color: #001A45;
-    font-weight: bold; /* Bold font for the step number */
-    margin-right: 10px; /* Space between number and detail */
+}
+
+/* стили для Top Rated Companies Section */
+.top-rated-companies-section {
+  text-align: center;
+  padding: 2rem 1rem;
+}
+
+.top-rated-companies-section h2 {
+  font-size: 2rem;
+  font-weight: bold;
+  color: #1a1a1a;
+  margin-bottom: 1rem;
+}
+
+.nav {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 2rem;
+}
+
+.nav-link {
+  font-size: 1rem;
+  color: #007bff;
+  text-decoration: none;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.nav-link:hover {
+  text-decoration: underline;
+}
+
+.watch-all-icon {
+  margin-left: 0.5rem;
+  font-size: 1.2rem;
+}
+
+.company-cards {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 1rem;
+}
+
+.company-card {
+  background-color: #f8f9fa;
+  border-radius: 0.5rem;
+  padding: 1rem;
+  width: 200px;
+  text-align: left;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.company-card .company-icon {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  background-color: #e9ecef;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 1.5rem;
+  color: #007bff;
+  margin-bottom: 1rem;
+}
+
+.company-card h3 {
+  font-size: 1rem;
+  font-weight: bold;
+  color: #1a1a1a;
+  margin-bottom: 0.5rem;
+}
+
+.company-card .company-rating {
+  display: flex;
+  align-items: center;
+  font-size: 1rem;
+  color: #28a745;
+  margin-bottom: 0.5rem;
+}
+
+.company-card .company-rating .star-icon {
+  color: #ffc107;
+  margin-right: 0.25rem;
+}
+
+.company-card .company-reviews {
+  font-size: 0.9rem;
+  color: #6c757d;
+}
+
+/* Responsive Styles */
+@media (max-width: 768px) {
+  .company-cards {
+      flex-direction: column;
+      align-items: center;
   }
-  
-  .intro-step-detail {
-    font-size: 16px;
-    color: #001A45; /* Slightly lighter black for details */
+}
+
+/* стили для статы */
+.statistic-section {
+  text-align: center;
+  padding: 2rem 1rem;
+  background: linear-gradient(90deg, rgba(255,228,196,1) 0%, rgba(230,237,255,1) 100%);
+  border-radius: 1rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 2rem;
+}
+
+.statistic-section-logo {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.statistic-section-logo img {
+  width: 40px;
+  height: 40px;
+}
+
+.statistic-section-logo h2 {
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: #1a1a1a;
+  margin: 0;
+}
+
+.statistic-items {
+  display: flex;
+  justify-content: center;
+  gap: 2rem;
+  flex-wrap: wrap;
+}
+
+.statistic-item {
+  text-align: center;
+}
+
+.statistic-item h3 {
+  font-size: 2rem;
+  font-weight: bold;
+  color: #1a1a1a;
+  margin: 0;
+}
+
+.statistic-item p {
+  font-size: 1rem;
+  color: #555;
+  margin: 0;
+}
+
+.file-complaint-button {
+  background-color: #fff;
+  border: 2px solid #007bff;
+  color: #007bff;
+  padding: 0.5rem 1rem;
+  font-size: 1rem;
+  font-weight: bold;
+  border-radius: 0.5rem;
+  cursor: pointer;
+  text-decoration: none;
+}
+
+.file-complaint-button:hover {
+  background-color: #f0f8ff;
+}
+
+/* Responsive Styles */
+@media (max-width: 768px) {
+  .statistic-items {
+      flex-direction: column;
+      align-items: center;
+      gap: 1rem;
   }
+}
+
   
   /* Стили для ФАК */
 
