@@ -3,7 +3,7 @@ import React, { useEffect, useState } from "react";
 import FrameComponent from "./FrameComponent";
 import api from "../../api/axios"
 
-function RecentRequestSection({ route }){
+function RecentRequestSection(){
   const [requests, setRequests] = useState([]);
 
   useEffect(() => {

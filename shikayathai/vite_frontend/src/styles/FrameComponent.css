@@ -1,0 +1,15 @@
+.recent-requests-section {
+    padding: 20px;
+  }
+  
+  .request-grid {
+    display: flex;
+    flex-wrap: nowrap; /* Ensures children are placed in one line */
+    overflow-x: auto; /* Allows horizontal scrolling if children overflow */
+    gap: 10px; /* Optional: Add space between children */
+  }
+  
+  .request-grid > * {
+    flex: 0 0 auto; /* Prevents children from shrinking or growing */
+  }
+  

@@ -11,6 +11,7 @@ from django.contrib.auth import authenticate
 @api_view(['POST'])
 def logout_view(request):
     try:
+        print(request)
         refresh_token = request.data["refresh"]
         token = RefreshToken(refresh_token)
         token.blacklist()

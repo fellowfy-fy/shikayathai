@@ -1,19 +1,23 @@
-import React, { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useModal } from '../../context/ModalContext';
 import axios from '../../api/axios';
+import useAuth from '../../hooks/useAuth';
 
 const FileComplaintForm = () => {
   const { hideModal } = useModal();
   const [title, setTitle] = useState('');
   const [description, setDescription] = useState('');
   const [company, setCompany] = useState('');
+  const [companies, setCompanies] = useState([]); 
   const [photos, setPhotos] = useState([]);
   const [documents, setDocuments] = useState([]);
   const [error, setError] = useState(null);
+  const { auth } = useAuth()
 
   const handleSubmit = async (event) => {
     event.preventDefault();
     const formData = new FormData();
+    formData.append('author', auth.name)
     formData.append('title', title);
     formData.append('description', description);
     formData.append('company', company);
@@ -21,9 +25,11 @@ const FileComplaintForm = () => {
     documents.forEach((document, index) => formData.append(`documents[${index}]`, document));
 
     try {
+      console.log(formData)
       await axios.post('api/complaints/', formData, {
         headers: {
-          'Content-Type': 'multipart/form-data'
+          'Content-Type': 'multipart/form-data',
+          'Authorization': `Bearer ${auth.accessToken}`
         }
       });
       hideModal();
@@ -35,6 +41,18 @@ const FileComplaintForm = () => {
   const handleFileChange = (event, setFiles) => {
     setFiles(Array.from(event.target.files));
   };
+
+  useEffect(() => {
+    const fetchCompanies = async () => {
+      try {
+        const response = await axios.get('api/companies/');
+        setCompanies(response.data);
+      } catch (error) {
+        console.error('Error fetching companies:', error);
+      }
+    };
+    fetchCompanies();
+  }, []);
 
   return (
     <div>
@@ -55,7 +73,12 @@ const FileComplaintForm = () => {
           </div>
           <div className="mb-3">
             <label htmlFor="company" className="form-label">Company</label>
-            <input type="text" className="form-control" id="company" value={company} onChange={(e) => setCompany(e.target.value)} required />
+            <select className="form-control" id="company" value={company} onChange={(e) => setCompany(e.target.value)} required>
+              <option value="">Select a company</option>
+              {companies.map(company => (
+                <option key={company.id} value={company.id}>{company.name}</option>
+              ))}
+            </select>
           </div>
           <div className="mb-3">
             <label htmlFor="photos" className="form-label">Photos</label>

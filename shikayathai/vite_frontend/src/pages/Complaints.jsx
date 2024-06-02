@@ -1,3 +1,5 @@
+import RecentRequestsSection from "../components/main/RecentReqeustSection";
+
 function Complaints() {
     return (
       <div>
@@ -6,7 +8,7 @@ function Complaints() {
         <br />
         <br />
         <br />
-        <div>Complaints Page!</div>
+      <RecentRequestsSection title="Recent requests" />
       </div>
     );
   }

@@ -7,7 +7,6 @@ function Profile() {
 
   const signOut = async () => {
     await logout();
-    console.log("You have been log out")
     navigate("/");
   };
   return (
@@ -18,21 +17,6 @@ function Profile() {
       <br />
       <br />
       <div>Profile Page!</div>
-
-      <div className="d-flex ms-auto">
-        {" "}
-        {/* This will push the Profile to the right */}
-        <Link to="/profile/register" className="btn btn-outline-dark">
-          Register
-        </Link>
-      </div>
-      <div className="d-flex ms-auto">
-        {" "}
-        {/* This will push the Profile to the right */}
-        <Link to="/profile/login" className="btn btn-outline-dark">
-          Login
-        </Link>
-      </div>
       <div className="d-flex ms-auto">
         {" "}
         {/* This will push the Profile to the right */}

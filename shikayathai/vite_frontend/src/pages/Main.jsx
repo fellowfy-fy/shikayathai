@@ -6,7 +6,6 @@ import TopRatedCompaniesSection from "../components/main/TopRatedCompaniesSectio
 import StatisticsSection from "../components/main/StatisticsSection";
 import FAQSection from "../components/main/FAQSection";
 import OrganizationSection from "../components/main/OrganizationSection";
-import FrameComponent from "../components/main/FrameComponent";
 import FileComplaintForm from "../components/main/FileComplaintForm";
 
 const Main = () => {
@@ -21,8 +20,6 @@ const Main = () => {
       <HeroSection onFileComplaintClick={toggleFormVisibility} />
       <IntroSection />
       <RecentRequestsSection title="Recent requests" />
-      <FrameComponent />
-      <RecentRequestsSection title="Recent reactions" route="/api/complaints/"/>
       <TopRatedCompaniesSection />
       <StatisticsSection />
       <FAQSection />
