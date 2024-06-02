@@ -1,10 +1,15 @@
-import React from 'react';
-import { useModal } from '../../context/ModalContext';
-import RegistrationComponent from './RegistrationComponent';
-import LoginComponent from './LoginComponent';
+import React from "react";
+import { useModal } from "../../context/ModalContext";
+import RegistrationComponent from "./RegistrationComponent";
+import LoginComponent from "./LoginComponent";
 import "../../styles/HeaderFooter.css";
+import { useContext } from "react";
+import AuthContext from "../../context/AuthProvider";
+import { Link } from "react-router-dom";
+import Login from "../Login";
 
 const Header = () => {
+  const { auth } = useContext(AuthContext);
   const { showModal } = useModal();
 
   const handleRegisterClick = () => {
@@ -17,28 +22,62 @@ const Header = () => {
 
   return (
     <header>
-      <nav className="navbar navbar-expand-lg">
+      <nav className="navbar navbar-expand-lg ">
         <div className="container-fluid">
-          <a className="navbar-brand" href="/">Shikayathai</a>
-          <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+          <Link className="navbar-brand" to="/">
+            Shikayathai
+          </Link>
+          <button
+            className="navbar-toggler"
+            type="button"
+            data-bs-toggle="collapse"
+            data-bs-target="#navbarNav"
+            aria-controls="navbarNav"
+            aria-expanded="false"
+            aria-label="Toggle navigation"
+          >
             <span className="navbar-toggler-icon"></span>
           </button>
           <div className="collapse navbar-collapse" id="navbarNav">
             <ul className="navbar-nav me-auto mb-2 mb-lg-0">
               <li className="nav-item">
-                <a className="nav-link active" aria-current="page" href="/">Home</a>
+                <Link className="nav-link" to="/">
+                  Home
+                </Link>
               </li>
               <li className="nav-item">
-                <a className="nav-link" href="/brands">All rands</a>
+                <Link className="nav-link" to="/brands">
+                  All brands
+                </Link>
               </li>
               <li className="nav-item">
-                <a className="nav-link" href="/complaints">All Complaints</a>
+                <Link className="nav-link" to="/complaints">
+                  All Complaints
+                </Link>
               </li>
             </ul>
-            <div className="d-flex">
-              <button onClick={handleRegisterClick} className="btn btn-primary me-2">Register</button>
-              <button onClick={handleLoginClick} className="btn btn-secondary">Login</button>
-            </div>
+            {!auth.name ? (
+              <div className="d-flex">
+                <button
+                  onClick={handleRegisterClick}
+                  className="btn btn-primary me-2"
+                >
+                  Register
+                </button>
+                <button
+                  onClick={handleLoginClick}
+                  className="btn btn-secondary"
+                >
+                  Login
+                </button>
+              </div>
+            ) : (
+              <div className="d-flex">
+              <Link className="btn btn-primary me-2" to="/profile">
+                {auth.name}
+              </Link>
+              </div>
+            )}
           </div>
         </div>
       </nav>

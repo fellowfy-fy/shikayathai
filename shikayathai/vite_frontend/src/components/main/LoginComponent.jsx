@@ -1,22 +1,60 @@
-import React, { useState } from 'react';
 import { useModal } from '../../context/ModalContext';
-import axios from '../../api/axios';
+import api from '../../api/axios';
+import  { useRef, useState } from 'react';
+import useAuth from '../../hooks/useAuth';
+import {  useNavigate, useLocation } from 'react-router-dom';
+
+const LOGIN_URL = 'api/login/';
 
 const LoginComponent = () => {
+  
   const { hideModal } = useModal();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [error, setError] = useState(null);
+  const { setAuth } = useAuth();
 
-  const handleSubmit = async (event) => {
-    event.preventDefault();
+  const navigate = useNavigate();
+  const location = useLocation();
+  const from = location.state?.from?.pathname || "/";
+
+  const errRef = useRef();
+
+  const [errMsg, setErrMsg] = useState('');
+
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
     try {
-      await axios.post('/api/login/', { email, password });
-      hideModal();
-    } catch (error) {
-      setError(error.response?.data?.message || 'An error occurred');
+        const response = await api.post(LOGIN_URL,
+            JSON.stringify({ email, password }),
+            {
+                headers: { 'Content-Type': 'application/json' },
+                // withCredentials: true
+            }
+        );
+        console.log(JSON.stringify(response?.data));
+        // console.log(JSON.stringify(response));
+        const accessToken = response?.data?.access;
+        const name = response?.data?.name
+        setAuth({ name, email, password, accessToken });
+        setEmail('');
+        setPassword('');
+        hideModal();
+        navigate(from, { replace: true });
+    } catch (err) {
+        if (!err?.response) {
+            setErrMsg('No Server Response');
+        } else if (err.response?.status === 400) {
+            setErrMsg('Missing Username or Password');
+        } else if (err.response?.status === 401) {
+            setErrMsg('Unauthorized');
+        } else {
+            setErrMsg('Login Failed');
+        }
+        errRef.current.focus();
     }
-  };
+}
 
   return (
     <div>
@@ -25,7 +63,7 @@ const LoginComponent = () => {
         <button type="button" className="btn-close" onClick={hideModal} aria-label="Close"></button>
       </div>
       <div className="modal-body">
-        {error && <div className="alert alert-danger">{error}</div>}
+        {errMsg && <div className="alert alert-danger">{errMsg}</div>}
         <form onSubmit={handleSubmit}>
           <div className="mb-3">
             <label htmlFor="email" className="form-label">Email</label>

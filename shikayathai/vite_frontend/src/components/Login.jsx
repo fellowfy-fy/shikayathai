@@ -41,8 +41,9 @@ const Login = () => {
             console.log(JSON.stringify(response?.data));
             // console.log(JSON.stringify(response));
             const accessToken = response?.data?.access;
-            const username = response?.data?.name
-            setAuth({ username, email, pwd, accessToken });
+            const name = response?.data?.name
+            console.log(name, email, pwd, accessToken)
+            setAuth({ name, email, pwd, accessToken });
             setEmail('');
             setPwd('');
             navigate(from, { replace: true });

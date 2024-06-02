@@ -1,7 +1,7 @@
 // RecentRequestSection.jsx
 import React, { useEffect, useState } from "react";
 import FrameComponent from "./FrameComponent";
-import axios from 'axios';  // Import Axios
+import api from "../../api/axios"
 
 function RecentRequestSection({ route }){
   const [requests, setRequests] = useState([]);
@@ -12,9 +12,8 @@ function RecentRequestSection({ route }){
 
   const fetchRequests = async () => {
     try {
-      const url = "http://127.0.0.1:8000/api/complaints/get/"
-      const data = await axios.get(url);
-      console.log(data.data)
+      const url = "/api/complaints/get/"
+      const data = await api.get(url);
       setRequests(data.data);
 
     } catch (error) {
