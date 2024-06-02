@@ -417,4 +417,94 @@
     margin-top: 10px; /* Space between question and answer */
   }
   
+  /* стили для оргий*/
+
+  .organization-section {
+    text-align: center;
+    padding: 2rem;
+  }
+  
+  .section-header {
+    margin-bottom: 2rem;
+  }
+  
+  .section-title-wrapper {
+    margin-bottom: 1rem;
+  }
+  
+  .section-title {
+    font-size: 2rem;
+    font-weight: bold;
+    color: #1a1a1a;
+  }
+  
+  .section-subtitle {
+    font-size: 1.2rem;
+    color: #555;
+  }
+  
+  .section-content {
+    display: flex;
+    justify-content: space-around;
+    margin-bottom: 2rem;
+  }
+  
+  .content-item {
+    text-align: center;
+    max-width: 200px;
+  }
+  
+  .item-title {
+    font-size: 2rem;
+    color: #7f56d9;
+    margin-bottom: 0.5rem;
+  }
+  
+  .item-subtitle {
+    font-size: 1.2rem;
+    font-weight: bold;
+    color: #1a1a1a;
+    margin-bottom: 0.5rem;
+  }
+  
+  .call-to-action {
+    margin-top: 2rem;
+  }
+  
+  .call-to-action p {
+    font-size: 1rem;
+    color: #1a1a1a;
+    margin-bottom: 1rem;
+  }
+  
+  .create-button {
+    background-color: #1a1a1a;
+    color: #fff;
+    border: none;
+    padding: 0.5rem 1rem;
+    border-radius: 0.5rem;
+    cursor: pointer;
+  }
+  
+  .create-button:hover {
+    background-color: #333;
+  }
+  
+  /* Media queries for responsiveness */
+  @media (max-width: 768px) {
+    .section-content {
+      flex-direction: column;
+      align-items: center;
+    }
+  
+    .content-item {
+      max-width: 90%;
+      margin-bottom: 1.5rem;
+    }
+  
+    .call-to-action p {
+      font-size: 1rem;
+      padding: 0 1rem;
+    }
+  }
   
