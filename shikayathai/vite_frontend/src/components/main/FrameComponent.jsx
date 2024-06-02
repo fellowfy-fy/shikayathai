@@ -1,38 +1,19 @@
-import React, { useState } from "react";
+import React from "react";
 import PropTypes from "prop-types";
-
+import { useNavigate } from "react-router-dom";
 import "../../styles/FrameComponent.css";
-// Simple modal component
-const Modal = ({ isOpen, onClose, content }) => {
-  if (!isOpen) return null;
-
-  return (
-    <div className="modal-overlay">
-      <div className="modal-content">
-        <button className="modal-close" onClick={onClose}>Close</button>
-        <p>{content}</p>
-      </div>
-    </div>
-  );
-};
 
 const FrameComponent = ({ className = "", data }) => {
-  const [isModalOpen, setModalOpen] = useState(false);
+  const navigate = useNavigate();
 
   const handleReadMoreClick = () => {
-    // Only open modal if fullText is available
-    if (data?.description) {
-      setModalOpen(true);
+    if (data?.id) {
+      navigate(`/complaints/${data.id}`);
     } else {
-      console.log("No full text available for modal.");
+      console.log("No complaint ID available for navigation.");
     }
   };
 
-  const handleCloseModal = () => {
-    setModalOpen(false);
-  };
-
-  // Check if data and data.title are available before rendering
   if (!data?.title) {
     return <div>Loading or no data available...</div>;
   }
@@ -40,21 +21,22 @@ const FrameComponent = ({ className = "", data }) => {
   return (
     <div className={`review-card ${className}`}>
       <div className="user-info">
-        {/* User info goes here */}
+        <img src={data.author_avatar} alt={data.author_name} className="avatar" />
+        <div>
+          <h4>{data.author_name}</h4>
+          <p className="company-name">{data.company_name}</p>
+        </div>
       </div>
       <div className="review-text">
-        {data.title} {/* Adjusted to display title */}
+        {data.title}
       </div>
       <div className="review-text">
-        {data.author_name} {/* Adjusted to display title */}
+        {data.description}
       </div>
       {data.description && (
-        <>
-          <button className="read-more-button" onClick={handleReadMoreClick}>
-            Read more
-          </button>
-          <Modal isOpen={isModalOpen} onClose={handleCloseModal} content={data.description} />
-        </>
+        <button className="read-more-button" onClick={handleReadMoreClick}>
+          Read more
+        </button>
       )}
     </div>
   );
@@ -63,10 +45,13 @@ const FrameComponent = ({ className = "", data }) => {
 FrameComponent.propTypes = {
   className: PropTypes.string,
   data: PropTypes.shape({
-    title: PropTypes.string.isRequired, // Updated to ensure title is required
-    author_name: PropTypes.string,             // Marked as optional
-    description: PropTypes.string          // Ensure this prop is available
-  })
+    id: PropTypes.string.isRequired,
+    title: PropTypes.string.isRequired,
+    author_name: PropTypes.string,
+    author_avatar: PropTypes.string,
+    company_name: PropTypes.string,
+    description: PropTypes.string,
+  }),
 };
 
 export default FrameComponent;

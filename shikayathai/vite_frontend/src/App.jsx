@@ -9,6 +9,7 @@ import Profile from './pages/Profile';
 import Register from './components/Register';
 import Login from './components/Login';
 import ModalComponent from './components/ModalComponent';
+import ComplaintPage from './pages/ComplaintPage';
 
 function App() {
   return (
@@ -22,6 +23,7 @@ function App() {
           <Route path="profile/login" element={<Login />} />
           <Route path="brands" element={<Brands />} />
           <Route path="complaints" element={<Complaints />} />
+          <Route path="/complaints/:id" element={<ComplaintPage />} />
         </Route>
       </Routes>
       <ModalComponent />

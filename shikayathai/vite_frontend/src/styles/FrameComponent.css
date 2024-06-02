@@ -12,4 +12,93 @@
   .request-grid > * {
     flex: 0 0 auto; /* Prevents children from shrinking or growing */
   }
+  .review-card {
+    background-color: #f8f9fa;
+    border-radius: 1rem;
+    padding: 1rem;
+    width: 300px;
+    text-align: left;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+    position: relative;
+  }
+  
+  .user-info {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin-bottom: 1rem;
+  }
+  
+  .user-info .avatar {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+  }
+  
+  .user-info h4 {
+    font-size: 1rem;
+    font-weight: bold;
+    color: #1a1a1a;
+    margin: 0;
+  }
+  
+  .user-info .company-name {
+    font-size: 0.875rem;
+    color: #555;
+    margin: 0;
+  }
+  
+  .review-text {
+    font-size: 1rem;
+    color: #1a1a1a;
+    margin-bottom: 1rem;
+  }
+  
+  .read-more-button {
+    background-color: #ffffff;
+    border: 1px solid #007bff;
+    color: #007bff;
+    padding: 0.5rem 1rem;
+    font-size: 1rem;
+    font-weight: bold;
+    border-radius: 1.5rem;
+    cursor: pointer;
+    text-decoration: none;
+    display: inline-block;
+  }
+  
+  .read-more-button:hover {
+    background-color: #f0f8ff;
+  }
+  
+  .modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .modal-content {
+    background: #fff;
+    padding: 2rem;
+    border-radius: 1rem;
+    position: relative;
+    max-width: 500px;
+    width: 100%;
+  }
+  
+  .modal-close {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    background: none;
+    border: none;
+    font-size: 1.5rem;
+    cursor: pointer;
+  }
   
