@@ -88,62 +88,75 @@
 
 
   /* стили для IntroSection */
-.intro-section {
-  text-align: center;
-  padding: 2rem 1rem;
-}
-
-.intro-section h1 {
-  font-size: 3rem;
-  font-weight: bold;
-  color: #1a1a1a;
-}
-
-.intro-section p {
-  font-size: 1.2rem;
-  color: #555;
-  margin-bottom: 2rem;
-}
-
-.intro-steps {
-  display: flex;
-  justify-content: center;
-  gap: 2rem;
-  margin-bottom: 2rem;
-}
-
-.intro-step {
-  max-width: 200px;
-  text-align: center;
-}
-
-.intro-step h2 {
-  font-size: 1.5rem;
-  font-weight: bold;
-  color: #1a1a1a;
-  margin-bottom: 0.5rem;
-}
-
-.intro-step p {
-  font-size: 1rem;
-  color: #777;
-}
-
-.intro-step .step-number {
-  font-size: 2rem;
-  font-weight: bold;
-  color: #007bff;
-  margin-bottom: 0.5rem;
-}
-
-.intro-highlight {
-  background-color: #f0f8ff;
-  padding: 1rem;
-  border-radius: 0.5rem;
-  font-size: 1rem;
-  color: #555;
-}
-
+  .intro-section {
+    text-align: center;
+    padding: 2rem 1rem;
+  }
+  
+  .intro-title {
+    font-size: 2.5rem;
+    font-weight: bold;
+  }
+  
+  .intro-text {
+    font-size: 1.25rem;
+    margin-bottom: 2rem;
+  }
+  
+  .intro-steps {
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+    gap: 2rem;
+  }
+  
+  .intro-step {
+    flex: 1;
+    max-width: 300px;
+  }
+  
+  .intro-step-number {
+    display: inline-block;
+    width: 40px;
+    height: 40px;
+    line-height: 40px;
+    border-radius: 50%;
+    background-color: #003366;
+    color: #fff;
+    font-size: 1.5rem;
+    font-weight: bold;
+    margin-bottom: 0.5rem;
+  }
+  
+  .intro-step-detail {
+    text-align: left;
+  }
+  
+  .step-header {
+    font-size: 1.25rem;
+    font-weight: bold;
+    margin: 0;
+  }
+  
+  .step-header + p {
+    margin-top: 0.5rem;
+    font-size: 1rem;
+    color: #333;
+  }
+  
+  /* Media queries for responsiveness */
+  @media (max-width: 768px) {
+    .intro-steps {
+      flex-direction: column;
+      align-items: center;
+    }
+  
+    .intro-step {
+      max-width: none;
+      width: 100%;
+    }
+  }
+  
 /* стили для реквестов */
 .recent-requests-section {
   text-align: center;
