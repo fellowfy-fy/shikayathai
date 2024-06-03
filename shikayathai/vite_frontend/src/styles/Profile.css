@@ -81,7 +81,7 @@
   
   .save-changes-button {
     padding: 10px 20px;
-    background-color: #B5F62B; /* Primary background color */
+    background-color: #B5F62B; 
     color: #001A45;
     border: none;
     border-radius: 5px;
@@ -91,13 +91,13 @@
   
   /* Hover state */
   .save-changes-button:hover {
-    background-color: #A9E922; /* Darker shade for hover */
+    background-color: #A9E922; 
   }
   
   /* Active state */
   .save-changes-button:active {
-    background-color: #C9FF57; /* Even darker shade for active  */
-    transform: scale(0.98); /* Slightly scale down when pressed */
+    background-color: #C9FF57; 
+    transform: scale(0.98); 
   }
 
   .sign-out-button {
