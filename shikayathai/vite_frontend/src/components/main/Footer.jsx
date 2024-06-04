@@ -1,23 +1,31 @@
 import React from "react";
 import { BRAND_NAME } from "../../constants";
 import "../../styles/HeaderFooter.css";
+import logo from "../../assets/logo.svg";
 
-const Footer = () => (
+const Footer = () => {
+  return (
     <footer className="footer">
-      <div className="footer-logo">
-        <img className="logo-icon" alt="" src="/frame-72.svg" />
-        <b className="brand-name">{BRAND_NAME}</b>
+      <div className="footer-left">
+        <ul>
+          <li><a href="/about-us">About Us</a></li>
+          <li><a href="/terms">Terms</a></li>
+          <li><a href="/privacy-policy">Privacy policy</a></li>
+        </ul>
       </div>
-      <div className="footer-links">
-        <button className="link">About Us</button>
-        <button className="link">Terms</button>
-        <button className="link">Privacy policy</button>
+      <div className="footer-center">
+        <div className="footer-logo-name">
+          <img src={logo} alt="Shikayahai Logo" className="footer-logo" />
+          <p className="footer-name">Shikayahai</p>
+        </div>
+        <p className="footer-rights">Shikayahai 2024 all rights reserved</p>
       </div>
-      <div className="footer-text">
-        <div>{`${BRAND_NAME} 2024 all rights reserved`}</div>
+      <div className="footer-right">
+        <p>Noida</p>
+        <p>+91-8447078784</p>
       </div>
     </footer>
   );
-  
+};
 
-  export default Footer
+export default Footer;

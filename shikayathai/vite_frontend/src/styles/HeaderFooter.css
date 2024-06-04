@@ -1,6 +1,5 @@
 /* хэдер */
 
-/* Basic navbar styling */
 .navbar {
   background-color: #001A45; /* Deep blue background for navbar */
   position: fixed; /* Fix navbar at the top of the viewport */
@@ -47,57 +46,6 @@
   color: #cbd3e6; /* Color for active or clicked link */
 }
 
-/* футер */
-
-.footer {
-  background-color: #001A45; /* Dark blue background */
-  color: #ffffff; /* White text color */
-  display: flex;
-  justify-content: space-around;
-  align-items: center;
-  padding: 20px 0; /* Vertical padding */
-  font-family: 'YourFontFamily', sans-serif; /* Specify your font family */
-}
-
-.footer-logo {
-  display: flex;
-  align-items: center;
-}
-
-.logo-icon {
-  width: 50px; /* Adjust the size as needed */
-  height: auto;
-  margin-right: 10px; /* Space between logo and brand name */
-}
-
-.brand-name {
-  font-size: 24px; /* Adjust the size as needed */
-  font-weight: bold;
-}
-
-.footer-links {
-  display: flex;
-  gap: 20px; /* Space between buttons */
-}
-
-.link {
-  background: none;
-  border: none;
-  color: #ffffff;
-  font-size: 16px; /* Adjust the size as needed */
-  cursor: pointer;
-}
-
-.link:hover, .link:focus {
-  text-decoration: underline; /* Style for hover and focus */
-}
-
-.footer-text {
-  font-size: 14px; /* Adjust the size as needed */
-}
-
-
-
 /* Right-aligned profile button */
 .btn-profile {
   margin-left: auto; /* Pushes the profile button to the right */
@@ -109,3 +57,66 @@
   color: #002366; /* Dark blue text on hover */
   background-color: #f8f9fa; /* Light background on hover */
 }
+
+/* футер */
+.footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #001A45;
+  color: white;
+  padding: 20px;
+  font-size: 14px;
+}
+
+.footer-left ul {
+  list-style: none;
+  padding: 0;
+}
+
+.footer-left ul li {
+  margin-bottom: 10px;
+}
+
+.footer-left ul li a {
+  color: white;
+  text-decoration: none;
+}
+
+.footer-left ul li a:hover {
+  text-decoration: underline;
+}
+
+.footer-center {
+  text-align: center;
+  color: rgba(255, 255, 255, 0.5); /* Semi-transparent */
+}
+
+.footer-logo-name {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.footer-logo {
+  width: auto;
+  height: auto;
+  margin-right: 10px; /* Add some spacing between the logo and the name */
+}
+
+.footer-name {
+  font-size: 18px;
+  font-weight: bold;
+  margin: 0;
+}
+
+
+.footer-right {
+  text-align: right;
+}
+
+.footer-right p {
+  margin: 0;
+  margin-bottom: 10px;
+}
+
