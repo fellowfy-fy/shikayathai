@@ -1,7 +1,20 @@
 from django.contrib.auth.models import AbstractBaseUser, BaseUserManager, PermissionsMixin
 from django.db import IntegrityError, models
 
+def user_directory_path(instance, filename):
+    # file will be uploaded to MEDIA_ROOT/photos/<username>/<id_complaint>/<filename> or documents/<username>/<id_complaint>/<filename>
+    return '{}/{}/{}/{}'.format(
+        'photos' if isinstance(instance, Photo) else 'documents',
+        instance.complaint.author.name,
+        instance.complaint.id,
+        filename
+    )
 
+def userpic_path(instance, filename):
+    return '{}/{}/{}'.format(
+        'userpics',
+        instance.name,
+        filename)
 
 class UserManager(BaseUserManager):
     def create_user(self, email, name, password=None, **extra_fields):
@@ -25,7 +38,7 @@ class UserManager(BaseUserManager):
 class User(AbstractBaseUser, PermissionsMixin):
     name = models.CharField(max_length=255, unique=True)
     email = models.EmailField(unique=True)
-    userpic = models.ImageField(upload_to='userpics/', blank=True, null=True)
+    userpic = models.ImageField(upload_to=userpic_path, default='default/userpic.jpg')
     is_active = models.BooleanField(default=True)
     is_staff = models.BooleanField(default=False)
 
@@ -50,8 +63,6 @@ class Complaint(models.Model):
     description = models.TextField()
     private_description = models.TextField(blank=True, null=True)
     company = models.ForeignKey(Company, on_delete=models.CASCADE, related_name='complaints')
-    photos = models.ManyToManyField('Photo', blank=True, related_name='complaints')
-    documents = models.ManyToManyField('Document', blank=True, related_name='complaints')
     resolution_rating = models.IntegerField(blank=True, null=True)
     resolution_comment = models.TextField(blank=True, null=True)
 
@@ -68,15 +79,9 @@ class Comment(models.Model):
         return self.text[:20]
 
 class Photo(models.Model):
-    image = models.ImageField(upload_to='photos/')
-    uploaded_at = models.DateTimeField(auto_now_add=True)
-
-    def __str__(self):
-        return f"Photo {self.id}"
+    image = models.ImageField(upload_to=user_directory_path)
+    complaint = models.ForeignKey(Complaint, related_name='photos', on_delete=models.CASCADE)
 
 class Document(models.Model):
-    file = models.FileField(upload_to='documents/')
-    uploaded_at = models.DateTimeField(auto_now_add=True)
-
-    def __str__(self):
-        return f"Document {self.id}"
+    file = models.FileField(upload_to=user_directory_path)
+    complaint = models.ForeignKey(Complaint, related_name='documents', on_delete=models.CASCADE)
