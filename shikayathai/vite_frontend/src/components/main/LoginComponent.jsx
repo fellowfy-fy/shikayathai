@@ -33,11 +33,10 @@ const LoginComponent = () => {
                 // withCredentials: true
             }
         );
-        console.log(JSON.stringify(response?.data));
-        // console.log(JSON.stringify(response));
         const accessToken = response?.data?.access;
         const name = response?.data?.name
-        setAuth({ name, email, password, accessToken });
+        const userpic = `data:image/png;base64,${response.data.userpic}`
+        setAuth({ name, email, password, accessToken, userpic });
         setEmail('');
         setPassword('');
         hideModal();

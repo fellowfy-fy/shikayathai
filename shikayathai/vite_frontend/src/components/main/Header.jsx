@@ -11,6 +11,7 @@ import api from "../../api/axios";
 const Header = () => {
   const { auth } = useContext(AuthContext);
   const { showModal } = useModal();
+  console.log(auth)
 
   const handleRegisterClick = () => {
     showModal(<RegistrationComponent />);
@@ -79,7 +80,7 @@ const Header = () => {
 
                 <img
                   className="navbar-brand rounded-circle"
-                  src="https://mdbootstrap.com/img/Photos/Avatars/img%20(30).jpg"
+                  src={auth.userpic}
                   width="30" height="40"
                 ></img>
               </div>

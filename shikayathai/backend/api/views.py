@@ -18,8 +18,6 @@ class UserDetailUpdateDeleteView(RetrieveUpdateDestroyAPIView):
     def get_queryset(self):
         # Optionally, restrict to only allow users to update/delete their own profile
         return User.objects.filter(id=self.request.user.id)
-            
-
 
 class ComplaintDetailUpdateDeleteView(RetrieveUpdateDestroyAPIView):
     serializer_class = ComplaintSerializer
@@ -34,7 +32,7 @@ class ComplaintDetailUpdateDeleteView(RetrieveUpdateDestroyAPIView):
             serializer.save(author=self.request.user)
         else:
             print(serializer.errors)
-            
+
 class CompanyDetailUpdateDeleteView(RetrieveUpdateDestroyAPIView):
     serializer_class = CompanySerializer
     permission_classes = [AllowAny]  # Adjust permissions based on your app's requirements
@@ -47,8 +45,7 @@ class CompanyDetailUpdateDeleteView(RetrieveUpdateDestroyAPIView):
             serializer.save()
         else:
             print(serializer.errors)
-            
-            
+
 class CreateUserView(ListCreateAPIView):
     queryset = User.objects.all()
     serializer_class = UserSerializer
@@ -85,8 +82,6 @@ class CreateComplaintView(ListCreateAPIView):
     def perform_create(self, serializer):
         serializer.save(author=self.request.user)
             
-
-
 class CreateCompanyView(ListCreateAPIView): 
     serializer_class = CompanySerializer
     permission_classes = [AllowAny]

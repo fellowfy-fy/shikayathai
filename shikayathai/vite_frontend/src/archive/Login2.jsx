@@ -38,12 +38,10 @@ const Login = () => {
                     // withCredentials: true
                 }
             );
-            console.log(JSON.stringify(response?.data));
-            // console.log(JSON.stringify(response));
             const accessToken = response?.data?.access;
             const name = response?.data?.name
-            console.log(name, email, pwd, accessToken)
-            setAuth({ name, email, pwd, accessToken });
+            const userpic = `data:image/png;base64,${response.data.userpic}`
+            setAuth({ name, email, pwd, accessToken, userpic });
             setEmail('');
             setPwd('');
             navigate(from, { replace: true });

@@ -8,6 +8,7 @@ from rest_framework import serializers
 from rest_framework.views import APIView
 from django.contrib.auth import authenticate
 from django.conf import settings
+import base64
 
 @api_view(['POST'])
 def logout_view(request):
@@ -29,6 +30,13 @@ def get_userpic_url(user):
         return f"{settings.MEDIA_URL}{user.userpic}"
     return f"{settings.MEDIA_URL}default/userpic.png"
 
+def get_userpic_base64(user):
+    if user.userpic:
+        with open(user.userpic.path, "rb") as img_file:
+            return base64.b64encode(img_file.read()).decode('utf-8')
+    with open(f"{settings.MEDIA_ROOT}/default/userpic.png", "rb") as img_file:
+        return base64.b64encode(img_file.read()).decode('utf-8')
+
 class CustomLoginView(APIView):
     permission_classes = []
 
@@ -44,7 +52,7 @@ class CustomLoginView(APIView):
                     'name': user.name,
                     'email': email,
                     'access': str(refresh.access_token),                    
-                    'userpic': get_userpic_url(user)
+                    'userpic': get_userpic_base64(user)
                 })
             else:
                 return Response({'detail': 'Invalid credentials'}, status=status.HTTP_401_UNAUTHORIZED)
