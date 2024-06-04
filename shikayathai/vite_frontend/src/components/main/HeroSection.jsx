@@ -1,7 +1,8 @@
 import React from "react";
 import { useModal } from '../../context/ModalContext';
 import FileComplaintForm from './FileComplaintForm';
-import man from "../../assets/man.jpg"; 
+import man from "../../assets/man.png"; 
+import circle from "../../assets/circle.svg";
 import '../../styles/Main.css';
 
 const HeroSection = () => {
@@ -15,13 +16,18 @@ const HeroSection = () => {
     <section className="hero-section">
       <div className="hero-content">
         <div className="hero-title-wrapper">
-          <h1 className="hero-title">FREE complaint platform</h1>
+        <h1 className="hero-title">
+          <span>FREE</span>
+          <span>Complaint</span>
+          <span>Platform</span>
+        </h1>
           <p className="hero-subtitle">Turning grievances into wins, guaranteed</p>
           <button className="cta-button" onClick={handleFileComplaintClick}>
             File a complaint
           </button>
         </div>
       </div>
+      <img src={circle} alt="Circle Background" className="circle-background" />
       <img className="hero-graphic" alt="Happy man holding a card" src={man} />
     </section>
   );

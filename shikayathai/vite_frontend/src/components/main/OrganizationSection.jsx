@@ -1,7 +1,9 @@
 import React from "react";
 import { useModal } from "../../context/ModalContext";
 import CompanyForm from "../CompanyForm";
+import aboba from "../../assets/aboba.svg";
 import "../../styles/Main.css";
+
 
 const OrganizationSection = () => {
   const { showModal } = useModal();
@@ -43,7 +45,9 @@ const OrganizationSection = () => {
         </div>
       </div>
       <div className="call-to-action">
-        <p>Join us and forge stronger relationships with your customers — start by creating your organization’s page now!</p>
+      <img src={aboba} alt="Circle Background" className="aboba" />
+        <p>Join us and forge stronger relationships with your customers</p>
+          <p>— start by creating your organization’s page now!</p>
         <button onClick={handleCreateClick} className="create-button">
           Create
         </button>
