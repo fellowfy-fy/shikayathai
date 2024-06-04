@@ -6,8 +6,6 @@ import Brands from './pages/Brands';
 import Complaints from './pages/Complaints';
 import Layout from './components/Layout';
 import Profile from './pages/Profile';
-import Register from './components/Register';
-import Login from './components/Login';
 import ModalComponent from './components/ModalComponent';
 import ComplaintPage from './pages/ComplaintPage';
 
@@ -19,8 +17,6 @@ function App() {
           <Route path="/" element={<Main />} />
           <Route path="*" element={<NotFound />} />
           <Route path="profile" element={<Profile />} />
-          <Route path="profile/register" element={<Register />} />
-          <Route path="profile/login" element={<Login />} />
           <Route path="brands" element={<Brands />} />
           <Route path="complaints" element={<Complaints />} />
           <Route path="/complaints/:id" element={<ComplaintPage />} />
