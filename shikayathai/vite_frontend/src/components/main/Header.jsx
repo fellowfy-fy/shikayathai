@@ -6,7 +6,7 @@ import "../../styles/HeaderFooter.css";
 import { useContext } from "react";
 import AuthContext from "../../context/AuthProvider";
 import { Link } from "react-router-dom";
-import Login from "../Login";
+import api from "../../api/axios";
 
 const Header = () => {
   const { auth } = useContext(AuthContext);
@@ -73,9 +73,15 @@ const Header = () => {
               </div>
             ) : (
               <div className="d-flex">
-              <Link className="btn btn-primary me-2" to="/profile">
-                {auth.name}
-              </Link>
+                <Link className="btn btn-primary me-2" to="/profile">
+                  {auth.name}
+                </Link>
+
+                <img
+                  className="navbar-brand rounded-circle"
+                  src="https://mdbootstrap.com/img/Photos/Avatars/img%20(30).jpg"
+                  width="30" height="40"
+                ></img>
               </div>
             )}
           </div>

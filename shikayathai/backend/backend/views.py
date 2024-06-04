@@ -7,6 +7,7 @@ from rest_framework_simplejwt.tokens import RefreshToken
 from rest_framework import serializers
 from rest_framework.views import APIView
 from django.contrib.auth import authenticate
+from django.conf import settings
 
 @api_view(['POST'])
 def logout_view(request):
@@ -23,6 +24,11 @@ class CustomLoginSerializer(serializers.Serializer):
     email = serializers.CharField()
     password = serializers.CharField()
 
+def get_userpic_url(user):
+    if user.userpic:
+        return f"{settings.MEDIA_URL}{user.userpic}"
+    return f"{settings.MEDIA_URL}default/userpic.png"
+
 class CustomLoginView(APIView):
     permission_classes = []
 
@@ -37,7 +43,8 @@ class CustomLoginView(APIView):
                 return Response({
                     'name': user.name,
                     'email': email,
-                    'access': str(refresh.access_token),
+                    'access': str(refresh.access_token),                    
+                    'userpic': get_userpic_url(user)
                 })
             else:
                 return Response({'detail': 'Invalid credentials'}, status=status.HTTP_401_UNAUTHORIZED)
