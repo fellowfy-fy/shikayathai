@@ -1,92 +1,99 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import axios from "axios";
+//import { getComplaintDetails, getComments, postComment } from "../api";
 import "../styles/ComplaintPage.css";
 
 const ComplaintPage = () => {
-  const { id } = useParams();
-  const [complaint, setComplaint] = useState(null);
-  const [comments, setComments] = useState([]);
-  const [newComment, setNewComment] = useState("");
+  //const { id } = useParams();
+  //const [complaint, setComplaint] = useState({});
+  //const [comments, setComments] = useState([]);
+  //const [newComment, setNewComment] = useState("");
 
   useEffect(() => {
-    // Fetch the complaint details
-    axios.get(`/api/complaints/${id}`)
-      .then(response => setComplaint(response.data))
-      .catch(error => console.error("Error fetching complaint:", error));
-    
-    // Fetch the comments
+    const fetchComplaintDetails = async () => {
+      const data = await getComplaintDetails(id);
+      setComplaint(data);
+    };
+
+    const fetchComments = async () => {
+      const data = await getComments(id);
+      setComments(data);
+    };
+
+    fetchComplaintDetails();
     fetchComments();
   }, [id]);
 
-  const fetchComments = () => {
-    axios.get(`/api/complaints/${id}/comments`)
-      .then(response => {
-        if (Array.isArray(response.data)) {
-          setComments(response.data);
-        } else {
-          setComments([]);
-        }
-      })
-      .catch(error => console.error("Error fetching comments:", error));
-  };
-
-  const handleAddComment = () => {
+  const handleCommentSubmit = async () => {
     if (newComment.trim()) {
-      axios.post(`/api/complaints/${id}/comments`, { content: newComment })
-        .then(response => {
-          setNewComment("");
-          fetchComments();
-        })
-        .catch(error => console.error("Error posting comment:", error));
+      await postComment(id, newComment);
+      setNewComment("");
+      const data = await getComments(id);
+      setComments(data);
     }
   };
 
-  if (!complaint) {
-    return <div>Loading...</div>;
-  }
-
   return (
     <div className="complaint-page">
-      <div className="complaint-header">
-        <h2>{complaint.title}</h2>
+      <div className="breadcrumbs">
+        <a href="/">Home</a> &gt; <a href="/my-complaints">My complaints</a> &gt; <span>Complaint {id}</span>
+      </div>
+      <div className="notification-banner">
+        Your complaint is added successfully! We will process it asap.
+        <br />
+        Make your complaint more effective. The more people will see it the higher chances that company will resolve it quickly. Share it on social media!
+        <br />
+        <input type="text" value={`shareyourlink.com/${id}`} readOnly />
+      </div>
+      <div className="complaint-details">
         <div className="user-info">
-          <img src={complaint.author_avatar} alt={complaint.author_name} className="avatar" />
+          <img src={complaint.userAvatar} alt="User avatar" />
           <div>
-            <h4>{complaint.author_name}</h4>
-            <p className="company-name">{complaint.company_name}</p>
+            <h4>{complaint.userName}</h4>
+            <p>{complaint.companyName}</p>
           </div>
         </div>
+        <h1>{complaint.title}</h1>
         <p>{complaint.description}</p>
-        {complaint.images && (
-          <div className="complaint-images">
-            {complaint.images.map((image, index) => (
-              <img key={index} src={image} alt={`Complaint image ${index + 1}`} />
-            ))}
-          </div>
-        )}
-        <div className="complaint-actions">
+        <div className="attachment">
+          <a href={complaint.attachment}>{complaint.attachmentName}</a>
+        </div>
+        <div className="timestamp">Posted on {complaint.timestamp}</div>
+        <div className="action-buttons">
           <button>Support</button>
           <button>Share</button>
           <button>Mark as resolved</button>
         </div>
+        <div className="image-gallery">
+          <img src={complaint.images[0]} alt="Main" className="main-image" />
+          <div className="thumbnails">
+            {complaint.images.map((image, index) => (
+              <img key={index} src={image} alt={`Thumbnail ${index}`} />
+            ))}
+          </div>
+        </div>
       </div>
-      <div className="complaint-comments">
+      <div className="comments-section">
         <h3>Comments</h3>
-        {comments.map(comment => (
+        {comments.map((comment) => (
           <div key={comment.id} className="comment">
-            <h4>{comment.author}</h4>
-            <p>{comment.date}</p>
-            <p>{comment.content}</p>
+            <div className="commenter-info">
+              <img src={comment.avatar} alt="Commenter avatar" />
+              <div>
+                <h4>{comment.author}</h4>
+                <p>{comment.timestamp}</p>
+              </div>
+            </div>
+            <p>{comment.text}</p>
           </div>
         ))}
-        <div className="new-comment">
+        <div className="add-comment">
           <textarea
-            placeholder="Add a comment"
             value={newComment}
             onChange={(e) => setNewComment(e.target.value)}
+            placeholder="Add a comment"
           ></textarea>
-          <button onClick={handleAddComment}>Add comment</button>
+          <button onClick={handleCommentSubmit}>Add comment</button>
         </div>
       </div>
     </div>

@@ -1,121 +1,132 @@
 .complaint-page {
-    padding: 2rem;
-  }
-  
-  .complaint-header {
-    text-align: left;
-    margin-bottom: 2rem;
-  }
-  
-  .user-info {
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-    margin-bottom: 1rem;
-  }
-  
-  .user-info .avatar {
-    width: 50px;
-    height: 50px;
-    border-radius: 50%;
-  }
-  
-  .user-info h4 {
-    font-size: 1rem;
-    font-weight: bold;
-    color: #1a1a1a;
-    margin: 0;
-  }
-  
-  .user-info .company-name {
-    font-size: 0.875rem;
-    color: #555;
-    margin: 0;
-  }
-  
-  .complaint-images {
-    display: flex;
-    gap: 1rem;
-    margin-bottom: 1rem;
-  }
-  
-  .complaint-images img {
-    width: 100px;
-    height: 100px;
-    border-radius: 0.5rem;
-  }
-  
-  .complaint-actions {
-    display: flex;
-    gap: 1rem;
-    margin-bottom: 1rem;
-  }
-  
-  .complaint-actions button {
-    background-color: #007bff;
-    color: #fff;
-    border: none;
-    padding: 0.5rem 1rem;
-    border-radius: 0.5rem;
-    cursor: pointer;
-  }
-  
-  .complaint-actions button:hover {
-    background-color: #0056b3;
-  }
-  
-  .complaint-comments {
-    margin-top: 2rem;
-  }
-  
-  .complaint-comments h3 {
-    font-size: 1.5rem;
-    font-weight: bold;
-    color: #1a1a1a;
-    margin-bottom: 1rem;
-  }
-  
-  .comment {
-    margin-bottom: 1rem;
-  }
-  
-  .comment h4 {
-    font-size: 1rem;
-    font-weight: bold;
-    color: #1a1a1a;
-    margin: 0;
-  }
-  
-  .comment p {
-    font-size: 0.875rem;
-    color: #555;
-    margin: 0.5rem 0;
-  }
-  
-  .new-comment {
-    margin-top: 2rem;
-  }
-  
-  .new-comment textarea {
-    width: 100%;
-    height: 100px;
-    padding: 0.5rem;
-    border: 1px solid #ccc;
-    border-radius: 0.5rem;
-    margin-bottom: 1rem;
-    font-size: 1rem;
-  }
-  
-  .new-comment button {
-    background-color: #28a745;
-    color: #fff;
-    border: none;
-    padding: 0.5rem 1rem;
-    border-radius: 0.5rem;
-    cursor: pointer;
-  }
-  
-  .new-comment button:hover {
-    background-color: #218838;
-  }
-  
+  margin: 20px;
+}
+
+.breadcrumbs {
+  font-size: 14px;
+  margin-bottom: 20px;
+}
+
+.notification-banner {
+  background-color: #d4edda;
+  color: #155724;
+  padding: 20px;
+  margin-bottom: 20px;
+  border-radius: 5px;
+}
+
+.complaint-details {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.user-info {
+  display: flex;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.user-info img {
+  border-radius: 50%;
+  margin-right: 10px;
+}
+
+.user-info h4,
+.user-info p {
+  margin: 0;
+}
+
+h1 {
+  margin-bottom: 10px;
+}
+
+.attachment,
+.timestamp {
+  margin-top: 10px;
+}
+
+.action-buttons {
+  display: flex;
+  gap: 10px;
+  margin-top: 20px;
+}
+
+.image-gallery {
+  margin-top: 20px;
+}
+
+.main-image {
+  width: 100%;
+  max-width: 500px;
+  margin-bottom: 10px;
+}
+
+.thumbnails {
+  display: flex;
+  gap: 10px;
+}
+
+.thumbnails img {
+  width: 50px;
+  height: 50px;
+  object-fit: cover;
+}
+
+.comments-section {
+  margin-top: 40px;
+}
+
+.comment {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+.commenter-info {
+  display: flex;
+  align-items: center;
+}
+
+.commenter-info img {
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  object-fit: cover;
+  margin-right: 10px;
+}
+
+.commenter-info h4,
+.commenter-info p {
+  margin: 0;
+}
+
+.add-comment {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-top: 20px;
+}
+
+.add-comment textarea {
+  width: 100%;
+  min-height: 100px;
+  padding: 10px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+}
+
+.add-comment button {
+  align-self: flex-end;
+  padding: 10px 20px;
+  background-color: #28a745;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.add-comment button:hover {
+  background-color: #218838;
+}
