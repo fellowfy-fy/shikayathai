@@ -1,11 +1,11 @@
 .hero-section {
   display: flex;
-  align-items: center;
+  align-items: left;
   justify-content: space-between;
   background-color: #FFD2BE;
   padding: 2rem;
-  border-bottom-left-radius: 50px;
-  border-bottom-right-radius: 50px;
+  border-bottom-left-radius: 30px;
+  border-bottom-right-radius: 30px;
   position: relative; /* Added for better control of image positioning */
 }
 
@@ -14,7 +14,7 @@
 }
 
 .hero-image {
-  max-width: 100%;
+  max-width: auto;
   height: auto;
   position: absolute; /* Allows positioning the image at the bottom */
   bottom: 0;
@@ -101,6 +101,10 @@
     height: auto;
     bottom: unset;
     right: unset;
+  }
+
+  .hero-image {
+    position: absolute;
   }
 }
 

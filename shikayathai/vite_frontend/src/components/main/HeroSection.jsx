@@ -2,7 +2,6 @@ import React from "react";
 import { useModal } from '../../context/ModalContext';
 import FileComplaintForm from './FileComplaintForm';
 import man from "../../assets/man.png"; 
-import circle from "../../assets/circle.svg";
 import '../../styles/Main.css';
 
 const HeroSection = () => {
@@ -27,7 +26,6 @@ const HeroSection = () => {
           </button>
         </div>
       </div>
-      <img src={circle} alt="Circle Background" className="circle-background" />
       <img className="hero-graphic" alt="Happy man holding a card" src={man} />
     </section>
   );
