@@ -8,16 +8,44 @@ from rest_framework.response import Response
 from rest_framework.parsers import MultiPartParser, FormParser
 from rest_framework import status
 from rest_framework.exceptions import ValidationError
+from django.contrib.auth import authenticate
+from django.conf import settings
+from rest_framework_simplejwt.tokens import RefreshToken
+import base64
     
+def get_userpic_base64(user):
+    if user.userpic:
+        with open(user.userpic.path, "rb") as img_file:
+            return base64.b64encode(img_file.read()).decode('utf-8')
+    with open(f"{settings.MEDIA_ROOT}/default/userpic.png", "rb") as img_file:
+        return base64.b64encode(img_file.read()).decode('utf-8')
 
 class UserDetailUpdateDeleteView(RetrieveUpdateDestroyAPIView):
-    queryset = User.objects.all()
     serializer_class = UserSerializer
-    permission_classes = [IsAuthenticated]  # Typically, only admins can update/delete users, adjust as needed.
+    permission_classes = [IsAuthenticated]
 
-    def get_queryset(self):
-        # Optionally, restrict to only allow users to update/delete their own profile
-        return User.objects.filter(id=self.request.user.id)
+    def get_object(self):
+        return self.request.user
+    
+    def update(self, request, *args, **kwargs):
+        partial = kwargs.pop('partial', False)
+        instance = self.get_object()
+        serializer = self.get_serializer(instance, data=request.data, partial=partial)
+        serializer.is_valid(raise_exception=True)
+        self.perform_update(serializer)
+        email = serializer.validated_data['email']
+        password = serializer.validated_data['password']
+        user = authenticate(email=email, password=password)
+        refresh = RefreshToken.for_user(user)
+
+        # Custom response
+        custom_response = {
+            'name': user.name,
+            'email': email,
+            'access': str(refresh.access_token),                    
+            'userpic': get_userpic_base64(user)
+        }
+        return Response(custom_response, status=status.HTTP_200_OK)
 
 class ComplaintDetailUpdateDeleteView(RetrieveUpdateDestroyAPIView):
     serializer_class = ComplaintSerializer

@@ -7,3 +7,4 @@ virtenv/
 .DS_store
 media/
 migrations/
+venv/

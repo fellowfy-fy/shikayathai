@@ -1,13 +1,15 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import useLogout from '../hooks/useLogout';
-import axios from 'axios';
+import api from '../api/axios';
 import '../styles/Profile.css';
 import signOutIcon from '../assets/sign-out-icon.svg'; // Ensure this path is correct
+import useAuth from '../hooks/useAuth';
 
 function Profile() {
   const navigate = useNavigate();
   const logout = useLogout();
+  const { auth, setAuth } = useAuth()
   const [user, setUser] = useState({});
   const [photo, setPhoto] = useState(null);
   const [name, setName] = useState('');
@@ -17,7 +19,9 @@ function Profile() {
 
   useEffect(() => {
     // Fetch user data from the backend
-    axios.get('/api/user/profile')
+    api.get('/api/users/profile', { headers: {
+      Authorization: `Bearer ${auth.accessToken}`
+    }})
       .then(response => {
         setUser(response.data);
         setName(response.data.name);
@@ -33,23 +37,55 @@ function Profile() {
   };
 
   const handlePhotoChange = (e) => {
-    setPhoto(URL.createObjectURL(e.target.files[0]));
-    // Implement logic to upload the photo to the backend
+    const file = e.target.files[0];
+    if (file) {
+      setPhoto(file);
+    }
   };
 
   const handleSaveChanges = () => {
-    // Implement logic to save changes to the backend
-    const updatedProfile = {
-      name,
-      email,
-      password,
-    };
+    console.log(password, repeatPassword)
+    if (password === "") {
+      alert('Confirm password')
+      return;
+    }
+    if (password !== repeatPassword) {
+      alert('Passwords do not match!');
+      return;
+    }
 
-    axios.post('/api/user/profile', updatedProfile)
+    const updatedProfile = new FormData();
+    updatedProfile.append('name', name);
+    updatedProfile.append('email', email);
+    if (password) {
+      updatedProfile.append('password', password);
+    }
+    if (photo && photo instanceof File) {
+      updatedProfile.append('userpic', photo);
+    }
+
+    api.put('/api/users/profile/', updatedProfile, {
+      headers: {
+        Authorization: `Bearer ${auth.accessToken}`,
+        'Content-Type': 'multipart/form-data'
+      }
+    })
       .then(response => {
         alert('Changes saved!');
+        const accessToken = response?.data?.access;
+        const name = response?.data?.name
+        const email = response?.data?.email
+        const userpic = `data:image/png;base64,${response.data.userpic}`
+        setAuth({ name, email, password, accessToken, userpic });
+        setUser(response.data);
+
       })
-      .catch(error => console.error('Error saving changes:', error));
+      .catch(error => {
+        console.error('Error saving changes:', error);
+        if (error.response && error.response.status === 401) {
+          navigate('/login'); // Redirect to login if not authorized
+        }
+      });
   };
 
   return (
@@ -60,7 +96,7 @@ function Profile() {
       <h2>Profile</h2>
       <div className="profile-form">
         <div className="photo-section">
-          <img src={photo || 'default-avatar.png'} alt="Profile" className="profile-photo" />
+          <img src={ auth.userpic } alt="Profile" className="profile-photo" />
           <label htmlFor="photo-upload" className="choose-photo-label">Choose a photo</label>
           <input type="file" id="photo-upload" onChange={handlePhotoChange} className="choose-photo" />
         </div>
@@ -75,11 +111,11 @@ function Profile() {
           </div>
           <div className="form-group">
             <label>Password</label>
-            <input type="password" value={password} onChange={(e) => setPassword(e.target.value)} />
+            <input type="password" value={password} onChange={(e) => setPassword(e.target.value)} required />
           </div>
           <div className="form-group">
             <label>Repeat Password</label>
-            <input type="password" value={repeatPassword} onChange={(e) => setRepeatPassword(e.target.value)} />
+            <input type="password" value={repeatPassword} onChange={(e) => setRepeatPassword(e.target.value)} required />
           </div>
         </div>
         <button onClick={handleSaveChanges} className="save-changes-button">Save changes</button>

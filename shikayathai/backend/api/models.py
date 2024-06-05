@@ -14,7 +14,7 @@ def userpic_path(instance, filename):
     return '{}/{}/{}'.format(
         'userpics',
         instance.name,
-        filename)
+        "userpic.png")
 
 class UserManager(BaseUserManager):
     def create_user(self, email, name, password=None, **extra_fields):

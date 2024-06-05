@@ -6,6 +6,7 @@ from rest_framework.response import Response
 from rest_framework_simplejwt.tokens import RefreshToken
 from rest_framework import serializers
 from rest_framework.views import APIView
+from rest_framework.generics import ListCreateAPIView
 from django.contrib.auth import authenticate
 from django.conf import settings
 import base64
@@ -25,11 +26,6 @@ class CustomLoginSerializer(serializers.Serializer):
     email = serializers.CharField()
     password = serializers.CharField()
 
-def get_userpic_url(user):
-    if user.userpic:
-        return f"{settings.MEDIA_URL}{user.userpic}"
-    return f"{settings.MEDIA_URL}default/userpic.png"
-
 def get_userpic_base64(user):
     if user.userpic:
         with open(user.userpic.path, "rb") as img_file:
@@ -37,7 +33,7 @@ def get_userpic_base64(user):
     with open(f"{settings.MEDIA_ROOT}/default/userpic.png", "rb") as img_file:
         return base64.b64encode(img_file.read()).decode('utf-8')
 
-class CustomLoginView(APIView):
+class CustomLoginView(ListCreateAPIView):
     permission_classes = []
 
     def post(self, request, *args, **kwargs):
