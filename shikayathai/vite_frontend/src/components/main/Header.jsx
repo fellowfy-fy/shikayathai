@@ -1,4 +1,3 @@
-import React from "react";
 import { useModal } from "../../context/ModalContext";
 import RegistrationComponent from "./RegistrationComponent";
 import LoginComponent from "./LoginComponent";
@@ -6,12 +5,10 @@ import "../../styles/HeaderFooter.css";
 import { useContext } from "react";
 import AuthContext from "../../context/AuthProvider";
 import { Link } from "react-router-dom";
-import api from "../../api/axios";
 
 const Header = () => {
   const { auth } = useContext(AuthContext);
   const { showModal } = useModal();
-  console.log(auth)
 
   const handleRegisterClick = () => {
     showModal(<RegistrationComponent />);

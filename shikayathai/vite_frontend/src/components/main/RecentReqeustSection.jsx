@@ -1,7 +1,7 @@
 // RecentRequestSection.jsx
 import React, { useEffect, useState } from "react";
 import FrameComponent from "./FrameComponent";
-import api from "../../api/axios"
+import api from "../../api/axios";
 
 function RecentRequestSection(){
   const [requests, setRequests] = useState([]);

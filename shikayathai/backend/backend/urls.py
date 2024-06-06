@@ -4,7 +4,7 @@ from rest_framework_simplejwt.views import (
     TokenObtainPairView,
     TokenRefreshView,
 )
-from api.views import CreateUserView
+from api.views import CreateUserView, RefreshAccessTokenView
 from django.conf import settings
 from django.conf.urls.static import static
 from .views import logout_view, CustomLoginView
@@ -16,6 +16,8 @@ urlpatterns = [
     path('api/', include('api.urls')),
     path('api/token/', TokenObtainPairView.as_view(), name='token_obtain_pair'),
     path('api/token/refresh/', TokenRefreshView.as_view(), name='token_refresh'),
+    path('api/refresh/', RefreshAccessTokenView.as_view(), name='refresh_access_token'),
+    
     path("api/user/register/", CreateUserView.as_view(), name="register"),
     path('api/logout/', logout_view, name='logout'),
     path('api/login/', CustomLoginView.as_view(), name='login'),

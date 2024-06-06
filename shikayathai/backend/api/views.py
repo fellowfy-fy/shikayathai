@@ -12,6 +12,7 @@ from django.contrib.auth import authenticate
 from django.conf import settings
 from rest_framework_simplejwt.tokens import RefreshToken
 import base64
+from django.contrib.auth import get_user_model
     
 def get_userpic_base64(user):
     if user.userpic:
@@ -42,6 +43,7 @@ class UserDetailUpdateDeleteView(RetrieveUpdateDestroyAPIView):
         custom_response = {
             'name': user.name,
             'email': email,
+            'password': password,
             'access': str(refresh.access_token),                    
             'userpic': get_userpic_base64(user)
         }
@@ -129,3 +131,43 @@ class ListComplaintsView(ListAPIView):
     
     def get_queryset(self):
         return Complaint.objects.all()
+
+class CommentListCreateView(ListCreateAPIView):
+    queryset = Comment.objects.all()
+    serializer_class = CommentSerializer
+    permission_classes = [IsAuthenticated]
+
+    def perform_create(self, serializer):
+        serializer.save(user=self.request.user)
+        
+User = get_user_model()
+
+class RefreshAccessTokenView(APIView):
+    permission_classes = [IsAuthenticated]
+
+    def get(self, request, *args, **kwargs):
+        refresh_token = request.COOKIES.get('refresh_token')
+        if not refresh_token:
+            return Response({'detail': 'Refresh token not found'}, status=400)
+
+        try:
+            refresh = RefreshToken(refresh_token)
+            new_access_token = str(refresh.access_token)
+            response = Response({'access': new_access_token})
+            response.set_cookie('access_token', new_access_token, httponly=True, secure=True, samesite='None')
+            return response
+        except Exception as e:
+            return Response({'detail': 'Invalid refresh token'}, status=400)
+
+    def post(self, request, *args, **kwargs):
+        refresh_token = request.COOKIES.get('refresh_token')
+        if not refresh_token:
+            return Response({'detail': 'Refresh token not found'}, status=400)
+
+        try:
+            refresh = RefreshToken(refresh_token)
+            new_access_token = str(refresh.access_token)
+            response = Response({'access': new_access_token})
+            return response
+        except Exception as e:
+            return Response({'detail': 'Invalid refresh token'}, status=400)
