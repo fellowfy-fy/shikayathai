@@ -1,4 +1,28 @@
 /* хэдер */
+/* General button styles */
+.navbar .btn {
+  background-color: transparent; /* Transparent background */
+  color: #ffffff; /* Text color */
+  padding: 10px 20px;
+  border: none; /* Remove border */
+  border-radius: 5px;
+  font-size: 16px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.3s, color 0.3s;
+  margin-right: 10px; /* Adds spacing between buttons */
+}
+
+/* Styles for the hover and active states */
+.navbar .btn:hover,
+.navbar .btn:focus,
+.navbar .btn:active {
+  background-color: transparent; /* Background color on hover */
+  color: #FFD2BE; /* Text color on hover */
+  outline: none;
+}
+
+
 
 .navbar {
   background-color: #001A45; /* Deep blue background for navbar */
