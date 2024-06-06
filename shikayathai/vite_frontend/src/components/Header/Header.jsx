@@ -24,7 +24,7 @@ const Header = () => {
       <nav className="navbar navbar-expand-lg">
         <div className="container-fluid">
           <Link className="navbar-brand d-flex align-items-center" to="/">
-            <img src={logo} alt="Logo" style={{ width: '30px', marginRight: '10px' }} />
+            <img src={logo} alt="Logo" style={{ width: '24px', marginRight: '10px' }} />
             <span className="text-white">Shikayathai</span>
           </Link>
           <button

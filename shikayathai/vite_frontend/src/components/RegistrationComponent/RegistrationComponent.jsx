@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useModal } from '../../context/ModalContext';
-import axios from '../../api/axios';
+import api from '../../api/axios';
 
 const RegistrationComponent = () => {
   const { hideModal } = useModal();
@@ -12,7 +12,7 @@ const RegistrationComponent = () => {
   const handleSubmit = async (event) => {
     event.preventDefault();
     try {
-      await axios.post('/api/user/register/', { name, email, password });
+      await api.post('/api/user/register/', { name, email, password });
       hideModal();
     } catch (error) {
       setError(error.response?.data?.message || 'An error occurred');

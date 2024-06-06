@@ -2,7 +2,6 @@
 .faq-section {
     background-color: white;
     padding: 40px;
-    font-family: 'Unbounded', sans-serif;
 }
 
 .section-header {
@@ -13,6 +12,7 @@
 .section-title {
     font-size: 32px;
     color: #001A45;
+    font-family: 'Unbounded', sans-serif;
 }
 
 .section-subtitle {
