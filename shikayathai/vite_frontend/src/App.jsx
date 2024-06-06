@@ -1,16 +1,16 @@
 import React from 'react';
 import { Routes, Route } from 'react-router-dom';
-import NotFound from './pages/NotFound';
-import Main from './pages/Main';
-import Brands from './pages/Brands';
-import Complaints from './pages/Complaints';
-import Layout from './components/Layout';
-import Profile from './pages/Profile';
-import ModalComponent from './components/ModalComponent';
-import ComplaintPage from './pages/ComplaintPage';
-import './styles/Main/Base.css';
-import './styles/Main/Responsive.css';
-import './styles/Main/Utilities.css'; // Assuming Utilities.css is used globally
+import NotFound from './pages/NotFound.jsx';
+import Main from './pages/Main.jsx';
+import Brands from './pages/AllBrands/Brands.jsx';
+import Complaints from './pages/AllComplaints/Complaints.jsx';
+import Layout from './Layout.jsx';
+import Profile from './pages/ProfilePage/Profile.jsx';
+import ModalComponent from './components/ModalComponent.jsx';
+import ComplaintPage from './pages/ComplaintPage/ComplaintPage.jsx';
+import './styles/Base.css';
+// import './styles/Main/Responsive.css';
+import './styles/Utilities.css'; 
 
 
 function App() {

@@ -1,12 +1,12 @@
 import { useState } from "react";
-import HeroSection from "../components/main/HeroSection";
-import IntroSection from "../components/main/IntroSection";
-import RecentRequestsSection from "../components/main/RecentReqeustSection";
-import TopRatedCompaniesSection from "../components/main/TopRatedCompaniesSection";
-import StatisticsSection from "../components/main/StatisticsSection";
-import FAQSection from "../components/main/FAQSection";
-import OrganizationSection from "../components/main/OrganizationSection";
-import FileComplaintForm from "../components/main/FileComplaintForm";
+import HeroSection from "../components/HeroSection/HeroSection.jsx";
+import IntroSection from "../components/IntroSection/IntroSection.jsx";
+import RecentRequestsSection from "../components/RecentRequestSection/RecentReqeustSection.jsx";
+import TopRatedCompaniesSection from "../components/TopRatedCompaniesSection/TopRatedCompaniesSection.jsx";
+import StatisticsSection from "../components/StatisticsSection/StatisticsSection.jsx";
+import FAQSection from "../components/FAQSection/FAQSection.jsx";
+import OrganizationSection from "../components/OrganizationSection/OrganizationSection.jsx";
+import FileComplaintForm from "../components/FileComplaintForm/FileComplaintForm.jsx";
 
 
 
