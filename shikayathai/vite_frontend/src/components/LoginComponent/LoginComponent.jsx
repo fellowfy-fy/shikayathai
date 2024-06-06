@@ -27,7 +27,7 @@ const LoginComponent = () => {
     try {
       const response = await api.post(
         LOGIN_URL,
-        JSON.stringify({ email, password }),
+        JSON.stringify({ email, password, persist }),
         {
           headers: { "Content-Type": "application/json" },
           withCredentials: true
@@ -36,7 +36,8 @@ const LoginComponent = () => {
       const accessToken = response?.data?.access;
       const name = response?.data?.name;
       const userpic = `data:image/png;base64,${response.data.userpic}`;
-      setAuth({ name, email, password, accessToken, userpic });
+      console.log(userpic)
+      setAuth({ name, email, accessToken, userpic });
       setEmail("");
       setPassword("");
       hideModal();

@@ -20,7 +20,7 @@ function Profile() {
   useEffect(() => {
     // Fetch user data from the backend
     api.get('/api/users/profile/', { headers: {
-      Authorization: `Bearer ${auth.accessToken}`
+      withCredentials: true
     }})
     .then(response => {
       setUser(response.data);
@@ -69,7 +69,7 @@ function Profile() {
 
     api.put('/api/users/profile/', updatedProfile, {
       headers: {
-        Authorization: `Bearer ${auth.accessToken}`,
+        withCredentials: true,
         'Content-Type': 'multipart/form-data'
       }
     })
