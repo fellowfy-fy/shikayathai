@@ -1,6 +1,6 @@
 import React from "react";
 import { BRAND_NAME } from "../../constants";
-import "../../styles/HeaderFooter.css";
+import "../../styles/Footer.css";
 import logo from "../../assets/logo.svg";
 
 const Footer = () => {

@@ -1,0 +1,88 @@
+/* Organizations section styles */
+.organization-section {
+    text-align: center;
+    padding: 2rem 1rem;
+}
+
+.section-header {
+    margin-bottom: 2rem;
+}
+
+.section-title-wrapper {
+    margin-bottom: 0.5rem;
+}
+
+.section-title {
+    font-size: 2rem;
+    font-weight: bold;
+}
+
+.section-subtitle {
+    font-size: 1.25rem;
+    color: #333;
+}
+
+.section-content {
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+    gap: 2rem;
+}
+
+.content-item {
+    flex: 1;
+    max-width: 200px;
+}
+
+.item-title {
+    display: inline-block;
+    width: 40px;
+    height: 40px;
+    line-height: 40px;
+    border-radius: 50%;
+    background-color: #d1c4e9;
+    color: #fff;
+    font-size: 1.5rem;
+    font-weight: bold;
+    margin-bottom: 0.5rem;
+}
+
+.item-subtitle {
+    font-size: 1.25rem;
+    font-weight:bold;
+    margin: 0;
+}
+
+.item-subtitle + p {
+    margin-top: 0.5rem;
+    font-size: 1rem;
+    color: #333;
+}
+
+.call-to-action {
+    margin-top: 2rem;
+}
+
+.call-to-action p {
+    font-size: 1rem;
+    color: #333;
+    margin-bottom: 1rem;
+    line-height: 1.5rem;
+    max-width: 500px;
+    margin: 0 auto;
+    font-weight: bold;
+}
+
+.create-button {
+    background-color: #001A45;
+    color: white;
+    padding: 0.5rem 1rem;
+    border: none;
+    border-radius: 0.5rem;
+    font-size: 1rem;
+    width: 20%;
+}
+
+.create-button:hover {
+    background-color: #002244;
+}

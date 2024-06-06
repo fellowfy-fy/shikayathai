@@ -1,140 +1,124 @@
+/* Profile page container */
 .profile-page {
-    padding: 2rem;
-  }
-  
-  .breadcrumb {
-    text-align: left;
-    margin-bottom: 1rem;
-  }
-  
-  .breadcrumb a {
-    color: #007bff;
-    text-decoration: none;
-  }
-  
-  .breadcrumb span {
-    color: #333;
-  }
-  
-  .profile-page h2 {
-    text-align: left;
-    margin-bottom: 1rem;
-  }
-  
+  padding: 2rem;
+  max-width: 1200px;
+  margin: 0 auto;
+  font-family: 'Unbounded', sans-serif;
+}
+
+/* Breadcrumbs */
+.breadcrumbs {
+  font-size: 1rem;
+  color: #001A45;
+  margin-bottom: 1rem;
+}
+
+.breadcrumbs a {
+  color: #001A45;
+  text-decoration: none;
+}
+
+.breadcrumbs a:hover {
+  text-decoration: underline;
+}
+
+.breadcrumbs span {
+  color: #001A45;
+}
+
+/* Profile header */
+.profile-header {
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+  margin-bottom: 2rem;
+}
+
+.profile-header img {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%; /* Ensures the image is displayed as a circle */
+}
+
+.profile-header .choose-photo {
+  padding: 10px 20px;
+  border: 1px solid #001A45;
+  border-radius: 10px;
+  background-color: white;
+  color: #001A45;
+  cursor: pointer;
+  font-family: 'Unbounded', sans-serif;
+}
+
+.profile-header .choose-photo:hover {
+  background-color: #f0f8ff;
+}
+
+/* Profile form */
+.profile-form {
+  display: flex;
+  flex-direction: column; /* Adjusting for better responsiveness on small screens */
+  gap: 2rem;
+}
+
+.profile-form .form-group {
+  flex: 1;
+  min-width: 250px; /* Increased minimum width for better field visibility */
+}
+
+.profile-form label {
+  display: block;
+  font-weight: bold;
+  color: #001A45;
+  margin-bottom: 0.5rem;
+}
+
+.profile-form input, .profile-form .choose-photo {
+  width: 100%;
+  padding: 0.8rem; /* Increased padding for better clickability and readability */
+  border: 1px solid #001A45;
+  border-radius: 5px;
+  font-size: 1rem;
+  color: #001A45;
+}
+
+.profile-form input[type="password"] {
+  padding-right: 2.5rem; /* Space for the eye icon */
+}
+
+.profile-form .eye-icon {
+  position: absolute;
+  right: 30px; /* Adjusted for better alignment with input field */
+  top: 50%;
+  transform: translateY(-50%);
+  cursor: pointer;
+  color: #001A45;
+}
+
+/* Save changes button */
+.save-changes {
+  background-color: #b5f62b;
+  color: #001A45;
+  padding: 1rem;
+  text-align: center;
+  border-radius: 10px;
+  cursor: pointer;
+  margin-top: 2rem;
+}
+
+.save-changes:hover {
+  background-color: #c9ff57;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Adds a subtle shadow on hover for better visual feedback */
+}
+
+@media (min-width: 768px) {
+  /* Adjustments for tablets and desktops */
   .profile-form {
-    display: flex;
-    flex-direction: column;
-    gap: 1rem;
-  }
-  
-  .photo-section {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 1rem;
-  }
-  
-  .profile-photo {
-    width: 100px;
-    height: 100px;
-    border-radius: 50%;
-    object-fit: cover;
-  }
-  
-  .choose-photo {
-    display: none;
-  }
-  
-  .choose-photo-label {
-    background-color: #007bff;
-    color: white;
-    padding: 0.5rem 1rem;
-    border-radius: 0.5rem;
-    cursor: pointer;
-  }
-  
-  .form-fields {
-    display: flex;
     flex-direction: row;
-    justify-content: space-between;
-    gap: 1rem;
-    width: 100%;
-  }
-  
-  .form-group {
-    display: flex;
-    flex-direction: column;
-    gap: 0.5rem;
-    flex: 1;
-  }
-  
-  .form-group label {
-    font-weight: bold;
-    color: #1a1a1a;
-  }
-  
-  .form-group input {
-    padding: 0.5rem;
-    border: 1px solid #ccc;
-    border-radius: 0.5rem;
-  }
-  
-  .save-changes-button {
-    padding: 10px 20px;
-    background-color: #B5F62B; 
-    color: #001A45;
-    border: none;
-    border-radius: 5px;
-    transition: background-color 0.3s, transform 0.2s;
-    cursor: pointer;
-  }
-  
-  /* Hover state */
-  .save-changes-button:hover {
-    background-color: #A9E922; 
-  }
-  
-  /* Active state */
-  .save-changes-button:active {
-    background-color: #C9FF57; 
-    transform: scale(0.98); 
+    flex-wrap: wrap;
   }
 
-  .sign-out-button {
-    background: none;
-    border: none;
-    cursor: pointer;
-    position: absolute;
-    top: 2rem;
-    right: 2rem;
+  .profile-form .form-group {
+    min-width: 300px; /* Adjusted width for larger screens */
   }
-  
-  .sign-out-button img {
-    width: 24px;
-    height: 24px;
-  }
-  
-  /* Media queries for responsiveness */
-  @media (max-width: 768px) {
-    .profile-form {
-      flex-direction: column;
-      align-items: flex-start;
-      gap: 1rem;
-    }
-  
-    .form-fields {
-      flex-direction: column;
-      align-items: flex-start;
-      gap: 1rem;
-    }
-  
-    .form-group {
-      width: 100%;
-    }
-  
-    .sign-out-button {
-      top: 1rem;
-      right: 1rem;
-    }
-  }
-  
+}

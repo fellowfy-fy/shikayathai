@@ -9,7 +9,7 @@ import useAuth from '../hooks/useAuth';
 function Profile() {
   const navigate = useNavigate();
   const logout = useLogout();
-  const { auth, setAuth } = useAuth()
+  const { auth, setAuth } = useAuth();
   const [user, setUser] = useState({});
   const [photo, setPhoto] = useState(null);
   const [name, setName] = useState('');
@@ -22,14 +22,14 @@ function Profile() {
     api.get('/api/users/profile/', { headers: {
       Authorization: `Bearer ${auth.accessToken}`
     }})
-      .then(response => {
-        setUser(response.data);
-        setName(response.data.name);
-        setEmail(response.data.email);
-        setPhoto(response.data.photo);
-      })
-      .catch(error => console.error('Error fetching user data:', error));
-  }, []);
+    .then(response => {
+      setUser(response.data);
+      setName(response.data.name);
+      setEmail(response.data.email);
+      setPhoto(response.data.photo);
+    })
+    .catch(error => console.error('Error fetching user data:', error));
+  }, [auth.accessToken]);
 
   const signOut = async () => {
     await logout();
@@ -46,6 +46,10 @@ function Profile() {
   const handleSaveChanges = () => {
     if (password === "") {
       alert('Confirm password')
+      return;
+    }
+    if (password.length < 8) {
+      alert('Password must be at least 8 characters long');
       return;
     }
     if (password !== repeatPassword) {
@@ -69,22 +73,18 @@ function Profile() {
         'Content-Type': 'multipart/form-data'
       }
     })
-      .then(response => {
-        alert('Changes saved!');
-        const accessToken = response?.data?.access;
-        const name = response?.data?.name
-        const email = response?.data?.email
-        const userpic = `data:image/png;base64,${response.data.userpic}`
-        setAuth({ name, email, password, accessToken, userpic });
-        setUser(response.data);
-
-      })
-      .catch(error => {
-        console.error('Error saving changes:', error);
-        if (error.response && error.response.status === 401) {
-          navigate('/login'); // Redirect to login if not authorized
-        }
-      });
+    .then(response => {
+      alert('Changes saved!');
+      const accessToken = response?.data?.access;
+      setAuth(prev => ({ ...prev, accessToken, name, email }));
+      setUser(response.data);
+    })
+    .catch(error => {
+      console.error('Error saving changes:', error);
+      if (error.response && error.response.status === 401) {
+        navigate('/login'); // Redirect to login if not authorized
+      }
+    });
   };
 
   return (
@@ -95,7 +95,7 @@ function Profile() {
       <h2>Profile</h2>
       <div className="profile-form">
         <div className="photo-section">
-          <img src={ auth.userpic } alt="Profile" className="profile-photo" />
+          <img src={ auth.userpic || 'path_to_default_image.png' } alt="Profile" className="profile-photo" />
           <label htmlFor="photo-upload" className="choose-photo-label">Choose a photo</label>
           <input type="file" id="photo-upload" onChange={handlePhotoChange} className="choose-photo" />
         </div>

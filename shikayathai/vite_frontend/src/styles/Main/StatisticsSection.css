@@ -1,0 +1,68 @@
+/* Statistics section styles */
+.statistic-section {
+    text-align: center;
+    padding: 2rem 1rem;
+    background: linear-gradient(#F7E5FF 0%, #FFE5C6 100%);
+    border-radius: 1rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 2rem;
+}
+
+.statistic-section-logo {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.statistic-section-logo img {
+    width: 40px;
+    height: 40px;
+}
+
+.statistic-section-logo h2 {
+    font-size: 2rem;
+    font-weight: bold;
+    color: #001A45;
+    margin: 0;
+}
+
+.statistic-items {
+    display: flex;
+    justify-content: center;
+    gap: 3rem;
+    flex-wrap: wrap;
+}
+
+.statistic-item {
+    text-align: center;
+}
+
+.statistic-item h3 {
+    font-size: 3rem;
+    font-weight: bold;
+    color: #001A45;
+    margin: 0;
+}
+
+.statistic-item p {
+    font-size: 1rem;
+    color: #555;
+    margin: 0;
+}
+
+.file-complaint-button {
+    background-color: #fff;
+    border: 1px solid #001A45;
+    color: #001A45;
+    padding: 0.5rem 1rem;
+    font-size: 1rem;
+    font-weight: bold;
+    border-radius: 0.5rem;
+}
+
+.file-complaint-button:hover {
+    background-color: #f0f8ff;
+}

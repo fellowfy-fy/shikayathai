@@ -1,0 +1,6 @@
+/* Utility classes for margins, paddings, text utilities, etc. */
+.mt-1 { margin-top: 1rem; }
+.mb-1 { margin-bottom: 1rem; }
+.pt-1 { padding-top: 1rem; }
+.pb-1 { padding-bottom: 1rem; }
+.text-center { text-align: center; }
