@@ -2,7 +2,7 @@ import React from "react";
 import { useModal } from "../../context/ModalContext";
 import RegistrationComponent from "./RegistrationComponent";
 import LoginComponent from "./LoginComponent";
-import "../../styles/HeaderFooter.css";
+import "../../styles/Header.css";
 import logo from "../../assets/logo.svg";
 import { useContext } from "react";
 import AuthContext from "../../context/AuthProvider";

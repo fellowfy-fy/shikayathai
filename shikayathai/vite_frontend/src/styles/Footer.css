@@ -1,0 +1,62 @@
+/* футер */
+.footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #001A45;
+    color: white;
+    padding: 20px;
+    font-size: 14px;
+    position: relative;
+  }
+  
+  .footer-left ul {
+    list-style: none;
+    padding: 0;
+  }
+  
+  .footer-left ul li {
+    margin-bottom: 10px;
+  }
+  
+  .footer-left ul li a {
+    color: white;
+    text-decoration: none;
+  }
+  
+  .footer-left ul li a:hover {
+    text-decoration: underline;
+  }
+  
+  .footer-center {
+    text-align: center;
+    color: rgba(255, 255, 255, 0.5); /* Semi-transparent */
+  }
+  
+  .footer-logo-name {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .footer-logo {
+    width: auto;
+    height: auto;
+    margin-right: 10px; /* Add some spacing between the logo and the name */
+  }
+  
+  .footer-name {
+    font-size: 18px;
+    font-weight: bold;
+    margin: 0;
+  }
+  
+  
+  .footer-right {
+    text-align: right;
+  }
+  
+  .footer-right p {
+    margin: 0;
+    margin-bottom: 10px;
+  }
