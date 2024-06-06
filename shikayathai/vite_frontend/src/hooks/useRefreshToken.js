@@ -5,16 +5,15 @@ const useRefreshToken = () => {
     const { setAuth } = useAuth();
 
     const refresh = async () => {
-        const response = await api.get('api/token/refresh/', {
+        const response = await api.post('/api/refresh/', {
             withCredentials: true
         });
         setAuth(prev => {
-            console.log(JSON.stringify(prev));
-            console.log(response.data.accessToken);
+            // console.log(JSON.stringify(prev));
+            // console.log(response.data.access);
             return {
                 ...prev,
-                roles: response.data.roles,
-                accessToken: response.data.accessToken
+                accessToken: response.data.access
             }
         });
         return response.data.accessToken;

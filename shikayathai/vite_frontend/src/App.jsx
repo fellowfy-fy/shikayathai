@@ -18,12 +18,14 @@ function App() {
     <>
       <Routes>
         <Route path="/" element={<Layout />}>
-          <Route path="/" element={<Main />} />
+          <Route element={<PersistLogin />}>
+            <Route path="/" element={<Main />} />
+            <Route path="profile" element={<Profile />} />
+            <Route path="brands" element={<Brands />} />
+            <Route path="complaints" element={<Complaints />} />
+            <Route path="/complaints/:id" element={<ComplaintPage />} />
+          </Route>
           <Route path="*" element={<NotFound />} />
-          <Route path="profile" element={<Profile />} />
-          <Route path="brands" element={<Brands />} />
-          <Route path="complaints" element={<Complaints />} />
-          <Route path="/complaints/:id" element={<ComplaintPage />} />
         </Route>
       </Routes>
       <ModalComponent />

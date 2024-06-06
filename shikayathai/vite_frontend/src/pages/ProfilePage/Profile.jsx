@@ -19,7 +19,7 @@ function Profile() {
 
   useEffect(() => {
     // Fetch user data from the backend
-    api.get('/api/users/profile', { headers: {
+    api.get('/api/users/profile/', { headers: {
       Authorization: `Bearer ${auth.accessToken}`
     }})
     .then(response => {
@@ -44,7 +44,6 @@ function Profile() {
   };
 
   const handleSaveChanges = () => {
-    console.log(password, repeatPassword);
     if (password === "") {
       alert('Confirm password')
       return;
