@@ -3,6 +3,7 @@ import { useModal } from "../../context/ModalContext";
 import RegistrationComponent from "./RegistrationComponent";
 import LoginComponent from "./LoginComponent";
 import "../../styles/HeaderFooter.css";
+import logo from "../../assets/logo.svg";
 import { useContext } from "react";
 import AuthContext from "../../context/AuthProvider";
 import { Link } from "react-router-dom";
@@ -23,10 +24,11 @@ const Header = () => {
 
   return (
     <header>
-      <nav className="navbar navbar-expand-lg ">
+      <nav className="navbar navbar-expand-lg">
         <div className="container-fluid">
-          <Link className="navbar-brand" to="/">
-            Shikayathai
+          <Link className="navbar-brand d-flex align-items-center" to="/">
+            <img src={logo} alt="Logo" style={{ width: '30px', marginRight: '10px' }} />
+            <span className="text-white">Shikayathai</span>
           </Link>
           <button
             className="navbar-toggler"
@@ -42,47 +44,30 @@ const Header = () => {
           <div className="collapse navbar-collapse" id="navbarNav">
             <ul className="navbar-nav me-auto mb-2 mb-lg-0">
               <li className="nav-item">
-                <Link className="nav-link" to="/">
-                  Home
-                </Link>
+                <Link className="nav-link" to="/">Home</Link>
               </li>
               <li className="nav-item">
-                <Link className="nav-link" to="/brands">
-                  All brands
-                </Link>
+                <Link className="nav-link" to="/brands">All brands</Link>
               </li>
               <li className="nav-item">
-                <Link className="nav-link" to="/complaints">
-                  All Complaints
-                </Link>
+                <Link className="nav-link" to="/complaints">All Complaints</Link>
               </li>
             </ul>
             {!auth.name ? (
               <div className="d-flex">
-                <button
-                  onClick={handleRegisterClick}
-                  className="btn btn-primary me-2"
-                >
+                <button onClick={handleRegisterClick} className="btn btn-primary me-2">
                   Register
                 </button>
-                <button
-                  onClick={handleLoginClick}
-                  className="btn btn-secondary"
-                >
+                <button onClick={handleLoginClick} className="btn btn-secondary">
                   Login
                 </button>
               </div>
             ) : (
-              <div className="d-flex">
+              <div className="d-flex align-items-center">
                 <Link className="btn btn-primary me-2" to="/profile">
                   {auth.name}
                 </Link>
-
-                <img
-                  className="navbar-brand rounded-circle"
-                  src={auth.userpic}
-                  width="30" height="40"
-                ></img>
+                <img className="navbar-brand rounded-circle" src={auth.userpic} width="30" height="30" alt="User" />
               </div>
             )}
           </div>

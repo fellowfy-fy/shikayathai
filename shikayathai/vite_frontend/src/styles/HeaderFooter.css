@@ -5,13 +5,25 @@
   position: fixed; /* Fix navbar at the top of the viewport */
   width: 100%; /* Ensure navbar spans full width */
   z-index: 1050; /* Sit on top of other content */
-  border-bottom: 2px solid #cbd3e6; /* Optional border for aesthetic */
 }
 
 .navbar-brand {
   color: white; /* Brand text color */
   display: flex;
   align-items: center; /* Align logo and text vertically */
+}
+
+.logo-img {
+  height: 30px;
+  width: 30px;
+  margin-right: 10px;
+  margin-left: 20px;
+}
+
+.logo-text {
+  color: #fff; /* White color */
+  font-size: 1rem;
+  font-weight: bold;
 }
 
 .navbar-brand img {

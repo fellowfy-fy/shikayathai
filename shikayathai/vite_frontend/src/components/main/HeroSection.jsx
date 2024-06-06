@@ -15,11 +15,11 @@ const HeroSection = () => {
     <section className="hero-section">
       <div className="hero-content">
         <div className="hero-title-wrapper">
-        <h1 className="hero-title">
-          <span>FREE</span>
-          <span>Complaint</span>
-          <span>Platform</span>
-        </h1>
+          <h1 className="hero-title">
+            <span>FREE</span>
+            <span>Complaint</span>
+            <span>Platform</span>
+          </h1>
           <p className="hero-subtitle">Turning grievances into wins, guaranteed</p>
           <button className="cta-button" onClick={handleFileComplaintClick}>
             File a complaint
