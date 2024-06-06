@@ -26,7 +26,9 @@ class UserDetailUpdateDeleteView(RetrieveUpdateDestroyAPIView):
     permission_classes = [IsAuthenticated]
 
     def get_object(self):
-        return self.request.user
+        obj = self.request.user
+        return obj
+        
     
     def update(self, request, *args, **kwargs):
         partial = kwargs.pop('partial', False)
@@ -38,16 +40,15 @@ class UserDetailUpdateDeleteView(RetrieveUpdateDestroyAPIView):
         password = serializer.validated_data['password']
         user = authenticate(email=email, password=password)
         refresh = RefreshToken.for_user(user)
-
         # Custom response
-        custom_response = {
+        response = {
             'name': user.name,
-            'email': email,
-            'password': password,
-            'access': str(refresh.access_token),                    
+            'email': email,                  
             'userpic': get_userpic_base64(user)
         }
-        return Response(custom_response, status=status.HTTP_200_OK)
+        access_token = str(refresh.access_token)
+        response.set_cookie('access_token', access_token, httponly=True, secure=True, samesite='None')
+        return Response(response, status=status.HTTP_200_OK)
 
 class ComplaintDetailUpdateDeleteView(RetrieveUpdateDestroyAPIView):
     serializer_class = ComplaintSerializer
@@ -144,21 +145,7 @@ User = get_user_model()
 
 class RefreshAccessTokenView(APIView):
     permission_classes = [IsAuthenticated]
-
-    def get(self, request, *args, **kwargs):
-        refresh_token = request.COOKIES.get('refresh_token')
-        if not refresh_token:
-            return Response({'detail': 'Refresh token not found'}, status=400)
-
-        try:
-            refresh = RefreshToken(refresh_token)
-            new_access_token = str(refresh.access_token)
-            response = Response({'access': new_access_token})
-            response.set_cookie('access_token', new_access_token, httponly=True, secure=True, samesite='None')
-            return response
-        except Exception as e:
-            return Response({'detail': 'Invalid refresh token'}, status=400)
-
+    
     def post(self, request, *args, **kwargs):
         refresh_token = request.COOKIES.get('refresh_token')
         if not refresh_token:
@@ -167,7 +154,12 @@ class RefreshAccessTokenView(APIView):
         try:
             refresh = RefreshToken(refresh_token)
             new_access_token = str(refresh.access_token)
-            response = Response({'access': new_access_token})
+            response = Response({
+                'access': new_access_token,
+                'email': request.user.email,
+                'name': request.user.name,
+                'userpic': get_userpic_base64(request.user)
+            })
             return response
         except Exception as e:
             return Response({'detail': 'Invalid refresh token'}, status=400)
