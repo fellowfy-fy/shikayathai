@@ -19,9 +19,7 @@ function Profile() {
 
   useEffect(() => {
     // Fetch user data from the backend
-    api.get('/api/users/profile/', { headers: {
-      withCredentials: true
-    }})
+    api.get('/api/users/profile', { headers: { Authorization: `Bearer ${auth.access}` } })
     .then(response => {
       setUser(response.data);
       setName(response.data.name);
@@ -29,7 +27,7 @@ function Profile() {
       setPhoto(response.data.photo);
     })
     .catch(error => console.error('Error fetching user data:', error));
-  }, [auth.accessToken]);
+  }, [auth.access]);
 
   const signOut = async () => {
     await logout();
@@ -70,13 +68,16 @@ function Profile() {
     api.put('/api/users/profile/', updatedProfile, {
       headers: {
         withCredentials: true,
-        'Content-Type': 'multipart/form-data'
+        'Content-Type': 'multipart/form-data',
+        Authorization: `Bearer ${auth.access}`
       }
     })
     .then(response => {
       alert('Changes saved!');
-      const accessToken = response?.data?.access;
-      setAuth(prev => ({ ...prev, accessToken, name, email }));
+      const userpic = response?.data?.userpic;
+      const access = response?.data?.access;
+      console.log(response.data)
+      setAuth(prev => ({ ...prev, access, name, email, userpic }));
       setUser(response.data);
     })
     .catch(error => {
@@ -95,7 +96,7 @@ function Profile() {
       <h2>Profile</h2>
       <div className="profile-form">
         <div className="photo-section">
-          <img src={ auth.userpic || 'path_to_default_image.png' } alt="Profile" className="profile-photo" />
+          <img src={ auth.userpic } alt="Profile" className="profile-photo" />
           <label htmlFor="photo-upload" className="choose-photo-label">Choose a photo</label>
           <input type="file" id="photo-upload" onChange={handlePhotoChange} className="choose-photo" />
         </div>
