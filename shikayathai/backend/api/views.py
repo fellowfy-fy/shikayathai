@@ -11,15 +11,9 @@ from rest_framework.exceptions import ValidationError
 from django.contrib.auth import authenticate
 from django.conf import settings
 from rest_framework_simplejwt.tokens import RefreshToken
+from rest_framework_simplejwt.views import TokenRefreshView
 import base64
 from django.contrib.auth import get_user_model
-    
-def get_userpic_base64(user):
-    if user.userpic:
-        with open(user.userpic.path, "rb") as img_file:
-            return base64.b64encode(img_file.read()).decode('utf-8')
-    with open(f"{settings.MEDIA_ROOT}/default/userpic.png", "rb") as img_file:
-        return base64.b64encode(img_file.read()).decode('utf-8')
 
 class UserDetailUpdateDeleteView(RetrieveUpdateDestroyAPIView):
     serializer_class = UserSerializer
@@ -29,25 +23,22 @@ class UserDetailUpdateDeleteView(RetrieveUpdateDestroyAPIView):
         obj = self.request.user
         return obj
         
-    
     def update(self, request, *args, **kwargs):
         partial = kwargs.pop('partial', False)
         instance = self.get_object()
         serializer = self.get_serializer(instance, data=request.data, partial=partial)
         serializer.is_valid(raise_exception=True)
         self.perform_update(serializer)
-        email = serializer.validated_data['email']
-        password = serializer.validated_data['password']
-        user = authenticate(email=email, password=password)
-        refresh = RefreshToken.for_user(user)
-        # Custom response
+
+        # Fetch the updated user data
+        user = self.get_object()
+        userpic_url = user.userpic.url if user.userpic else None
+
         response = {
             'name': user.name,
-            'email': email,                  
-            'userpic': get_userpic_base64(user)
+            'email': user.email,
+            'userpic': userpic_url
         }
-        access_token = str(refresh.access_token)
-        response.set_cookie('access_token', access_token, httponly=True, secure=True, samesite='None')
         return Response(response, status=status.HTTP_200_OK)
 
 class ComplaintDetailUpdateDeleteView(RetrieveUpdateDestroyAPIView):
@@ -143,11 +134,10 @@ class CommentListCreateView(ListCreateAPIView):
         
 User = get_user_model()
 
-class RefreshAccessTokenView(APIView):
-    permission_classes = [IsAuthenticated]
+class RefreshAccessTokenView(TokenRefreshView):
     
     def post(self, request, *args, **kwargs):
-        refresh_token = request.COOKIES.get('refresh_token')
+        refresh_token = request.COOKIES.get('refresh')
         if not refresh_token:
             return Response({'detail': 'Refresh token not found'}, status=400)
 
@@ -156,9 +146,6 @@ class RefreshAccessTokenView(APIView):
             new_access_token = str(refresh.access_token)
             response = Response({
                 'access': new_access_token,
-                'email': request.user.email,
-                'name': request.user.name,
-                'userpic': get_userpic_base64(request.user)
             })
             return response
         except Exception as e:

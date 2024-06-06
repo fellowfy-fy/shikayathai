@@ -5,17 +5,13 @@ const useRefreshToken = () => {
     const { setAuth } = useAuth();
 
     const refresh = async () => {
-        const response = await api.post('/api/refresh/', {
+        const response = await api.post('/api/token/refresh/', {
             withCredentials: true
         });
-        console.log(response, "REfresSH")
         setAuth({
-                accessToken: response.data.access,
-                name: response.data.name,
-                email: response.data.email,
-                userpic: `data:image/png;base64,${response.data.userpic}`
+                access: response.data.access,
             });
-        return response.data.accessToken;
+        return response.data.access;
     }
     return refresh;
 };

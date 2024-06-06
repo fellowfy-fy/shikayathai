@@ -28,7 +28,7 @@ const FileComplaintForm = () => {
       await axios.post('api/complaints/', formData, {
         headers: {
           'Content-Type': 'multipart/form-data',
-          'Authorization': `Bearer ${auth.accessToken}`
+          'Authorization': `Bearer ${auth.access}`
         }
       });
       hideModal();
