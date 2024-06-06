@@ -1,7 +1,7 @@
 import React from "react";
 import { useModal } from '../../context/ModalContext';
 import FileComplaintForm from './FileComplaintForm';
-import '../../styles/Main.css';
+import '../../styles/Main/StatisticsSection.css';
 import logo from '../../assets/invlogo.svg'; // Adjust the path to your logo image
 
 const StatisticSection = () => {

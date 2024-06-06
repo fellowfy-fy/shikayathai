@@ -2,7 +2,7 @@ import React from "react";
 import { useModal } from '../../context/ModalContext';
 import FileComplaintForm from './FileComplaintForm';
 import man from "../../assets/man.png"; 
-import '../../styles/Main.css';
+import '../../styles/Main/HeroSection.css';
 
 const HeroSection = () => {
   const { showModal } = useModal();

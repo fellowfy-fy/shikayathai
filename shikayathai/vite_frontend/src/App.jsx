@@ -8,6 +8,10 @@ import Layout from './components/Layout';
 import Profile from './pages/Profile';
 import ModalComponent from './components/ModalComponent';
 import ComplaintPage from './pages/ComplaintPage';
+import './styles/Main/Base.css';
+import './styles/Main/Responsive.css';
+import './styles/Main/Utilities.css'; // Assuming Utilities.css is used globally
+
 
 function App() {
   return (

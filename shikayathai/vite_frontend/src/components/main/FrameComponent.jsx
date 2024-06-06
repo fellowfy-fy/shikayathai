@@ -1,7 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 import { useNavigate } from "react-router-dom";
-import "../../styles/Components/FrameComponent.css";
+import "../../styles/Components/RequestComponent.css";
 
 const FrameComponent = ({ className = "", data }) => {
   const navigate = useNavigate();

@@ -8,6 +8,8 @@ import FAQSection from "../components/main/FAQSection";
 import OrganizationSection from "../components/main/OrganizationSection";
 import FileComplaintForm from "../components/main/FileComplaintForm";
 
+
+
 const Main = () => {
   const [isFormVisible, setIsFormVisible] = useState(false);
 

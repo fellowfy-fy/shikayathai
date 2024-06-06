@@ -2,7 +2,7 @@ import React from "react";
 import { useModal } from "../../context/ModalContext";
 import CompanyForm from "../CompanyForm";
 import aboba from "../../assets/aboba.svg";
-import "../../styles/Main.css";
+import '../../styles/Main/OrganizationSection.css';
 
 
 const OrganizationSection = () => {

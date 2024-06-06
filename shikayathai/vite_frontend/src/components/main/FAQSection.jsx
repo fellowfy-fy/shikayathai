@@ -1,5 +1,5 @@
 import React from "react";
-import "../../styles/Main.css";
+import "../../styles/Main/FAQSection.css";
 
 const FAQSection = () => (
   <section className="faq-section">
