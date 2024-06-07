@@ -2,7 +2,7 @@ from rest_framework import viewsets
 from rest_framework.permissions import AllowAny, IsAuthenticated, IsAdminUser
 from .models import User, Company, Complaint, Comment, Photo, Document
 from .serializers import UserSerializer, CompanySerializer, ComplaintSerializer, CommentSerializer, PhotoSerializer, DocumentSerializer, UserUpdateSerializer
-from rest_framework.generics import RetrieveUpdateDestroyAPIView, ListCreateAPIView, ListAPIView
+from rest_framework.generics import RetrieveUpdateDestroyAPIView, ListCreateAPIView, ListAPIView, RetrieveAPIView
 from rest_framework.response import Response
 from rest_framework.parsers import MultiPartParser, FormParser
 from rest_framework import status
@@ -71,6 +71,11 @@ class ComplaintDetailUpdateDeleteView(RetrieveUpdateDestroyAPIView):
             serializer.save(author=self.request.user)
         else:
             print(serializer.errors)
+
+class ComplaintDetailView(RetrieveAPIView):
+    queryset = Complaint.objects.all()
+    serializer_class = ComplaintSerializer
+    permission_classes = [AllowAny]
 
 class CompanyDetailUpdateDeleteView(RetrieveUpdateDestroyAPIView):
     serializer_class = CompanySerializer

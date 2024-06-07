@@ -1,6 +1,6 @@
 import RecentRequestsSection from "../../components/RecentRequestSection/RecentReqeustSection.jsx";
 
-function Complaints() {
+const Complaints = () => {
     return (
       <div>
         <br />
