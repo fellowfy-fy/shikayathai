@@ -1,32 +1,49 @@
 from rest_framework import viewsets
 from rest_framework.permissions import AllowAny, IsAuthenticated, IsAdminUser
 from .models import User, Company, Complaint, Comment, Photo, Document
-from .serializers import UserSerializer, CompanySerializer, ComplaintSerializer, CommentSerializer, PhotoSerializer, DocumentSerializer
+from .serializers import UserSerializer, CompanySerializer, ComplaintSerializer, CommentSerializer, PhotoSerializer, DocumentSerializer, UserUpdateSerializer
 from rest_framework.generics import RetrieveUpdateDestroyAPIView, ListCreateAPIView, ListAPIView
-from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework.parsers import MultiPartParser, FormParser
 from rest_framework import status
 from rest_framework.exceptions import ValidationError
-from django.contrib.auth import authenticate
-from django.conf import settings
 from rest_framework_simplejwt.tokens import RefreshToken
 from rest_framework_simplejwt.views import TokenRefreshView
-import base64
 from django.contrib.auth import get_user_model
+from django.contrib.auth.hashers import make_password
+from dotenv import load_dotenv
+import os
+from django.conf import settings
+
+load_dotenv()
+USERPIC_SITE = os.getenv("USERPIC_SITE")
+
+def get_userpic_url(user):
+    if user.userpic:
+        return f"{USERPIC_SITE}{user.userpic.url}"
+    return f"{USERPIC_SITE}{settings.MEDIA_URL}default/userpic.png"
 
 class UserDetailUpdateDeleteView(RetrieveUpdateDestroyAPIView):
-    serializer_class = UserSerializer
+    serializer_class = UserUpdateSerializer
     permission_classes = [IsAuthenticated]
+    parser_classes = (MultiPartParser, FormParser)
 
     def get_object(self):
-        obj = self.request.user
-        return obj
-        
+        return self.request.user
+
     def update(self, request, *args, **kwargs):
         partial = kwargs.pop('partial', False)
         instance = self.get_object()
-        serializer = self.get_serializer(instance, data=request.data, partial=partial)
+        data = request.data.copy()
+
+        # Handle password update separately
+        if 'password' in data and data['password']:
+            password = data.pop('password')
+            if isinstance(password, list):
+                password = password[0]
+            instance.password = make_password(password)
+
+        serializer = self.get_serializer(instance, data=data, partial=partial)
         serializer.is_valid(raise_exception=True)
         self.perform_update(serializer)
 
@@ -37,7 +54,7 @@ class UserDetailUpdateDeleteView(RetrieveUpdateDestroyAPIView):
         response = {
             'name': user.name,
             'email': user.email,
-            'userpic': userpic_url
+            'userpic': get_userpic_url(user),
         }
         return Response(response, status=status.HTTP_200_OK)
 
