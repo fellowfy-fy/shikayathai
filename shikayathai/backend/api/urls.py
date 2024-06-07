@@ -1,5 +1,5 @@
 from django.urls import path
-from .views import UserDetailUpdateDeleteView, ComplaintDetailUpdateDeleteView, CompanyDetailUpdateDeleteView, CreateComplaintView, CreateCompanyView, ListComplaintsView, CommentListCreateView, ComplaintDetailView
+from .views import UserDetailUpdateDeleteView, ComplaintDetailUpdateDeleteView, CompanyDetailUpdateDeleteView, CreateComplaintView, CreateCompanyView, ListComplaintsView, CommentListCreateView, ComplaintDetailView, ComplaintAndCompanyCreateView
 
 urlpatterns = [
     path("complaints/", CreateComplaintView.as_view(), name="complaint-list"),
@@ -9,4 +9,5 @@ urlpatterns = [
     path('companies/<int:pk>/', CompanyDetailUpdateDeleteView.as_view(), name='company-detail-update-delete'),
     path("complaints/get/", ListComplaintsView.as_view(), name="complaint-get-list"),
     path('comments/', CommentListCreateView.as_view(), name='comment-list-create'),
+    path('complaints/create/', ComplaintAndCompanyCreateView.as_view(), name='complaint-create')
 ]

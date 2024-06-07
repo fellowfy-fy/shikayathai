@@ -1,7 +1,7 @@
 from rest_framework import viewsets
 from rest_framework.permissions import AllowAny, IsAuthenticated, IsAdminUser
 from .models import User, Company, Complaint, Comment, Photo, Document
-from .serializers import UserSerializer, CompanySerializer, ComplaintSerializer, CommentSerializer, PhotoSerializer, DocumentSerializer, UserUpdateSerializer
+from .serializers import UserSerializer, CompanySerializer, ComplaintSerializer, CommentSerializer, PhotoSerializer, DocumentSerializer, UserUpdateSerializer, ComplaintAndCompanySerializer
 from rest_framework.generics import RetrieveUpdateDestroyAPIView, ListCreateAPIView, ListAPIView, RetrieveAPIView
 from rest_framework.response import Response
 from rest_framework.parsers import MultiPartParser, FormParser
@@ -12,6 +12,7 @@ from rest_framework_simplejwt.views import TokenRefreshView
 from django.contrib.auth import get_user_model
 from django.contrib.auth.hashers import make_password
 from dotenv import load_dotenv
+from rest_framework.views import APIView
 import os
 from django.conf import settings
 
@@ -155,6 +156,55 @@ class CommentListCreateView(ListCreateAPIView):
         serializer.save(user=self.request.user)
         
 User = get_user_model()
+
+class ComplaintAndCompanyCreateView(APIView):
+    parser_classes = (MultiPartParser, FormParser)
+    
+    def post(self, request, *args, **kwargs):
+        company_data = {
+            'name': request.data.get('company'),
+            'phone': request.data.get('brandPhone'),
+            'email': request.data.get('brandEmail'),
+            'website': request.data.get('brandWebsite'),
+        }
+
+        company_serializer = CompanySerializer(data=company_data)
+        if company_serializer.is_valid():
+            company = company_serializer.save()
+        else:
+            return Response(company_serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+        author_name = request.data.get('author')
+        if not author_name:
+            return Response({'author': ['This field is required.']}, status=status.HTTP_400_BAD_REQUEST)
+        
+        try:
+            author = User.objects.get(name=author_name)
+        except User.DoesNotExist:
+            return Response({'author': ['User not found.']}, status=status.HTTP_400_BAD_REQUEST)
+
+        complaint_data = {
+            'author': author.id,
+            'title': request.data.get('title'),
+            'description': request.data.get('description'),
+            'private_description': request.data.get('privateDetails'),
+            'company': company_data,
+        }
+        
+        complaint_serializer = ComplaintAndCompanySerializer(data=complaint_data)
+        if complaint_serializer.is_valid():
+            complaint = complaint_serializer.save()
+
+            photos = request.FILES.getlist('photos')
+            for photo in photos:
+                Photo.objects.create(complaint=complaint, image=photo)
+
+            documents = request.FILES.getlist('documents')
+            for document in documents:
+                Document.objects.create(complaint=complaint, file=document)
+
+            return Response(complaint_serializer.data, status=status.HTTP_201_CREATED)
+        else:
+            return Response(complaint_serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 class RefreshAccessTokenView(TokenRefreshView):
     

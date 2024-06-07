@@ -48,30 +48,40 @@ class UserUpdateSerializer(serializers.ModelSerializer):
 class CompanySerializer(serializers.ModelSerializer):
     class Meta:
         model = Company
-        fields = ['id', 'name', 'website']
+        fields = ['name', 'website', 'phone', 'email']
+
 
 
 class PhotoSerializer(serializers.ModelSerializer):
     class Meta:
         model = Photo
-        fields = ['id', 'file', 'complaint']
+        fields = ['id', 'image']
 
 class DocumentSerializer(serializers.ModelSerializer):
     class Meta:
         model = Document
-        fields = ['id', 'file', 'complaint']
+        fields = ['id', 'file']
+        
+class ComplaintAndCompanySerializer(serializers.ModelSerializer):
+    photos = PhotoSerializer(many=True, read_only=True)
+    documents = DocumentSerializer(many=True, read_only=True)
+    company = CompanySerializer()
 
+    class Meta:
+        model = Complaint
+        fields = ['id', 'author', 'title', 'description', 'private_description', 'photos', 'documents', 'company']
+
+    def create(self, validated_data):
+        company_data = validated_data.pop('company')
+        company = Company.objects.create(**company_data)
+        complaint = Complaint.objects.create(company=company, **validated_data)
+        return complaint
 class ComplaintSerializer(serializers.ModelSerializer):
     author_name = serializers.SerializerMethodField()
     company_name = serializers.SerializerMethodField()
-    photos = serializers.ListField(
-        child=serializers.ImageField(max_length=100000, allow_empty_file=False, use_url=False),
-        write_only=True
-    )
-    documents = serializers.ListField(
-        child=serializers.FileField(max_length=100000, allow_empty_file=False, use_url=False),
-        write_only=True
-    )
+    
+    photos = PhotoSerializer(many=True, read_only=True)
+    documents = DocumentSerializer(many=True, read_only=True)
     class Meta:
         model = Complaint
         fields = ['id', 'author_name', 'title', 'description', 'private_description', 'company_name', 'photos', 'documents', 'resolution_rating', 'resolution_comment']

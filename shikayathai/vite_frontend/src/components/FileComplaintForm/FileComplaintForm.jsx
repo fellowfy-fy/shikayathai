@@ -43,9 +43,8 @@ const FileComplaintForm = () => {
     formData.append('privateDetails', privateDetails);
     photos.forEach((photo, index) => formData.append(`photos[${index}]`, photo));
     documents.forEach((document, index) => formData.append(`documents[${index}]`, document));
-
     try {
-      await axios.post('api/complaints/', formData, {
+      await axios.post('api/complaints/create/', formData, {
         headers: {
           'Content-Type': 'multipart/form-data',
           'Authorization': `Bearer ${auth?.access}`
