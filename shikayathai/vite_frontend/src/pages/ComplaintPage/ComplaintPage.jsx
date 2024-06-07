@@ -1,6 +1,7 @@
 import{ useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import api from '../../api/axios.jsx';
+import SuccessBanner from './SuccBanner/SuccessBanner.jsx';
 
 const ComplaintDetail = () => {
   const { id } = useParams();
@@ -22,16 +23,7 @@ const ComplaintDetail = () => {
 
   return (
     <div className="complaint-page">
-    <div className="breadcrumbs">
-    <a href="/">Home</a> &gt; <a href="/my-complaints">My complaints</a> &gt; <span>Complaint {id}</span>
-  </div>
-  <div className="notification-banner">
-    Your complaint is added successfully! We will process it asap.
-    <br />
-    Make your complaint more effective. The more people will see it the higher chances that company will resolve it quickly. Share it on social media!
-    <br />
-    <input type="text" value={`shareyourlink.com/${id}`} readOnly />
-  </div>
+    <SuccessBanner />
   <div className="complaint-details">
     <div className="user-info">
       {/* <img src={complaint.userAvatar} alt="User avatar" /> */}
