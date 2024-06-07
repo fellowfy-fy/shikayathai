@@ -31,8 +31,8 @@ const StatisticSection = () => {
           <h3>8 000 000+</h3>
           <p>resolved requests</p>
         </div>
+        <button onClick={handleFileComplaintClick} className="file-complaint-button">File a complaint</button>
       </div>
-      <button onClick={handleFileComplaintClick} className="file-complaint-button">File a complaint</button>
     </section>
   );
 };

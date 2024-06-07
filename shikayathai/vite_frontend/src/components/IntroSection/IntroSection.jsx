@@ -32,6 +32,10 @@ const IntroSection = () => (
             <p>Track your complaint's journey to resolution.</p>
           </div>
         </div>
+        <div className="goal">
+            <p>Our platform aims to foster constructive dialogues between consumers and companies, leading to mutually beneficial resolutions.
+</p>
+        </div>
       </div>
     </div>
   </section>

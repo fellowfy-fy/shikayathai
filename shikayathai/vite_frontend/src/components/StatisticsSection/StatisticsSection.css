@@ -18,16 +18,24 @@
 }
 
 .statistic-section-logo img {
-    width: 40px;
-    height: 40px;
+    width: 24px;
+    height: auto;
 }
 
 .statistic-section-logo h2 {
-    font-size: 2rem;
+    font-size: 18px;
     font-weight: bold;
     color: #001A45;
     margin: 0;
+    font-family: 'Unbounded', sans-serif;
 }
+
+.statistic-section-logo h3 {
+    font-size: 24px;
+    font-family: 'Unbounded', sans-serif;
+    font-weight: bold;
+}
+
 
 .statistic-items {
     display: flex;
@@ -41,10 +49,11 @@
 }
 
 .statistic-item h3 {
-    font-size: 3rem;
     font-weight: bold;
     color: #001A45;
     margin: 0;
+    font-family: 'Unbounded', sans-serif;
+    font-size: 32px;
 }
 
 .statistic-item p {
@@ -58,9 +67,11 @@
     border: 1px solid #001A45;
     color: #001A45;
     padding: 0.5rem 1rem;
-    font-size: 1rem;
-    font-weight: bold;
-    border-radius: 0.5rem;
+    font-size: 18px;
+    font-weight: 500;
+    border-radius: 0.7rem;
+    width: 312px;
+    height: 56px;
 }
 
 .file-complaint-button:hover {
