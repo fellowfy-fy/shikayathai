@@ -1,0 +1,9 @@
+.modal-body {
+    max-height: 75vh; 
+    overflow-y: auto; 
+    padding: 15px;
+}
+
+.modal-body * {
+    overflow-y: visible; 
+}

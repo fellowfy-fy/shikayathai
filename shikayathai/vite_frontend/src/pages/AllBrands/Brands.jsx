@@ -34,7 +34,7 @@ function Brands() {
 
       <div className="hero-content">
         <div className="hero-title-wrapper">
-          <h1 className="hero-title">Companies List</h1>
+          <h1 className="hero-title">All brands</h1>
           <button className="cta-button" onClick={handleFileComplaintClick}>
             Add a company
           </button>

@@ -46,10 +46,7 @@ function Profile() {
       alert('Confirm password')
       return;
     }
-    if (password.length < 8) {
-      alert('Password must be at least 8 characters long');
-      return;
-    }
+
     if (password !== repeatPassword) {
       alert('Passwords do not match!');
       return;

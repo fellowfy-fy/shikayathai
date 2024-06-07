@@ -8,7 +8,7 @@ function Complaints() {
         <br />
         <br />
         <br />
-      <RecentRequestsSection title="Recent requests" />
+      <RecentRequestsSection title="All complaints" />
       </div>
     );
   }

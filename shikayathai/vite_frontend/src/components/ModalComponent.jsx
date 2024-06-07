@@ -1,5 +1,6 @@
 import React from 'react';
 import { useModal } from '../context/ModalContext';
+import './ModalComponent.css';
 
 const ModalComponent = () => {
   const { modalContent, hideModal } = useModal();
