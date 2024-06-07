@@ -63,6 +63,7 @@ class DocumentSerializer(serializers.ModelSerializer):
 
 class ComplaintSerializer(serializers.ModelSerializer):
     author_name = serializers.SerializerMethodField()
+    company_name = serializers.SerializerMethodField()
     photos = serializers.ListField(
         child=serializers.ImageField(max_length=100000, allow_empty_file=False, use_url=False),
         write_only=True
@@ -73,7 +74,7 @@ class ComplaintSerializer(serializers.ModelSerializer):
     )
     class Meta:
         model = Complaint
-        fields = ['id', 'author_name', 'title', 'description', 'private_description', 'company', 'photos', 'documents', 'resolution_rating', 'resolution_comment']
+        fields = ['id', 'author_name', 'title', 'description', 'private_description', 'company_name', 'photos', 'documents', 'resolution_rating', 'resolution_comment']
         
     def create(self, validated_data):
         photos_data = validated_data.pop('photos')
@@ -87,6 +88,8 @@ class ComplaintSerializer(serializers.ModelSerializer):
     
     def get_author_name(self, obj):
         return obj.author.name
+    def get_company_name(self, obj):
+        return obj.company.name
 
 class CommentSerializer(serializers.ModelSerializer):
     class Meta:
