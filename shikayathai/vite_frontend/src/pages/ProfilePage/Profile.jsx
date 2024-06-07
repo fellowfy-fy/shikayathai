@@ -42,11 +42,6 @@ function Profile() {
   };
 
   const handleSaveChanges = () => {
-    if (password === "") {
-      alert('Confirm password')
-      return;
-    }
-
     if (password !== repeatPassword) {
       alert('Passwords do not match!');
       return;
@@ -55,7 +50,7 @@ function Profile() {
     const updatedProfile = new FormData();
     updatedProfile.append('name', name);
     updatedProfile.append('email', email);
-    if (password) {
+    if (password !== "") {
       updatedProfile.append('password', password);
     }
     if (photo && photo instanceof File) {
@@ -64,7 +59,6 @@ function Profile() {
 
     api.put('/api/users/profile/', updatedProfile, {
       headers: {
-        withCredentials: true,
         'Content-Type': 'multipart/form-data',
         Authorization: `Bearer ${auth.access}`
       }
@@ -72,16 +66,15 @@ function Profile() {
     .then(response => {
       alert('Changes saved!');
       const userpic = response?.data?.userpic;
-      const access = response?.data?.access;
       console.log(response.data)
-      setAuth(prev => ({ ...prev, access, name, email, userpic }));
+      setAuth(prev => ({ ...prev, name, email, userpic }));
       setUser(response.data);
     })
     .catch(error => {
       console.error('Error saving changes:', error);
-      if (error.response && error.response.status === 401) {
-        navigate('/login'); // Redirect to login if not authorized
-      }
+      // if (error.response && error.response.status === 401) {
+      //   navigate('/login'); // Redirect to login if not authorized
+      // }
     });
   };
 

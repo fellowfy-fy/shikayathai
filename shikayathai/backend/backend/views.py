@@ -10,8 +10,10 @@ from rest_framework.views import APIView
 from rest_framework.generics import ListCreateAPIView
 from django.contrib.auth import authenticate, get_user_model
 from django.conf import settings
-import base64
-
+from dotenv import load_dotenv
+import os
+load_dotenv()
+USERPIC_SITE = os.getenv("USERPIC_SITE")
 class LogoutView(APIView):
     def post(self, request, *args, **kwargs):
         response = Response({'detail': 'Logout successful'}, status=status.HTTP_200_OK)
@@ -29,8 +31,8 @@ User = get_user_model()
 
 def get_userpic_url(user):
     if user.userpic:
-        return f"https://127.0.0.1:8000{user.userpic.url}"
-    return f"https://127.0.0.1:8000{settings.MEDIA_URL}default/userpic.png"
+        return f"{USERPIC_SITE}{user.userpic.url}"
+    return f"{USERPIC_SITE}{settings.MEDIA_URL}default/userpic.png"
 
 class CustomLoginView(ListCreateAPIView):
     permission_classes = []
@@ -50,6 +52,7 @@ class CustomLoginView(ListCreateAPIView):
                     'name': user.name,
                     'email': email,          
                     'userpic': get_userpic_url(user),
+                    'access': access_token
                 })
                 if persist:
                     response.set_cookie('access', access_token, httponly=True, secure=True, samesite='None')

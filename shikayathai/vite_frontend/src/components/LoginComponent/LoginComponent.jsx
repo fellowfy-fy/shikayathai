@@ -36,7 +36,6 @@ const LoginComponent = () => {
       const access = response?.data?.access;
       const name = response?.data?.name;
       const userpic = response.data.userpic;
-      console.log(userpic)
       setAuth({ name, email, access, userpic });
       setEmail("");
       setPassword("");
