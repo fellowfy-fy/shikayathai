@@ -27,6 +27,15 @@ function RecentRequestSection(){
   return (
     <div className="recent-requests-section">
       <h2>Recent Requests</h2>
+      {/* <nav>
+        <ul className="nav">
+          <li className="nav-item">
+            <Link className="nav-link watch-all" to="/complaints">
+              Watch all
+            </Link>
+          </li>
+        </ul>
+      </nav> */}
       <div className="request-grid">
         {requests.map((request, index) => (
           <FrameComponent key={index} data={request} />

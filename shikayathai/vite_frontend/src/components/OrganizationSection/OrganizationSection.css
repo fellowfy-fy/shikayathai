@@ -1,7 +1,10 @@
 /* Organizations section styles */
 .organization-section {
     text-align: center;
-    padding: 2rem 1rem;
+    padding-left: 120px;
+    padding-right: 120px;
+    padding-top: 160px;
+    padding-bottom: 80px;
 }
 
 .section-header {
@@ -13,21 +16,23 @@
 }
 
 .section-title {
-    font-size: 2rem;
+    font-size: 32px;
     font-weight: bold;
     
 }
 
 .section-subtitle {
-    font-size: 1.25rem;
+    font-size: 24px;
     color: #333;
+    font-family: 'Inter', sans-serif;
+    font-weight: 300;
 }
 
 .section-content {
     display: flex;
     justify-content: space-around;
     flex-wrap: wrap;
-    gap: 2rem;
+    gap: 32px;
 }
 
 .content-item {
@@ -43,21 +48,25 @@
     border-radius: 50%;
     background-color: #d1c4e9;
     color: #fff;
-    font-size: 1.5rem;
+    font-size: 24px;
     font-weight: bold;
+    font-family: 'Unbounded', sans-serif;
     margin-bottom: 0.5rem;
 }
 
 .item-subtitle {
-    font-size: 1.25rem;
-    font-weight:bold;
+    font-size: 24px;
+    font-weight: 500;
     margin: 0;
+    font-family: 'Inter', sans-serif;
+    font-weight: bold;
 }
 
 .item-subtitle + p {
     margin-top: 0.5rem;
-    font-size: 1rem;
-    color: #333;
+    font-size: 18px;
+    font-weight: 300;
+    color: #001A45;
 }
 
 .call-to-action {
@@ -66,7 +75,7 @@
 
 .call-to-action p {
     font-size: 1rem;
-    color: #333;
+    color: #001A45;
     margin-bottom: 1rem;
     line-height: 1.5rem;
     max-width: 500px;

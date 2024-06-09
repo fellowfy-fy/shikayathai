@@ -25,7 +25,7 @@ const Header = () => {
         <div className="container-fluid">
           <Link className="navbar-brand d-flex align-items-center" to="/">
             <img src={logo} alt="Logo" style={{ width: '24px', marginRight: '10px' }} />
-            <span className="text-white">Shikayathai</span>
+            <span className="text-white">Shikayahai</span>
           </Link>
           <button
             className="navbar-toggler"

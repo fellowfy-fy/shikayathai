@@ -1,7 +1,10 @@
 /* Top Rated Companies section styles */
 .top-rated-companies-section {
     text-align: center;
-    padding: 2rem 1rem;
+    padding-left: 120px;
+    padding-right: 120px;
+    padding-top: 160px;
+    padding-bottom: 80px;
 }
 
 .top-rated-companies-section h2 {
