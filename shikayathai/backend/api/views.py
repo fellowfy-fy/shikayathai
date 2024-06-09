@@ -1,8 +1,7 @@
-from rest_framework import viewsets
-from rest_framework.permissions import AllowAny, IsAuthenticated, IsAdminUser
-from .models import User, Company, Complaint, Comment, Photo, Document
-from .serializers import UserSerializer, CompanySerializer, ComplaintSerializer, CommentSerializer, PhotoSerializer, DocumentSerializer, UserUpdateSerializer, ComplaintAndCompanySerializer
-from rest_framework.generics import RetrieveUpdateDestroyAPIView, ListCreateAPIView, ListAPIView, RetrieveAPIView
+from rest_framework.permissions import AllowAny, IsAuthenticated
+from .models import User
+from .serializers import UserSerializer, UserUpdateSerializer
+from rest_framework.generics import RetrieveUpdateDestroyAPIView, ListCreateAPIView
 from rest_framework.response import Response
 from rest_framework.parsers import MultiPartParser, FormParser
 from rest_framework import status
@@ -16,15 +15,18 @@ from rest_framework.views import APIView
 import os
 from django.conf import settings
 
+User = get_user_model()
 load_dotenv()
 USERPIC_SITE = os.getenv("USERPIC_SITE")
+
+
 
 def get_userpic_url(user):
     if user.userpic:
         return f"{USERPIC_SITE}{user.userpic.url}"
     return f"{USERPIC_SITE}{settings.MEDIA_URL}default/userpic.png"
 
-class UserDetailUpdateDeleteView(RetrieveUpdateDestroyAPIView):
+class UserDashboardView(RetrieveUpdateDestroyAPIView):
     serializer_class = UserUpdateSerializer
     permission_classes = [IsAuthenticated]
     parser_classes = (MultiPartParser, FormParser)
@@ -50,7 +52,6 @@ class UserDetailUpdateDeleteView(RetrieveUpdateDestroyAPIView):
 
         # Fetch the updated user data
         user = self.get_object()
-        userpic_url = user.userpic.url if user.userpic else None
 
         response = {
             'name': user.name,
@@ -58,38 +59,6 @@ class UserDetailUpdateDeleteView(RetrieveUpdateDestroyAPIView):
             'userpic': get_userpic_url(user),
         }
         return Response(response, status=status.HTTP_200_OK)
-
-class ComplaintDetailUpdateDeleteView(RetrieveUpdateDestroyAPIView):
-    serializer_class = ComplaintSerializer
-    permission_classes = [IsAuthenticated]
-
-    def get_queryset(self):
-        # Users can update or delete their own complaints
-        return Complaint.objects.filter(author=self.request.user)
-
-    def perform_update(self, serializer):
-        if serializer.is_valid():
-            serializer.save(author=self.request.user)
-        else:
-            print(serializer.errors)
-
-class ComplaintDetailView(RetrieveAPIView):
-    queryset = Complaint.objects.all()
-    serializer_class = ComplaintSerializer
-    permission_classes = [AllowAny]
-
-class CompanyDetailUpdateDeleteView(RetrieveUpdateDestroyAPIView):
-    serializer_class = CompanySerializer
-    permission_classes = [AllowAny]  # Adjust permissions based on your app's requirements
-
-    def get_queryset(self):
-        return Company.objects.all()
-
-    def perform_update(self, serializer):
-        if serializer.is_valid():
-            serializer.save()
-        else:
-            print(serializer.errors)
 
 class CreateUserView(ListCreateAPIView):
     queryset = User.objects.all()
@@ -115,96 +84,6 @@ class CreateUserView(ListCreateAPIView):
         user = User.objects.create_user(name=name, password=password, email=email)
 
         return Response({'message': 'User created successfully'}, status=status.HTTP_201_CREATED)
-    
-class CreateComplaintView(ListCreateAPIView): 
-    serializer_class = ComplaintSerializer
-    permission_classes = [IsAuthenticated]
-    parser_classes = (MultiPartParser, FormParser)  # Needed for file uploads
-
-    def get_queryset(self):
-        return Complaint.objects.filter(author=self.request.user)
-    
-    def perform_create(self, serializer):
-        serializer.save(author=self.request.user)
-            
-class CreateCompanyView(ListCreateAPIView): 
-    serializer_class = CompanySerializer
-    permission_classes = [AllowAny]
-    
-    def get_queryset(self):
-        return Company.objects.all()
-    
-    def perform_create(self, serializer):
-        if serializer.is_valid():
-            serializer.save()
-        else:
-            print(serializer.errors)
-
-class ListComplaintsView(ListAPIView):
-    serializer_class = ComplaintSerializer
-    permission_classes = [AllowAny]
-    
-    def get_queryset(self):
-        return Complaint.objects.all()
-
-class CommentListCreateView(ListCreateAPIView):
-    queryset = Comment.objects.all()
-    serializer_class = CommentSerializer
-    permission_classes = [IsAuthenticated]
-
-    def perform_create(self, serializer):
-        serializer.save(user=self.request.user)
-        
-User = get_user_model()
-
-class ComplaintAndCompanyCreateView(APIView):
-    parser_classes = (MultiPartParser, FormParser)
-    
-    def post(self, request, *args, **kwargs):
-        company_data = {
-            'name': request.data.get('company'),
-            'phone': request.data.get('brandPhone'),
-            'email': request.data.get('brandEmail'),
-            'website': request.data.get('brandWebsite'),
-        }
-
-        company_serializer = CompanySerializer(data=company_data)
-        if company_serializer.is_valid():
-            company = company_serializer.save()
-        else:
-            return Response(company_serializer.errors, status=status.HTTP_400_BAD_REQUEST)
-        author_name = request.data.get('author')
-        if not author_name:
-            return Response({'author': ['This field is required.']}, status=status.HTTP_400_BAD_REQUEST)
-        
-        try:
-            author = User.objects.get(name=author_name)
-        except User.DoesNotExist:
-            return Response({'author': ['User not found.']}, status=status.HTTP_400_BAD_REQUEST)
-
-        complaint_data = {
-            'author': author.id,
-            'title': request.data.get('title'),
-            'description': request.data.get('description'),
-            'private_description': request.data.get('privateDetails'),
-            'company': company_data,
-        }
-        
-        complaint_serializer = ComplaintAndCompanySerializer(data=complaint_data)
-        if complaint_serializer.is_valid():
-            complaint = complaint_serializer.save()
-
-            photos = request.FILES.getlist('photos')
-            for photo in photos:
-                Photo.objects.create(complaint=complaint, image=photo)
-
-            documents = request.FILES.getlist('documents')
-            for document in documents:
-                Document.objects.create(complaint=complaint, file=document)
-
-            return Response(complaint_serializer.data, status=status.HTTP_201_CREATED)
-        else:
-            return Response(complaint_serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 class RefreshAccessTokenView(TokenRefreshView):
     
@@ -222,3 +101,44 @@ class RefreshAccessTokenView(TokenRefreshView):
             return response
         except Exception as e:
             return Response({'detail': 'Invalid refresh token'}, status=400)
+
+class LoginView(ListCreateAPIView):
+    permission_classes = []
+
+    def post(self, request, *args, **kwargs):
+        serializer = CustomLoginSerializer(data=request.data)
+        if serializer.is_valid():
+            email = serializer.validated_data['email']
+            password = serializer.validated_data['password']
+            user = authenticate(email=email, password=password)
+            persist = serializer.validated_data.get('persist', False)
+            if user is not None:
+                refresh = RefreshToken.for_user(user)
+                access_token = str(refresh.access_token)
+                refresh_token = str(refresh)
+                response = Response({
+                    'name': user.name,
+                    'email': email,          
+                    'userpic': get_userpic_url(user),
+                    'access': access_token
+                })
+                if persist:
+                    response.set_cookie('access', access_token, httponly=True, secure=True, samesite='None')
+                    response.set_cookie('refresh', refresh_token, httponly=True, secure=True, samesite='None')
+                else:
+                    response.set_cookie('access', access_token, httponly=True, secure=True, samesite='None')
+                return response
+            else:
+                return Response({'detail': 'Invalid credentials'}, status=status.HTTP_401_UNAUTHORIZED)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+class LogoutView(APIView):
+    def post(self, request, *args, **kwargs):
+        response = Response({'detail': 'Logout successful'}, status=status.HTTP_200_OK)
+        response.delete_cookie('access')
+        response.delete_cookie('refresh')
+        return response
+        
+        
+        
+        
