@@ -3,6 +3,7 @@ import api from "../../api/axios";
 import { useRef, useState, useEffect } from "react";
 import useAuth from "../../hooks/useAuth";
 import { useNavigate, useLocation } from "react-router-dom";
+import cookie from "cookie";
 
 const LOGIN_URL = "api/login/";
 
@@ -30,13 +31,11 @@ const LoginComponent = () => {
         JSON.stringify({ email, password, persist }),
         {
           headers: { "Content-Type": "application/json" },
-          withCredentials: true
         }
       );
-      const access = response?.data?.access;
       const name = response?.data?.name;
       const userpic = response.data.userpic;
-      setAuth({ name, email, access, userpic });
+      setAuth({ name, email, userpic });
       setEmail("");
       setPassword("");
       hideModal();

@@ -1,6 +1,6 @@
 from rest_framework.permissions import AllowAny, IsAuthenticated
 from .models import User
-from .serializers import UserSerializer, UserUpdateSerializer
+from .serializers import UserSerializer, UserUpdateSerializer, LoginSerializer
 from rest_framework.generics import RetrieveUpdateDestroyAPIView, ListCreateAPIView
 from rest_framework.response import Response
 from rest_framework.parsers import MultiPartParser, FormParser
@@ -14,6 +14,7 @@ from dotenv import load_dotenv
 from rest_framework.views import APIView
 import os
 from django.conf import settings
+from django.contrib.auth import authenticate
 
 User = get_user_model()
 load_dotenv()
@@ -106,7 +107,7 @@ class LoginView(ListCreateAPIView):
     permission_classes = []
 
     def post(self, request, *args, **kwargs):
-        serializer = CustomLoginSerializer(data=request.data)
+        serializer = LoginSerializer(data=request.data)
         if serializer.is_valid():
             email = serializer.validated_data['email']
             password = serializer.validated_data['password']
@@ -133,10 +134,15 @@ class LoginView(ListCreateAPIView):
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 class LogoutView(APIView):
+    
+    permission_classes = [AllowAny]
+    
     def post(self, request, *args, **kwargs):
         response = Response({'detail': 'Logout successful'}, status=status.HTTP_200_OK)
         response.delete_cookie('access')
         response.delete_cookie('refresh')
+        response.delete_cookie('access_token')
+        response.delete_cookie('refresh_token')
         return response
         
         

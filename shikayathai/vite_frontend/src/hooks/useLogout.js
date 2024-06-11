@@ -9,8 +9,8 @@ const useLogout = () => {
         try {
             const response = await api.post('/api/logout/', {
                 withCredentials: true,
-                Authorization: `Bearer ${auth.access}` 
             });
+            console.log(response)
         } catch (err) {
             console.error(err);
         }

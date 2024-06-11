@@ -15,12 +15,12 @@ const ComplaintDetail = () => {
   const [complaint, setComplaint] = useState(null);
 
   useEffect(() => {
-    api.get(`/api/complaints/${id}/`)
+    api.get(`complaints/details/${id}`)
       .then(response => {
         setComplaint(response.data);
       })
       .catch(error => {
-        console.error('Error fetching complaint:', error);
+        console.error('Error fetching complaint:');
       });
   }, [id]);
 

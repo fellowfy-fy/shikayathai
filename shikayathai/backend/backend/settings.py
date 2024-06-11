@@ -26,12 +26,14 @@ INSTALLED_APPS = [
     'django_extensions',
     
     # Local apps
-    'api',
-    'complaints',
-    'companies',
+    'api.apps.ApiConfig',
+    'complaints.apps.ComplaintsConfig',
+    'companies.apps.CompaniesConfig',
 ]
 
 MIDDLEWARE = [
+    #3-rd party
+    'corsheaders.middleware.CorsMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -40,24 +42,12 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     
-    #3-rd party
-    'corsheaders.middleware.CorsMiddleware',
 ]
 
 CORS_ALLOWED_ORIGINS = [
     'http://localhost:5173',  # Add your frontend URL here
     'http://127.0.0.1:5173',
 ]
-
-# HTTPS settings
-SECURE_SSL_REDIRECT = True
-SESSION_COOKIE_SECURE = True
-CSRF_COOKIE_SECURE = True
-SECURE_BROWSER_XSS_FILTER = True
-SECURE_CONTENT_TYPE_NOSNIFF = True
-SECURE_HSTS_SECONDS = 31536000
-SECURE_HSTS_INCLUDE_SUBDOMAINS = True
-SECURE_HSTS_PRELOAD = True
 
 CORS_ALLOW_CREDENTIALS = True
 

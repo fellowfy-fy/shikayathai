@@ -13,7 +13,7 @@ function RecentRequestSection(){
 
   const fetchRequests = async () => {
     try {
-      const url = "/api/complaints/get/"
+      const url = "/complaints/list/"
       const data = await api.get(url);
       setRequests(data.data);
 

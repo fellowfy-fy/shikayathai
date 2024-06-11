@@ -19,7 +19,7 @@ function Profile() {
 
   useEffect(() => {
     // Fetch user data from the backend
-    api.get('/api/users/profile', { headers: { Authorization: `Bearer ${auth.access}` } })
+    api.get('/api/profile', { headers: { Authorization: `Bearer ${auth.access}` } })
     .then(response => {
       setUser(response.data);
       setName(response.data.name);
@@ -57,7 +57,7 @@ function Profile() {
       updatedProfile.append('userpic', photo);
     }
 
-    api.put('/api/users/profile/', updatedProfile, {
+    api.put('/api/profile/', updatedProfile, {
       headers: {
         'Content-Type': 'multipart/form-data',
         Authorization: `Bearer ${auth.access}`

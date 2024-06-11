@@ -10,7 +10,7 @@ function Brands() {
   useEffect(() => {
     const fetchCompanies = async () => {
       try {
-        const response = await axios.get("api/companies/");
+        const response = await axios.get("companies/list");
         setCompanies(response.data);
       } catch (error) {
         console.error("Error fetching companies:", error);
