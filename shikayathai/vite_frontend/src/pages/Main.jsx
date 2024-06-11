@@ -8,7 +8,7 @@ import StatisticsSection from "../components/StatisticsSection/StatisticsSection
 import FAQSection from "../components/FAQSection/FAQSection.jsx";
 import OrganizationSection from "../components/OrganizationSection/OrganizationSection.jsx";
 import FileComplaintForm from "../components/FileComplaintForm/FileComplaintForm.jsx";
-import '../styles/Base.css';
+import '../styles/global.css';
 
 
 

@@ -4,8 +4,6 @@ import { BrowserRouter } from 'react-router-dom';
 import { ModalProvider } from './context/ModalContext';
 import { AuthProvider } from './context/AuthProvider';
 import App from './App';
-import './styles/Base.css';
-// import 'bootstrap/dist/css/bootstrap.min.css';
 
 
 ReactDOM.createRoot(document.getElementById("root")).render(

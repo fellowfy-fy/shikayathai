@@ -9,8 +9,6 @@ import Profile from './pages/ProfilePage/Profile.jsx';
 import ModalComponent from './components/ModalComponent.jsx';
 import ComplaintPage from './pages/ComplaintPage/ComplaintPage.jsx';
 import PersistLogin from './components/PersistLogin.jsx';
-import './styles/Base.css';
-// import './styles/Utilities.css'; 
 
 
 function App() {
