@@ -1,7 +1,6 @@
 import { useModal } from "../../context/ModalContext";
 import RegistrationComponent from "../RegistrationComponent/RegistrationComponent.jsx";
 import LoginComponent from "../LoginComponent/LoginComponent.jsx";
-import "./Header.css";
 import logo from "../../assets/logo.svg";
 import { useContext } from "react";
 import AuthContext from "../../context/AuthProvider";
@@ -20,54 +19,51 @@ const Header = () => {
   };
 
   return (
-    <header>
-      <nav className="navbar navbar-expand-lg">
-        <div className="container-fluid">
-          <Link className="navbar-brand d-flex align-items-center" to="/">
-            <img src={logo} alt="Logo" style={{ width: '24px', marginRight: '10px' }} />
-            <span className="text-white">Shikayahai</span>
-          </Link>
-          <button
-            className="navbar-toggler"
-            type="button"
-            data-bs-toggle="collapse"
-            data-bs-target="#navbarNav"
-            aria-controls="navbarNav"
-            aria-expanded="false"
-            aria-label="Toggle navigation"
-          >
-            <span className="navbar-toggler-icon"></span>
-          </button>
-          <div className="collapse navbar-collapse" id="navbarNav">
-            <ul className="navbar-nav me-auto mb-2 mb-lg-0">
-              <li className="nav-item">
-                <Link className="nav-link" to="/">Home</Link>
-              </li>
-              <li className="nav-item">
-                <Link className="nav-link" to="/brands">All brands</Link>
-              </li>
-              <li className="nav-item">
-                <Link className="nav-link" to="/complaints">All Complaints</Link>
-              </li>
-            </ul>
-            {!auth.name ? (
-              <div className="d-flex">
-                <button onClick={handleRegisterClick} className="btn btn-primary me-2">
-                  Register
-                </button>
-                <button onClick={handleLoginClick} className="btn btn-secondary">
-                  Login
-                </button>
-              </div>
-            ) : (
-              <div className="d-flex align-items-center">
-                <Link className="btn btn-primary me-2" to="/profile">
-                  {auth.name}
-                </Link>
-                <img className="navbar-brand rounded-circle" src={auth.userpic} width="30" height="30" alt="User" />
-              </div>
-            )}
-          </div>
+    <header className="bg-gray-800 text-white">
+      <nav className="container mx-auto p-4 flex flex-wrap items-center justify-between">
+        <Link className="flex items-center" to="/">
+          <img src={logo} alt="Logo" className="w-6 mr-2" />
+          <span className="font-semibold text-xl">Shikayahai</span>
+        </Link>
+        <button
+          className="block lg:hidden text-white focus:outline-none"
+          onClick={() => {
+            document.getElementById("navbarNav").classList.toggle("hidden");
+          }}
+        >
+          <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 6h16M4 12h16m-7 6h7"></path>
+          </svg>
+        </button>
+        <div className="w-full lg:flex lg:items-center lg:w-auto hidden" id="navbarNav">
+          <ul className="lg:flex lg:justify-between lg:flex-grow">
+            <li className="mt-4 lg:mt-0">
+              <Link className="block lg:inline-block lg:mt-0 text-white hover:text-gray-400 mr-4" to="/">Home</Link>
+            </li>
+            <li className="mt-4 lg:mt-0">
+              <Link className="block lg:inline-block lg:mt-0 text-white hover:text-gray-400 mr-4" to="/brands">All brands</Link>
+            </li>
+            <li className="mt-4 lg:mt-0">
+              <Link className="block lg:inline-block lg:mt-0 text-white hover:text-gray-400 mr-4" to="/complaints">All Complaints</Link>
+            </li>
+          </ul>
+          {!auth.name ? (
+            <div className="mt-4 lg:mt-0 flex">
+              <button onClick={handleRegisterClick} className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mr-2">
+                Register
+              </button>
+              <button onClick={handleLoginClick} className="bg-gray-500 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded">
+                Login
+              </button>
+            </div>
+          ) : (
+            <div className="mt-4 lg:mt-0 flex items-center">
+              <Link className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mr-2" to="/profile">
+                {auth.name}
+              </Link>
+              <img className="rounded-full w-8 h-8" src={auth.userpic} alt="User" />
+            </div>
+          )}
         </div>
       </nav>
     </header>
