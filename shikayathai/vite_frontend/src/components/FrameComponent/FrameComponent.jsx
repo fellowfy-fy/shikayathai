@@ -44,7 +44,7 @@ const FrameComponent = ({ className = "", data }) => {
 FrameComponent.propTypes = {
   className: PropTypes.string,
   data: PropTypes.shape({
-    id: PropTypes.string.isRequired,
+    id: PropTypes.number.isRequired,
     title: PropTypes.string.isRequired,
     author_name: PropTypes.string,
     author_avatar: PropTypes.string,

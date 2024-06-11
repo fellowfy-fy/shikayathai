@@ -3,7 +3,6 @@ import api from "../../api/axios";
 import { useRef, useState, useEffect } from "react";
 import useAuth from "../../hooks/useAuth";
 import { useNavigate, useLocation } from "react-router-dom";
-import cookie from "cookie";
 
 const LOGIN_URL = "api/login/";
 

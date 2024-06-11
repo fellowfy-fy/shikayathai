@@ -10,6 +10,10 @@ SECRET_KEY = 'django-insecure-ll8ju8fj(0w2*-h8@h4c3y*4^q^gkncyz4#ph-sl7&8h9$^qzi
 DEBUG = True
 ALLOWED_HOSTS = ["*"]
 
+SITE_ID = 1
+
+
+
 INSTALLED_APPS = [
     'django.contrib.admin',
     'django.contrib.auth',
@@ -17,13 +21,17 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'django.contrib.sites',
     
     # 3rd-party apps
     'rest_framework',
     'rest_framework_simplejwt',
     'rest_framework.authtoken',
     'corsheaders',
-    'django_extensions',
+    'allauth',
+    'allauth.account',
+    'allauth.socialaccount',
+    'allauth.socialaccount.providers.github',
     
     # Local apps
     'api.apps.ApiConfig',
@@ -34,6 +42,7 @@ INSTALLED_APPS = [
 MIDDLEWARE = [
     #3-rd party
     'corsheaders.middleware.CorsMiddleware',
+    'allauth.account.middleware.AccountMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -88,9 +97,9 @@ TEMPLATES = [
         'OPTIONS': {
             'context_processors': [
                 'django.template.context_processors.debug',
-                'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                'django.template.context_processors.request',
             ],
         },
     },
@@ -154,7 +163,18 @@ SIMPLE_JWT = {
 AUTH_USER_MODEL = 'api.User'
 
 AUTHENTICATION_BACKENDS = [
-    'api.authentication.EmailOrNameBackend', 
     'django.contrib.auth.backends.ModelBackend',
+    'allauth.account.auth_backends.AuthenticationBackend',
 ]
 
+
+SOCIALACCOUNT_PROVIDERS = {
+    'github': {
+        'APP': {
+            'client_id': 'Ov23liIFkbXHGShCJAXu',
+            'secret': 'cd3a3704aba6d2d89025fc9ddb615bc933a82561',
+            'key': '',
+        }
+    }
+    
+}
