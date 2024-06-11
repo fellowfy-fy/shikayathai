@@ -69,6 +69,11 @@ const LoginComponent = () => {
     setErrMsg("");
   }, [email, password]);
 
+  
+  const handleGitHubLogin = () => {
+    window.location.href = 'http://127.0.0.1:8000/accounts/github/login/';
+  };
+
   return (
     <div>
       <div className="modal-header">
@@ -124,6 +129,10 @@ const LoginComponent = () => {
             Login
           </button>
         </form>
+        
+        <button onClick={handleGitHubLogin} className="btn btn-secondary mt-3">
+          Login with GitHub
+        </button>
       </div>
     </div>
   );
