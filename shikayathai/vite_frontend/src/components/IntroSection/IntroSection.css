@@ -1,5 +1,8 @@
-/* Introduction section styles */
-.intro-section {
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* .intro-section {
     text-align: center;
     padding: 2rem 1rem;
     padding-left: 120px;
@@ -75,4 +78,4 @@
 .goal {
     font-size: 16px;
     text-align: left;
-}
+} */

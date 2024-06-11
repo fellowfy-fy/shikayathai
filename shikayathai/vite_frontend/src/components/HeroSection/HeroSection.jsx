@@ -1,7 +1,8 @@
 import React from "react";
 import { useModal } from '../../context/ModalContext';
 import FileComplaintForm from '../FileComplaintForm/FileComplaintForm.jsx';
-import man from "../../assets/man.png"; 
+import man from "../../assets/man.png";
+import mansmall from "../../assets/mansmall.png"; 
 import './HeroSection.css';
 
 const HeroSection = () => {
@@ -27,6 +28,7 @@ const HeroSection = () => {
         </div>
       </div>
       <img className="hero-graphic" alt="Happy man holding a card" src={man} />
+      <img className="hero-graphic-small" alt="Happy man holding a card" src={mansmall} />
     </section>
   );
 };
