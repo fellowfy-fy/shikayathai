@@ -12,8 +12,9 @@ const RegistrationComponent = () => {
   const handleSubmit = async (event) => {
     event.preventDefault();
     try {
-      await api.post('/api/user/register/', { name, email, password });
+      await api.post('/api/register/', { name, email, password });
       hideModal();
+      alert("User has been created");
     } catch (error) {
       setError(error.response?.data?.message || 'An error occurred');
     }

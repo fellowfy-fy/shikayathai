@@ -21,10 +21,10 @@ const FileComplaintForm = () => {
   useEffect(() => {
     const fetchCompanies = async () => {
       try {
-        const response = await axios.get('api/companies/');
+        const response = await axios.get('companies/list/');
         setCompanies(response.data);
       } catch (error) {
-        console.error('Error fetching companies:', error);
+        console.error('Error fetching companies: Something went wrong');
       }
     };
     fetchCompanies();
@@ -44,7 +44,7 @@ const FileComplaintForm = () => {
     photos.forEach((photo, index) => formData.append(`photos[${index}]`, photo));
     documents.forEach((document, index) => formData.append(`documents[${index}]`, document));
     try {
-      await axios.post('api/complaints/create/', formData, {
+      await axios.post('complaints/create/', formData, {
         headers: {
           'Content-Type': 'multipart/form-data',
           'Authorization': `Bearer ${auth?.access}`

@@ -44,7 +44,7 @@ class UserUpdateSerializer(serializers.ModelSerializer):
             instance.password = make_password(password)
         return super().update(instance, validated_data)
     
-class CustomLoginSerializer(serializers.Serializer):
+class LoginSerializer(serializers.Serializer):
     email = serializers.CharField()
     password = serializers.CharField()
     persist = serializers.BooleanField()
