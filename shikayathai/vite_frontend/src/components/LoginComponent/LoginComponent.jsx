@@ -23,7 +23,6 @@ const LoginComponent = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
     try {
       const response = await api.post(
         LOGIN_URL,
@@ -34,7 +33,8 @@ const LoginComponent = () => {
       );
       const name = response?.data?.name;
       const userpic = response.data.userpic;
-      setAuth({ name, email, userpic });
+      const access = response.data.access;
+      setAuth({ name, email, userpic, access });
       setEmail("");
       setPassword("");
       hideModal();
@@ -109,7 +109,7 @@ const LoginComponent = () => {
             <input
               type="password"
               className="form-control"
-              id="password"
+              id="repassword"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
               required

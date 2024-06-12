@@ -15,7 +15,7 @@ const FileComplaintForm = () => {
     formData.append("website", website);
 
     try {
-      await axios.post("api/companies/", formData, {
+      await axios.post("companies/create/", formData, {
         headers: {
           "Content-Type": "multipart/form-data",
         },

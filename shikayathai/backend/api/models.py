@@ -32,6 +32,7 @@ class User(AbstractBaseUser, PermissionsMixin):
     userpic = models.ImageField(upload_to=userpic_path, default='default/userpic.png')
     is_active = models.BooleanField(default=True)
     is_staff = models.BooleanField(default=False)
+    is_company = models.BooleanField(default=False)
 
     objects = UserManager()
 

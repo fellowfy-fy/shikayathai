@@ -8,9 +8,14 @@ const RegistrationComponent = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState(null);
+  const [repassword, setRePassword] = useState("");
 
   const handleSubmit = async (event) => {
     event.preventDefault();
+    if (password !== repassword) {
+      setError("The password must be identical");
+      return
+    }
     try {
       await api.post('/api/register/', { name, email, password });
       hideModal();
@@ -40,6 +45,20 @@ const RegistrationComponent = () => {
           <div className="mb-3">
             <label htmlFor="password" className="form-label">Password</label>
             <input type="password" className="form-control" id="password" value={password} onChange={(e) => setPassword(e.target.value)} required />
+          </div>
+          
+          <div className="mb-3">
+            <label htmlFor="password" className="form-label">
+              Repeat Password
+            </label>
+            <input
+              type="password"
+              className="form-control"
+              id="repassword"
+              value={repassword}
+              onChange={(e) => setRePassword(e.target.value)}
+              required
+            />
           </div>
           <button type="submit" className="btn btn-primary">Register</button>
         </form>

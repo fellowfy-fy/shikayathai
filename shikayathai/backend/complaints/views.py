@@ -8,23 +8,33 @@ from rest_framework.generics import RetrieveUpdateDestroyAPIView, ListCreateAPIV
 from rest_framework.parsers import MultiPartParser, FormParser
 from api.models import User
 from .models import Photo, Document, Comment, Complaint
+from companies.models import Company
+from rest_framework.pagination import PageNumberPagination
 
 class ComplaintAndCompanyCreateView(APIView):
     parser_classes = (MultiPartParser, FormParser)
     
     def post(self, request, *args, **kwargs):
-        company_data = {
-            'name': request.data.get('company'),
-            'phone': request.data.get('brandPhone'),
-            'email': request.data.get('brandEmail'),
-            'website': request.data.get('brandWebsite'),
-        }
+        company_name = request.data.get('company')
+        company = None
 
-        company_serializer = CompanySerializer(data=company_data)
-        if company_serializer.is_valid():
-            company = company_serializer.save()
-        else:
-            return Response(company_serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+        if company_name:
+            # Check if the company already exists
+            try:
+                company = Company.objects.get(name=company_name)
+            except Company.DoesNotExist:
+                company_data = {
+                    'name': company_name,
+                    'phone': request.data.get('brandPhone'),
+                    'email': request.data.get('brandEmail'),
+                    'website': request.data.get('brandWebsite'),
+                }
+                company_serializer = CompanySerializer(data=company_data)
+                if company_serializer.is_valid():
+                    company = company_serializer.save()
+                else:
+                    return Response(company_serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+        
         author_name = request.data.get('author')
         if not author_name:
             return Response({'author': ['This field is required.']}, status=status.HTTP_400_BAD_REQUEST)
@@ -39,10 +49,10 @@ class ComplaintAndCompanyCreateView(APIView):
             'title': request.data.get('title'),
             'description': request.data.get('description'),
             'private_description': request.data.get('privateDetails'),
-            'company': company_data,
+            'company': company.id,
         }
         
-        complaint_serializer = ComplaintAndCompanySerializer(data=complaint_data)
+        complaint_serializer = ComplaintSerializer(data=complaint_data)
         if complaint_serializer.is_valid():
             complaint = complaint_serializer.save()
 
@@ -80,6 +90,7 @@ class ComplaintDetailView(RetrieveAPIView):
 class ListComplaintsView(ListAPIView):
     serializer_class = ComplaintSerializer
     permission_classes = [AllowAny]
+    pagination_class = PageNumberPagination 
     
     def get_queryset(self):
         return Complaint.objects.all()

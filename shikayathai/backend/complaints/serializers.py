@@ -42,16 +42,10 @@ class ComplaintSerializer(serializers.ModelSerializer):
     documents = DocumentSerializer(many=True, read_only=True)
     class Meta:
         model = Complaint
-        fields = ['id', 'author_name', 'title', 'description', 'private_description', 'company_name', 'photos', 'documents', 'resolution_rating', 'resolution_comment']
+        fields = ['id', 'author_name', 'author', 'title', 'description', 'private_description', 'company', 'company_name', 'photos', 'documents', 'resolution_rating', 'resolution_comment']
         
     def create(self, validated_data):
-        photos_data = validated_data.pop('photos')
-        documents_data = validated_data.pop('documents')
         complaint = Complaint.objects.create(**validated_data)
-        for photo_data in photos_data:
-            Photo.objects.create(complaint=complaint, image=photo_data)
-        for document_data in documents_data:
-            Document.objects.create(complaint=complaint, file=document_data)
         return complaint
     
     def get_author_name(self, obj):
