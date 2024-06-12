@@ -14,7 +14,7 @@ function RecentReactionsSection({ route }){
     try {
       const url = "http://127.0.0.1:8000/complaints/list/"
       const data = await axios.get(url);
-      setRequests(data.data);
+      setRequests(data.data.results);
 
     } catch (error) {
 
