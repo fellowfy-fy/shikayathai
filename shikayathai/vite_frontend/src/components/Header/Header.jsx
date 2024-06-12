@@ -19,11 +19,11 @@ const Header = () => {
   };
 
   return (
-    <header className="bg-gray-800 text-white">
+    <header className="bg-[#001A45] text-white">
       <nav className="container mx-auto p-4 flex flex-wrap items-center justify-between">
         <Link className="flex items-center" to="/">
           <img src={logo} alt="Logo" className="w-6 mr-2" />
-          <span className="font-semibold text-xl">Shikayahai</span>
+          <span className="font-unbounded font-bold text-xl">Shikayahai</span>
         </Link>
         <button
           className="block lg:hidden text-white focus:outline-none"
@@ -38,27 +38,27 @@ const Header = () => {
         <div className="w-full lg:flex lg:items-center lg:w-auto hidden" id="navbarNav">
           <ul className="lg:flex lg:justify-between lg:flex-grow">
             <li className="mt-4 lg:mt-0">
-              <Link className="block lg:inline-block lg:mt-0 text-white hover:text-gray-400 mr-4" to="/">Home</Link>
+              <Link className="font-inter block lg:inline-block lg:mt-0 text-white hover:text-gray-400 mr-4" to="/">Home</Link>
             </li>
             <li className="mt-4 lg:mt-0">
-              <Link className="block lg:inline-block lg:mt-0 text-white hover:text-gray-400 mr-4" to="/brands">All brands</Link>
+              <Link className="font-inter block lg:inline-block lg:mt-0 text-white hover:text-gray-400 mr-4" to="/brands">All brands</Link>
             </li>
             <li className="mt-4 lg:mt-0">
-              <Link className="block lg:inline-block lg:mt-0 text-white hover:text-gray-400 mr-4" to="/complaints">All Complaints</Link>
+              <Link className="font-inter block lg:inline-block lg:mt-0 text-white hover:text-gray-400 mr-4" to="/complaints">All Complaints</Link>
             </li>
           </ul>
           {!auth.name ? (
             <div className="mt-4 lg:mt-0 flex">
-              <button onClick={handleRegisterClick} className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mr-2">
+              <button onClick={handleRegisterClick} className="bg-transparent hover:bg-transparent text-white font-inter py-2 px-4 rounded mr-2">
                 Register
               </button>
-              <button onClick={handleLoginClick} className="bg-gray-500 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded">
+              <button onClick={handleLoginClick} className="bg-transparent hover:bg-transparent text-white font-inter py-2 px-4 rounded">
                 Login
               </button>
             </div>
           ) : (
             <div className="mt-4 lg:mt-0 flex items-center">
-              <Link className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mr-2" to="/profile">
+              <Link className="bg-transparent text-white font-inter py-2 px-4 rounded mr-2" to="/profile">
                 {auth.name}
               </Link>
               <img className="rounded-full w-8 h-8" src={auth.userpic} alt="User" />
