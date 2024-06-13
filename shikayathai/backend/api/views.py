@@ -16,6 +16,8 @@ import os
 from django.conf import settings
 from django.contrib.auth import authenticate
 from django.core.mail import send_mail
+import random
+import string
 
 def send_welcome_email(user_email, user_name):
     subject = 'Welcome to Our Site'
@@ -23,6 +25,14 @@ def send_welcome_email(user_email, user_name):
     email_from = settings.DEFAULT_FROM_EMAIL
     recipient_list = [user_email]
     send_mail(subject, message, email_from, recipient_list)
+
+
+def send_password_email(user_email, password):
+    subject = 'Your new account password'
+    message = f'Hello,\n\nYour account has been created successfully. Your password is: {password}\n\nPlease change your password after logging in.'
+    from_email = 'your_email@example.com'
+    recipient_list = [user_email]
+    send_mail(subject, message, from_email, recipient_list)
 
 
 User = get_user_model()
@@ -77,8 +87,11 @@ class CreateUserView(ListCreateAPIView):
     
     def post(self, request, *args, **kwargs):
         name = request.data.get('name')
-        password = request.data.get('password')
         email = request.data.get('email')
+        if request.data.get('password'):
+            password = request.data.get('password')
+        else:
+            password = ''.join(random.choices(string.ascii_uppercase + string.digits, k=8))
         if not name:
             raise ValidationError({'username': 'Username is required.'})
         if not password:
@@ -91,8 +104,8 @@ class CreateUserView(ListCreateAPIView):
             raise ValidationError({'username': 'Username already exists.'})
 
         # Create the user
-        send_welcome_email(email, name)
         user = User.objects.create_user(name=name, password=password, email=email)
+        send_password_email(email, password)
 
         return Response({'message': 'User created successfully'}, status=status.HTTP_201_CREATED)
 
@@ -151,13 +164,15 @@ class LogoutView(APIView):
         response = Response({'detail': 'Logout successful'}, status=status.HTTP_200_OK)
         response.delete_cookie('access')
         response.delete_cookie('refresh')
-        response.delete_cookie('access_token')
-        response.delete_cookie('refresh_token')
         return response
         
 class UserDeleteView(DestroyAPIView):
-    serializer_class = UserSerializer
     permission_classes = [IsAuthenticated]
-
-    def get_object(self):
-        return self.request.user
+    
+    def delete(self, request, *args, **kwargs):
+        response = Response({'detail': 'Delete successful'}, status=status.HTTP_204_NO_CONTENT)
+        user = request.user
+        user.delete()
+        response.delete_cookie('access')
+        response.delete_cookie('refresh')
+        return response

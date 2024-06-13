@@ -23,12 +23,13 @@ const FileComplaintForm = () => {
   const [showAddCompanyFields, setShowAddCompanyFields] = useState(false);
   const [error, setError] = useState(null);
   const { auth } = useAuth();
+  const [userName, setUserName] = useState('');
+  const [userEmail, setUserEmail] = useState('');
 
   const handleInfoClick = () => {
-    setIsVisible(false);  
-    showModal(<InfoComponent  />);  
+    setIsVisible(false);
+    showModal(<InfoComponent />);
   };
- 
 
   useEffect(() => {
     if (company) {
@@ -49,6 +50,25 @@ const FileComplaintForm = () => {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
+
+    if (!auth?.name) {
+      try {
+        // Register user if not authenticated
+        const registrationResponse = await axios.post('api/register/', {
+          name: userName,
+          email: userEmail,
+        });
+        // Assuming registration API returns the new user's name and access token
+        const { name, access } = registrationResponse.data;
+        auth.name = name;
+        auth.access = access;
+        // Send password to user via email
+      } catch (error) {
+        setError(error.response?.data?.message || 'Registration error occurred');
+        return;
+      }
+    }
+
     const formData = new FormData();
     formData.append('author', auth?.name);
     formData.append('company', company);
@@ -58,8 +78,9 @@ const FileComplaintForm = () => {
     formData.append('brandWebsite', brandWebsite);
     formData.append('description', description);
     formData.append('privateDetails', privateDetails);
-    photos.forEach((photo) => formData.append(`photos`, photo));
-    documents.forEach((document) => formData.append(`documents`, document));
+    photos.forEach((photo) => formData.append('photos', photo));
+    documents.forEach((document) => formData.append('documents', document));
+
     try {
       const response = await axios.post('complaints/create/', formData, {
         headers: {
@@ -68,8 +89,8 @@ const FileComplaintForm = () => {
         }
       });
       const complaintLink = `http://localhost/complaints/${response.data.id}`
-      setIsVisible(false);  
-      showModal(<FacebookShareComponent link={complaintLink}/>);
+      setIsVisible(false);
+      showModal(<FacebookShareComponent link={complaintLink} />);
     } catch (error) {
       setError(error.response?.data?.message || 'An error occurred');
     }
@@ -85,7 +106,6 @@ const FileComplaintForm = () => {
     setShowAddCompanyFields(false);
   };
 
-
   if (!isVisible) return null;
 
   return (
@@ -99,110 +119,136 @@ const FileComplaintForm = () => {
         </div>
         {error && <div className="alert alert-danger p-4 rounded-md bg-red-100 text-red-700">{error}</div>}
         <div className="overflow-auto max-h-[70vh]">
-        <form onSubmit={handleSubmit} className="mt-4">
-          <div className="mb-3">
-            <label htmlFor="company" className="form-label">Company Name</label>
-            <input
-              type="text"
-              className="form-control"
-              id="company"
-              value={company}
-              onChange={(e) => setCompany(e.target.value)}
-              required
-            />
-            {companies.length > 0 && (
-              <ul className="list-group">
-                {companies.map((comp) => (
-                  <li
-                    key={comp.id}
-                    className="list-group-item"
-                    onClick={() => handleCompanySelect(comp.name)}
-                  >
-                    {comp.name}
-                  </li>
-                ))}
-                <li className="list-group-item" onClick={() => setShowAddCompanyFields(true)}>
-                  Can't find your company? Add new
-                </li>
-              </ul>
+          <form onSubmit={handleSubmit} className="mt-4">
+            {!auth?.name && (
+              <>
+                <div className="mb-3">
+                  <label htmlFor="userName" className="form-label">Name</label>
+                  <input
+                    type="text"
+                    className="form-control"
+                    id="userName"
+                    value={userName}
+                    onChange={(e) => setUserName(e.target.value)}
+                    required
+                  />
+                </div>
+                <div className="mb-3">
+                  <label htmlFor="userEmail" className="form-label">Email</label>
+                  <input
+                    type="email"
+                    className="form-control"
+                    id="userEmail"
+                    value={userEmail}
+                    onChange={(e) => setUserEmail(e.target.value)}
+                    required
+                  />
+                </div>
+              </>
             )}
-          </div>
-          {showAddCompanyFields && (
-            <>
-              <div className="mb-3">
-                <label htmlFor="brandPhone" className="form-label">Brand Phone</label>
-                <input
-                  type="text"
-                  className="form-control"
-                  id="brandPhone"
-                  value={brandPhone}
-                  onChange={(e) => setBrandPhone(e.target.value)}
-                />
-              </div>
-              <div className="mb-3">
-                <label htmlFor="brandEmail" className="form-label">Brand Email</label>
-                <input
-                  type="email"
-                  className="form-control"
-                  id="brandEmail"
-                  value={brandEmail}
-                  onChange={(e) => setBrandEmail(e.target.value)}
-                />
-              </div>
-              <div className="mb-3">
-                <label htmlFor="brandWebsite" className="form-label">Brand Website</label>
-                <input
-                  type="url"
-                  className="form-control"
-                  id="brandWebsite"
-                  value={brandWebsite}
-                  onChange={(e) => setBrandWebsite(e.target.value)}
-                />
-              </div>
-            </>
-          )}
-          <div className="mb-3">
-            <label htmlFor="title" className="form-label">Title</label>
-            <input type="text" className="form-control w-full p-3 rounded-xl border-gray-300 mb-4" id="title" value={title} onChange={(e) => setTitle(e.target.value)} required />
-          </div>
-          <div className="mb-3">
-            <label htmlFor="description" className="form-label">Complaint Description</label>
-            <p className="form-description">
-                Include any details that will help Company to identify your case and resolve your issue as soon as possible. 
-                E.g. order id, receipt number, payment amount etc. 
+            <div className="mb-3">
+              <label htmlFor="company" className="form-label">Company Name</label>
+              <input
+                type="text"
+                className="form-control"
+                id="company"
+                value={company}
+                onChange={(e) => setCompany(e.target.value)}
+                required
+              />
+              {companies.length > 0 && (
+                <ul className="list-group">
+                  {companies.map((comp) => (
+                    <li
+                      key={comp.id}
+                      className="list-group-item"
+                      onClick={() => handleCompanySelect(comp.name)}
+                    >
+                      {comp.name}
+                    </li>
+                  ))}
+                  <li className="list-group-item" onClick={() => setShowAddCompanyFields(true)}>
+                    Can't find your company? Add new
+                  </li>
+                </ul>
+              )}
+            </div>
+            {showAddCompanyFields && (
+              <>
+                <div className="mb-3">
+                  <label htmlFor="brandPhone" className="form-label">Brand Phone</label>
+                  <input
+                    type="text"
+                    className="form-control"
+                    id="brandPhone"
+                    value={brandPhone}
+                    onChange={(e) => setBrandPhone(e.target.value)}
+                  />
+                </div>
+                <div className="mb-3">
+                  <label htmlFor="brandEmail" className="form-label">Brand Email</label>
+                  <input
+                    type="email"
+                    className="form-control"
+                    id="brandEmail"
+                    value={brandEmail}
+                    onChange={(e) => setBrandEmail(e.target.value)}
+                  />
+                </div>
+                <div className="mb-3">
+                  <label htmlFor="brandWebsite" className="form-label">Brand Website</label>
+                  <input
+                    type="url"
+                    className="form-control"
+                    id="brandWebsite"
+                    value={brandWebsite}
+                    onChange={(e) => setBrandWebsite(e.target.value)}
+                  />
+                </div>
+              </>
+            )}
+            <div className="mb-3">
+              <label htmlFor="title" className="form-label">Title</label>
+              <input type="text" className="form-control w-full p-3 rounded-xl border-gray-300 mb-4" id="title" value={title} onChange={(e) => setTitle(e.target.value)} required />
+            </div>
+            <div className="mb-3">
+              <label htmlFor="description" className="form-label">Complaint Description</label>
+              <p className="form-description">
+                Include any details that will help Company to identify your case and resolve your issue as soon as possible.
+                E.g. order id, receipt number, payment amount etc.
                 Please note that the complaint description is public, please don’t include any personal details.
                 <button onClick={handleInfoClick} className="underline text-blue-600 hover:text-blue-800">why the complaint is public?</button>
-            </p>
-            <textarea 
-                className="form-control" 
-                id="description" 
-                value={description} 
-                onChange={(e) => setDescription(e.target.value)} 
+              </p>
+              <textarea
+                className="form-control"
+                id="description"
+                value={description}
+                onChange={(e) => setDescription(e.target.value)}
                 required
-            ></textarea>
-          </div>
-          <div className="mb-3">
-            <label htmlFor="privateDetails" className="form-label">Private Details</label>
-            <textarea className="form-control" id="privateDetails" value={privateDetails} onChange={(e) => setPrivateDetails(e.target.value)} />
-          </div>
-          <div className="mb-3">
-            <label htmlFor="photos" className="form-label">Photos and Images</label>
-            <p className="form-description">
+              ></textarea>
+            </div>
+            <div className="mb-3">
+              <label htmlFor="privateDetails" className="form-label">Private Details</label>
+              <textarea className="form-control" id="privateDetails" value={privateDetails} onChange={(e) => setPrivateDetails(e.target.value)} />
+            </div>
+            <div className="mb-3">
+              <label htmlFor="photos" className="form-label">Photos and Images</label>
+              <p className="form-description">
                 Please attach any valuable images or photos: payment screenshot, the photo of the broken product etc.
                 Please note that the photos are public.
-            </p>
-            <input type="file" className="form-control" id="photos" onChange={(e) => handleFileChange(e, setPhotos)} multiple />
-          </div>
-          <div className="mb-3">
-            <label htmlFor="documents" className="form-label">Documents</label>
-            <p className="form-description">
+              </p>
+              <input type="file" className="form-control" id="photos" onChange={(e) => handleFileChange(e, setPhotos)} multiple />
+            </div>
+            <div className="mb-3">
+              <label htmlFor="documents" className="form-label">Documents</label>
+              <p className="form-description">
                 Please attach any documents.
                 All the documents are private.
-            </p>
-            <input type="file" className="form-control" id="documents" onChange={(e) => handleFileChange(e, setDocuments)} multiple />
-          </div>
-          <button type="submit" className="btn btn-primary w-full bg-[#B5F62B] text-[#001A45] hover:bg-[#A9E922] active:bg-[#C9FF57] font-semibold py-2 px-4 rounded-xl">Add complaint</button>
-        </form>
+              </p>
+              <input type="file" className="form-control" id="documents" onChange={(e) => handleFileChange(e, setDocuments)} multiple />
+            </div>
+            <button type="submit" className="btn btn-primary w-full bg-[#B5F62B] text-[#001A45] hover:bg-[#A9E922] active:bg-[#C9FF57] font-semibold py-2 px-4 rounded-xl">Add complaint</button>
+          </form>
         </div>
       </div>
     </div>

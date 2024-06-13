@@ -1,10 +1,10 @@
-import React, { useState, useEffect } from 'react';
-import { useNavigate, Navigate } from 'react-router-dom';
-import useLogout from '../../hooks/useLogout';
-import api from '../../api/axios';
-import './Profile.css';
-import signOutIcon from '../../assets/sign-out-icon.svg'; // Ensure this path is correct
-import useAuth from '../../hooks/useAuth';
+import React, { useState, useEffect } from "react";
+import { useNavigate, Navigate } from "react-router-dom";
+import useLogout from "../../hooks/useLogout";
+import api from "../../api/axios";
+import "./Profile.css";
+import signOutIcon from "../../assets/sign-out-icon.svg"; // Ensure this path is correct
+import useAuth from "../../hooks/useAuth";
 
 function Profile() {
   const navigate = useNavigate();
@@ -12,31 +12,50 @@ function Profile() {
   const { auth, setAuth } = useAuth();
   const [user, setUser] = useState({});
   const [photo, setPhoto] = useState(null);
-  const [name, setName] = useState('');
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const [repeatPassword, setRepeatPassword] = useState('');
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [repeatPassword, setRepeatPassword] = useState("");
   const [photoPreview, setPhotoPreview] = useState(null); // State for photo preview
 
   useEffect(() => {
     if (!auth?.access) {
-      navigate('/'); 
-    } 
-    api.get('/api/profile', { headers: { Authorization: `Bearer ${auth.access}` } })
-    .then(response => {
-      setUser(response.data);
-      setName(response.data.name);
-      setEmail(response.data.email);
-      setPhoto(response.data.photo);
-    })
-    .catch(error => console.error('Error fetching user data:', error));
+      navigate("/");
+    }
+    api
+      .get("/api/profile", {
+        headers: { Authorization: `Bearer ${auth.access}` },
+      })
+      .then((response) => {
+        setUser(response.data);
+        setName(response.data.name);
+        setEmail(response.data.email);
+        setPhoto(response.data.photo);
+      })
+      .catch((error) => console.error("Error fetching user data:", error));
   }, [auth.access, navigate]);
 
   const signOut = async () => {
     await logout();
-    navigate('/');
+    navigate("/");
   };
 
+  const deleteUser = async () => {
+    const confirmation = window.confirm('Are you sure you want to delete your account? This action cannot be undone.');
+    if (!confirmation) return;
+    try {
+      console.log(auth.access)
+      const response = await api.delete("/api/delete/",  {
+        headers: {
+          Authorization: `Bearer ${auth.access}`,
+        },
+      });
+      setAuth({});
+      console.log(response);
+    } catch (err) {
+      console.error(err);
+    }
+  };
   const handlePhotoChange = (e) => {
     const file = e.target.files[0];
     if (file) {
@@ -47,39 +66,40 @@ function Profile() {
 
   const handleSaveChanges = () => {
     if (password !== repeatPassword) {
-      alert('Passwords do not match!');
+      alert("Passwords do not match!");
       return;
     }
 
     const updatedProfile = new FormData();
-    updatedProfile.append('name', name);
-    updatedProfile.append('email', email);
+    updatedProfile.append("name", name);
+    updatedProfile.append("email", email);
     if (password !== "") {
-      updatedProfile.append('password', password);
+      updatedProfile.append("password", password);
     }
     if (photo && photo instanceof File) {
-      updatedProfile.append('userpic', photo);
+      updatedProfile.append("userpic", photo);
     }
 
-    api.put('/api/profile/', updatedProfile, {
-      headers: {
-        'Content-Type': 'multipart/form-data',
-        Authorization: `Bearer ${auth.access}`
-      }
-    })
-    .then(response => {
-      alert('Changes saved!');
-      const userpic = response?.data?.userpic;
-      console.log(response.data)
-      setAuth(prev => ({ ...prev, name, email, userpic }));
-      setUser(response.data);
-    })
-    .catch(error => {
-      console.error('Error saving changes:', error);
-      // if (error.response && error.response.status === 401) {
-      //   navigate('/login'); // Redirect to login if not authorized
-      // }
-    });
+    api
+      .put("/api/profile/", updatedProfile, {
+        headers: {
+          "Content-Type": "multipart/form-data",
+          Authorization: `Bearer ${auth.access}`,
+        },
+      })
+      .then((response) => {
+        alert("Changes saved!");
+        const userpic = response?.data?.userpic;
+        console.log(response.data);
+        setAuth((prev) => ({ ...prev, name, email, userpic }));
+        setUser(response.data);
+      })
+      .catch((error) => {
+        console.error("Error saving changes:", error);
+        // if (error.response && error.response.status === 401) {
+        //   navigate('/login'); // Redirect to login if not authorized
+        // }
+      });
   };
 
   return (
@@ -90,32 +110,66 @@ function Profile() {
       <h2>Profile</h2>
       <div className="profile-form">
         <div className="photo-section">
-          <img src={photoPreview || auth.userpic} alt="Profile" className="profile-photo" />
-          <label htmlFor="photo-upload" className="choose-photo-label">Choose a photo</label>
-          <input type="file" id="photo-upload" onChange={handlePhotoChange} className="choose-photo" />
+          <img
+            src={photoPreview || auth.userpic}
+            alt="Profile"
+            className="profile-photo"
+          />
+          <label htmlFor="photo-upload" className="choose-photo-label">
+            Choose a photo
+          </label>
+          <input
+            type="file"
+            id="photo-upload"
+            onChange={handlePhotoChange}
+            className="choose-photo"
+          />
         </div>
         <div className="form-fields">
           <div className="form-group">
             <label>Name</label>
-            <input type="text" value={name} onChange={(e) => setName(e.target.value)} />
+            <input
+              type="text"
+              value={name}
+              onChange={(e) => setName(e.target.value)}
+            />
           </div>
           <div className="form-group">
             <label>Email</label>
-            <input type="email" value={email} onChange={(e) => setEmail(e.target.value)} />
+            <input
+              type="email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+            />
           </div>
           <div className="form-group">
             <label>Password</label>
-            <input type="password" value={password} onChange={(e) => setPassword(e.target.value)} required />
+            <input
+              type="password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              required
+            />
           </div>
           <div className="form-group">
             <label>Repeat Password</label>
-            <input type="password" value={repeatPassword} onChange={(e) => setRepeatPassword(e.target.value)} required />
+            <input
+              type="password"
+              value={repeatPassword}
+              onChange={(e) => setRepeatPassword(e.target.value)}
+              required
+            />
           </div>
         </div>
-        <button onClick={handleSaveChanges} className="save-changes-button">Save changes</button>
+        <button onClick={handleSaveChanges} className="save-changes-button">
+          Save changes
+        </button>
       </div>
       <button onClick={signOut} className="sign-out-button">
         <img src={signOutIcon} alt="Sign Out" />
+      </button>
+      <button onClick={deleteUser} className="sign-out-button">
+        <h1>Delete User</h1>
       </button>
     </div>
   );
