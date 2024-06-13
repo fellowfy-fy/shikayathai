@@ -6,6 +6,7 @@ import InfoComponent from "../pop-ups/InfoComponent";
 import FacebookShareComponent from "../FacebookShare/FacebookShare";
 import debounce from "lodash/debounce";
 import "../../styles/global.css";
+import "./FileComplaintForm.css"
 
 const FileComplaintForm = () => {
   const { showModal, hideModal } = useModal();
@@ -102,8 +103,14 @@ const FileComplaintForm = () => {
     }
   };
 
-  const handleFileChange = (event, setFiles) => {
-    setFiles(Array.from(event.target.files));
+  const handleFileChange = (event, setFiles, setPreviews) => {
+    const files = Array.from(event.target.files);
+    setFiles(files);
+
+    if (setPreviews) {
+      const previews = files.map((file) => URL.createObjectURL(file));
+      setPreviews(previews);
+    }
   };
 
   const handleCompanySelect = (companyName) => {
@@ -111,6 +118,8 @@ const FileComplaintForm = () => {
     setCompanies([]);
     setShowAddCompanyFields(false);
   };
+
+  const [photoPreviews, setPhotoPreviews] = useState([]);
 
   if (!isVisible) return null;
 
@@ -299,9 +308,21 @@ const FileComplaintForm = () => {
                 type="file"
                 className="form-control"
                 id="photos"
-                onChange={(e) => handleFileChange(e, setPhotos)}
+                onChange={(e) => handleFileChange(e, setPhotos, setPhotoPreviews)}
                 multiple
               />
+              {photoPreviews.length > 0 && (
+                <div className="photo-previews mt-3">
+                  {photoPreviews.map((preview, index) => (
+                    <img
+                      key={index}
+                      src={preview}
+                      alt={`Preview ${index}`}
+                      className="preview-image"
+                    />
+                  ))}
+                </div>
+              )}
             </div>
             <div className="mb-3">
               <label htmlFor="documents" className="form-label">
@@ -317,6 +338,15 @@ const FileComplaintForm = () => {
                 onChange={(e) => handleFileChange(e, setDocuments)}
                 multiple
               />
+              {documents.length > 0 && (
+                <ul className="document-list mt-3">
+                  {documents.map((doc, index) => (
+                    <li key={index} className="document-item">
+                      {doc.name}
+                    </li>
+                  ))}
+                </ul>
+              )}
             </div>
             <button
               type="submit"
