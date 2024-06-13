@@ -1,10 +1,10 @@
 from companies.serializers import CompanySerializer
-from .serializers import ComplaintAndCompanySerializer, ComplaintSerializer, CommentSerializer
+from .serializers import ComplaintSerializer, CommentSerializer
 from rest_framework.permissions import AllowAny, IsAuthenticated
 from rest_framework.response import Response
 from rest_framework import status
 from rest_framework.views import APIView
-from rest_framework.generics import RetrieveUpdateDestroyAPIView, ListCreateAPIView, ListAPIView, RetrieveAPIView, CreateAPIView
+from rest_framework.generics import RetrieveUpdateDestroyAPIView, ListAPIView, RetrieveAPIView, CreateAPIView
 from rest_framework.parsers import MultiPartParser, FormParser
 from api.models import User
 from .models import Photo, Document, Comment, Complaint
@@ -99,9 +99,10 @@ class CommentCreateView(CreateAPIView):
     queryset = Comment.objects.all()
     serializer_class = CommentSerializer
     permission_classes = [IsAuthenticated]
-
+    
     def perform_create(self, serializer):
-        serializer.save(user=self.request.user)
+        user = User.objects.get(name=self.request.data.get('user'))
+        serializer.save(user=user)
 
 class CommentListView(ListAPIView):
     queryset = Comment.objects.all()
@@ -110,15 +111,5 @@ class CommentListView(ListAPIView):
 
     def get_queryset(self):
         return Comment.objects.filter(complaint=self.request.complaint)
+    
         
-    
-# class CreateComplaintView(ListCreateAPIView): 
-#     serializer_class = ComplaintSerializer
-#     permission_classes = [IsAuthenticated]
-#     parser_classes = (MultiPartParser, FormParser)  # Needed for file uploads
-
-#     def get_queryset(self):
-#         return Complaint.objects.filter(author=self.request.user)
-    
-#     def perform_create(self, serializer):
-#         serializer.save(author=self.request.user)
