@@ -15,7 +15,6 @@ function RecentRequestSection(){
     try {
       const url = "/complaints/list/"
       const data = await api.get(url);
-      console.log(data)
       setRequests(data.data.results);
 
     } catch (error) {
