@@ -1,6 +1,7 @@
 from django.db import models
 from api.models import User
 from companies.models import Company
+from django.utils import timezone
 
 def user_directory_path(instance, filename):
     return '{}/{}/{}/{}'.format(
@@ -18,6 +19,7 @@ class Complaint(models.Model):
     company = models.ForeignKey(Company, on_delete=models.CASCADE, related_name='complaints')
     resolution_rating = models.IntegerField(blank=True, null=True)
     resolution_comment = models.TextField(blank=True, null=True)
+    created_at = models.DateTimeField(auto_now=True) 
 
     def __str__(self):
         return self.title

@@ -105,9 +105,11 @@ class CreateUserView(ListCreateAPIView):
 
         # Create the user
         user = User.objects.create_user(name=name, password=password, email=email)
+        refresh = RefreshToken.for_user(user)
+        access_token = str(refresh.access_token)
         send_password_email(email, password)
 
-        return Response({'message': 'User created successfully'}, status=status.HTTP_201_CREATED)
+        return Response({'name': user.name, 'access': access_token}, status=status.HTTP_201_CREATED)
 
 class RefreshAccessTokenView(TokenRefreshView):
     

@@ -93,7 +93,7 @@ class ListComplaintsView(ListAPIView):
     pagination_class = PageNumberPagination 
     
     def get_queryset(self):
-        return Complaint.objects.all()
+        return Complaint.objects.all().order_by('-created_at')
 
 class CommentCreateView(CreateAPIView):
     queryset = Comment.objects.all()
