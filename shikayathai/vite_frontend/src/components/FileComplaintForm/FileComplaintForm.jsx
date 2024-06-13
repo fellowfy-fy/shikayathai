@@ -5,6 +5,7 @@ import useAuth from '../../hooks/useAuth';
 import InfoComponent from '../pop-ups/InfoComponent';
 import FacebookShareComponent from '../FacebookShare/FacebookShare';
 import debounce from 'lodash/debounce';
+import '../../styles/global.css';
 
 const FileComplaintForm = () => {
   const { showModal, hideModal } = useModal();
@@ -19,8 +20,8 @@ const FileComplaintForm = () => {
   const [photos, setPhotos] = useState([]);
   const [documents, setDocuments] = useState([]);
   const [companies, setCompanies] = useState([]);
-  const [error, setError] = useState(null);
   const [showAddCompanyFields, setShowAddCompanyFields] = useState(false);
+  const [error, setError] = useState(null);
   const { auth } = useAuth();
 
   const handleInfoClick = () => {
@@ -40,7 +41,7 @@ const FileComplaintForm = () => {
   const fetchCompanies = useCallback(debounce(async (query) => {
     try {
       const response = await axios.get(`companies/list/?search=${query}`);
-      setCompanies(response.data.results);
+      setCompanies(response.data);
     } catch (error) {
       console.error('Error fetching companies:', error);
     }
@@ -74,17 +75,16 @@ const FileComplaintForm = () => {
     }
   };
 
+  const handleFileChange = (event, setFiles) => {
+    setFiles(Array.from(event.target.files));
+  };
+
   const handleCompanySelect = (companyName) => {
     setCompany(companyName);
     setCompanies([]);
     setShowAddCompanyFields(false);
   };
 
-
-
-  const handleFileChange = (event, setFiles) => {
-    setFiles(Array.from(event.target.files));
-  };
 
   if (!isVisible) return null;
 
@@ -104,13 +104,13 @@ const FileComplaintForm = () => {
             <label htmlFor="company" className="form-label">Company Name</label>
             <input
               type="text"
-              className="form-control w-full p-3 rounded-xl border-gray-300 mb-4"
+              className="form-control"
               id="company"
               value={company}
               onChange={(e) => setCompany(e.target.value)}
               required
             />
-             {companies.length > 0 && (
+            {companies.length > 0 && (
               <ul className="list-group">
                 {companies.map((comp) => (
                   <li
@@ -133,7 +133,7 @@ const FileComplaintForm = () => {
                 <label htmlFor="brandPhone" className="form-label">Brand Phone</label>
                 <input
                   type="text"
-                  className="form-control w-full p-3 rounded-xl border-gray-300 mb-4"
+                  className="form-control"
                   id="brandPhone"
                   value={brandPhone}
                   onChange={(e) => setBrandPhone(e.target.value)}
@@ -143,7 +143,7 @@ const FileComplaintForm = () => {
                 <label htmlFor="brandEmail" className="form-label">Brand Email</label>
                 <input
                   type="email"
-                  className="form-control w-full p-3 rounded-xl border-gray-300 mb-4"
+                  className="form-control"
                   id="brandEmail"
                   value={brandEmail}
                   onChange={(e) => setBrandEmail(e.target.value)}
@@ -153,7 +153,7 @@ const FileComplaintForm = () => {
                 <label htmlFor="brandWebsite" className="form-label">Brand Website</label>
                 <input
                   type="url"
-                  className="form-label w-full p-3 rounded-xl border-gray-300 mb-4"
+                  className="form-control"
                   id="brandWebsite"
                   value={brandWebsite}
                   onChange={(e) => setBrandWebsite(e.target.value)}
@@ -201,7 +201,7 @@ const FileComplaintForm = () => {
             </p>
             <input type="file" className="form-control" id="documents" onChange={(e) => handleFileChange(e, setDocuments)} multiple />
           </div>
-          <button type="submit" className="btn btn-primary w-full bg-[#B5F62B] text-[#001A45] rounded hover:bg-[#A9E922] active:bg-[#C9FF57] font-semibold py-2 px-4 rounded-xl">Add complaint</button>
+          <button type="submit" className="btn btn-primary w-full bg-[#B5F62B] text-[#001A45] hover:bg-[#A9E922] active:bg-[#C9FF57] font-semibold py-2 px-4 rounded-xl">Add complaint</button>
         </form>
         </div>
       </div>
