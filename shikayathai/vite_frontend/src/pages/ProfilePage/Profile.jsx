@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Navigate } from 'react-router-dom';
 import useLogout from '../../hooks/useLogout';
 import api from '../../api/axios';
 import './Profile.css';
@@ -16,9 +16,12 @@ function Profile() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [repeatPassword, setRepeatPassword] = useState('');
+  const [photoPreview, setPhotoPreview] = useState(null); // State for photo preview
 
   useEffect(() => {
-    // Fetch user data from the backend
+    if (!auth?.access) {
+      navigate('/'); 
+    } 
     api.get('/api/profile', { headers: { Authorization: `Bearer ${auth.access}` } })
     .then(response => {
       setUser(response.data);
@@ -27,7 +30,7 @@ function Profile() {
       setPhoto(response.data.photo);
     })
     .catch(error => console.error('Error fetching user data:', error));
-  }, [auth.access]);
+  }, [auth.access, navigate]);
 
   const signOut = async () => {
     await logout();
@@ -38,6 +41,7 @@ function Profile() {
     const file = e.target.files[0];
     if (file) {
       setPhoto(file);
+      setPhotoPreview(URL.createObjectURL(file)); // Set photo preview
     }
   };
 
@@ -86,7 +90,7 @@ function Profile() {
       <h2>Profile</h2>
       <div className="profile-form">
         <div className="photo-section">
-          <img src={ auth.userpic } alt="Profile" className="profile-photo" />
+          <img src={photoPreview || auth.userpic} alt="Profile" className="profile-photo" />
           <label htmlFor="photo-upload" className="choose-photo-label">Choose a photo</label>
           <input type="file" id="photo-upload" onChange={handlePhotoChange} className="choose-photo" />
         </div>
