@@ -103,75 +103,44 @@ function Profile() {
   };
 
   return (
-    <div className="profile-page">
-      <div className="breadcrumb">
-        <a href="/">Home</a> &gt; <span>Profile</span>
-      </div>
-      <h2>Profile</h2>
-      <div className="profile-form">
-        <div className="photo-section">
-          <img
-            src={photoPreview || auth.userpic}
-            alt="Profile"
-            className="profile-photo"
-          />
-          <label htmlFor="photo-upload" className="choose-photo-label">
-            Choose a photo
-          </label>
-          <input
-            type="file"
-            id="photo-upload"
-            onChange={handlePhotoChange}
-            className="choose-photo"
-          />
-        </div>
-        <div className="form-fields">
-          <div className="form-group">
-            <label>Name</label>
-            <input
-              type="text"
-              value={name}
-              onChange={(e) => setName(e.target.value)}
-            />
-          </div>
-          <div className="form-group">
-            <label>Email</label>
-            <input
-              type="email"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-            />
-          </div>
-          <div className="form-group">
-            <label>Password</label>
-            <input
-              type="password"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-              required
-            />
-          </div>
-          <div className="form-group">
-            <label>Repeat Password</label>
-            <input
-              type="password"
-              value={repeatPassword}
-              onChange={(e) => setRepeatPassword(e.target.value)}
-              required
-            />
-          </div>
-        </div>
-        <button onClick={handleSaveChanges} className="save-changes-button">
-          Save changes
-        </button>
-      </div>
-      <button onClick={signOut} className="sign-out-button">
-        <img src={signOutIcon} alt="Sign Out" />
-      </button>
-      <button onClick={deleteUser} className="sign-out-button">
-        <h1>Delete User</h1>
-      </button>
+    <div className="max-w-5xl mx-auto p-8">
+    <div className="text-lg text-[#001A45] mb-4">
+      <a href="/" className="text-[#001A45] hover:underline">Home</a> &gt; <span>Profile</span>
     </div>
+    <h2 className="text-2xl font-bold text-[#001A45] mb-4">Profile</h2>
+    <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+      <div>
+        <img src={photoPreview || signOutIcon} alt="Profile" className="rounded-full w-24 h-24 object-cover mb-4" />
+        <div>
+          <label htmlFor="photo-upload" className="block text-sm font-medium text-[#001A45] cursor-pointer mb-2">Choose a photo</label>
+          <input type="file" id="photo-upload" onChange={handlePhotoChange} className="block w-full text-sm text-[#001A45] p-2 border border-[#001A45] rounded" />
+        </div>
+      </div>
+      <div className="space-y-4">
+        <div>
+          <label className="block font-bold text-[#001A45]">Name</label>
+          <input type="text" value={name} onChange={(e) => setName(e.target.value)} className="w-full p-2 border border-[#001A45] rounded" />
+        </div>
+        <div>
+          <label className="block font-bold text-[#001A45]">Email</label>
+          <input type="email" value={email} onChange={(e) => setEmail(e.target.value)} className="w-full p-2 border border-[#001A45] rounded" />
+        </div>
+        <div>
+          <label className="block font-bold text-[#001A45]">Password</label>
+          <input type="password" value={password} onChange={(e) => setPassword(e.target.value)} className="w-full p-2 border border-[#001A45] rounded" />
+        </div>
+        <div>
+          <label className="block font-bold text-[#001A45]">Repeat Password</label>
+          <input type="password" value={repeatPassword} onChange={(e) => setRepeatPassword(e.target.value)} className="w-full p-2 border border-[#001A45] rounded" />
+        </div>
+        <button onClick={handleSaveChanges} className="bg-[#B5F62B] hover:bg-[#A9E922] text-[#001A45] px-4 py-2 rounded font-bold mt-4">Save changes</button>
+      </div>
+    </div>
+    <div className="flex justify-end space-x-4 mt-8">
+      <button onClick={deleteUser} className="text-red-500 hover:text-red-700">Delete Account</button>
+      <button onClick={signOut} className="bg-[#001A45] text-white px-4 py-2 rounded hover:bg-[#002244]">Sign Out</button>
+    </div>
+  </div>
   );
 }
 
