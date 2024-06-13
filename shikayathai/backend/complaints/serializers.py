@@ -14,25 +14,15 @@ class DocumentSerializer(serializers.ModelSerializer):
         fields = ['id', 'file']
 
 class CommentSerializer(serializers.ModelSerializer):
+    user_name = serializers.SerializerMethodField()
     class Meta:
         model = Comment
-        fields = ['id', 'text', 'complaint', 'user', 'created_at']
-        read_only_fields = ['id', 'created_at']
+        fields = ['id', 'text', 'complaint', 'user_name', 'user', 'created_at']
+        read_only_fields = ['id', 'created_at', 'user']
         
-class ComplaintAndCompanySerializer(serializers.ModelSerializer):
-    photos = PhotoSerializer(many=True, read_only=True)
-    documents = DocumentSerializer(many=True, read_only=True)
-    company = CompanySerializer()
-
-    class Meta:
-        model = Complaint
-        fields = ['id', 'author', 'title', 'description', 'private_description', 'photos', 'documents', 'company']
-
-    def create(self, validated_data):
-        company_data = validated_data.pop('company')
-        company = Company.objects.create(**company_data)
-        complaint = Complaint.objects.create(company=company, **validated_data)
-        return complaint
+    
+    def get_user_name(self, obj):
+        return obj.user.name
 
 class ComplaintSerializer(serializers.ModelSerializer):
     author_name = serializers.SerializerMethodField()
@@ -40,9 +30,10 @@ class ComplaintSerializer(serializers.ModelSerializer):
     
     photos = PhotoSerializer(many=True, read_only=True)
     documents = DocumentSerializer(many=True, read_only=True)
+    comments = CommentSerializer(many=True, read_only=True)
     class Meta:
         model = Complaint
-        fields = ['id', 'author_name', 'author', 'title', 'description', 'private_description', 'company', 'company_name', 'photos', 'documents', 'resolution_rating', 'resolution_comment']
+        fields = ['id', 'author_name', 'author', 'title', 'description', 'private_description', 'company', 'company_name', 'photos', 'documents', 'resolution_rating', 'resolution_comment', 'comments', 'created_at']
         
     def create(self, validated_data):
         complaint = Complaint.objects.create(**validated_data)
