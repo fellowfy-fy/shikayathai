@@ -11,7 +11,7 @@ function Brands() {
     const fetchCompanies = async () => {
       try {
         const response = await axios.get("companies/list");
-        setCompanies(response.data);
+        setCompanies(response.data.results);
       } catch (error) {
         console.error("Error fetching companies:", error);
       }

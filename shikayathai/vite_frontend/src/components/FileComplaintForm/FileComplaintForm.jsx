@@ -3,6 +3,7 @@ import { useModal } from '../../context/ModalContext';
 import axios from '../../api/axios';
 import useAuth from '../../hooks/useAuth';
 import InfoComponent from '../pop-ups/InfoComponent';
+import FacebookShareComponent from '../FacebookShare/FacebookShare';
 import debounce from 'lodash/debounce';
 import '../../styles/global.css';
 
@@ -25,7 +26,7 @@ const FileComplaintForm = () => {
 
   const handleInfoClick = () => {
     setIsVisible(false);  
-    showModal(<InfoComponent onOk={() => setIsVisible(true)} />);  
+    showModal(<InfoComponent  />);  
   };
  
 
@@ -60,13 +61,15 @@ const FileComplaintForm = () => {
     photos.forEach((photo) => formData.append(`photos`, photo));
     documents.forEach((document) => formData.append(`documents`, document));
     try {
-      await axios.post('complaints/create/', formData, {
+      const response = await axios.post('complaints/create/', formData, {
         headers: {
           'Content-Type': 'multipart/form-data',
           'Authorization': `Bearer ${auth?.access}`
         }
       });
-      hideModal();
+      const complaintLink = `http://localhost/complaints/${response.data.id}`
+      setIsVisible(false);  
+      showModal(<FacebookShareComponent link={complaintLink}/>);
     } catch (error) {
       setError(error.response?.data?.message || 'An error occurred');
     }

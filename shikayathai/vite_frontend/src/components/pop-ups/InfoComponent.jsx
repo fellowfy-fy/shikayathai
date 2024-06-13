@@ -1,12 +1,12 @@
-import React from "react";
 import { useModal } from '../../context/ModalContext';
+import FileComplaintForm from '../FileComplaintForm/FileComplaintForm';
 
-const InfoComponent = ({ onOk }) => {
-    const { hideModal } = useModal();
+const InfoComponent = () => {
+    const { hideModal, showModal } = useModal();
 
     const handleOk = () => {
         hideModal();
-        onOk();
+        showModal(<FileComplaintForm />)
     };
 
     return (
