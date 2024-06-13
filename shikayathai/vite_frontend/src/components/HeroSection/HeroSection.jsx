@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { useModal } from '../../context/ModalContext';
 import FileComplaintForm from '../FileComplaintForm/FileComplaintForm.jsx';
 import man from "../../assets/man.png";
@@ -6,9 +6,26 @@ import mansmall from "../../assets/mansmall.png";
 
 const HeroSection = () => {
   const { showModal } = useModal();
+  const [windowWidth, setWindowWidth] = useState(window.innerWidth);
 
   const handleFileComplaintClick = () => {
     showModal(<FileComplaintForm />);
+  };
+
+  const handleResize = () => {
+    setWindowWidth(window.innerWidth);
+  };
+
+  useEffect(() => {
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
+
+  const getImageSrc = () => {
+    if (windowWidth < 1000) {
+      return mansmall;
+    }
+    return man;
   };
 
   return (
@@ -24,16 +41,16 @@ const HeroSection = () => {
             Turning grievances into wins, guaranteed
           </p>
           <button 
-            className="mt-5 bg-[#B5F62B] hover:bg-[#A9E922] active:bg-[#C9FF57] text-[#001A45] w-[312px] h-[55px] rounded-[12px] font-inter font-medium text-[18px] transition-all"
+            className="mt-5 bg-[#B5F62B] hover:bg-[#A9E922] active:bg-[#C9FF57] text-[#001A45] w-[312px] sm:w-[312px] md:w-[312px] h-[55px] rounded-[12px] font-inter font-medium text-[18px] transition-all mx-auto sm:mx-0 md:mx-0 w-full sm:w-auto"
             onClick={handleFileComplaintClick}
           >
             File a complaint
           </button>
         </div>
         <img 
-        className="w-full max-w-[816px] h-auto object-contain mt-auto"
-        src={man} 
-        alt="Happy man holding a card"
+          className={`${windowWidth < 1830 ? 'max-w-[600px]' : 'max-w-[816px]'} w-full h-auto object-contain mt-auto`}
+          src={getImageSrc()} 
+          alt="Happy man holding a card"
         />
       </div>
     </section>
