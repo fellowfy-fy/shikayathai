@@ -3,7 +3,7 @@ import { useNavigate, Navigate } from "react-router-dom";
 import useLogout from "../../hooks/useLogout";
 import api from "../../api/axios";
 import "./Profile.css";
-import signOutIcon from "../../assets/sign-out-icon.svg"; // Ensure this path is correct
+import signouticon from "../../assets/signouticon.svg"; 
 import useAuth from "../../hooks/useAuth";
 
 function Profile() {
@@ -103,45 +103,53 @@ function Profile() {
   };
 
   return (
-    <div className="max-w-5xl mx-auto p-8">
+  <div className="max-w-auto mx-auto p-8 relative">
+    <div className="absolute top-8 right-8">
+    <button onClick={signOut} className="bg-transparent border-none p-0 hover:bg-transparent focus:outline-none">
+          <img src={signouticon} alt="Sign Out" className="inline"/>
+        </button>
+    </div>
     <div className="text-lg text-[#001A45] mb-4">
       <a href="/" className="text-[#001A45] hover:underline">Home</a> &gt; <span>Profile</span>
     </div>
     <h2 className="text-2xl font-bold text-[#001A45] mb-4">Profile</h2>
-    <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-      <div>
-        <img src={photoPreview || auth.userpic} alt="Profile" className="rounded-full w-24 h-24 object-cover mb-4" />
-        <div>
-          <label htmlFor="photo-upload" className="block text-sm font-medium text-[#001A45] cursor-pointer mb-2">Choose a photo</label>
-          <input type="file" id="photo-upload" onChange={handlePhotoChange} className="block w-full text-sm text-[#001A45] p-2 border border-[#001A45] rounded" />
+    <div className="flex flex-col items-start w-full">
+    <div className="flex items-center w-full mb-4">
+     <img src={photoPreview || auth.userpic} alt="Profile" className="rounded-full w-24 h-24 object-cover" />
+     <input type="file" id="photo-upload" onChange={handlePhotoChange} className="ml-2 block text-sm text-[#001A45] p-2 border border-[#001A45] rounded hidden" />
+      <button 
+       className="bg-[#001A45] text-white font-medium py-2 px-4 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 hover:bg-blue-700 ml-2"
+       onClick={() => document.getElementById('photo-upload').click()}>
+       Choose a photo
+     </button>
+    </div>
+      <div className="flex justify-between w-full">
+        <div className="w-full mr-2">
+        <label className="block font-bold text-[#001A45]">Name</label>
+        <input type="name" value={name} onChange={(e) => setEmail(e.target.value)} className="w-full p-2 border border-[#001A45] rounded" />
         </div>
-      </div>
-      <div className="space-y-4">
-        <div>
-          <label className="block font-bold text-[#001A45]">Name</label>
-          <input type="text" value={name} onChange={(e) => setName(e.target.value)} className="w-full p-2 border border-[#001A45] rounded" />
-        </div>
-        <div>
+        <div className="w-full mr-2">
           <label className="block font-bold text-[#001A45]">Email</label>
           <input type="email" value={email} onChange={(e) => setEmail(e.target.value)} className="w-full p-2 border border-[#001A45] rounded" />
         </div>
-        <div>
+        <div className="w-full mr-2">
           <label className="block font-bold text-[#001A45]">Password</label>
           <input type="password" value={password} onChange={(e) => setPassword(e.target.value)} className="w-full p-2 border border-[#001A45] rounded" />
         </div>
-        <div>
+        <div className="w-full">
           <label className="block font-bold text-[#001A45]">Repeat Password</label>
           <input type="password" value={repeatPassword} onChange={(e) => setRepeatPassword(e.target.value)} className="w-full p-2 border border-[#001A45] rounded" />
         </div>
-        <button onClick={handleSaveChanges} className="bg-[#B5F62B] hover:bg-[#A9E922] text-[#001A45] px-4 py-2 rounded font-bold mt-4">Save changes</button>
       </div>
-    </div>
-    <div className="flex justify-end space-x-4 mt-8">
-      <button onClick={deleteUser} className="text-red-500 hover:text-red-700">Delete Account</button>
-      <button onClick={signOut} className="bg-[#001A45] text-white px-4 py-2 rounded hover:bg-[#002244]">Sign Out</button>
+      <button onClick={handleSaveChanges} className="bg-[#B5F62B] hover:bg-[#A9E922] text-[#001A45] px-4 py-2 rounded font-bold w-full mt-4">Save changes</button>
+      <button onClick={deleteUser} className="bg-red-500 hover:bg-red-700 text-white px-4 py-2 rounded font-bold w-full mt-4">Delete Account</button>
     </div>
   </div>
-  );
+);
+
+    
 }
 
 export default Profile;
+
+
