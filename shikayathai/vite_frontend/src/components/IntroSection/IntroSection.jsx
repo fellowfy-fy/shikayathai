@@ -39,6 +39,7 @@ const IntroSection = () => (
             borderRadius: '8px'
           } : {}}
         >
+        <div className="flex justify-center items-center flex-col max-w-xs">
           {step.number && (
             <div className="w-10 h-10 rounded-full bg-[#001A45] text-white text-2xl font-bold mb-2 flex items-center justify-center">
               {step.number}
@@ -48,7 +49,7 @@ const IntroSection = () => (
             {step.header && <h3 className="text-4xl font-bold text-[#001A45]">{step.header}</h3>}
             <p className="mt-2 text-xl text-[#001A45]">{step.detail}</p>
           </div>
-        </div>
+        </div></div>
       ))}
     </div>
   </section>

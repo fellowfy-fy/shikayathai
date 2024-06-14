@@ -20,23 +20,20 @@ function RecentRequestSection() {
   }, []);
 
   return (
-    <div className="text-center px-30 pt-40 bg-white">
-      <h2 className="text-4xl font-bold text-[#001A45] font-unbounded mb-4">Recent Requests</h2>
-      {/* Optional link - Uncomment if needed */}
-      {/* <nav className="mb-6">
-        <ul className="flex justify-center">
-          <li>
-            <Link to="/complaints" className="text-base text-[#001A45] hover:underline flex items-center">
-              Watch all
-            </Link>
-          </li>
-        </ul>
-      </nav> */}
+    <div className="text-center px-8 pt-10 bg-white">
+      <h2 className="text-4xl font-bold text-[#001A45] font-unbounded mb-4">
+        Recent Requests
+      </h2>
+      <Link to="complaints" className="text-[#001A45]">
+        Watch all 
+      </Link>
       {requests.length > 0 ? (
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {requests.map((request, index) => (
-            <FrameComponent key={index} data={request} />
-          ))}
+        <div className="overflow-x-auto">
+          <div className="flex space-x-8">
+            {requests.map((request, index) => (
+              <FrameComponent key={index} data={request} />
+            ))}
+          </div>
         </div>
       ) : (
         <p>No recent requests available.</p>

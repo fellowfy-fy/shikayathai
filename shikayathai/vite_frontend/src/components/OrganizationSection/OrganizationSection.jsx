@@ -26,8 +26,8 @@ const OrganizationSection = () => {
           { title: "3", subtitle: "Enhance Visibility", description: "Increase your online presence and attract new customers." },
           { title: "4", subtitle: "Feedback for Growth", description: "Utilize customer feedback to improve your services and customer experience." },
         ].map((item, index) => (
-          <div className="flex-1 max-w-xs" key={index}>
-            <div className="inline-block w-10 h-10 rounded-full bg-purple-200 text-white text-3xl font-bold mb-2 flex items-center justify-center">
+          <div className="flex justify-center items-center flex-col max-w-xs" key={index}>
+            <div className="w-10 h-10 rounded-full bg-purple-200 text-white text-3xl font-bold mb-2 ">
               {item.title}
             </div>
             <h4 className="text-xl md:text-3xl font-bold mb-2">{item.subtitle}</h4>
