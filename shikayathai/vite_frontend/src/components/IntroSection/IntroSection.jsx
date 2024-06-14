@@ -36,7 +36,7 @@ const IntroSection = () => (
             alignItems: 'center',
             justifyContent: 'center',
             padding: '1rem',
-            borderRadius: '8px'
+            borderRadius: '16px'
           } : {}}
         >
         <div className="flex justify-center items-center flex-col max-w-xs">

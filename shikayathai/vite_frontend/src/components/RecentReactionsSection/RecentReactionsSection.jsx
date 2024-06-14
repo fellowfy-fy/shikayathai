@@ -1,32 +1,39 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import FrameComponent from "../FrameComponent/FrameComponent.jsx";
-import axios from 'axios';  // Import Axios
+import api from "../../api/axios";
+import { Link } from "react-router-dom";
 
-function RecentReactionsSection({ route }){
-  const [reactions, setReactions] = useState([]);
+function RecentReactionsSection() {
+  const [requests, setRequests] = useState([]);
 
   useEffect(() => {
-    const fetchReactions = async () => {
+    const fetchRequests = async () => {
       try {
-        const url = "http://127.0.0.1:8000/complaints/list/"  // Ensure this URL is correct
-        const response = await axios.get(url);
-        setReactions(response.data.results);
+        const response = await api.get("/complaints/list/");
+        setRequests(response.data.results);
       } catch (error) {
-        console.error("Failed to fetch reactions:", error);
+        console.error("Failed to fetch requests:", error);
       }
     };
 
-    fetchReactions();
+    fetchRequests();
   }, []);
 
   return (
-    <div className="text-center px-30 pt-40 bg-white">
-      <h2 className="text-4xl font-bold text-[#001A45] font-unbounded mb-4">Recent Reactions</h2>
-      {reactions.length > 0 ? (
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {reactions.map((reaction, index) => (
-            <FrameComponent key={index} data={reaction} />
-          ))}
+    <div className="text-center px-8 pt-10 bg-white">
+      <h2 className="text-4xl font-bold text-[#001A45] font-unbounded mb-4">
+        Recent Reactions
+      </h2>
+      <Link to="complaints" className="text-[#001A45]">
+        Watch all 
+      </Link>
+      {requests.length > 0 ? (
+        <div className="overflow-x-auto">
+          <div className="flex space-x-8">
+            {requests.map((request, index) => (
+              <FrameComponent key={index} data={request} />
+            ))}
+          </div>
         </div>
       ) : (
         <p>No recent reactions available.</p>
