@@ -14,7 +14,9 @@ const UsersComplaints = () => {
   const [complaints, setComplaints] = useState([]);
 
   useEffect(() => {
-    api.get("/complaints/list/")
+    api.get("/complaints/list/author/", {headers:{
+      Authorization: `Bearer ${auth.access}`,
+    }})
       .then(response => setComplaints(response.data.results))
       .catch(error => console.error("Error fetching complaints:", error));
   }, []);
