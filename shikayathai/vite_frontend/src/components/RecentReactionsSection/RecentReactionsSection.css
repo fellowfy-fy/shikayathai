@@ -1,0 +1,12 @@
+
+.overflow-hidden {
+    text-overflow: ellipsis;
+    white-space: pre-wrap;
+    word-wrap: break-word;
+    overflow: hidden;
+  }
+  
+  /* Set a maximum height for the collapsed state */
+  .max-h-16 {
+    max-height: 4rem;
+  }
