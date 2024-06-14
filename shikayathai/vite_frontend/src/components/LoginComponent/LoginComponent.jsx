@@ -1,138 +1,111 @@
-import { useModal } from "../../context/ModalContext";
-import api from "../../api/axios";
-import { useRef, useState, useEffect } from "react";
-import useAuth from "../../hooks/useAuth";
-import { useNavigate, useLocation } from "react-router-dom";
+import React, { useState, useRef, useEffect } from 'react';
+import { useModal } from '../../context/ModalContext';
+import api from '../../api/axios';
+import useAuth from '../../hooks/useAuth';
+import { useNavigate, useLocation } from 'react-router-dom';
 
-const LOGIN_URL = "api/login/";
+const LOGIN_URL = '/api/login/';
 
 const LoginComponent = () => {
   const { hideModal } = useModal();
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const { setAuth, persist, setPersist } = useAuth();
-
+  const { setAuth } = useAuth();
   const navigate = useNavigate();
   const location = useLocation();
-  const from = location.state?.from?.pathname || "/";
-
+  const from = location.state?.from?.pathname || '/';
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [errMsg, setErrMsg] = useState('');
   const errRef = useRef();
-  const userRef = useRef();
+  const [persist, setPersist] = useState(false);
 
-  const [errMsg, setErrMsg] = useState("");
+  useEffect(() => {
+    errRef.current?.focus();
+  }, [errMsg]);
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
+  const handleSubmit = async (event) => {
+    event.preventDefault();
     try {
-      const response = await api.post(
-        LOGIN_URL,
-        JSON.stringify({ email, password, persist }),
-        {
-          headers: { "Content-Type": "application/json" },
-        }
-      );
-      const name = response?.data?.name;
-      const userpic = response.data.userpic;
-      const access = response.data.access;
-      setAuth({ name, email, userpic, access });
-      setEmail("");
-      setPassword("");
+      const response = await api.post(LOGIN_URL, JSON.stringify({ email, password, persist }), {
+        headers: { 'Content-Type': 'application/json' }
+      });
+      const { name, access, userpic } = response.data;
+      setAuth({ name, email, access, userpic });
+      setEmail('');
+      setPassword('');
       hideModal();
       navigate(from, { replace: true });
     } catch (err) {
       if (!err?.response) {
-        setErrMsg("No Server Response");
+        setErrMsg('No Server Response');
       } else if (err.response?.status === 400) {
-        setErrMsg("Missing Username or Password");
+        setErrMsg('Missing Username or Password');
       } else if (err.response?.status === 401) {
-        setErrMsg("Unauthorized");
+        setErrMsg('Unauthorized');
       } else {
-        setErrMsg("Login Failed");
+        setErrMsg('Login Failed');
       }
-      errRef.current.focus();
     }
+  };
+
+  const handleGitHubLogin = () => {
+    window.location.href = 'http://127.0.0.1:8000/accounts/github/login/';
   };
 
   const togglePersist = () => {
     setPersist((prev) => !prev);
   };
 
-  useEffect(() => {
-    localStorage.setItem("persist", persist);
-  }, [persist]);
-
-  useEffect(() => {
-    userRef.current.focus();
-  }, []);
-
-  useEffect(() => {
-    setErrMsg("");
-  }, [email, password]);
-
-  
-  const handleGitHubLogin = () => {
-    window.location.href = 'http://127.0.0.1:8000/accounts/github/login/';
-  };
-
   return (
-    <div>
-      <div className="modal-header">
-        <h5 className="modal-title">Login</h5>
-        <button
-          type="button"
-          className="btn-close"
-          onClick={hideModal}
-          aria-label="Close"
-        ></button>
-      </div>
-      <div className="modal-body">
-        {errMsg && <div className="alert alert-danger">{errMsg}</div>}
-        <form onSubmit={handleSubmit}>
-          <div className="mb-3">
-            <label htmlFor="email" className="form-label">
-              Email
-            </label>
-            <input
-              type="email"
-              ref={userRef}
-              className="form-control"
-              id="email"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              required
-            />
-          </div>
-          <div className="mb-3">
-            <label htmlFor="password" className="form-label">
-              Password
-            </label>
-            <input
-              type="password"
-              className="form-control"
-              id="repassword"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-              required
-            />
-          </div>
-
-          <div className="persistCheck">
-            <input
-              type="checkbox"
-              id="persist"
-              onChange={togglePersist}
-              checked={persist}
-            />
-            <label htmlFor="persist">Trust This Device</label>
-          </div>
-          <button type="submit" className="btn btn-primary">
+    <div className="fixed inset-0 bg-gray-500 bg-opacity-75 flex justify-center items-center">
+      <div className="bg-white p-6 rounded-lg shadow-xl w-full max-w-md">
+        <div className="modal-header flex justify-between items-center pb-3">
+          <h5 className="modal-title text-xl font-bold">Login</h5>
+          <button onClick={hideModal} className="text-lg font-semibold">×</button>
+        </div>
+        <div className="modal-body">
+          {errMsg && <p ref={errRef} className="alert alert-danger" tabIndex={-1}>{errMsg}</p>}
+          <form onSubmit={handleSubmit}>
+            <div className="mb-3">
+            <label htmlFor="email" className="block text-sm font-medium text-gray-700">Email</label>
+              <input
+                type="email"
+                className="form-control mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
+                id="email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                required
+                autoFocus
+              />
+            </div>
+            <div className="mb-3">
+            <label htmlFor="password" className="block text-sm font-medium text-gray-700">Password</label>
+              <input
+                type="password"
+                className="form-control mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
+                id="password"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                required
+              />
+            </div>
+            <div className="mb-3 form-check">
+              <input
+                type="checkbox"
+                className="form-check-input"
+                id="persist"
+                onChange={togglePersist}
+                checked={persist}
+              />
+              <label className="form-check-label" htmlFor="persist">Trust This Device</label>
+            </div>
+            <button type="submit" className="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-[#001A45] bg-[#C9FF57] hover:bg-[#B5F62B] focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500">
             Login
           </button>
-        </form>
-        
-        <button onClick={handleGitHubLogin} className="btn btn-secondary mt-3">
-          Login with GitHub
-        </button>
+          </form>
+          <button onClick={handleGitHubLogin} className="btn btn-secondary mt-3 w-full">
+            Login with GitHub
+          </button>
+        </div>
       </div>
     </div>
   );
