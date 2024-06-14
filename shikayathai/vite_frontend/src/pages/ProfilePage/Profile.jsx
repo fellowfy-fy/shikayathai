@@ -110,7 +110,7 @@ function Profile() {
     <h2 className="text-2xl font-bold text-[#001A45] mb-4">Profile</h2>
     <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
       <div>
-        <img src={photoPreview || signOutIcon} alt="Profile" className="rounded-full w-24 h-24 object-cover mb-4" />
+        <img src={photoPreview || auth.userpic} alt="Profile" className="rounded-full w-24 h-24 object-cover mb-4" />
         <div>
           <label htmlFor="photo-upload" className="block text-sm font-medium text-[#001A45] cursor-pointer mb-2">Choose a photo</label>
           <input type="file" id="photo-upload" onChange={handlePhotoChange} className="block w-full text-sm text-[#001A45] p-2 border border-[#001A45] rounded" />
