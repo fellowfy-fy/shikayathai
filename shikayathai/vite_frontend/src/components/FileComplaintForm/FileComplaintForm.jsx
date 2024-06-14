@@ -96,7 +96,9 @@ const FileComplaintForm = () => {
       });
       const complaintLink = `http://localhost/complaints/${response.data.id}`;
       setIsVisible(false);
-      setAuth({});
+      if (!auth.email) {
+        setAuth({});
+      }
       showModal(<FacebookShareComponent link={complaintLink} />);
     } catch (error) {
       setError(error.response?.data?.message || "An error occurred");

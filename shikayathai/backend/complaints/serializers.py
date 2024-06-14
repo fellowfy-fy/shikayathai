@@ -27,13 +27,14 @@ class CommentSerializer(serializers.ModelSerializer):
 class ComplaintSerializer(serializers.ModelSerializer):
     author_name = serializers.SerializerMethodField()
     company_name = serializers.SerializerMethodField()
+    author_userpic = serializers.SerializerMethodField()
     
     photos = PhotoSerializer(many=True, read_only=True)
     documents = DocumentSerializer(many=True, read_only=True)
     comments = CommentSerializer(many=True, read_only=True)
     class Meta:
         model = Complaint
-        fields = ['id', 'author_name', 'author', 'title', 'description', 'private_description', 'company', 'company_name', 'photos', 'documents', 'resolution_rating', 'resolution_comment', 'comments', 'created_at']
+        fields = ['id', 'author_name', 'author', 'author_userpic', 'title', 'description', 'private_description', 'company', 'company_name', 'photos', 'documents', 'resolution_rating', 'resolution_comment', 'comments', 'created_at']
         
     def create(self, validated_data):
         complaint = Complaint.objects.create(**validated_data)
@@ -43,5 +44,7 @@ class ComplaintSerializer(serializers.ModelSerializer):
         return obj.author.name
     def get_company_name(self, obj):
         return obj.company.name
+    def get_author_userpic(self, obj):
+        return obj.author.userpic.url
         
         
