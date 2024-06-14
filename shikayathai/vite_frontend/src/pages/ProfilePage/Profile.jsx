@@ -103,12 +103,12 @@ function Profile() {
   };
 
   return (
-    <div className="max-w-5xl mx-auto p-8">
+    <div className="max-w-auto mx-auto p-8">
     <div className="text-lg text-[#001A45] mb-4">
       <a href="/" className="text-[#001A45] hover:underline">Home</a> &gt; <span>Profile</span>
     </div>
     <h2 className="text-2xl font-bold text-[#001A45] mb-4">Profile</h2>
-    <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+    <div className="grid flex-cols-1 md:grid-cols-2 gap-6">
       <div>
         <img src={photoPreview || signOutIcon} alt="Profile" className="rounded-full w-24 h-24 object-cover mb-4" />
         <div>
@@ -133,7 +133,7 @@ function Profile() {
           <label className="block font-bold text-[#001A45]">Repeat Password</label>
           <input type="password" value={repeatPassword} onChange={(e) => setRepeatPassword(e.target.value)} className="w-full p-2 border border-[#001A45] rounded" />
         </div>
-        <button onClick={handleSaveChanges} className="bg-[#B5F62B] hover:bg-[#A9E922] text-[#001A45] px-4 py-2 rounded font-bold mt-4">Save changes</button>
+        <button onClick={handleSaveChanges} className="bg-[#B5F62B] hover:bg-[#A9E922] text-[#001A45] px-4 py-2 rounded font-bold w-full mt-4">Save changes</button>
       </div>
     </div>
     <div className="flex justify-end space-x-4 mt-8">
@@ -145,3 +145,5 @@ function Profile() {
 }
 
 export default Profile;
+
+
