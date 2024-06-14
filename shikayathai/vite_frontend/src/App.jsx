@@ -10,6 +10,7 @@ import ModalComponent from "./components/ModalComponent.jsx";
 import ComplaintPage from "./pages/ComplaintPage/ComplaintPage.jsx";
 import PersistLogin from "./components/PersistLogin.jsx";
 import UsersComplaints from "./pages/UsersComplaints.jsx";
+import './styles/global.css'
 
 function App() {
   return (

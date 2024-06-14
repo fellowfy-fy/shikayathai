@@ -19,8 +19,8 @@ const Header = () => {
   };
 
   return (
-    <header className="bg-[#001A45] text-white">
-      <nav className="container mx-auto p-4 flex flex-wrap items-center justify-between">
+    <header className="bg-[#001A45] text-white h-12 w-full flex items-center justify-center">
+      <nav className="container mx-auto h-full flex items-center justify-between w-full">
         <Link className="flex items-center" to="/">
           <img src={logo} alt="Logo" className="w-6 mr-2" />
           <span className="font-unbounded font-bold text-xl">Shikayahai</span>
@@ -35,21 +35,21 @@ const Header = () => {
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 6h16M4 12h16m-7 6h7"></path>
           </svg>
         </button>
-        <div className="w-full lg:flex lg:items-center lg:w-auto hidden" id="navbarNav">
-          <ul className="lg:flex lg:justify-between lg:flex-grow">
-            <li className="mt-4 lg:mt-0">
-              <Link className="font-inter block lg:inline-block lg:mt-0 text-white hover:text-gray-400 mr-4" to="/">Home</Link>
+        <div className="hidden lg:flex lg:items-center lg:justify-center w-full" id="navbarNav">
+          <ul className="flex justify-center items-center flex-grow">
+            <li>
+              <Link className="font-inter text-white hover:text-gray-400 mx-4" to="/">Home</Link>
             </li>
-            <li className="mt-4 lg:mt-0">
-              <Link className="font-inter block lg:inline-block lg:mt-0 text-white hover:text-gray-400 mr-4" to="/brands">All brands</Link>
+            <li>
+              <Link className="font-inter text-white hover:text-gray-400 mx-4" to="/brands">All brands</Link>
             </li>
-            <li className="mt-4 lg:mt-0">
-              <Link className="font-inter block lg:inline-block lg:mt-0 text-white hover:text-gray-400 mr-4" to="/complaints">All Complaints</Link>
+            <li>
+              <Link className="font-inter text-white hover:text-gray-400 mx-4" to="/complaints">All Complaints</Link>
             </li>
           </ul>
           {!auth.name ? (
-            <div className="mt-4 lg:mt-0 flex">
-              <button onClick={handleRegisterClick} className="bg-transparent hover:bg-transparent text-white font-inter py-2 px-4 rounded mr-2">
+            <div className="flex">
+              <button onClick={handleRegisterClick} className="bg-transparent hover:bg-transparent text-white font-inter py-2 px-4 rounded mx-2">
                 Register
               </button>
               <button onClick={handleLoginClick} className="bg-transparent hover:bg-transparent text-white font-inter py-2 px-4 rounded">
@@ -57,8 +57,8 @@ const Header = () => {
               </button>
             </div>
           ) : (
-            <div className="mt-4 lg:mt-0 flex items-center">
-              <Link className="bg-transparent text-white font-inter py-2 px-4 rounded mr-2" to="/profile">
+            <div className="flex items-center">
+              <Link className="bg-transparent text-white font-inter py-2 px-4 rounded mx-2" to="/profile">
                 {auth.name}
               </Link>
               <img className="rounded-full w-8 h-8" src={auth.userpic} alt="User" />
