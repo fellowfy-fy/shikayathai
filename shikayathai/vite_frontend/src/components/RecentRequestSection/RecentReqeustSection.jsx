@@ -2,6 +2,7 @@ import { useEffect, useState, useRef } from "react";
 import FrameComponent from "../FrameComponent/FrameComponent.jsx";
 import api from "../../api/axios";
 import { Link } from "react-router-dom";
+import arrow from "../../assets/arrow.svg";
 
 function RecentRequestSection() {
   const [requests, setRequests] = useState([]);
@@ -47,9 +48,9 @@ function RecentRequestSection() {
         <div className="relative">
           <button
             onClick={() => scroll('left')}
-            className="absolute left-0 top-1/2 transform -translate-y-1/2 bg-white p-2 rounded-full shadow-md z-10"
+            className="absolute left-5 top-1/2 transform -translate-y-1/2 bg-gray-200 p-2 rotate-180 rounded-[16px] w-[40px] h-[40px] z-10"
           >
-            &#8249;
+            <img src={arrow} />
           </button>
           <div className="overflow-x-auto scrollbar-hide" ref={scrollContainerRef}>
             <div className="flex space-x-8">
@@ -60,9 +61,9 @@ function RecentRequestSection() {
           </div>
           <button
             onClick={() => scroll('right')}
-            className="absolute right-0 top-1/2 transform -translate-y-1/2 bg-white p-2 rounded-full shadow-md z-10"
+            className="absolute right-5 top-1/2 transform -translate-y-1/2 bg-gray-200 p-2 rounded-[16px] w-[40px] h-[40px]"
           >
-            &#8250;
+            <img src={arrow} />
           </button>
         </div>
       ) : (

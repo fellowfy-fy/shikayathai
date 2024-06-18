@@ -129,7 +129,7 @@ const FileComplaintForm = () => {
     <div className="fixed inset-0 bg-gray-500 bg-opacity-50 flex justify-center items-center p-4">
     <div className="relative bg-white p-6 rounded-2xl shadow-lg w-full max-w-[800px] h-auto overflow-hidden">
       <div className="flex justify-between items-center mb-4">
-        <h5 className="text-lg font-bold">File a Complaint</h5>
+        <h5 className="text-lg font-unbounded font-bold text-[#001A45]">Fill in the contact details</h5>
         <button
           type="button"
           className="text-gray-600 hover:text-gray-900"
@@ -148,37 +148,39 @@ const FileComplaintForm = () => {
         <form onSubmit={handleSubmit} className="mt-4">
           {!auth?.name && (
             <>
-              <div className="mb-3">
-                <label htmlFor="userName" className="block font-semibold mb-1">
-                  Name
-                </label>
-                <input
-                  type="name"
-                  className="form-control p-2 border rounded-lg"
-                  id="userName"
-                  value={userName}
-                  onChange={(e) => setUserName(e.target.value)}
-                  required
-                />
-              </div>
-              <div className="mb-3">
-                <label htmlFor="userEmail" className="block font-semibold mb-1">
-                  Email
-                </label>
-                <input
-                  type="email"
-                  className="form-control p-2 border rounded-lg"
-                  id="userEmail"
-                  value={userEmail}
-                  onChange={(e) => setUserEmail(e.target.value)}
-                  required
-                />
-              </div>
+          <div className="flex gap-4 mb-3">
+            <div className="w-1/2">
+              <label htmlFor="userName" className="block font-semibold mb-1 font-inter text-[#001A45]">
+                Name
+              </label>
+              <input
+                type="name"
+                className="form-control p-2 border rounded-lg w-full"
+                id="userName"
+                value={userName}
+                onChange={(e) => setUserName(e.target.value)}
+                required
+              />
+            </div>
+            <div className="w-1/2">
+              <label htmlFor="userEmail" className="block font-semibold mb-1 font-inter text-[#001A45]">
+                Email
+              </label>
+              <input
+                type="email"
+                className="form-control p-2 border rounded-lg w-full"
+                id="userEmail"
+                value={userEmail}
+                onChange={(e) => setUserEmail(e.target.value)}
+                required
+              />
+            </div>
+          </div>
             </>
           )}
           
           <div className="mb-3">
-            <label htmlFor="company" className="block font-semibold mb-1">
+            <label htmlFor="company" className="block font-semibold mb-1 font-inter text-[#001A45]">
               Company Name
             </label>
             <input
@@ -212,7 +214,7 @@ const FileComplaintForm = () => {
           {showAddCompanyFields && (
             <>
               <div className="mb-3">
-                <label htmlFor="brandPhone" className="block font-semibold mb-1">
+                <label htmlFor="brandPhone" className="block font-semibold mb-1 font-inter text-[#001A45]">
                   Brand Phone
                 </label>
                 <input
@@ -224,7 +226,7 @@ const FileComplaintForm = () => {
                 />
               </div>
               <div className="mb-3">
-                <label htmlFor="brandEmail" className="block font-semibold mb-1">
+                <label htmlFor="brandEmail" className="block font-semibold mb-1 font-inter text-[#001A45]">
                   Brand Email
                 </label>
                 <input
@@ -236,12 +238,12 @@ const FileComplaintForm = () => {
                 />
               </div>
               <div className="mb-3">
-                <label htmlFor="brandWebsite" className="block font-semibold mb-1">
+                <label htmlFor="brandWebsite" className="block font-semibold mb-1 font-inter text-[#001A45]">
                   Brand Website
                 </label>
                 <input
                   type="url"
-                  className="form-control w-full p-2 border rounded-lg"
+                  className="form-control w-full p-2 border rounded-lg font-inter text-[#001A45]"
                   id="brandWebsite"
                   value={brandWebsite}
                   onChange={(e) => setBrandWebsite(e.target.value)}
@@ -250,12 +252,12 @@ const FileComplaintForm = () => {
             </>
           )}
           <div className="mb-3">
-            <label htmlFor="title" className="block font-semibold mb-1">
+            <label htmlFor="title" className="block font-semibold mb-1 font-inter text-[#001A45]">
               Title
             </label>
             <input
               type="text"
-              className="form-control w-full p-2 border rounded-lg"
+              className="form-control w-full p-2 border rounded-lg font-inter text-[#001A45]"
               id="title"
               value={title}
               onChange={(e) => setTitle(e.target.value)}
@@ -263,10 +265,10 @@ const FileComplaintForm = () => {
             />
           </div>
           <div className="mb-3">
-            <label htmlFor="description" className="block font-semibold mb-1">
+            <label htmlFor="description" className="block font-semibold mb-1 font-inter text-[#001A45]">
               Complaint Description
             </label>
-            <p className="text-sm mb-2">
+            <p className="text-sm mb-2 font-inter text-[#001A45]">
               Include any details that will help Company to identify your case and resolve your issue as soon as possible. E.g. order id, receipt number, payment amount etc. Please note that the complaint description is public, please don’t include any personal details.
               <button
                 onClick={handleInfoClick}
@@ -284,32 +286,32 @@ const FileComplaintForm = () => {
             ></textarea>
           </div>
           <div className="mb-3">
-            <label htmlFor="privateDetails" className="block font-semibold mb-1">
+            <label htmlFor="privateDetails" className="block font-semibold mb-1 font-inter text-[#001A45]">
               Private Details
             </label>
             <textarea
-              className="form-control w-full p-2 border rounded-lg"
+              className="form-control w-full p-2 border rounded-lg font-inter text-[#001A45]"
               id="privateDetails"
               value={privateDetails}
               onChange={(e) => setPrivateDetails(e.target.value)}
             />
           </div>
           <div className="mb-3">
-            <label htmlFor="photos" className="block font-semibold mb-1">
+            <label htmlFor="photos" className="block font-semibold mb-1 font-inter text-[#001A45]">
               Photos and Images
             </label>
-            <p className="text-sm mb-2">
+            <p className="text-sm mb-2 font-inter text-[#001A45]">
               Please attach any valuable images or photos: payment screenshot, the photo of the broken product etc. Please note that the photos are public.
             </p>
             <input
               type="file"
-              className="form-control w-full p-2 border rounded-lg"
+              className="form-control w-full p-2 border rounded-lg font-inter text-[#001A45]"
               id="photos"
               onChange={(e) => handleFileChange(e, setPhotos, setPhotoPreviews)}
               multiple
             />
             {photoPreviews.length > 0 && (
-              <div className="flex flex-wrap gap-2 mt-2">
+              <div className="flex flex-wrap gap-2 mt-2 font-inter text-[#001A45]">
                 {photoPreviews.map((preview, index) => (
                   <img
                     key={index}
@@ -322,21 +324,21 @@ const FileComplaintForm = () => {
             )}
           </div>
           <div className="mb-3">
-            <label htmlFor="documents" className="block font-semibold mb-1">
+            <label htmlFor="documents" className="block font-semibold mb-1 font-inter text-[#001A45]">
               Documents
             </label>
-            <p className="text-sm mb-2">
+            <p className="text-sm mb-2 font-inter text-[#001A45]">
               Please attach any documents. All the documents are private.
             </p>
             <input
               type="file"
-              className="form-control w-full p-2 border rounded-lg"
+              className="form-control w-full p-2 border rounded-lg font-inter text-[#001A45]"
               id="documents"
               onChange={(e) => handleFileChange(e, setDocuments)}
               multiple
             />
             {documents.length > 0 && (
-              <ul className="list-disc pl-5 mt-2">
+              <ul className="list-disc pl-5 mt-2 font-inter text-[#001A45]">
                 {documents.map((doc, index) => (
                   <li key={index} className="text-sm">
                     {doc.name}
@@ -347,7 +349,7 @@ const FileComplaintForm = () => {
           </div>
           <button
             type="submit"
-            className="w-full hover:bg-[#B5F62B] text-[#001A45] bg-[#A9E922] active:bg-[#C9FF57] font-semibold py-2 px-4 rounded-xl"
+            className="w-full hover:bg-[#C9FF57] text-[#001A45] bg-[#B5F62B] active:bg-[#A9E922] font-semibold py-2 px-4 rounded-xl"
           >
             Add complaint
           </button>

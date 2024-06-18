@@ -17,13 +17,13 @@ const FrameComponent = ({ data }) => {
   }
 
   return (
-    <div className="bg-gray-100 rounded-lg p-4 w-72 h-80 relative text-left">
+    <div className="bg-gray-100 rounded-[16px] p-4 min-w-[280px] max-w-[280px] min-h-[320px] max-h-[320px] relative text-left mt-[24px]">
       <div className="flex items-center gap-2 mb-4 mt-4 ml-4">
         <img src={data.author_avatar} alt={data.author_name} className="w-11 h-11 rounded-full object-cover" />
         <div>
           <h4 className="text-lg font-bold">{data.author_name}</h4>
           <div className="flex items-center">
-            <div className="inline-block w-5 h-5 rounded-full bg-purple-200 text-white text-xs font-bold flex items-center justify-center mr-2">
+            <div className="w-5 h-5 rounded-full bg-purple-200 text-white text-xs font-bold flex items-center justify-center mr-2">
               {data.company_name.charAt(0)}
             </div>
             <p className="text-sm">{data.company_name}</p>
