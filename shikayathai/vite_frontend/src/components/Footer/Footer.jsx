@@ -1,5 +1,3 @@
-import React from "react";
-import { BRAND_NAME } from "../../constants";
 import "./Footer.css";
 import logo from "../../assets/logo.svg";
 

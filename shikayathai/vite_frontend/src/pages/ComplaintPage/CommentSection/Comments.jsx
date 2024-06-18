@@ -3,7 +3,7 @@ import { useState } from "react";
 import { useParams } from "react-router-dom";
 import useAuth from "../../../hooks/useAuth";
 import api from "../../../api/axios";
-// import profilePlaceholder from '../../../assets/profilePlaceholder.png';
+import { MEDIA_URL } from "../../../config";
 
 
 const options = {
@@ -38,7 +38,6 @@ const Comments = ({ initialComments }) => {
           },
         }
       );
-      console.log(apiResponse);
       setComments([...comments, apiResponse.data]);
       setNewComment("");
     } catch (err) {
@@ -56,7 +55,7 @@ const Comments = ({ initialComments }) => {
             <div key={comment.id} className="mb-1 p-1">
               <div className="flex items-center mb-2">
                 <img
-                  src={`http://localhost:8000${comment.userpic}`}
+                  src={comment.userpic}
                   alt="Commenter avatar"
                   className="w-10 h-10 rounded-full mr-4"
                 />
