@@ -1,7 +1,10 @@
 import { useEffect, useState } from "react";
-import { useModal } from '../../context/ModalContext';
+import { useModal } from "../../context/ModalContext";
 import axios from "../../api/axios";
-import CompanyForm from "../../components/CompanyForm/CompanyForm"
+import navigationArrow from "../../assets/navigationArrow.svg";
+import loopa from "../../assets/loopa.svg";
+import CompanyForm from "../../components/CompanyForm/CompanyForm";
+import CompanyComponent from "./CompanyComponent";
 
 function Brands() {
   const [companies, setCompanies] = useState([]);
@@ -19,32 +22,36 @@ function Brands() {
     fetchCompanies();
   }, []);
 
-  
   const handleFileComplaintClick = () => {
     showModal(<CompanyForm />);
   };
 
   return (
-    <div>
-      <br />
-      <br />
-      <br />
-      <br />
-      <br />
-
-      <div className="hero-content">
-        <div className="hero-title-wrapper">
-          <h1 className="hero-title">All brands</h1>
-          <button className="cta-button" onClick={handleFileComplaintClick}>
-            Add a company
-          </button>
-        </div>
+    <div className="mx-[120px] mt-2 text-[#001A45]">
+      {/* 1 line */}
+      <div className="flex flex-row gap-2 mb-10">
+        <span>Home</span>
+        <img src={navigationArrow} />
+        <span className="font-bold">All brands</span>
       </div>
-      {companies.map((company) => (
-        <div key={company.id} value={company.id}>
-          {company.name}
-        </div>
-      ))}
+
+      {/* Title */}
+      <div className="text-3xl font-bold font-unbounded mb-6">All brands</div>
+
+      {/* Search */}
+      <div className="flex flex-row p-3 gap-2 border rounded-xl items-center max-w-[640px] mb-6">
+        <button>
+          <img src={loopa} />
+        </button>
+        <input placeholder="Search brand" className="w-full" />
+      </div>
+
+      {/* Company Components  */}
+      <div className="flex flex-row gap-3 mb-8">
+        {companies.map((company, index) => (
+          <CompanyComponent key={index} company={company} />
+        ))}
+      </div>
     </div>
   );
 }
