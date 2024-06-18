@@ -10,7 +10,7 @@ const TopRatedCompaniesSection = () => {
 
     return (
         <section className="text-center px-30 pt-40 pb-20">
-            <h2 className="text-2xl font-bold text-[#001A45] mb-4">Top rated companies</h2>
+            <h2 className="text-4xl font-unbounded font-bold text-[#001A45] mb-4">Top rated companies</h2>
             <nav>
                 <ul className="flex justify-center mb-8">
                     <li>
