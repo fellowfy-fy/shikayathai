@@ -41,7 +41,7 @@ const HeroSection = () => {
             Turning grievances into wins, guaranteed
           </p>
           <button 
-            className="mt-5 bg-[#B5F62B] hover:bg-[#A9E922] active:bg-[#C9FF57] text-[#001A45] w-[312px] sm:w-[312px] md:w-[312px] h-[55px] rounded-[12px] font-inter font-medium text-[18px] transition-all mx-auto sm:mx-0 md:mx-0 w-full sm:w-auto"
+            className="mt-5 bg-[#B5F62B] hover:bg-[#A9E922] active:bg-[#C9FF57] text-[#001A45] sm:w-[312px] w-[100%] h-[55px] rounded-[12px] font-inter font-medium text-[18px] transition-all mx-auto sm:mx-0 md:mx-0"
             onClick={handleFileComplaintClick}
           >
             File a complaint

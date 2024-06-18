@@ -4,11 +4,11 @@ const FAQSection = () => (
   <section className="bg-white px-30 pt-40">
     <div className="text-center mb-7.5">
       <div>
-        <b className="text-4xl text-[#001A45] font-unbounded">FAQ</b>
+        <b className="text-3xl text-[#001A45] font-unbounded">FAQ</b>
       </div>
-      <div className="text-2.5xl text-[#001A45] mt-2.5">Your Guide to Getting Heard</div>
+      <div className="text-2xl text-[#001A45] mt-2.5">Your Guide to Getting Heard</div>
     </div>
-    <div className="bg-white p-5">
+    <div className="ml-2 mr-2 sm:ml-20 sm:mr-20 bg-white p-5">
       <div className="bg-[#f4f4f4] p-5 mb-5 rounded-lg">
         <b className="text-2xl text-[#001A45]">How do I file a complaint?</b>
         <div className="text-xl text-[#001A45] mt-2.5">

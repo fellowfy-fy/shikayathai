@@ -126,7 +126,7 @@ function Profile() {
       <div className="flex justify-between w-full">
         <div className="w-full mr-2">
         <label className="block font-bold text-[#001A45]">Name</label>
-        <input type="name" value={name} onChange={(e) => setEmail(e.target.value)} className="w-full p-2 border border-[#001A45] rounded" />
+        <input type="name" value={name} onChange={(e) => setName(e.target.value)} className="w-full p-2 border border-[#001A45] rounded" />
         </div>
         <div className="w-full mr-2">
           <label className="block font-bold text-[#001A45]">Email</label>

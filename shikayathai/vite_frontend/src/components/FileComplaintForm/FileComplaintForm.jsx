@@ -154,7 +154,7 @@ const FileComplaintForm = () => {
                 </label>
                 <input
                   type="name"
-                  className="form-control w-full p-2 border rounded-lg"
+                  className="form-control p-2 border rounded-lg"
                   id="userName"
                   value={userName}
                   onChange={(e) => setUserName(e.target.value)}
@@ -167,7 +167,7 @@ const FileComplaintForm = () => {
                 </label>
                 <input
                   type="email"
-                  className="form-control w-full p-2 border rounded-lg"
+                  className="form-control p-2 border rounded-lg"
                   id="userEmail"
                   value={userEmail}
                   onChange={(e) => setUserEmail(e.target.value)}
@@ -176,6 +176,7 @@ const FileComplaintForm = () => {
               </div>
             </>
           )}
+          
           <div className="mb-3">
             <label htmlFor="company" className="block font-semibold mb-1">
               Company Name
@@ -346,7 +347,7 @@ const FileComplaintForm = () => {
           </div>
           <button
             type="submit"
-            className="w-full bg-[#B5F62B] text-[#001A45] hover:bg-[#A9E922] active:bg-[#C9FF57] font-semibold py-2 px-4 rounded-xl"
+            className="w-full hover:bg-[#B5F62B] text-[#001A45] bg-[#A9E922] active:bg-[#C9FF57] font-semibold py-2 px-4 rounded-xl"
           >
             Add complaint
           </button>
