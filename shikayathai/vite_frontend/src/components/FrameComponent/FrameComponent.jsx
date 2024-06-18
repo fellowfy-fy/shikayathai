@@ -19,7 +19,7 @@ const FrameComponent = ({ data }) => {
   return (
     <div className="bg-gray-100 rounded-[16px] p-4 min-w-[280px] max-w-[280px] min-h-[320px] max-h-[320px] relative text-left mt-[24px]">
       <div className="flex items-center gap-2 mb-4 mt-4 ml-4">
-        <img src={data.author_avatar} alt={data.author_name} className="w-11 h-11 rounded-full object-cover" />
+        <img src={data.author_userpic} alt={data.author_name} className="w-11 h-11 rounded-full object-cover" />
         <div>
           <h4 className="text-lg font-bold">{data.author_name}</h4>
           <div className="flex items-center">
