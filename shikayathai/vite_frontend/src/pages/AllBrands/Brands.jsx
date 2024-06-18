@@ -47,7 +47,7 @@ function Brands() {
       </div>
 
       {/* Company Components  */}
-      <div className="flex flex-row gap-3 mb-8">
+      <div className="flex flex-row gap-3 mb-8 flex-wrap">
         {companies.map((company, index) => (
           <CompanyComponent key={index} company={company} />
         ))}
