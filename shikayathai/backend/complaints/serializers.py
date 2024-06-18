@@ -15,14 +15,17 @@ class DocumentSerializer(serializers.ModelSerializer):
 
 class CommentSerializer(serializers.ModelSerializer):
     user_name = serializers.SerializerMethodField()
+    userpic = serializers.SerializerMethodField()
     class Meta:
         model = Comment
-        fields = ['id', 'text', 'complaint', 'user_name', 'user', 'created_at']
+        fields = ['id', 'text', 'complaint', 'user_name', 'user', 'created_at', 'userpic']
         read_only_fields = ['id', 'created_at', 'user']
         
     
     def get_user_name(self, obj):
         return obj.user.name
+    def get_userpic(self, obj):
+        return obj.user.userpic.url
 
 class ComplaintSerializer(serializers.ModelSerializer):
     author_name = serializers.SerializerMethodField()

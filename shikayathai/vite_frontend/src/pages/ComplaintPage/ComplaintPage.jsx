@@ -8,6 +8,7 @@ import imagePlaceholder from "../../assets/imagePlaceholder.jpg";
 import share from "../../assets/share.svg";
 import support from "../../assets/support.svg";
 import resolved from "../../assets/resolved.svg";
+import arrow from "../../assets/arrow.svg";
 import Zoom from "react-medium-image-zoom";
 import "react-medium-image-zoom/dist/styles.css";
 
@@ -80,18 +81,19 @@ const ComplaintDetail = () => {
             <img
               src={mainImage || imagePlaceholder}
               alt="Main"
-              className="w-[640px] h-[640px] object-cover rounded-lg mb-6"
+              className="w-[640px] h-[640px] object-cover rounded-[32px]"
             />
           </Zoom>
           
           <div className="relative">
             <button
               onClick={scrollLeft}
-              className="absolute left-0 top-1/2 transform -translate-y-1/2 bg-white text-gray-600 p-2 rounded-full shadow-md z-10"
+              className="absolute left-5 top-1/2 transform -translate-y-1/2 bg-white text-gray-600 p-2 rounded-[16px] shadow-md z-10 rotate-180 w-[40px] h-[40px]
+"
             >
-              &lt;
+              <img src={arrow} />
             </button>
-          <div className="flex overflow-x-auto space-x-2 w-[640px]" ref={scrollContainerRef} style={{ scrollBehavior: "smooth" }}>
+          <div className="flex overflow-x-auto space-x-4 w-[640px] mt-[24px]" ref={scrollContainerRef} style={{ scrollBehavior: "smooth" }}>
             {thumbnails.map((photo, index) => (
               <span key={index}>
               <Zoom >
@@ -99,7 +101,7 @@ const ComplaintDetail = () => {
                 <img
                   src={photo.image || imagePlaceholder}
                   alt={`Thumbnail ${index}`}
-                  className="w-[154px] h-[154px] object-cover rounded-lg shrink-0"
+                  className="w-[154px] h-[154px] object-cover rounded-[32px] shrink-0"
                 />
 
                 </span>
@@ -109,9 +111,9 @@ const ComplaintDetail = () => {
           
           <button
               onClick={scrollRight}
-              className="absolute right-0 top-1/2 transform -translate-y-1/2 bg-white text-gray-600 p-2 rounded-full shadow-md"
+              className="absolute right-5 top-1/2 transform -translate-y-1/2 bg-white text-gray-600 p-2 rounded-[16px] shadow-md w-[40px] h-[40px]"
             >
-              &gt;
+              <img src={arrow} />
             </button>
         </div>
         </div>
@@ -146,7 +148,7 @@ const ComplaintDetail = () => {
           </div>
         </div>
       </div>
-      <Comments comments={complaint.comments} />
+      <Comments initialComments={complaint.comments} />
     </div>
   );
 };
