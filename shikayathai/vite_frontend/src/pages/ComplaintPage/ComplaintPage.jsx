@@ -73,7 +73,7 @@ const ComplaintDetail = () => {
         <img
           src={
             complaint.author_userpic
-              ? `http://localhost:8000${complaint.author_userpic}`
+              ? complaint.author_userpic
               : profilePlaceholder
           }
           alt="User avatar"

@@ -25,7 +25,8 @@ class CommentSerializer(serializers.ModelSerializer):
     def get_user_name(self, obj):
         return obj.user.name
     def get_userpic(self, obj):
-        return obj.user.userpic.url
+        request = self.context.get('request')
+        return request.build_absolute_uri(obj.user.userpic.url)
 
 class ComplaintSerializer(serializers.ModelSerializer):
     author_name = serializers.SerializerMethodField()
@@ -48,6 +49,6 @@ class ComplaintSerializer(serializers.ModelSerializer):
     def get_company_name(self, obj):
         return obj.company.name
     def get_author_userpic(self, obj):
-        return obj.author.userpic.url
-        
+        request = self.context.get('request')
+        return request.build_absolute_uri(obj.author.userpic.url)
         
