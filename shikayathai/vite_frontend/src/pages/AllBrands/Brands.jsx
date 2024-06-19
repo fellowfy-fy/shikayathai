@@ -27,7 +27,7 @@ function Brands() {
   };
 
   return (
-    <div className="mx-[120px] mt-2 text-[#001A45]">
+    <div className="mx-[24px] sm:mx-[120px] mt-2 text-[#001A45]">
       {/* 1 line */}
       <div className="flex flex-row gap-2 mb-10">
         <span>Home</span>

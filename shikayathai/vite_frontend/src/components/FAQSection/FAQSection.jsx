@@ -8,7 +8,7 @@ const FAQSection = () => (
       </div>
       <div className="text-2xl text-[#001A45] mt-2.5">Your Guide to Getting Heard</div>
     </div>
-    <div className="ml-2 mr-2 sm:ml-20 sm:mr-20 bg-white p-5">
+    <div className="ml-2 mr-2 mx-[24px] sm:mx-[120px] bg-white p-5">
       <div className="bg-[#f4f4f4] p-5 mb-5 rounded-lg">
         <b className="text-2xl text-[#001A45]">How do I file a complaint?</b>
         <div className="text-xl text-[#001A45] mt-2.5">
