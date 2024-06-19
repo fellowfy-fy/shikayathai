@@ -1,10 +1,10 @@
 from companies.serializers import CompanySerializer
-from .serializers import ComplaintSerializer, CommentSerializer
+from .serializers import ComplaintSerializer, CommentSerializer, ComplaintResolutionSerializer
 from rest_framework.permissions import AllowAny, IsAuthenticated
 from rest_framework.response import Response
 from rest_framework import status
 from rest_framework.views import APIView
-from rest_framework.generics import RetrieveUpdateDestroyAPIView, ListAPIView, RetrieveAPIView, CreateAPIView
+from rest_framework.generics import RetrieveUpdateDestroyAPIView, ListAPIView, RetrieveAPIView, CreateAPIView, UpdateAPIView
 from rest_framework.parsers import MultiPartParser, FormParser
 from api.models import User
 from .models import Photo, Document, Comment, Complaint
@@ -123,4 +123,25 @@ class CommentListView(ListAPIView):
     def get_queryset(self):
         return Comment.objects.filter(complaint=self.request.complaint)
     
+class MarkAsResolvedView(UpdateAPIView):
+    queryset = Complaint.objects.all()
+    serializer_class = ComplaintResolutionSerializer
+    permission_classes = [IsAuthenticated]
+    
+    def get_object(self):
+        complaint = super().get_object()
+        if complaint.author != self.request.user:
+            return Response({"detail": "You do not have permission to perform this action."}, status=status.HTTP_403_FORBIDDEN)
+        return complaint
+    
+    def update(self, request, *args, **kwargs):
+        # Add logic to fetch complaint by email if provided
+        email = request.data.get("email")
+        if email:
+            try:
+                user = User.objects.get(email=email)
+                self.queryset = Complaint.objects.filter(author=user)
+            except User.DoesNotExist:
+                return Response({"detail": "User with provided email does not exist."}, status=status.HTTP_400_BAD_REQUEST)
         
+        return super().update(request, *args, **kwargs)

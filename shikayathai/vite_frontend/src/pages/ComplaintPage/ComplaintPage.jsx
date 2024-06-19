@@ -12,6 +12,8 @@ import arrow from "../../assets/arrow.svg";
 import document from "../../assets/document.svg"
 import timestamparrow from "../../assets/timestamparrow.svg"
 import Zoom from "react-medium-image-zoom";
+import { useModal } from "../../context/ModalContext.jsx";
+import ResolvedRating from "./ResolvedRating.jsx";
 import "react-medium-image-zoom/dist/styles.css";
 
 
@@ -27,6 +29,7 @@ const options = {
 const ComplaintDetail = () => {
   const { id } = useParams();
   const [complaint, setComplaint] = useState(null);
+  const { showModal } = useModal();
 
   
   const scrollContainerRef = useRef(null);
@@ -38,6 +41,11 @@ const ComplaintDetail = () => {
   const scrollRight = () => {
     scrollContainerRef.current.scrollBy({ left: 154, behavior: "smooth" });
   };
+  
+
+  const handleResolved = () => {
+    showModal(<ResolvedRating id={complaint.id} />)
+  }
 
 
   useEffect(() => {
@@ -161,7 +169,7 @@ const ComplaintDetail = () => {
             <button className="bg-transparent text-[#001A45] py-2.5 px-5 rounded-lg text-sm flex items-center justify-center gap-2 col-span-1 border border-[#001A45] border-opacity-70">
               <img src={share} alt="Share" className="w-4 h-4" /> Share
             </button>
-            <button className="bg-[#B5F62B] bg-opacity-30 text-[#001A45] py-2.5 px-5 rounded-lg text-sm flex items-center justify-center gap-2 col-span-1 border border-[#001A45] border-opacity-70">
+            <button className="bg-[#B5F62B] bg-opacity-30 text-[#001A45] py-2.5 px-5 rounded-lg text-sm flex items-center justify-center gap-2 col-span-1 border border-[#001A45] border-opacity-70" onClick={handleResolved}>
               <img src={resolved} alt="Mark as resolved" className="w-4 h-4" />{" "}
               Mark as resolved
             </button>

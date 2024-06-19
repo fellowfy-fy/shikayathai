@@ -52,3 +52,8 @@ class ComplaintSerializer(serializers.ModelSerializer):
         request = self.context.get('request')
         return request.build_absolute_uri(obj.author.userpic.url)
         
+class ComplaintResolutionSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Complaint
+        fields = ['id', 'resolution_rating', 'resolution_comment']
+        
