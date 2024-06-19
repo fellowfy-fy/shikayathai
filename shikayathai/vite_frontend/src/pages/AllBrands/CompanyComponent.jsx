@@ -15,8 +15,8 @@ const CompanyComponent = ({ company }) => {
         <div className="bg-[#C9FF57] w-5 h-5 rounded-md flex items-center justify-center">
           <img src={star} />
         </div>
-        <div>10/100</div>
-        <div>184 reviews</div>
+        <div>{company.rating ? company.rating: "0"}/100</div>
+        <div>{company.complaints.length} reviews</div>
       </div>
     </div>
   );

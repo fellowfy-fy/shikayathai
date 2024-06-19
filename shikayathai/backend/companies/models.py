@@ -19,7 +19,7 @@ class Company(models.Model):
     rating = models.FloatField(
         validators=[
             MinValueValidator(0.0),
-            MaxValueValidator(5.0)
+            MaxValueValidator(100.0)
         ],
         blank=True,
         null=True

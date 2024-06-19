@@ -144,4 +144,9 @@ class MarkAsResolvedView(UpdateAPIView):
             except User.DoesNotExist:
                 return Response({"detail": "User with provided email does not exist."}, status=status.HTTP_400_BAD_REQUEST)
         
-        return super().update(request, *args, **kwargs)
+        response = super().update(request, *args, **kwargs)
+        
+        complaint = self.get_object()
+        complaint.update_company_rating()
+        
+        return response

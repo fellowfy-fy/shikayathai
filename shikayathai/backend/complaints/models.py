@@ -23,6 +23,15 @@ class Complaint(models.Model):
 
     def __str__(self):
         return self.title
+    
+    def update_company_rating(self):
+        if self.resolution_rating is not None:
+            # Calculate the average rating
+            all_ratings = Complaint.objects.filter(company=self.company, resolution_rating__isnull=False).values_list('resolution_rating', flat=True)
+            if all_ratings:
+                average_rating = sum(all_ratings) / len(all_ratings)
+                self.company.rating = average_rating
+                self.company.save()
 
 class Comment(models.Model):
     text = models.TextField()
@@ -32,7 +41,7 @@ class Comment(models.Model):
 
     def __str__(self):
         return self.text[:20]
-
+    
 class Photo(models.Model):
     image = models.ImageField(upload_to=user_directory_path)
     complaint = models.ForeignKey(Complaint, related_name='photos', on_delete=models.CASCADE)

@@ -1,7 +1,5 @@
 from rest_framework import serializers
 from .models import Photo, Document, Comment, Complaint
-from companies.models import Company
-from companies.serializers import CompanySerializer
 
 class PhotoSerializer(serializers.ModelSerializer):
     class Meta:
@@ -50,7 +48,9 @@ class ComplaintSerializer(serializers.ModelSerializer):
         return obj.company.name
     def get_author_userpic(self, obj):
         request = self.context.get('request')
-        return request.build_absolute_uri(obj.author.userpic.url)
+        if request is not None:
+            return request.build_absolute_uri(obj.author.userpic.url)
+        return None
         
 class ComplaintResolutionSerializer(serializers.ModelSerializer):
     class Meta:

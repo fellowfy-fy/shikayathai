@@ -11,9 +11,12 @@ import resolved from "../../assets/resolved.svg";
 import arrow from "../../assets/arrow.svg";
 import document from "../../assets/document.svg"
 import timestamparrow from "../../assets/timestamparrow.svg"
+import smile from "../../assets/smile.svg"
+import star from "../../assets/star.svg"
 import Zoom from "react-medium-image-zoom";
 import { useModal } from "../../context/ModalContext.jsx";
 import ResolvedRating from "./ResolvedRating.jsx";
+import useAuth from "../../hooks/useAuth.js";
 import "react-medium-image-zoom/dist/styles.css";
 
 
@@ -27,6 +30,7 @@ const options = {
 };
 
 const ComplaintDetail = () => {
+  const { auth } = useAuth();
   const { id } = useParams();
   const [complaint, setComplaint] = useState(null);
   const { showModal } = useModal();
@@ -47,6 +51,18 @@ const ComplaintDetail = () => {
     showModal(<ResolvedRating id={complaint.id} />)
   }
 
+  const renderStars =() => {
+    const rating = complaint.resolution_rating;
+    return [20, 40, 60, 80, 100].map((starValue) => (
+        <img
+        key={starValue}
+          src={star}
+          className={`w-10 h-10 rounded-md flex items-center justify-center ${
+            rating >= starValue ? "bg-[#C9FF57]" : "bg-[#001A45] bg-opacity-5"
+          }`}
+        />
+    ));
+  }
 
   useEffect(() => {
     api
@@ -144,10 +160,16 @@ const ComplaintDetail = () => {
         </div>
         </div> : <span></span>}
         <div className="flex-1">
+        {complaint.resolution_rating ?
+          <div className="bg-[#EAFFEA] rounded-2xl p-2">
+            <div><img src={smile} /></div>
+            <div className="flex flex-row gap-2">{renderStars()}</div>
+            <div>{complaint.resolution_comment}</div>
+          </div> : <></>}
           <p className="mb-4 mt-4 text-gray-800 whitespace-pre-wrap break-all md:max-w-[640px]">
             {complaint.description}
           </p>
-          <div className="mt-4 text-blue-500">
+          <div className="mt-4 text-[#001A45]">
             {complaint.documents &&
               complaint.documents.map((doc, index) => (
                 <div key={index} className="mt-4 flex flex-row rounded-xl border border-[#001A45] border-opacity-30 w-fit p-2">
@@ -169,10 +191,11 @@ const ComplaintDetail = () => {
             <button className="bg-transparent text-[#001A45] py-2.5 px-5 rounded-lg text-sm flex items-center justify-center gap-2 col-span-1 border border-[#001A45] border-opacity-70">
               <img src={share} alt="Share" className="w-4 h-4" /> Share
             </button>
+            {auth.name === complaint.author_name && !complaint.resolution_rating ?
             <button className="bg-[#B5F62B] bg-opacity-30 text-[#001A45] py-2.5 px-5 rounded-lg text-sm flex items-center justify-center gap-2 col-span-1 border border-[#001A45] border-opacity-70" onClick={handleResolved}>
               <img src={resolved} alt="Mark as resolved" className="w-4 h-4" />{" "}
               Mark as resolved
-            </button>
+            </button> : <></>}
           </div>
         </div>
       </div>
