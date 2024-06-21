@@ -54,6 +54,7 @@ MIDDLEWARE = [
 CORS_ALLOWED_ORIGINS = [
     'http://localhost:5173',  # Add your frontend URL here
     'http://127.0.0.1:5173',
+    'https://ttestt.store',
 ]
 
 CORS_ALLOW_CREDENTIALS = True
@@ -70,6 +71,7 @@ CORS_ALLOW_METHODS = [
 CSRF_TRUSTED_ORIGINS = [
     'http://localhost:5173',  # Add your frontend URL here
     'http://127.0.0.1:5173',
+    'https://ttestt.store',
 ]
 
 CORS_ALLOW_HEADERS = [
