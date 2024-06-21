@@ -6,7 +6,7 @@ import InfoComponent from "../pop-ups/InfoComponent";
 import FacebookShareComponent from "../FacebookShare/FacebookShare";
 import debounce from "lodash/debounce";
 import "../../styles/global.css";
-import "./FileComplaintForm.css"
+import "./FileComplaintForm.css";
 import close from "../../assets/close.svg";
 
 const FileComplaintForm = () => {
@@ -27,6 +27,7 @@ const FileComplaintForm = () => {
   const { auth, setAuth } = useAuth();
   const [userName, setUserName] = useState("");
   const [userEmail, setUserEmail] = useState("");
+  const [photoPreviews, setPhotoPreviews] = useState([]);
 
   const handleInfoClick = () => {
     setIsVisible(false);
@@ -58,20 +59,15 @@ const FileComplaintForm = () => {
 
     if (!auth?.name) {
       try {
-        // Register user if not authenticated
         const registrationResponse = await axios.post("register/", {
           name: userName,
           email: userEmail,
         });
-        // Assuming registration API returns the new user's name and access token
         const { name, access } = registrationResponse.data;
         auth.name = name;
         auth.access = access;
-        // Send password to user via email
       } catch (error) {
-        setError(
-          error.response?.data?.message || "Registration error occurred"
-        );
+        setError(error.response?.data?.message || "Registration error occurred");
         return;
       }
     }
@@ -123,258 +119,292 @@ const FileComplaintForm = () => {
     setShowAddCompanyFields(false);
   };
 
-  const [photoPreviews, setPhotoPreviews] = useState([]);
-
   if (!isVisible) return null;
 
   return (
     <div className="fixed inset-0 bg-gray-500 bg-opacity-50 flex justify-center items-center p-4">
-    <div className="relative bg-white p-6 rounded-[32px] shadow-lg w-full max-w-[800px] h-auto overflow-hidden">
-      <div className="flex justify-between items-center mb-4">
-        <h5 className="text-[23px] font-unbounded font-bold text-[#001A45]">Fill in the contact details</h5>
-        <button
-          type="button"
-          className="text-gray-600 hover:text-gray-900"
-          onClick={hideModal}
-          aria-label="Close"
-        >
-          <span> <img src={close} /></span>
-        </button>
-      </div>
-      {error && (
-        <div className="p-4 rounded-md bg-red-100 text-red-700 mb-4">
-          {error}
+      <div className="relative bg-white p-6 rounded-[32px] shadow-lg w-full max-w-[800px] h-auto overflow-hidden">
+        <div className="flex justify-between items-center mb-4">
+          <h5 className="text-[23px] font-unbounded font-bold text-[#001A45]">
+            Fill in the contact details
+          </h5>
+          <button
+            type="button"
+            className="text-gray-600 hover:text-gray-900"
+            onClick={hideModal}
+            aria-label="Close"
+          >
+            <img src={close} alt="Close" />
+          </button>
         </div>
-      )}
-      <div className="overflow-auto max-h-[70vh]">
-        <form onSubmit={handleSubmit} className="mt-4">
-          {!auth?.name && (
-            <>
-          <div className="flex gap-4 mb-3">
-            <div className="w-1/2">
-              <label htmlFor="userName" className="block font-bold mb-[4px] font-inter text-[24px] text-[#001A45]">
-                Name
-              </label>
-              <input
-                type="name"
-                className="block w-full px-3 py-2 border h-[44px] border-[#001A45] rounded-[12px] border-opacity-50 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 hover:border-[#0450CF] placeholder-opacity-30"
-                placeholder="John"
-                id="userName"
-                value={userName}
-                onChange={(e) => setUserName(e.target.value)}
-                required
-              />
-            </div>
-            <div className="w-1/2">
-              <label htmlFor="userEmail" className="block font-bold mb-[4px] font-inter text-[24px] text-[#001A45]">
-                Email
-              </label>
-              <input
-                type="email"
-                className="block w-full px-3 py-2 border h-[44px] border-[#001A45] rounded-[12px] border-opacity-50 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 hover:border-[#0450CF] placeholder-opacity-30"
-                placeholder="john@example.com"
-                id="userEmail"
-                value={userEmail}
-                onChange={(e) => setUserEmail(e.target.value)}
-                required
-              />
-            </div>
+        {error && (
+          <div className="p-4 rounded-md bg-red-100 text-red-700 mb-4">
+            {error}
           </div>
-            </>
-          )}
-          
-          <div className="mb-3">
-            <div className="flex gap-4 mb-3 relative">
-              <label htmlFor="company" className="font-bold mb-[4px] font-inter text-[24px] text-[#001A45]">
-                 Company Name
-                <p
-                  className="cursor-pointer font-inter font-light text-[16px] text-blue-600 hover:underline lg:absolute lg:right-0 lg:bottom-1"
-                  onClick={() => setShowAddCompanyFields(true)}
-                >
-                  Can't find your company? Add new
-                </p>
-              </label>
-            </div>
-            <input
-              type="text"
-              className="block w-full px-3 py-2 border h-[44px] border-[#001A45] rounded-[12px] border-opacity-50 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 hover:border-[#0450CF] placeholder-opacity-30"
-                placeholder="Company"
-              id="company"
-              value={company}
-              onChange={(e) => setCompany(e.target.value)}
-              required
-            />
-            {companies.length > 0 && (
-              <ul className="list-group mt-2">
-                {companies.map((comp) => (
-                  <li
-                    key={comp.id}
-                    className="list-group-item cursor-pointer p-2 border-b"
-                    onClick={() => handleCompanySelect(comp.name)}
+        )}
+        <div className="overflow-auto max-h-[70vh]">
+          <form onSubmit={handleSubmit} className="mt-4">
+            {!auth?.name && (
+              <div className="flex gap-4 mb-3">
+                <div className="w-1/2">
+                  <label
+                    htmlFor="userName"
+                    className="block font-bold mb-[4px] font-inter text-[24px] text-[#001A45]"
                   >
-                    {comp.name}
-                  </li>
-                ))}
-              </ul>
+                    Name
+                  </label>
+                  <input
+                    type="text"
+                    className="block w-full px-3 py-2 border h-[44px] border-[#001A45] rounded-[12px] border-opacity-50 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 hover:border-[#0450CF] placeholder-opacity-30"
+                    placeholder="John"
+                    id="userName"
+                    value={userName}
+                    onChange={(e) => setUserName(e.target.value)}
+                    required
+                  />
+                </div>
+                <div className="w-1/2">
+                  <label
+                    htmlFor="userEmail"
+                    className="block font-bold mb-[4px] font-inter text-[24px] text-[#001A45]"
+                  >
+                    Email
+                  </label>
+                  <input
+                    type="email"
+                    className="block w-full px-3 py-2 border h-[44px] border-[#001A45] rounded-[12px] border-opacity-50 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 hover:border-[#0450CF] placeholder-opacity-30"
+                    placeholder="john@example.com"
+                    id="userEmail"
+                    value={userEmail}
+                    onChange={(e) => setUserEmail(e.target.value)}
+                    required
+                  />
+                </div>
+              </div>
             )}
-          </div>
-          {showAddCompanyFields && (
-            <>
-              <p className="block font-medium mb-[4px] font-inter text-[23px] text-[#001A45]">
-                fill in the company information
-              </p>
-              <div className="mb-3">
-                <label htmlFor="brandPhone" className="block font-bold mb-[4px] font-inter text-[24px] text-[#001A45]">
-                  Brand Phone
+
+            <div className="flex gap-4 mb-3">
+              <div className="w-1/2">
+                <label
+                  htmlFor="company"
+                  className="block font-bold mb-[4px] font-inter text-[24px] text-[#001A45]"
+                >
+                  Company Name
                 </label>
                 <input
                   type="text"
                   className="block w-full px-3 py-2 border h-[44px] border-[#001A45] rounded-[12px] border-opacity-50 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 hover:border-[#0450CF] placeholder-opacity-30"
-                placeholder="Company"
-                  id="brandPhone"
-                  value={brandPhone}
-                  onChange={(e) => setBrandPhone(e.target.value)}
+                  placeholder="Company"
+                  id="company"
+                  value={company}
+                  onChange={(e) => setCompany(e.target.value)}
+                  required
                 />
+                {companies.length > 0 && (
+                  <ul className="list-group mt-2">
+                    {companies.map((comp) => (
+                      <li
+                        key={comp.id}
+                        className="list-group-item cursor-pointer p-2 border-b"
+                        onClick={() => handleCompanySelect(comp.name)}
+                      >
+                        {comp.name}
+                      </li>
+                    ))}
+                  </ul>
+                )}
+                <p
+                  className="cursor-pointer font-inter font-light text-[16px] text-blue-600 hover:underline mt-1"
+                  onClick={() => setShowAddCompanyFields(true)}
+                >
+                  Can't find your company? Add new
+                </p>
               </div>
-              <div className="mb-3">
-                <label htmlFor="brandEmail" className="block font-bold mb-[4px] font-inter text-[24px] text-[#001A45]">
-                  Brand Email
+              <div className="w-1/2">
+                <label
+                  htmlFor="title"
+                  className="block font-bold mb-[4px] font-inter text-[24px] text-[#001A45]"
+                >
+                  Title
                 </label>
                 <input
-                  type="email"
-                  className="block w-full px-3 py-2 border h-[44px] border-[#001A45] rounded-[12px] border-opacity-50 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 hover:border-[#0450CF] placeholder-opacity-30"
-                placeholder="company@example.com"
-                  id="brandEmail"
-                  value={brandEmail}
-                  onChange={(e) => setBrandEmail(e.target.value)}
+                  type="text"
+                  className="block px-3 py-2 border h-[44px] border-[#001A45] rounded-[12px] border-opacity-50 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 hover:border-[#0450CF] font-inter text-[#001A45] placeholder-opacity-30"
+                  placeholder="Title of Your complaint"
+                  id="title"
+                  value={title}
+                  onChange={(e) => setTitle(e.target.value)}
+                  required
                 />
               </div>
-              <div className="mb-3">
-                <label htmlFor="brandWebsite" className="block font-bold mb-[4px] font-inter text-[24px] text-[#001A45]">
-                  Brand Website
-                </label>
-                <input
-                  type="url"
-                  className="block w-full px-3 py-2 border h-[44px] border-[#001A45] rounded-[12px] border-opacity-50 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 hover:border-[#0450CF] font-inter text-[#001A45] placeholder-opacity-30"
-                placeholder="https://example.com"
-                  id="brandWebsite"
-                  value={brandWebsite}
-                  onChange={(e) => setBrandWebsite(e.target.value)}
-                />
-              </div>
-            </>
-          )}
-          <div className="mb-3">
-            <label htmlFor="title" className="block font-bold mb-[4px] font-inter text-[24px] text-[#001A45]">
-              Title
-            </label>
-            <input
-              type="text"
-              className="block w-full px-3 py-2 border h-[44px] border-[#001A45] rounded-[12px] border-opacity-50 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 hover:border-[#0450CF] font-inter text-[#001A45] placeholder-opacity-30"
-                placeholder="Title of Your complaint"
-              id="title"
-              value={title}
-              onChange={(e) => setTitle(e.target.value)}
-              required
-            />
-          </div>
-          <div className="mb-3">
-            <label htmlFor="description" className="block font-bold mb-[4px] font-inter text-[24px] text-[#001A45]">
-              Complaint Description
-            </label>
-            <p className="text-sm mb-2 font-inter text-[#001A45]">
-              Include any details that will help Company to identify your case and resolve your issue as soon as possible. E.g. order id, receipt number, payment amount etc. Please note that the complaint description is public, please don’t include any personal details.
-              <button
-                onClick={handleInfoClick}
-                className="underline text-blue-600 hover:text-blue-800 ml-1"
-              >
-                why the complaint is public?
-              </button>
-            </p>
-            <textarea
-              className="block w-full px-3 py-2 border border-[#001A45] rounded-[12px] border-opacity-50 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 hover:border-[#0450CF] placeholder-opacity-30"
-                placeholder="Describe your issue"
-              id="description"
-              value={description}
-              onChange={(e) => setDescription(e.target.value)}
-              required
-            ></textarea>
-          </div>
-          <div className="mb-3">
-            <label htmlFor="privateDetails" className="block font-bold mb-[4px] font-inter text-[24px] text-[#001A45]">
-              Private Details
-            </label>
-            <p className="text-sm mb-2 font-inter text-[#001A45]">
-            any private details that will help Company to identify you case resolve your issue as soon as possible. E.g. phone number, email id etc.</p>
-            <textarea
-              className="block w-full px-3 py-2 border border-[#001A45] rounded-[12px] border-opacity-50 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 hover:border-[#0450CF] font-inter text-[#001A45] placeholder-opacity-30"
-                placeholder="Additional private details"
-              id="privateDetails"
-              value={privateDetails}
-              onChange={(e) => setPrivateDetails(e.target.value)}
-            />
-          </div>
-          <div className="mb-3">
-            <label htmlFor="photos" className="block font-bold mb-[4px] font-inter text-[24px] text-[#001A45]">
-              Photos and Images
-            </label>
-            <p className="text-sm mb-2 font-inter text-[#001A45]">
-              Please attach any valuable images or photos: payment screenshot, the photo of the broken product etc. Please note that the photos are public.
-            </p>
-            <input
-              type="file"
-              className="block w-full px-3 py-2 border h-[44px] border-[#001A45] rounded-[12px] border-opacity-50 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 hover:border-[#0450CF] font-inter text-[#001A45]"
-              id="photos"
-              onChange={(e) => handleFileChange(e, setPhotos, setPhotoPreviews)}
-              multiple
-            />
-            {photoPreviews.length > 0 && (
-              <div className="flex flex-wrap gap-2 mt-2 font-inter text-[#001A45]">
-                {photoPreviews.map((preview, index) => (
-                  <img
-                    key={index}
-                    src={preview}
-                    alt={`Preview ${index}`}
-                    className="w-20 h-20 object-cover rounded"
+            </div>
+
+            {showAddCompanyFields && (
+              <>
+                <p className="block font-medium mb-[4px] font-inter text-[23px] text-[#001A45]">
+                  Fill in the company information
+                </p>
+                <div className="mb-3">
+                  <label
+                    htmlFor="brandPhone"
+                    className="block font-bold mb-[4px] font-inter text-[24px] text-[#001A45]"
+                  >
+                    Brand Phone
+                  </label>
+                  <input
+                    type="text"
+                    className="block w-full px-3 py-2 border h-[44px] border-[#001A45] rounded-[12px] border-opacity-50 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 hover:border-[#0450CF] placeholder-opacity-30"
+                    placeholder="Brand Phone"
+                    id="brandPhone"
+                    value={brandPhone}
+                    onChange={(e) => setBrandPhone(e.target.value)}
                   />
-                ))}
-              </div>
+                </div>
+                <div className="mb-3">
+                  <label
+                    htmlFor="brandEmail"
+                    className="block font-bold mb-[4px] font-inter text-[24px] text-[#001A45]"
+                  >
+                    Brand Email
+                  </label>
+                  <input
+                    type="email"
+                    className="block w-full px-3 py-2 border h-[44px] border-[#001A45] rounded-[12px] border-opacity-50 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 hover:border-[#0450CF] placeholder-opacity-30"
+                    placeholder="company@example.com"
+                    id="brandEmail"
+                    value={brandEmail}
+                    onChange={(e) => setBrandEmail(e.target.value)}
+                  />
+                </div>
+                <div className="mb-3">
+                  <label
+                    htmlFor="brandWebsite"
+                    className="block font-bold mb-[4px] font-inter text-[24px] text-[#001A45]"
+                  >
+                    Brand Website
+                  </label>
+                  <input
+                    type="url"
+                    className="block w-full px-3 py-2 border h-[44px] border-[#001A45] rounded-[12px] border-opacity-50 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 hover:border-[#0450CF] font-inter text-[#001A45] placeholder-opacity-30"
+                    placeholder="https://example.com"
+                    id="brandWebsite"
+                    value={brandWebsite}
+                    onChange={(e) => setBrandWebsite(e.target.value)}
+                  />
+                </div>
+              </>
             )}
-          </div>
-          <div className="mb-3">
-            <label htmlFor="documents" className="block font-bold mb-[4px] font-inter text-[24px] text-[#001A45]">
-              Documents
-            </label>
-            <p className="text-sm mb-2 font-inter text-[#001A45]">
-              Please attach any documents. All the documents are private.
-            </p>
-            <input
-              type="file"
-              className="block w-full px-3 py-2 border h-[44px] border-[#001A45] rounded-[12px] border-opacity-50 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 hover:border-[#0450CF] font-inter text-[#001A45]"
-              id="documents"
-              onChange={(e) => handleFileChange(e, setDocuments)}
-              multiple
-            />
-            {documents.length > 0 && (
-              <ul className="list-disc pl-5 mt-2 font-inter text-[#001A45]">
-                {documents.map((doc, index) => (
-                  <li key={index} className="text-sm">
-                    {doc.name}
-                  </li>
-                ))}
-              </ul>
-            )}
-          </div>
-          <button
-            type="submit"
-            className="w-full hover:bg-[#C9FF57] text-[#001A45] bg-[#B5F62B] active:bg-[#A9E922] font-semibold py-2 px-4 rounded-xl"
-          >
-            Add complaint
-          </button>
-        </form>
+            <div className="mb-3">
+              <label
+                htmlFor="description"
+                className="block font-bold mb-[4px] font-inter text-[24px] text-[#001A45]"
+              >
+                Complaint Description
+              </label>
+              <p className="text-sm mb-2 font-inter text-[#001A45]">
+                Include any details that will help Company to identify your case and resolve your issue as soon as possible. E.g. order id, receipt number, payment amount etc. Please note that the complaint description is public, please don’t include any personal details.
+                <button
+                  onClick={handleInfoClick}
+                  className="underline text-blue-600 hover:text-blue-800 ml-1"
+                >
+                  Why is the complaint public?
+                </button>
+              </p>
+              <textarea
+                className="block w-full px-3 py-2 border border-[#001A45] rounded-[12px] border-opacity-50 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 hover:border-[#0450CF] placeholder-opacity-30"
+                placeholder="Describe your issue"
+                id="description"
+                value={description}
+                onChange={(e) => setDescription(e.target.value)}
+                required
+              ></textarea>
+            </div>
+            <div className="mb-3">
+              <label
+                htmlFor="privateDetails"
+                className="block font-bold mb-[4px] font-inter text-[24px] text-[#001A45]"
+              >
+                Private Details
+              </label>
+              <p className="text-sm mb-2 font-inter text-[#001A45]">
+                Any private details that will help Company to identify your case and resolve your issue as soon as possible. E.g. phone number, email id etc.
+              </p>
+              <textarea
+                className="block w-full px-3 py-2 border border-[#001A45] rounded-[12px] border-opacity-50 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 hover:border-[#0450CF] placeholder-opacity-30"
+                placeholder="Additional private details"
+                id="privateDetails"
+                value={privateDetails}
+                onChange={(e) => setPrivateDetails(e.target.value)}
+              />
+            </div>
+            <div className="mb-3">
+              <label
+                htmlFor="photos"
+                className="block font-bold mb-[4px] font-inter text-[24px] text-[#001A45]"
+              >
+                Photos and Images
+              </label>
+              <p className="text-sm font-inter text-[#001A45]">
+                Please attach any valuable images or photos: payment screenshot, the photo of the broken product etc. 
+              </p>
+              <p className="text-sm mb-2 font-inter text-[#001A45]">Please note that the photos are public.</p>
+              <input
+                type="file"
+                className="block w-[312px] px-3 py-2 border h-[56px] border-[#001A45] rounded-[12px] border-opacity-50 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 hover:border-[#0450CF]"
+                id="photos"
+                onChange={(e) => handleFileChange(e, setPhotos, setPhotoPreviews)}
+                multiple
+              />
+              {photoPreviews.length > 0 && (
+                <div className="flex flex-wrap gap-2 mt-2 font-inter text-[#001A45] ">
+                  {photoPreviews.map((preview, index) => (
+                    <img
+                      key={index}
+                      src={preview}
+                      alt={`Preview ${index}`}
+                      className="w-[80px] h-[80px] object-cover rounded-2xl "
+                    />
+                  ))}
+                </div>
+              )}
+            </div>
+            <div className="mb-3">
+              <label
+                htmlFor="documents"
+                className="block font-bold mb-[4px] font-inter text-[24px] text-[#001A45]"
+              >
+                Documents
+              </label>
+              <p className="text-sm mb-2 font-inter text-[#001A45]">
+                Please attach any documents. All the documents are private.
+              </p>
+              <input
+                type="file"
+                className="block w-[312px] px-3 py-2 border h-[56px] border-[#001A45] rounded-[12px] border-opacity-50 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 hover:border-[#0450CF]"
+                id="documents"
+                onChange={(e) => handleFileChange(e, setDocuments)}
+                multiple
+              />
+              {documents.length > 0 && (
+                <ul className="list-disc pl-5 mt-2 font-inter text-[#001A45] ">
+                  {documents.map((doc, index) => (
+                    <li key={index} className="text-sm">
+                      {doc.name}
+                    </li>
+                  ))}
+                </ul>
+              )}
+            </div>
+            <button
+              type="submit"
+              className="w-full h-[55px] hover:bg-[#C9FF57] text-[#001A45] bg-[#B5F62B] active:bg-[#A9E922] text-[18px] font-semibold py-2 px-4 rounded-[12px] "
+            >
+              Add complaint
+            </button>
+          </form>
+        </div>
       </div>
     </div>
-  </div>
   );
 };
 

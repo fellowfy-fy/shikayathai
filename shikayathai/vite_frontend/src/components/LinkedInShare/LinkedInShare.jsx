@@ -48,14 +48,14 @@ const LinkedInShareComponent = ({ link, linkid }) => {
           <p>Share your complaint on social networks, the more people see it, the more chances there are for its speedy resolution</p>
         </div>
         <button
-          className="lg:h-[56px]  w-full py-2 mt-4 bg-[#001A45] text-white rounded-xl transition duration-150 ease-in-out flex flex-row justify-center items-center gap-2 font-inter text-lg"
+          className="lg:h-[56px]  w-full py-2 mt-4 bg-[#001A45] text-white rounded-xl transition duration-150 ease-in-out flex flex-row justify-center items-center gap-2 font-inter text-lg hover:bg-opacity-70 active:bg-black"
           onClick={shareOnLinkedIn}
         >
         <img src={linkedin} />
           Share
         </button>
         <button
-          className="lg:h-[56px] w-full py-4 mt-5 bg-white border border-[#001A45] text-[#001A45] rounded-xl transition duration-150 ease-in-out font-inter"
+          className="lg:h-[56px] w-full py-4 mt-5 bg-white border border-[#001A45] text-[#001A45] rounded-xl transition duration-150 ease-in-out font-inter hover:border-opacity-70 hover:text-opacity-70 active:border-opacity-70 active:text-opacity-70 active:bg-opacity-5"
           onClick={handleSkip}
         >
           Skip
