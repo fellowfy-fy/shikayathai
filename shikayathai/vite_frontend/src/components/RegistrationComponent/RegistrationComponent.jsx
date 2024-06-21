@@ -57,7 +57,8 @@ const RegistrationComponent = () => {
                 type="name"
                 name="name"
                 id="name"
-                className="mt-1 block w-full px-3 py-2 border h-[44px] border-[#001A45] rounded-[12px] border-opacity-50 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
+                className="mt-1 block w-full px-3 py-2 border h-[44px] border-[#001A45] rounded-[12px] border-opacity-50 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 placeholder-opacity-30"
+                placeholder="John"
                 value={userData.name}
                 onChange={handleChange}
                 required
@@ -69,7 +70,8 @@ const RegistrationComponent = () => {
                 type="email"
                 name="email"
                 id="email"
-                className="mt-1 block w-full px-3 py-2 border h-[44px] border-[#001A45] rounded-[12px] border-opacity-50 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
+                className="mt-1 block w-full px-3 py-2 border h-[44px] border-[#001A45] rounded-[12px] border-opacity-50 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 placeholder-opacity-30"
+                placeholder="john@example.com"
                 value={userData.email}
                 onChange={handleChange}
                 required
@@ -83,7 +85,8 @@ const RegistrationComponent = () => {
                 type="password"
                 name="password"
                 id="password"
-                className="mt-1 block w-full px-3 py-2 border h-[44px] border-[#001A45] rounded-[12px] border-opacity-50 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
+                className="mt-1 block w-full px-3 py-2 border h-[44px] border-[#001A45] rounded-[12px] border-opacity-50 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 placeholder-opacity-30"
+                placeholder="Enter Your password"
                 value={userData.password}
                 onChange={handleChange}
                 required
@@ -95,7 +98,8 @@ const RegistrationComponent = () => {
                 type="password"
                 name="repassword"
                 id="repassword"
-                className="mt-1 block w-full px-3 py-2 border h-[44px] border-[#001A45] rounded-[12px] border-opacity-50 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
+                className="mt-1 block w-full px-3 py-2 border h-[44px] border-[#001A45] rounded-[12px] border-opacity-50 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 placeholder-opacity-30"
+                placeholder="Repeat the password"
                 value={userData.repassword}
                 onChange={handleChange}
                 required

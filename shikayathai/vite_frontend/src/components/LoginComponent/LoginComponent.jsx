@@ -72,7 +72,8 @@ const LoginComponent = () => {
               <label htmlFor="email" className="block text-[#001A45] text-[24px] font-inter font-bold">Email</label>
               <input
                 type="email"
-                className="mt-1 block w-full px-3 py-2 border h-[44px] border-[#001A45] rounded-[12px] border-opacity-50 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
+                className="mt-1 block w-full px-3 py-2 border h-[44px] border-[#001A45] rounded-[12px] border-opacity-50 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 placeholder-opacity-30"
+                placeholder="john@example.com"
                 id="email"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
@@ -84,7 +85,8 @@ const LoginComponent = () => {
               <label htmlFor="name" className="block text-[#001A45] text-[24px] font-inter font-bold">Password</label>
               <input
                 type="password"
-                className="mt-1 block w-full px-3 py-2 border h-[44px] border-[#001A45] rounded-[12px] border-opacity-50 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
+                className="mt-1 block w-full px-3 py-2 border h-[44px] border-[#001A45] rounded-[12px] border-opacity-50 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 placeholder-opacity-30"
+                placeholder="Enter Your password"
                 id="password"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}

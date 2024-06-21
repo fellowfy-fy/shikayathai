@@ -129,7 +129,7 @@ const FileComplaintForm = () => {
     <div className="fixed inset-0 bg-gray-500 bg-opacity-50 flex justify-center items-center p-4">
     <div className="relative bg-white p-6 rounded-[32px] shadow-lg w-full max-w-[800px] h-auto overflow-hidden">
       <div className="flex justify-between items-center mb-4">
-        <h5 className="text-lg font-unbounded font-bold text-[#001A45]">Fill in the contact details</h5>
+        <h5 className="text-[23px] font-unbounded font-bold text-[#001A45]">Fill in the contact details</h5>
         <button
           type="button"
           className="text-gray-600 hover:text-gray-900"
@@ -150,12 +150,13 @@ const FileComplaintForm = () => {
             <>
           <div className="flex gap-4 mb-3">
             <div className="w-1/2">
-              <label htmlFor="userName" className="block font-semibold mb-1 font-inter text-[#001A45]">
+              <label htmlFor="userName" className="block font-bold mb-[4px] font-inter text-[24px] text-[#001A45]">
                 Name
               </label>
               <input
                 type="name"
-                className="form-control p-2 border rounded-lg w-full"
+                className="block w-full px-3 py-2 border h-[44px] border-[#001A45] rounded-[12px] border-opacity-50 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 placeholder-opacity-30"
+                placeholder="John"
                 id="userName"
                 value={userName}
                 onChange={(e) => setUserName(e.target.value)}
@@ -163,12 +164,13 @@ const FileComplaintForm = () => {
               />
             </div>
             <div className="w-1/2">
-              <label htmlFor="userEmail" className="block font-semibold mb-1 font-inter text-[#001A45]">
+              <label htmlFor="userEmail" className="block font-bold mb-[4px] font-inter text-[24px] text-[#001A45]">
                 Email
               </label>
               <input
                 type="email"
-                className="form-control p-2 border rounded-lg w-full"
+                className="block w-full px-3 py-2 border h-[44px] border-[#001A45] rounded-[12px] border-opacity-50 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 placeholder-opacity-30"
+                placeholder="john@example.com"
                 id="userEmail"
                 value={userEmail}
                 onChange={(e) => setUserEmail(e.target.value)}
@@ -180,12 +182,13 @@ const FileComplaintForm = () => {
           )}
           
           <div className="mb-3">
-            <label htmlFor="company" className="block font-semibold mb-1 font-inter text-[#001A45]">
+            <label htmlFor="company" className="block font-bold mb-[4px] font-inter text-[24px] text-[#001A45]">
               Company Name
             </label>
             <input
               type="text"
-              className="form-control w-full p-2 border rounded-lg"
+              className="block w-full px-3 py-2 border h-[44px] border-[#001A45] rounded-[12px] border-opacity-50 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 placeholder-opacity-30"
+                placeholder="Company"
               id="company"
               value={company}
               onChange={(e) => setCompany(e.target.value)}
@@ -214,36 +217,39 @@ const FileComplaintForm = () => {
           {showAddCompanyFields && (
             <>
               <div className="mb-3">
-                <label htmlFor="brandPhone" className="block font-semibold mb-1 font-inter text-[#001A45]">
+                <label htmlFor="brandPhone" className="block font-bold mb-[4px] font-inter text-[24px] text-[#001A45]">
                   Brand Phone
                 </label>
                 <input
                   type="text"
-                  className="form-control w-full p-2 border rounded-lg"
+                  className="block w-full px-3 py-2 border h-[44px] border-[#001A45] rounded-[12px] border-opacity-50 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 placeholder-opacity-30"
+                placeholder="Company"
                   id="brandPhone"
                   value={brandPhone}
                   onChange={(e) => setBrandPhone(e.target.value)}
                 />
               </div>
               <div className="mb-3">
-                <label htmlFor="brandEmail" className="block font-semibold mb-1 font-inter text-[#001A45]">
+                <label htmlFor="brandEmail" className="block font-bold mb-[4px] font-inter text-[24px] text-[#001A45]">
                   Brand Email
                 </label>
                 <input
                   type="email"
-                  className="form-control w-full p-2 border rounded-lg"
+                  className="block w-full px-3 py-2 border h-[44px] border-[#001A45] rounded-[12px] border-opacity-50 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 placeholder-opacity-30"
+                placeholder="company@example.com"
                   id="brandEmail"
                   value={brandEmail}
                   onChange={(e) => setBrandEmail(e.target.value)}
                 />
               </div>
               <div className="mb-3">
-                <label htmlFor="brandWebsite" className="block font-semibold mb-1 font-inter text-[#001A45]">
+                <label htmlFor="brandWebsite" className="block font-bold mb-[4px] font-inter text-[24px] text-[#001A45]">
                   Brand Website
                 </label>
                 <input
                   type="url"
-                  className="form-control w-full p-2 border rounded-lg font-inter text-[#001A45]"
+                  className="block w-full px-3 py-2 border h-[44px] border-[#001A45] rounded-[12px] border-opacity-50 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 font-inter text-[#001A45] placeholder-opacity-30"
+                placeholder="https://example.com"
                   id="brandWebsite"
                   value={brandWebsite}
                   onChange={(e) => setBrandWebsite(e.target.value)}
@@ -252,12 +258,13 @@ const FileComplaintForm = () => {
             </>
           )}
           <div className="mb-3">
-            <label htmlFor="title" className="block font-semibold mb-1 font-inter text-[#001A45]">
+            <label htmlFor="title" className="block font-bold mb-[4px] font-inter text-[24px] text-[#001A45]">
               Title
             </label>
             <input
               type="text"
-              className="form-control w-full p-2 border rounded-lg font-inter text-[#001A45]"
+              className="block w-full px-3 py-2 border h-[44px] border-[#001A45] rounded-[12px] border-opacity-50 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 font-inter text-[#001A45] placeholder-opacity-30"
+                placeholder="Title of Your complaint"
               id="title"
               value={title}
               onChange={(e) => setTitle(e.target.value)}
@@ -265,7 +272,7 @@ const FileComplaintForm = () => {
             />
           </div>
           <div className="mb-3">
-            <label htmlFor="description" className="block font-semibold mb-1 font-inter text-[#001A45]">
+            <label htmlFor="description" className="block font-bold mb-[4px] font-inter text-[24px] text-[#001A45]">
               Complaint Description
             </label>
             <p className="text-sm mb-2 font-inter text-[#001A45]">
@@ -278,7 +285,8 @@ const FileComplaintForm = () => {
               </button>
             </p>
             <textarea
-              className="form-control w-full p-2 border rounded-lg"
+              className="block w-full px-3 py-2 border border-[#001A45] rounded-[12px] border-opacity-50 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 placeholder-opacity-30"
+                placeholder="Describe your issue"
               id="description"
               value={description}
               onChange={(e) => setDescription(e.target.value)}
@@ -286,18 +294,19 @@ const FileComplaintForm = () => {
             ></textarea>
           </div>
           <div className="mb-3">
-            <label htmlFor="privateDetails" className="block font-semibold mb-1 font-inter text-[#001A45]">
+            <label htmlFor="privateDetails" className="block font-bold mb-[4px] font-inter text-[24px] text-[#001A45]">
               Private Details
             </label>
             <textarea
-              className="form-control w-full p-2 border rounded-lg font-inter text-[#001A45]"
+              className="block w-full px-3 py-2 border border-[#001A45] rounded-[12px] border-opacity-50 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 font-inter text-[#001A45] placeholder-opacity-30"
+                placeholder="Additional private details"
               id="privateDetails"
               value={privateDetails}
               onChange={(e) => setPrivateDetails(e.target.value)}
             />
           </div>
           <div className="mb-3">
-            <label htmlFor="photos" className="block font-semibold mb-1 font-inter text-[#001A45]">
+            <label htmlFor="photos" className="block font-bold mb-[4px] font-inter text-[24px] text-[#001A45]">
               Photos and Images
             </label>
             <p className="text-sm mb-2 font-inter text-[#001A45]">
@@ -305,7 +314,7 @@ const FileComplaintForm = () => {
             </p>
             <input
               type="file"
-              className="form-control w-full p-2 border rounded-lg font-inter text-[#001A45]"
+              className="block w-full px-3 py-2 border h-[44px] border-[#001A45] rounded-[12px] border-opacity-50 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 font-inter text-[#001A45]"
               id="photos"
               onChange={(e) => handleFileChange(e, setPhotos, setPhotoPreviews)}
               multiple
@@ -324,7 +333,7 @@ const FileComplaintForm = () => {
             )}
           </div>
           <div className="mb-3">
-            <label htmlFor="documents" className="block font-semibold mb-1 font-inter text-[#001A45]">
+            <label htmlFor="documents" className="block font-bold mb-[4px] font-inter text-[24px] text-[#001A45]">
               Documents
             </label>
             <p className="text-sm mb-2 font-inter text-[#001A45]">
@@ -332,7 +341,7 @@ const FileComplaintForm = () => {
             </p>
             <input
               type="file"
-              className="form-control w-full p-2 border rounded-lg font-inter text-[#001A45]"
+              className="block w-full px-3 py-2 border h-[44px] border-[#001A45] rounded-[12px] border-opacity-50 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 font-inter text-[#001A45]"
               id="documents"
               onChange={(e) => handleFileChange(e, setDocuments)}
               multiple
