@@ -114,7 +114,8 @@ const LoginComponent = () => {
               />
               <label className="form-check-label" htmlFor="persist">Trust This Device</label>
             </div>
-          <div>
+        </form>
+        <div>
             <label className="block mt-[20px] text-[24px] font-inter font-bold text-[#001A45]">Or log in via social media</label>
             <div className='flex gap-3 mt-[16px]'>
               <button className="w-[64px] h-[64px] bg-transparent">
@@ -133,7 +134,6 @@ const LoginComponent = () => {
               Don't have an account yet? Complete the registration process
             </button>
           </div>
-        </form>
       </div>
     </div>
   );

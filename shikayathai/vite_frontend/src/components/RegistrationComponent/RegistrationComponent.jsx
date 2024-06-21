@@ -108,7 +108,8 @@ const RegistrationComponent = () => {
           <button type="submit" className="w-full h-[55px] justify-center rounded-[12px] text-[18px] font-medium text-[#001A45] bg-[#C9FF57] hover:bg-[#B5F62B]">
             Create an account
           </button>
-          <div>
+        </form>
+        <div>
             <label className="block mt-[20px] text-[24px] font-inter font-bold text-[#001A45]">Or registration via social media</label>
             <div className='flex gap-3 mt-[16px]'>
               <button className="w-[64px] h-[64px] bg-transparent">
@@ -127,7 +128,6 @@ const RegistrationComponent = () => {
               Already have an account?  Log in to it
             </button>
           </div>
-        </form>
       </div>
     </div>
   );
