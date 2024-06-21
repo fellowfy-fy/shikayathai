@@ -2,6 +2,7 @@ import { useState } from "react";
 import { useModal } from "../../context/ModalContext";
 import LinkedInShareComponent from "../LinkedInShare/LinkedInShare";
 import close from "../../assets/close.svg";
+import copy from "../../assets/ico-copy.svg"
 
 const CopyShare = ({ link }) => {
   const [copied, setCopied] = useState(false);
@@ -20,7 +21,7 @@ const CopyShare = ({ link }) => {
 
   return (
     <div className="fixed inset-0 bg-gray-600 bg-opacity-50 flex justify-center items-center">
-      <div className="bg-white p-4 rounded-lg max-w-[800px] w-full relative">
+      <div className="bg-white p-4 rounded-[32px] max-w-[800px] w-full relative">
         <div className="w-[257px] h-4 flex justify-between items-center z-10 ">
           {/* Fully Opaque Part */}
           <div className="absolute top-[1.90rem] left-[25px] w-[173px] h-1 bg-[#0450CF] z-10"></div>
@@ -42,19 +43,20 @@ const CopyShare = ({ link }) => {
         >
           <img src={close} />
         </button>
-        <div className="text-sm md:text-base leading-relaxed p-4">
-          <p>Share the link with the environment</p>
-          <p>Share your complaint on social networks, the more people see it, the more chances there are for its speedy resolution</p>
+        <div className="text-sm md:text-base leading-relaxed mt-6">
+          <p className="font-bold text-2xl font-unbounded text-[#03132F]">Share the link with the environment</p>
+          <p className="mt-2 font-inter text-lg font-medium">Share your complaint on social networks, the more people see it, the more chances there are for its speedy resolution</p>
         </div>
+        <div className="w-full relative p-3 border rounded-[12px] border-[#001A45B2] border-opacity-70 mt-5">
         <input type="text" readOnly value={link} className="link-input" />
         <button
-          className="w-full py-2 mt-4 bg-[#B5F62B] text-[#001A45] rounded hover:bg-[#A9E922] active:bg-[#C9FF57] transition duration-150 ease-in-out"
+          className="absolute right-3"
           onClick={handleCopy}
         >
-          {copied ? "Copied!" : "Copy Link"}
-        </button>
+        <img src={copy} />
+        </button></div>
         <button
-          className="w-full py-2 mt-4 bg-[#B5F62B] text-[#001A45] rounded hover:bg-[#A9E922] active:bg-[#C9FF57] transition duration-150 ease-in-out"
+          className="lg:h-[56px] w-full py-4 mt-5 bg-white border border-[#001A45] text-[#001A45] rounded-xl transition duration-150 ease-in-out font-inter"
           onClick={handleSkip}
         >
           Skip
