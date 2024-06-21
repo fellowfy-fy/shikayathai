@@ -3,6 +3,7 @@ import api from "../api/axios";
 import FrameComponent from "../components/FrameComponent/FrameComponent";
 import useAuth from "../hooks/useAuth";
 import { Link } from "react-router-dom";
+import navigationArrow from "../assets/navigationArrow.svg";
 
 const UsersComplaints = () => {
   const {auth} = useAuth()
@@ -23,6 +24,11 @@ const UsersComplaints = () => {
 
   return (
     <div className="container mx-auto p-4">
+          <div className="flex flex-row gap-2 mb-10">
+      <a href="/" className="text-[#001A45] hover:underline">Home</a>
+        <img src={navigationArrow} />
+        <span className="font-bold">Profile</span>
+    </div>
       <div className="text-center mt-4">
         <img src={user.photoUrl} alt="User" className="w-24 h-24 rounded-full mx-auto"/>
         <h1 className="text-2xl font-bold mt-2">{user.name}</h1>

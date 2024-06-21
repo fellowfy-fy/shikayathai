@@ -18,6 +18,7 @@ import { useModal } from "../../context/ModalContext.jsx";
 import ResolvedRating from "./ResolvedRating.jsx";
 import useAuth from "../../hooks/useAuth.js";
 import "react-medium-image-zoom/dist/styles.css";
+import navigationArrow from "../../assets/navigationArrow.svg";
 
 
 const options = {
@@ -90,7 +91,15 @@ const ComplaintDetail = () => {
 
   return (
     <div>
+      
     <div className="p-6 bg-white rounded-lg mx-auto md:ml-[120px] md:mr-[120px]">
+                <div className="flex flex-row gap-2 mb-10">
+      <a href="/" className="text-[#001A45] hover:underline">Home</a>
+        <img src={navigationArrow} />
+        <a href="/profile" className="text-[#001A45] hover:underline">All complaints</a>
+        <img src={navigationArrow} />
+        <span className="font-bold">Complaint {id}</span>
+    </div>
       <SuccessBanner id={id} />
       <div className="flex items-center my-6 mb-6">
       

@@ -12,7 +12,7 @@ const ComplaintComponent = ({ complaint }) => {
   };
 
   return (
-    <div className="bg-[#001A450D] bg-opacity-5 rounded-2xl p-4 w-[22rem] my-2 h-[280px] relative">
+    <div className="bg-[#001A450D] bg-opacity-5 rounded-2xl p-4 w-[312px] my-2 h-[280px] relative">
       {/* Complaint Userpic, Username and Company*/}
       <div className="grid grid-cols-6 mb-3">
         <div className="flex flex-row mb-2 col-span-1">
