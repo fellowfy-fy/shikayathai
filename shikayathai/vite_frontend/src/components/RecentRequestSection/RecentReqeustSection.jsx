@@ -41,7 +41,7 @@ function RecentRequestSection() {
       <h2 className="text-[24px] sm:text-[32px] pr-[24px] sm:pr-[120px] font-bold text-[#001A45] font-unbounded mb-4">
         Recent Requests
       </h2>
-      <Link to="complaints" className="text-[#001A45] pr-[24px] md:pr-[120px] hover:underline">
+      <Link to="complaints" className="text-[#001A45] pr-[24px] sm:pr-[120px] hover:underline">
         Watch all 
       </Link>
       {requests.length > 0 ? (
