@@ -24,7 +24,7 @@ function Brands() {
     <div className="mx-[24px] sm:mx-[120px] mt-2 text-[#001A45]">
       {/* 1 line */}
       <div className="flex flex-row gap-2 mb-10">
-        <span>Home</span>
+      <a href="/" className="text-[#001A45] hover:underline">Home</a>
         <img src={navigationArrow} />
         <span className="font-bold">All brands</span>
       </div>
