@@ -2,7 +2,7 @@ import { useModal } from "../../context/ModalContext";
 import RegistrationComponent from "../RegistrationComponent/RegistrationComponent.jsx";
 import LoginComponent from "../LoginComponent/LoginComponent.jsx";
 import logo from "../../assets/logo.svg";
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import AuthContext from "../../context/AuthProvider";
 import { Link } from "react-router-dom";
 
@@ -17,24 +17,20 @@ const Header = () => {
   const handleLoginClick = () => {
     showModal(<LoginComponent />);
   };
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+
+  const toggleMobileMenu = () => {
+    setIsMobileMenuOpen(!isMobileMenuOpen);
+  };
 
   return (
-    <header className="bg-[#001A45] text-white h-12 w-full flex items-center justify-center">
+    <header className="bg-[rgb(0,26,69)] text-white lg:h-12 lg:w-full lg:flex lg:items-center lg:justify-center">
       <nav className="container mx-auto h-full flex items-center justify-between w-full">
         <Link className="flex items-center" to="/">
           <img src={logo} alt="Logo" className="w-6 mr-2" />
           <span className="font-unbounded font-bold text-xl">Shikayahai</span>
         </Link>
-        <button
-          className="block lg:hidden text-white focus:outline-none"
-          onClick={() => {
-            document.getElementById("navbarNav").classList.toggle("hidden");
-          }}
-        >
-          <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 6h16M4 12h16m-7 6h7"></path>
-          </svg>
-        </button>
+        
         <div className="hidden lg:flex lg:items-center lg:justify-center w-full" id="navbarNav">
           <ul className="flex justify-center items-center flex-grow">
             <li>
@@ -65,7 +61,48 @@ const Header = () => {
             </div>
           )}
         </div>
+        
+        <div className="lg:hidden flex items-center">
+          <button onClick={toggleMobileMenu} className="text-white focus:outline-none">
+            <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 6h16M4 12h16M4 18h16"></path>
+            </svg>
+          </button>
+        </div>
       </nav>
+
+      {isMobileMenuOpen && (
+        <div className="lg:hidden">
+          <ul className="flex flex-col items-center bg-[rgb(0,26,69)] text-white w-full">
+            <li>
+              <Link className="font-inter text-white hover:text-gray-400 py-2" to="/" onClick={toggleMobileMenu}>Home</Link>
+            </li>
+            <li>
+              <Link className="font-inter text-white hover:text-gray-400 py-2" to="/brands" onClick={toggleMobileMenu}>All brands</Link>
+            </li>
+            <li>
+              <Link className="font-inter text-white hover:text-gray-400 py-2" to="/complaints" onClick={toggleMobileMenu}>All Complaints</Link>
+            </li>
+            {!auth.name ? (
+              <div className="flex flex-col items-center py-2">
+                <button onClick={handleRegisterClick} className="bg-transparent hover:bg-transparent text-white font-inter py-2 px-4 rounded my-1">
+                  Register
+                </button>
+                <button onClick={handleLoginClick} className="bg-transparent hover:bg-transparent text-white font-inter py-2 px-4 rounded my-1">
+                  Login
+                </button>
+              </div>
+            ) : (
+              <div className="flex flex-col items-center py-2">
+                <Link className="bg-transparent text-white font-inter py-2 px-4 rounded my-1" to="/profile" onClick={toggleMobileMenu}>
+                  {auth.name}
+                </Link>
+                <img className="rounded-full w-8 h-8 my-1" src={auth.userpic} alt="User" />
+              </div>
+            )}
+          </ul>
+        </div>
+      )}
     </header>
   );
 };
