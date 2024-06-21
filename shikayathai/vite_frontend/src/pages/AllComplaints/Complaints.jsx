@@ -35,7 +35,7 @@ const Complaints = () => {
       </div>
 
       {/* Company Components  */}
-      <div className="flex flex-row gap-3 mb-8 flex-wrap">
+      <div className="flex flex-row gap-3 mb-8 flex-wrap justify-center">
         {complaints.map((complaint, index) => (
           <ComplaintComponent key={index} complaint={complaint} />
         ))}
