@@ -1,5 +1,5 @@
 import navigationArrow from "../../assets/navigationArrow.svg";
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import ComplaintComponent from "../AllComplaints/ComplaintComponent";
 import api from "../../api/axios";
@@ -32,19 +32,19 @@ const CompanyPage = () => {
       <div className="mx-[24px] sm:mx-[120px] mt-2 text-[#001A45]">
         {/* 1 line */}
         <div className="flex flex-row gap-2 mb-10">
-          <a href="/" className="text-[#001A45] hover:underline">
+          <Link to="/" className="text-[#001A45] hover:underline">
             Home
-          </a>
+          </Link>
           <img src={navigationArrow} />
-          <a href="/brands" className="text-[#001A45] hover:underline">
+          <Link to="/brands" className="text-[#001A45] hover:underline">
             All brands
-          </a>
+          </Link>
           <img src={navigationArrow} />
           <span className="font-bold">{company.name}</span>
         </div>
       </div>
       {/* Company detail */}
-      <div className="bg-[#E4EFFF] py-8 w-full px-[120px]">
+      <div className="bg-[#E4EFFF] py-8 w-full lg:px-[120px] px-[30px]">
         {/* Company Logo and Name*/}
         <div className="flex flex-row mb-2">
           <div className="w-[64px] h-[64px] rounded-full bg-purple-200 text-white text-[20px] font-inter font-bold flex items-center justify-center mr-2">
@@ -74,7 +74,7 @@ const CompanyPage = () => {
       </div>
 
       {/* Complaints  */}
-      <div className="lg:mx-[120px] mt-2 text-[#001A45] flex-wrap">
+      <div className="lg:mx-[120px] mt-2 text-[#001A45] mx-[30px]">
         <div className="flex flex-col">
           <h1 className="text-2xl font-bold">Complaints</h1>
           <div className="flex flex-row mt-[12px] gap-2">
