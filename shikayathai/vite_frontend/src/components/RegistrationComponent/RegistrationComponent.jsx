@@ -5,7 +5,7 @@ import facebookIcon from '../../assets/ico-fb.svg';
 import googleIcon from '../../assets/ico-g.svg'; 
 import linkedinIcon from '../../assets/ico-li.svg';
 import close from '../../assets/close.svg';
-import InfoComponent from "../pop-ups/InfoComponent";
+import LoginComponent from "../LoginComponent/LoginComponent.jsx";
 
 const RegistrationComponent = () => {
   const { hideModal } = useModal();
@@ -37,9 +37,9 @@ const RegistrationComponent = () => {
     }
   };
 
-  const handleInfoClick = () => {
+  const handleLoginClick = () => {
     setIsVisible(false);
-    showModal(<InfoComponent />);
+    showModal(<LoginComponent />);
   };
 
   return (
@@ -122,7 +122,7 @@ const RegistrationComponent = () => {
               </button>
             </div>
             <button
-              onClick={handleInfoClick}
+              onClick={handleLoginClick}
               className="mt-[20px] font-inter font-bold text-[18px] text-[#0450CF] hover:text-[#0450CF] hover:underline">
               Already have an account?  Log in to it
             </button>
