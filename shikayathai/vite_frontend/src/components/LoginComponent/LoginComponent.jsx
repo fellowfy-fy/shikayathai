@@ -72,7 +72,7 @@ const LoginComponent = () => {
               <label htmlFor="email" className="block text-[#001A45] text-[24px] font-inter font-bold">Email</label>
               <input
                 type="email"
-                className="mt-1 block w-full px-3 py-2 border h-[44px] border-[#001A45] rounded-[12px] border-opacity-50 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 placeholder-opacity-30"
+                className="mt-1 block w-full px-3 py-2 border h-[44px] border-[#001A45] rounded-[12px] border-opacity-50 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 hover:border-[#0450CF] placeholder-opacity-30"
                 placeholder="john@example.com"
                 id="email"
                 value={email}
@@ -85,7 +85,7 @@ const LoginComponent = () => {
               <label htmlFor="name" className="block text-[#001A45] text-[24px] font-inter font-bold">Password</label>
               <input
                 type="password"
-                className="mt-1 block w-full px-3 py-2 border h-[44px] border-[#001A45] rounded-[12px] border-opacity-50 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 placeholder-opacity-30"
+                className="mt-1 block w-full px-3 py-2 border h-[44px] border-[#001A45] rounded-[12px] border-opacity-50 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 hover:border-[#0450CF] placeholder-opacity-30"
                 placeholder="Enter Your password"
                 id="password"
                 value={password}
@@ -94,7 +94,7 @@ const LoginComponent = () => {
               />
             </div>
           </div>
-          <button type="submit" className="w-full h-[55px] justify-center rounded-[12px] text-[18px] font-medium text-[#001A45] bg-[#C9FF57] hover:bg-[#B5F62B]">
+          <button type="submit" className="w-full h-[55px] justify-center rounded-[12px] text-[18px] font-medium text-[#001A45] hover:bg-[#C9FF57] bg-[#B5F62B] active:bg-[#A9E922]">
             Login
           </button>
         </form>

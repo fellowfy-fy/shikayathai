@@ -30,7 +30,7 @@ const StatisticsSection = () => {
           <h3 className="text-3xl font-bold text-[#001A45] m-0 font-unbounded">8 000 000+</h3>
           <p className="text-xl font-inter font-bold text-[#001A45] items-left">resolved requests</p>
         </div>
-        <button onClick={handleFileComplaintClick} className="bg-white border border-[#001A45] text-[#001A45] py-2 px-4 font-semibold rounded-[12px] w-80 h-14 hover:bg-blue-100">File a complaint</button>
+        <button onClick={handleFileComplaintClick} className="bg-white border border-[#001A45] text-[#001A45] py-2 px-4 font-semibold rounded-[12px] w-80 h-14  hover:border-opacity-70 hover:text-opacity-70 active:border-opacity-70 active:text-opacity-70 active:bg-opacity-5">File a complaint</button>
       </div>
     </section>
   );

@@ -36,7 +36,7 @@ const ComplaintComponent = ({ complaint }) => {
 
       {/* Button More */}
       <div className="absolute left-4 bottom-4 text-[#0450CF]">
-        <button onClick={handleReadMoreClick}>
+        <button className="hover:underline" onClick={handleReadMoreClick}>
             More
         </button>
       </div>

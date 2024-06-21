@@ -122,7 +122,7 @@ function Profile() {
      <img src={photoPreview || auth.userpic} alt="Profile" className="rounded-full lg:w-24 lg:h-24 w-14 h-14  object-cover" />
      <input type="file" id="photo-upload" onChange={handlePhotoChange} className="ml-2 text-sm text-[#001A45] p-2 border border-[#001A45] rounded hidden" />
       <button 
-       className="border border-[#001A45] text-[#001A45] font-bold py-4 lg:px-24 px-12 rounded-[12px] ml-6"
+       className="border border-[#001A45] text-[#001A45] font-bold py-4 lg:px-24 px-12 rounded-[12px] ml-6 hover:border-opacity-70 hover:text-opacity-70 active:border-opacity-70 active:text-opacity-70 active:bg-opacity-5"
        onClick={() => document.getElementById('photo-upload').click()}>
        Choose a photo
      </button>
@@ -130,22 +130,22 @@ function Profile() {
       <div className="flex justify-between w-full lg:flex-nowrap flex-wrap">
         <div className="w-full mr-2">
         <label className="block font-bold text-[#001A45]">Name</label>
-        <input type="name" value={name} onChange={(e) => setName(e.target.value)}                 className="mt-1 block w-full px-3 py-2 border h-[44px] border-[#001A45] rounded-[12px] border-opacity-50 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 placeholder-opacity-30"
+        <input type="name" value={name} onChange={(e) => setName(e.target.value)}                 className="mt-1 block w-full px-3 py-2 border h-[44px] border-[#001A45] rounded-[12px] border-opacity-50 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 placeholder-opacity-30 hover:border-[#0450CF] hover:text-opacity-70 active:border-opacity-70 active:text-opacity-70 active:bg-opacity-5"
                 placeholder="John" />
         </div>
         <div className="w-full mr-2">
           <label className="block font-bold text-[#001A45]">Email</label>
-          <input type="email" value={email} onChange={(e) => setEmail(e.target.value)}                 className="mt-1 block w-full px-3 py-2 border h-[44px] border-[#001A45] rounded-[12px] border-opacity-50 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 placeholder-opacity-30"
+          <input type="email" value={email} onChange={(e) => setEmail(e.target.value)}                 className="mt-1 block w-full px-3 py-2 border h-[44px] border-[#001A45] rounded-[12px] border-opacity-50 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 placeholder-opacity-30 hover:border-[#0450CF] hover:text-opacity-70 active:border-opacity-70 active:text-opacity-70 active:bg-opacity-5"
                 placeholder="john@example.com" />
         </div>
         <div className="w-full mr-2">
           <label className="block font-bold text-[#001A45]">Password</label>
-          <input type="password" value={password} onChange={(e) => setPassword(e.target.value)}                 className="mt-1 block w-full px-3 py-2 border h-[44px] border-[#001A45] rounded-[12px] border-opacity-50 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 placeholder-opacity-30"
+          <input type="password" value={password} onChange={(e) => setPassword(e.target.value)}                 className="mt-1 block w-full px-3 py-2 border h-[44px] border-[#001A45] rounded-[12px] border-opacity-50 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 placeholder-opacity-30 hover:border-[#0450CF] hover:text-opacity-70 active:border-opacity-70 active:text-opacity-70 active:bg-opacity-5"
                 placeholder="Enter new password" />
         </div>
         <div className="w-full">
           <label className="block font-bold text-[#001A45]">Repeat Password</label>
-          <input type="password" value={repeatPassword} onChange={(e) => setRepeatPassword(e.target.value)}                 className="mt-1 block w-full px-3 py-2 border h-[44px] border-[#001A45] rounded-[12px] border-opacity-50 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 placeholder-opacity-30"
+          <input type="password" value={repeatPassword} onChange={(e) => setRepeatPassword(e.target.value)}                 className="mt-1 block w-full px-3 py-2 border h-[44px] border-[#001A45] rounded-[12px] border-opacity-50 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 placeholder-opacity-30 hover:border-[#0450CF] hover:text-opacity-70 active:border-opacity-70 active:text-opacity-70 active:bg-opacity-5"
                 placeholder="Repeat your new password" />
         </div>
       </div>

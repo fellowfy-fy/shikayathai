@@ -155,7 +155,7 @@ const FileComplaintForm = () => {
               </label>
               <input
                 type="name"
-                className="block w-full px-3 py-2 border h-[44px] border-[#001A45] rounded-[12px] border-opacity-50 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 placeholder-opacity-30"
+                className="block w-full px-3 py-2 border h-[44px] border-[#001A45] rounded-[12px] border-opacity-50 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 hover:border-[#0450CF] placeholder-opacity-30"
                 placeholder="John"
                 id="userName"
                 value={userName}
@@ -169,7 +169,7 @@ const FileComplaintForm = () => {
               </label>
               <input
                 type="email"
-                className="block w-full px-3 py-2 border h-[44px] border-[#001A45] rounded-[12px] border-opacity-50 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 placeholder-opacity-30"
+                className="block w-full px-3 py-2 border h-[44px] border-[#001A45] rounded-[12px] border-opacity-50 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 hover:border-[#0450CF] placeholder-opacity-30"
                 placeholder="john@example.com"
                 id="userEmail"
                 value={userEmail}
@@ -195,7 +195,7 @@ const FileComplaintForm = () => {
             </div>
             <input
               type="text"
-              className="block w-full px-3 py-2 border h-[44px] border-[#001A45] rounded-[12px] border-opacity-50 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 placeholder-opacity-30"
+              className="block w-full px-3 py-2 border h-[44px] border-[#001A45] rounded-[12px] border-opacity-50 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 hover:border-[#0450CF] placeholder-opacity-30"
                 placeholder="Company"
               id="company"
               value={company}
@@ -227,7 +227,7 @@ const FileComplaintForm = () => {
                 </label>
                 <input
                   type="text"
-                  className="block w-full px-3 py-2 border h-[44px] border-[#001A45] rounded-[12px] border-opacity-50 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 placeholder-opacity-30"
+                  className="block w-full px-3 py-2 border h-[44px] border-[#001A45] rounded-[12px] border-opacity-50 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 hover:border-[#0450CF] placeholder-opacity-30"
                 placeholder="Company"
                   id="brandPhone"
                   value={brandPhone}
@@ -240,7 +240,7 @@ const FileComplaintForm = () => {
                 </label>
                 <input
                   type="email"
-                  className="block w-full px-3 py-2 border h-[44px] border-[#001A45] rounded-[12px] border-opacity-50 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 placeholder-opacity-30"
+                  className="block w-full px-3 py-2 border h-[44px] border-[#001A45] rounded-[12px] border-opacity-50 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 hover:border-[#0450CF] placeholder-opacity-30"
                 placeholder="company@example.com"
                   id="brandEmail"
                   value={brandEmail}
@@ -253,7 +253,7 @@ const FileComplaintForm = () => {
                 </label>
                 <input
                   type="url"
-                  className="block w-full px-3 py-2 border h-[44px] border-[#001A45] rounded-[12px] border-opacity-50 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 font-inter text-[#001A45] placeholder-opacity-30"
+                  className="block w-full px-3 py-2 border h-[44px] border-[#001A45] rounded-[12px] border-opacity-50 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 hover:border-[#0450CF] font-inter text-[#001A45] placeholder-opacity-30"
                 placeholder="https://example.com"
                   id="brandWebsite"
                   value={brandWebsite}
@@ -268,7 +268,7 @@ const FileComplaintForm = () => {
             </label>
             <input
               type="text"
-              className="block w-full px-3 py-2 border h-[44px] border-[#001A45] rounded-[12px] border-opacity-50 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 font-inter text-[#001A45] placeholder-opacity-30"
+              className="block w-full px-3 py-2 border h-[44px] border-[#001A45] rounded-[12px] border-opacity-50 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 hover:border-[#0450CF] font-inter text-[#001A45] placeholder-opacity-30"
                 placeholder="Title of Your complaint"
               id="title"
               value={title}
@@ -290,7 +290,7 @@ const FileComplaintForm = () => {
               </button>
             </p>
             <textarea
-              className="block w-full px-3 py-2 border border-[#001A45] rounded-[12px] border-opacity-50 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 placeholder-opacity-30"
+              className="block w-full px-3 py-2 border border-[#001A45] rounded-[12px] border-opacity-50 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 hover:border-[#0450CF] placeholder-opacity-30"
                 placeholder="Describe your issue"
               id="description"
               value={description}
@@ -303,9 +303,9 @@ const FileComplaintForm = () => {
               Private Details
             </label>
             <p className="text-sm mb-2 font-inter text-[#001A45]">
-            any private details that will help Company to identify you case resolve your issue as soon as possible. E.g. phone number, email id etc.            </p>
+            any private details that will help Company to identify you case resolve your issue as soon as possible. E.g. phone number, email id etc.</p>
             <textarea
-              className="block w-full px-3 py-2 border border-[#001A45] rounded-[12px] border-opacity-50 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 font-inter text-[#001A45] placeholder-opacity-30"
+              className="block w-full px-3 py-2 border border-[#001A45] rounded-[12px] border-opacity-50 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 hover:border-[#0450CF] font-inter text-[#001A45] placeholder-opacity-30"
                 placeholder="Additional private details"
               id="privateDetails"
               value={privateDetails}
@@ -321,7 +321,7 @@ const FileComplaintForm = () => {
             </p>
             <input
               type="file"
-              className="block w-full px-3 py-2 border h-[44px] border-[#001A45] rounded-[12px] border-opacity-50 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 font-inter text-[#001A45]"
+              className="block w-full px-3 py-2 border h-[44px] border-[#001A45] rounded-[12px] border-opacity-50 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 hover:border-[#0450CF] font-inter text-[#001A45]"
               id="photos"
               onChange={(e) => handleFileChange(e, setPhotos, setPhotoPreviews)}
               multiple
@@ -348,7 +348,7 @@ const FileComplaintForm = () => {
             </p>
             <input
               type="file"
-              className="block w-full px-3 py-2 border h-[44px] border-[#001A45] rounded-[12px] border-opacity-50 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 font-inter text-[#001A45]"
+              className="block w-full px-3 py-2 border h-[44px] border-[#001A45] rounded-[12px] border-opacity-50 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 hover:border-[#0450CF] font-inter text-[#001A45]"
               id="documents"
               onChange={(e) => handleFileChange(e, setDocuments)}
               multiple

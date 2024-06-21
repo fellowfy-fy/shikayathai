@@ -30,7 +30,7 @@ const Complaints = () => {
       </div>
 
       {/* Title */}
-      <div className="text-3xl font-bold font-unbounded mb-6">
+      <div className="text-3xl font-bold font-unbounded mb-6 text-[#001A45]">
         All complaints
       </div>
 

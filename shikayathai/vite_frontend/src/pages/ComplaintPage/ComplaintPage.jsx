@@ -9,10 +9,10 @@ import share from "../../assets/share.svg";
 import support from "../../assets/support.svg";
 import resolved from "../../assets/resolved.svg";
 import arrow from "../../assets/arrow.svg";
-import document from "../../assets/document.svg";
-import timestamparrow from "../../assets/timestamparrow.svg";
-import smile from "../../assets/smile.svg";
-import star from "../../assets/star.svg";
+import document from "../../assets/document.svg"
+import timestamparrow from "../../assets/timestamparrow.svg"
+import smile from "../../assets/smile.svg"
+import star from "../../assets/star.svg"
 import Zoom from "react-medium-image-zoom";
 import { useModal } from "../../context/ModalContext.jsx";
 import ResolvedRating from "./ResolvedRating.jsx";
@@ -34,8 +34,8 @@ const ComplaintDetail = () => {
   const { id } = useParams();
   const [complaint, setComplaint] = useState(null);
   const { showModal } = useModal();
+  
   const scrollContainerRef = useRef(null);
-  const [isMobile, setIsMobile] = useState(window.innerWidth <= 640);
 
   const scrollLeft = () => {
     scrollContainerRef.current.scrollBy({ left: -154, behavior: "smooth" });
@@ -44,10 +44,10 @@ const ComplaintDetail = () => {
   const scrollRight = () => {
     scrollContainerRef.current.scrollBy({ left: 154, behavior: "smooth" });
   };
-
+  
   const handleResolved = () => {
-    showModal(<ResolvedRating id={complaint.id} />);
-  };
+    showModal(<ResolvedRating id={complaint.id} />)
+  }
 
   const renderStars = () => {
     const rating = complaint.resolution_rating;
@@ -60,16 +60,7 @@ const ComplaintDetail = () => {
         }`}
       />
     ));
-  };
-
-  useEffect(() => {
-    const handleResize = () => {
-      setIsMobile(window.innerWidth <= 640);
-    };
-
-    window.addEventListener("resize", handleResize);
-    return () => window.removeEventListener("resize", handleResize);
-  }, []);
+  }
 
   useEffect(() => {
     api
@@ -101,7 +92,7 @@ const ComplaintDetail = () => {
         <div className="flex flex-row gap-2 mb-10">
           <a href="/" className="text-[#001A45] hover:underline">Home</a>
           <img src={navigationArrow} />
-          <a href="/complaints" className="text-[#001A45] hover:underline">All complaints</a>
+          <a href="/profile" className="text-[#001A45] hover:underline">All complaints</a>
           <img src={navigationArrow} />
           <span className="font-bold">Complaint {id}</span>
         </div>
@@ -131,8 +122,8 @@ const ComplaintDetail = () => {
         <h1 className="text-5xl font-bold text-[#001A45] pl-3 whitespace-pre-wrap break-all mb-6">
           {complaint.title}
         </h1>
-        <div className="flex gap-6 items-start flex-wrap ">
-          {!isMobile && mainImage ? (
+        <div className="flex gap-6 items-start">
+          {mainImage ? (
             <div className="flex flex-col items-start mt-5">
               <Zoom>
                 <img
@@ -141,58 +132,51 @@ const ComplaintDetail = () => {
                   className="w-[640px] h-[640px] object-cover rounded-[32px]"
                 />
               </Zoom>
-            </div>
-          ) : null}
-          <div className="relative">
-            <button
-              onClick={scrollLeft}
-              className="absolute left-5 top-1/2 transform -translate-y-1/2 bg-white text-gray-600 p-2 rounded-[16px] shadow-md z-10 rotate-180 w-[40px] h-[40px]"
-            >
-              <img src={arrow} />
-            </button>
-            <div className="flex overflow-x-auto space-x-4 lg:w-[640px] w-[312px] mt-[24px]" ref={scrollContainerRef} style={{ scrollBehavior: "smooth" }}>
-              {thumbnails.map((photo, index) => (
-                <span key={index}>
-                  <Zoom>
-                    <span className="flex w-[154px] h-[154px]">
-                      <img
-                        src={photo.image || imagePlaceholder}
-                        alt={`Thumbnail ${index}`}
-                        className="w-[154px] h-[154px] object-cover rounded-[32px] shrink-0"
-                      />
+              
+              <div className="relative">
+                <button
+                  onClick={scrollLeft}
+                  className="absolute left-5 top-1/2 transform -translate-y-1/2 bg-white text-gray-600 p-2 rounded-[16px] shadow-md z-10 rotate-180 w-[40px] h-[40px]"
+                >
+                  <img src={arrow} />
+                </button>
+                <div className="flex overflow-x-auto space-x-4 w-[640px] mt-[24px]" ref={scrollContainerRef} style={{ scrollBehavior: "smooth" }}>
+                  {thumbnails.map((photo, index) => (
+                    <span key={index}>
+                      <Zoom>
+                        <span className="flex w-[312px] h-[312px] sm:w-[154px] sm:h-[154px]">
+                          <img
+                            src={photo.image || imagePlaceholder}
+                            alt={`Thumbnail ${index}`}
+                            className="w-[312px] h-[312px] sm:w-[154px] sm:h-[154px] object-cover rounded-[32px] shrink-0"
+                          />
+                        </span>
+                      </Zoom>
                     </span>
-                  </Zoom>
-                </span>
-              ))}
-              {isMobile && mainImage ? (
-                <span>
-                  <Zoom>
-                    <span className="flex w-[154px] h-[154px]">
-                      <img
-                        src={mainImage}
-                        alt="Main Thumbnail"
-                        className="w-[154px] h-[154px] object-cover rounded-[32px] shrink-0"
-                      />
-                    </span>
-                  </Zoom>
-                </span>
-              ) : null}
+                  ))}
+                </div>
+                
+                <button
+                  onClick={scrollRight}
+                  className="absolute right-5 top-1/2 transform -translate-y-1/2 bg-white text-gray-600 p-2 rounded-[16px] shadow-md w-[40px] h-[40px]"
+                >
+                  <img src={arrow} />
+                </button>
+              </div>
             </div>
-            <button
-              onClick={scrollRight}
-              className="absolute right-5 top-1/2 transform -translate-y-1/2 bg-white text-gray-600 p-2 rounded-[16px] shadow-md w-[40px] h-[40px]"
-            >
-              <img src={arrow} />
-            </button>
-          </div>
+          ) : (
+            <span></span>
+          )}
           <div className="flex-1">
             {complaint.resolution_rating ? (
               <div className="bg-[#EAFFEA] rounded-2xl p-2">
-                <div><img src={smile} /></div>
-                <div className="flex flex-row gap-2">{renderStars()}</div>
-                <div>{complaint.resolution_comment}</div>
+                <div className="px-2"><img src={smile} /></div>
+                <div className="flex flex-row gap-2 p-2">{renderStars()}</div>
+                <div className="px-2">{complaint.resolution_comment}</div>
               </div>
-            ) : null}
+            ) : (
+              <></>
+            )}
             <p className="mb-4 mt-4 text-gray-800 whitespace-pre-wrap break-all md:max-w-[640px]">
               {complaint.description}
             </p>
@@ -200,7 +184,7 @@ const ComplaintDetail = () => {
               {complaint.documents &&
                 complaint.documents.map((doc, index) => (
                   <div key={index} className="mt-4 flex flex-row rounded-xl border border-[#001A45] border-opacity-30 w-fit p-2">
-                    <img src={document} className="mr-2" />
+                    <img src={document} className="mr-2"/>
                     <a href={doc.file} target="_blank" rel="noopener noreferrer">
                       {decodeURIComponent(doc.file.split("/").pop())}
                     </a>
@@ -208,7 +192,7 @@ const ComplaintDetail = () => {
                 ))}
             </div>
             <p className="text-sm text-gray-600 mt-4 mb-4">
-              <img src={timestamparrow} className="inline pr-1" />
+              <img src={timestamparrow} className="inline pr-1"/>
               Posted on {new Date(complaint.created_at).toLocaleDateString('en-us', options)}
             </p>
             <div className="grid grid-cols-3 gap-4">
@@ -223,7 +207,9 @@ const ComplaintDetail = () => {
                   <img src={resolved} alt="Mark as resolved" className="w-4 h-4" />{" "}
                   Mark as resolved
                 </button>
-              ) : null}
+              ) : (
+                <></>
+              )}
             </div>
           </div>
         </div>

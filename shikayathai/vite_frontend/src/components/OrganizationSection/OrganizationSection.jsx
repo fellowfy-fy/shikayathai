@@ -40,7 +40,7 @@ const OrganizationSection = () => {
         <p className="text-base text-[#001A45] font-bold mx-auto w-full max-w-md text-center">
           Join us and forge stronger relationships with your customers — start by creating your organization’s page now!
         </p>
-        <button onClick={handleCreateClick} className="bg-[#001A45] text-white text-[18px] py-2 px-4 rounded-[12px] mt-4 hover:bg-[#002244] w-[312px] h-[56px] ">
+        <button onClick={handleCreateClick} className="bg-[#001A45] text-white text-[18px] py-2 px-4 rounded-[12px] mt-4 hover:bg-opacity-70 active:bg-black w-[312px] h-[56px] ">
           Create
         </button>
       </div>

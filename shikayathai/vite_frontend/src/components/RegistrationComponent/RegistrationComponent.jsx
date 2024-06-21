@@ -57,7 +57,7 @@ const RegistrationComponent = () => {
                 type="name"
                 name="name"
                 id="name"
-                className="mt-1 block w-full px-3 py-2 border h-[44px] border-[#001A45] rounded-[12px] border-opacity-50 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 placeholder-opacity-30"
+                className="mt-1 block w-full px-3 py-2 border h-[44px] border-[#001A45] rounded-[12px] border-opacity-50 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 hover:border-[#0450CF] placeholder-opacity-30"
                 placeholder="John"
                 value={userData.name}
                 onChange={handleChange}
@@ -70,7 +70,7 @@ const RegistrationComponent = () => {
                 type="email"
                 name="email"
                 id="email"
-                className="mt-1 block w-full px-3 py-2 border h-[44px] border-[#001A45] rounded-[12px] border-opacity-50 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 placeholder-opacity-30"
+                className="mt-1 block w-full px-3 py-2 border h-[44px] border-[#001A45] rounded-[12px] border-opacity-50 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 hover:border-[#0450CF] placeholder-opacity-30"
                 placeholder="john@example.com"
                 value={userData.email}
                 onChange={handleChange}
@@ -85,7 +85,7 @@ const RegistrationComponent = () => {
                 type="password"
                 name="password"
                 id="password"
-                className="mt-1 block w-full px-3 py-2 border h-[44px] border-[#001A45] rounded-[12px] border-opacity-50 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 placeholder-opacity-30"
+                className="mt-1 block w-full px-3 py-2 border h-[44px] border-[#001A45] rounded-[12px] border-opacity-50 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 hover:border-[#0450CF] placeholder-opacity-30"
                 placeholder="Enter Your password"
                 value={userData.password}
                 onChange={handleChange}
@@ -98,7 +98,7 @@ const RegistrationComponent = () => {
                 type="password"
                 name="repassword"
                 id="repassword"
-                className="mt-1 block w-full px-3 py-2 border h-[44px] border-[#001A45] rounded-[12px] border-opacity-50 placeholder-opacity-30"
+                className="mt-1 block w-full px-3 py-2 border h-[44px] border-[#001A45] rounded-[12px] border-opacity-50 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 hover:border-[#0450CF] placeholder-opacity-30"
                 placeholder="Repeat the password"
                 value={userData.repassword}
                 onChange={handleChange}
@@ -106,7 +106,7 @@ const RegistrationComponent = () => {
               />
             </div>
           </div>
-          <button type="submit" className="w-full h-[55px] justify-center rounded-[12px] text-[18px] font-medium text-[#001A45] bg-[#C9FF57] hover:bg-[#B5F62B]">
+          <button type="submit" className="w-full h-[55px] justify-center rounded-[12px] text-[18px] font-medium hover:bg-[#C9FF57] text-[#001A45] bg-[#B5F62B] active:bg-[#A9E922]">
             Create an account
           </button>
         </form>

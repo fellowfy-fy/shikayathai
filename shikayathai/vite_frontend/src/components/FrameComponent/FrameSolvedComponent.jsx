@@ -45,7 +45,7 @@ const FrameSolvedComponent = ({ data }) => {
       </div>
       {data.description && (
         <button
-          className="absolute bottom-4 left-1/2 transform -translate-x-1/2 bg-white text-black font-Inter py-2 px-6 rounded-full"
+          className="absolute bottom-4 left-1/2 transform -translate-x-1/2 bg-white text-black font-Inter py-2 px-6 rounded-full hover:border border-[#001A45] active:border-opacity-50"
           onClick={handleReadMoreClick}
         >
           read more
