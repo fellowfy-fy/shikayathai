@@ -1,8 +1,8 @@
 import { useNavigate } from "react-router-dom";
 
 const ComplaintComponent = ({ complaint }) => {
-    const navigate = useNavigate();
-    
+  const navigate = useNavigate();
+
   const handleReadMoreClick = () => {
     if (complaint?.id) {
       navigate(`/complaints/${complaint.id}`);
@@ -24,20 +24,23 @@ const ComplaintComponent = ({ complaint }) => {
         <div className="col-span-5">
           <div className="truncate">{complaint.author_name}</div>
           <div className="flex flex-row">
-          <div className="w-6 h-6 rounded-full bg-purple-200 text-white text-xl font-bold flex items-center justify-center mr-2 shrink-0">{complaint.company_name.charAt(0)}</div>
-          <div>{complaint.company_name}</div></div>
+            <div className="w-6 h-6 rounded-full bg-purple-200 text-white text-xl font-bold flex items-center justify-center mr-2 shrink-0">
+              {complaint.company_name.charAt(0)}
+            </div>
+            <div>{complaint.company_name}</div>
+          </div>
         </div>
       </div>
 
       {/* Description */}
       <div className="break-words mb-3">
-      {complaint.description.substring(0, 160)}...
+        {complaint.description.substring(0, 160)}...
       </div>
 
       {/* Button More */}
       <div className="absolute left-4 bottom-4 text-[#0450CF]">
         <button className="hover:underline" onClick={handleReadMoreClick}>
-            More
+          More
         </button>
       </div>
     </div>

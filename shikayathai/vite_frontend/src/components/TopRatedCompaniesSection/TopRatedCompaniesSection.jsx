@@ -39,9 +39,9 @@ const TopRatedCompaniesSection = () => {
           </li>
         </ul>
       </nav>
-      <div className="flex flex-wrap justify-center gap-4">
+      <div className="flex flex-wrap justify-center gap-[8px]">
         {companies.map((company, index) => (
-            <CompanyComponent key={index} company={company} />
+          <CompanyComponent key={index} company={company} />
         ))}
       </div>
     </section>

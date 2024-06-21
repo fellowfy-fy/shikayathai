@@ -13,8 +13,8 @@ const ResolvedRating = (id) => {
   };
 
   const handleNext = () => {
-    showModal(<ResolvedMessage rating={rating} id={id}/>)
-  }
+    showModal(<ResolvedMessage rating={rating} id={id} />);
+  };
 
   const renderStars = () => {
     return [20, 40, 60, 80, 100].map((starValue) => (
@@ -50,7 +50,10 @@ const ResolvedRating = (id) => {
 
         {/* Button */}
         <div>
-          <button className="w-full hover:bg-[#B5F62B] text-[#001A45] bg-[#A9E922] active:bg-[#C9FF57] font-semibold py-2 px-4 rounded-xl" onClick={handleNext}>
+          <button
+            className="w-full hover:bg-[#B5F62B] text-[#001A45] bg-[#A9E922] active:bg-[#C9FF57] font-semibold py-2 px-4 rounded-xl"
+            onClick={handleNext}
+          >
             Next
           </button>
         </div>

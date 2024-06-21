@@ -25,7 +25,9 @@ const Complaints = () => {
     <div className="mx-[24px] md:mx-[120px] mt-2 text-[#1c1e22]">
       {/* 1 line */}
       <div className="flex flex-row gap-2 mb-10">
-      <Link to="/" className="text-[#001A45] hover:underline">Home</Link>
+        <Link to="/" className="text-[#001A45] hover:underline">
+          Home
+        </Link>
         <img src={navigationArrow} />
         <span className="font-bold">All complaints</span>
       </div>

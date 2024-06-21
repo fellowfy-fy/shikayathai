@@ -1,7 +1,7 @@
 import { useModal } from "../../context/ModalContext";
 import CopyShare from "../CopyShare/CopyShare";
 import close from "../../assets/close.svg";
-import facebook from "../../assets/facebookLogo.svg"
+import facebook from "../../assets/facebookLogo.svg";
 
 const FacebookShareComponent = ({ link, linkid }) => {
   const { hideModal, showModal } = useModal();
@@ -12,7 +12,7 @@ const FacebookShareComponent = ({ link, linkid }) => {
   };
 
   const handleSkip = () => {
-    showModal(<CopyShare link={link} linkid={linkid}/>);
+    showModal(<CopyShare link={link} linkid={linkid} />);
   };
 
   return (
@@ -41,15 +41,18 @@ const FacebookShareComponent = ({ link, linkid }) => {
         </button>
         <div className="text-sm md:text-base leading-relaxed p-4 mt-5 text-[#03132F]">
           <p className="font-unbounded font-bold text-2xl">
-          Share your complaint with others in Facebook
+            Share your complaint with others in Facebook
           </p>
-          <p>Share your complaint on social networks, the more people see it, the more chances there are for its speedy resolution</p>
+          <p>
+            Share your complaint on social networks, the more people see it, the
+            more chances there are for its speedy resolution
+          </p>
         </div>
         <button
           className="lg:h-[56px]  w-full py-2 mt-4 bg-[#001A45] text-white rounded-xl transition duration-150 ease-in-out flex flex-row justify-center items-center gap-2 font-inter text-lg hover:bg-opacity-70 active:bg-black"
           onClick={shareOnFacebook}
         >
-        <img src={facebook} />
+          <img src={facebook} />
           Share
         </button>
         <button
