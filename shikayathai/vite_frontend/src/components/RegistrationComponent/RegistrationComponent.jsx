@@ -40,9 +40,9 @@ const RegistrationComponent = () => {
   };
 
   return (
-    <div className="fixed inset-0 bg-gray-500 bg-opacity-75 flex justify-center items-center">
-      <div className="bg-white px-[24px] w-[800px] h-[610px] rounded-[32px] shadow-xl">
-        <div className="modal-header flex justify-between items-center pb-3">
+    <div className="fixed inset-0 bg-gray-500 bg-opacity-75 flex justify-center items-center z-20">
+      <div className="bg-white px-[24px] lg:w-[800px] lg:h-[610px] lg:rounded-[32px] lg:shadow-xl h-auto overflow-hidden">
+        <div className="modal-header flex justify-between items-center pb-3 overflow-auto">
           <h5 className="modal-title mt-[76px] text-[#001A45] text-[32px] font-inter font-bold">Create an account</h5>
           {error && <p className="text-red-500 text-sm">{error}</p>}
           <button onClick={hideModal} className="text-lg font-semibold"><img src={close}></img></button>
@@ -50,8 +50,8 @@ const RegistrationComponent = () => {
         <p className="text-[16px] text-[#001A45] font-inter font-medium">
         To create complaints and track their status</p>
         <form onSubmit={handleSubmit} className="space-y-4">
-        <div className="flex gap-4">
-            <div className="w-1/2">
+        <div className="flex gap-4 flex-col lg:flex-row">
+            <div className="lg:w-1/2">
               <label htmlFor="name" className="block text-[#001A45] text-[24px] font-inter font-bold">Name</label>
               <input
                 type="name"
@@ -64,7 +64,7 @@ const RegistrationComponent = () => {
                 required
               />
             </div>
-            <div className="w-1/2">
+            <div className="lg:w-1/2">
               <label htmlFor="email" className="block text-[#001A45] text-[24px] font-inter font-bold">Email</label>
               <input
                 type="email"
@@ -78,8 +78,8 @@ const RegistrationComponent = () => {
               />
             </div>
           </div>
-          <div className="flex gap-4">
-            <div className="w-1/2">
+          <div className="flex gap-4 flex-col lg:flex-row">
+            <div className="lg:w-1/2">
               <label htmlFor="password" className="block text-[#001A45] text-[24px] font-inter font-bold">Password</label>
               <input
                 type="password"
@@ -92,13 +92,13 @@ const RegistrationComponent = () => {
                 required
               />
             </div>
-            <div className="w-1/2">
+            <div className="lg:w-1/2">
               <label htmlFor="repassword" className="block text-[#001A45] text-[24px] font-inter font-bold">Repeat Password</label>
               <input
                 type="password"
                 name="repassword"
                 id="repassword"
-                className="mt-1 block w-full px-3 py-2 border h-[44px] border-[#001A45] rounded-[12px] border-opacity-50 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 placeholder-opacity-30"
+                className="mt-1 block w-full px-3 py-2 border h-[44px] border-[#001A45] rounded-[12px] border-opacity-50 placeholder-opacity-30"
                 placeholder="Repeat the password"
                 value={userData.repassword}
                 onChange={handleChange}

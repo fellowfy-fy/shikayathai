@@ -182,11 +182,11 @@ const FileComplaintForm = () => {
           )}
           
           <div className="mb-3">
-            <div className="flex gap-4 mb-3">
+            <div className="flex gap-4 mb-3 relative">
               <label htmlFor="company" className="font-bold mb-[4px] font-inter text-[24px] text-[#001A45]">
                  Company Name
                 <p
-                  className="cursor-pointer font-inter font-light text-[16px] text-blue-600 hover:underline"
+                  className="cursor-pointer font-inter font-light text-[16px] text-blue-600 hover:underline lg:absolute lg:right-0 lg:bottom-1"
                   onClick={() => setShowAddCompanyFields(true)}
                 >
                   Can't find your company? Add new
