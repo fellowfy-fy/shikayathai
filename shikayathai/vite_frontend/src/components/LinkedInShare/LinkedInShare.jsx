@@ -1,9 +1,11 @@
 import { useModal } from "../../context/ModalContext";
 import linkedin from "../../assets/linkedinLogo.svg"
 import close from "../../assets/close.svg"
+import { useNavigate } from "react-router-dom";
 
-const LinkedInShareComponent = ({ link }) => {
+const LinkedInShareComponent = ({ link, linkid }) => {
   const { hideModal } = useModal();
+  const navigate = useNavigate()
 
   const shareOnLinkedIn = () => {
     const url = `https://www.linkedin.com/shareArticle?mini=true&url=${encodeURIComponent(link)}`;
@@ -12,6 +14,7 @@ const LinkedInShareComponent = ({ link }) => {
 
   const handleSkip = () => {
     hideModal();
+    navigate(`/complaints/${linkid}`)
   };
 
   return (

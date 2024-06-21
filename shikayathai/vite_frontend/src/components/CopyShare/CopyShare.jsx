@@ -4,7 +4,7 @@ import LinkedInShareComponent from "../LinkedInShare/LinkedInShare";
 import close from "../../assets/close.svg";
 import copy from "../../assets/ico-copy.svg"
 
-const CopyShare = ({ link }) => {
+const CopyShare = ({ link, linkid }) => {
   const [copied, setCopied] = useState(false);
   const { hideModal, showModal } = useModal();
 
@@ -16,7 +16,7 @@ const CopyShare = ({ link }) => {
   };
 
   const handleSkip = () => {
-    showModal(<LinkedInShareComponent link={link} />);
+    showModal(<LinkedInShareComponent link={link} linkid={linkid} />);
   };
 
   return (

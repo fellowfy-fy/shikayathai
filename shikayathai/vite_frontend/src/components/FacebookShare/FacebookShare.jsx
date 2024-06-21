@@ -3,7 +3,7 @@ import CopyShare from "../CopyShare/CopyShare";
 import close from "../../assets/close.svg";
 import facebook from "../../assets/facebookLogo.svg"
 
-const FacebookShareComponent = ({ link }) => {
+const FacebookShareComponent = ({ link, linkid }) => {
   const { hideModal, showModal } = useModal();
 
   const shareOnFacebook = () => {
@@ -12,7 +12,7 @@ const FacebookShareComponent = ({ link }) => {
   };
 
   const handleSkip = () => {
-    showModal(<CopyShare link={link} />);
+    showModal(<CopyShare link={link} linkid={linkid}/>);
   };
 
   return (

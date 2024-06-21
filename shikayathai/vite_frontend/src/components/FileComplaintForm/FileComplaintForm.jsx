@@ -95,12 +95,13 @@ const FileComplaintForm = () => {
           Authorization: `Bearer ${auth?.access}`,
         },
       });
-      const complaintLink = `http://localhost/complaints/${response.data.id}`;
+      const linkid = response.data.id
+      const complaintLink = `http://localhost/complaints/${linkid}`;
       setIsVisible(false);
       if (!auth.email) {
         setAuth({});
       }
-      showModal(<FacebookShareComponent link={complaintLink} />);
+      showModal(<FacebookShareComponent link={complaintLink} linkid={linkid}/>);
     } catch (error) {
       setError(error.response?.data?.message || "An error occurred");
     }
