@@ -43,12 +43,12 @@ function RecentReactionsSection() {
         <div className="relative">
           <button
             onClick={() => scroll('left')}
-            className="absolute left-5 top-1/2 transform -translate-y-1/2 bg-white p-2 rotate-180 rounded-[16px] w-[40px] h-[40px] z-10"
+            className="absolute left-5 top-1/2 transform -translate-y-1/2 bg-white p-2 rotate-180 rounded-[16px] w-[40px] h-[40px] z-10 hidden lg:block"
           >
             <img src={arrow} alt="Scroll Left" />
           </button>
           <div className="overflow-x-auto scrollbar-hide" ref={scrollContainerRef}>
-            <div className="flex space-x-8">
+            <div className="flex space-x-2 sm:space-x-8">
               {requests.map((request, index) => (
                 <FrameSolvedComponent key={index} data={request} className="min-w-[16rem]" />
               ))}
@@ -56,7 +56,7 @@ function RecentReactionsSection() {
           </div>
           <button
             onClick={() => scroll('right')}
-            className="absolute right-[24px] sm:right-[120px] top-1/2 transform -translate-y-1/2 bg-white p-2 rounded-[16px] w-[40px] h-[40px]"
+            className="absolute right-[24px] sm:right-[120px] top-1/2 transform -translate-y-1/2 bg-white p-2 rounded-[16px] w-[40px] h-[40px] hidden lg:block"
           >
             <img src={arrow} alt="Scroll Right" />
           </button>
