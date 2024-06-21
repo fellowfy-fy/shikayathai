@@ -74,7 +74,7 @@ const CompanyPage = () => {
       </div>
 
       {/* Complaints  */}
-      <div className="mx-[120px] mt-2 text-[#001A45]">
+      <div className="lg:mx-[120px] mt-2 text-[#001A45] flex-wrap">
         <div className="flex flex-col">
           <h1 className="text-2xl font-bold">Complaints</h1>
           <div className="flex flex-row mt-[12px] gap-2">
@@ -89,7 +89,7 @@ const CompanyPage = () => {
         </div>
 
         {/* Complaints Components */}
-        <div className="flex flex-row gap-4 mt-8">
+        <div className="flex flex-row gap-4 mt-8 flex-wrap">
           {company.complaints.map((complaint, index) => (
             <ComplaintComponent key={index} complaint={complaint} />
           ))}
