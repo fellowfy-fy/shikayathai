@@ -7,6 +7,7 @@ import FacebookShareComponent from "../FacebookShare/FacebookShare";
 import debounce from "lodash/debounce";
 import "../../styles/global.css";
 import "./FileComplaintForm.css"
+import close from "../../assets/close.svg";
 
 const FileComplaintForm = () => {
   const { showModal, hideModal } = useModal();
@@ -136,7 +137,7 @@ const FileComplaintForm = () => {
           onClick={hideModal}
           aria-label="Close"
         >
-          <span>&times;</span>
+          <span> <img src={close} /></span>
         </button>
       </div>
       {error && (
