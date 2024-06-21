@@ -14,7 +14,7 @@ const PersistLogin = () => {
         const verifyRefreshToken = async () => {
             try {
                 const access = await refresh();
-                const response = await api.get('/api/profile', { headers: { Authorization: `Bearer ${access}` } });
+                const response = await api.get('/profile', { headers: { Authorization: `Bearer ${access}` } });
                 const name = response.data.name
                 const email = response.data.email
                 const userpic = response.data.userpic

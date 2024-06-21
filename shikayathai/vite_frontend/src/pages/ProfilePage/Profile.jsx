@@ -23,7 +23,7 @@ function Profile() {
       navigate("/");
     }
     api
-      .get("/api/profile", {
+      .get("/profile", {
         headers: { Authorization: `Bearer ${auth.access}` },
       })
       .then((response) => {
@@ -45,7 +45,7 @@ function Profile() {
     if (!confirmation) return;
     try {
       console.log(auth.access)
-      const response = await api.delete("/api/delete/",  {
+      const response = await api.delete("/delete/",  {
         headers: {
           Authorization: `Bearer ${auth.access}`,
         },
@@ -81,7 +81,7 @@ function Profile() {
     }
 
     api
-      .put("/api/profile/", updatedProfile, {
+      .put("/profile/", updatedProfile, {
         headers: {
           "Content-Type": "multipart/form-data",
           Authorization: `Bearer ${auth.access}`,

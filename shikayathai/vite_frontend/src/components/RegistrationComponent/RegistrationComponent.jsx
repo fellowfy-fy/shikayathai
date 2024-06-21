@@ -8,7 +8,7 @@ import close from '../../assets/close.svg';
 import LoginComponent from "../LoginComponent/LoginComponent.jsx";
 
 const RegistrationComponent = () => {
-  const { hideModal } = useModal();
+  const { hideModal, showModal } = useModal();
   const [userData, setUserData] = useState({ name: '', email: '', password: '', repassword: '' });
   const [error, setError] = useState('');
 
@@ -24,21 +24,18 @@ const RegistrationComponent = () => {
       return;
     }
     try {
-      const response = await api.post('/api/register/', {
+      const response = await api.post('/register/', {
         name: userData.name,
         email: userData.email,
         password: userData.password
       });
-      hideModal();
-      alert("Registration successful!");
-      console.log(response.data); 
+      showModal(<LoginComponent />);
     } catch (error) {
-      setError(error.response?.data?.message || 'An error occurred during registration.');
+      setError(error.response.data.message || 'An error occurred during registration.');
     }
   };
 
   const handleLoginClick = () => {
-    setIsVisible(false);
     showModal(<LoginComponent />);
   };
 

@@ -10,6 +10,7 @@ from api.models import User
 from .models import Photo, Document, Comment, Complaint
 from companies.models import Company
 from rest_framework.pagination import PageNumberPagination
+from rest_framework.exceptions import ValidationError
 
 class ComplaintAndCompanyCreateView(APIView):
     parser_classes = (MultiPartParser, FormParser)
@@ -18,55 +19,61 @@ class ComplaintAndCompanyCreateView(APIView):
         company_name = request.data.get('company')
         company = None
 
-        if company_name:
-            # Check if the company already exists
-            try:
-                company = Company.objects.get(name=company_name)
-            except Company.DoesNotExist:
-                company_data = {
-                    'name': company_name,
-                    'phone': request.data.get('brandPhone'),
-                    'email': request.data.get('brandEmail'),
-                    'website': request.data.get('brandWebsite'),
-                }
-                company_serializer = CompanySerializer(data=company_data)
-                if company_serializer.is_valid():
-                    company = company_serializer.save()
-                else:
-                    return Response(company_serializer.errors, status=status.HTTP_400_BAD_REQUEST)
-        
-        author_name = request.data.get('author')
-        if not author_name:
-            return Response({'author': ['This field is required.']}, status=status.HTTP_400_BAD_REQUEST)
-        
         try:
-            author = User.objects.get(name=author_name)
-        except User.DoesNotExist:
-            return Response({'author': ['User not found.']}, status=status.HTTP_400_BAD_REQUEST)
+            if company_name:
+                # Check if the company already exists
+                try:
+                    company = Company.objects.get(name=company_name)
+                except Company.DoesNotExist:
+                    company_data = {
+                        'name': company_name,
+                        'phone': request.data.get('brandPhone'),
+                        'email': request.data.get('brandEmail'),
+                        'website': request.data.get('brandWebsite'),
+                    }
+                    company_serializer = CompanySerializer(data=company_data)
+                    if company_serializer.is_valid():
+                        company = company_serializer.save()
+                    else:
+                        raise ValidationError(company_serializer.errors)
+            
+            author_name = request.data.get('author')
+            if not author_name:
+                raise ValidationError({'author': ['This field is required.']})
+            
+            try:
+                author = User.objects.get(name=author_name)
+            except User.DoesNotExist:
+                raise ValidationError({'author': ['User not found.']})
 
-        complaint_data = {
-            'author': author.id,
-            'title': request.data.get('title'),
-            'description': request.data.get('description'),
-            'private_description': request.data.get('privateDetails'),
-            'company': company.id,
-        }
+            complaint_data = {
+                'author': author.id,
+                'title': request.data.get('title'),
+                'description': request.data.get('description'),
+                'private_description': request.data.get('privateDetails'),
+                'company': company.id,
+            }
+            
+            complaint_serializer = ComplaintSerializer(data=complaint_data)
+            if complaint_serializer.is_valid():
+                complaint = complaint_serializer.save()
+
+                photos = request.FILES.getlist('photos')
+                for photo in photos:
+                    Photo.objects.create(complaint=complaint, image=photo)
+
+                documents = request.FILES.getlist('documents')
+                for document in documents:
+                    Document.objects.create(complaint=complaint, file=document)
+
+                return Response(complaint_serializer.data, status=status.HTTP_201_CREATED)
+            else:
+                raise ValidationError(complaint_serializer.errors)
         
-        complaint_serializer = ComplaintSerializer(data=complaint_data)
-        if complaint_serializer.is_valid():
-            complaint = complaint_serializer.save()
-
-            photos = request.FILES.getlist('photos')
-            for photo in photos:
-                Photo.objects.create(complaint=complaint, image=photo)
-
-            documents = request.FILES.getlist('documents')
-            for document in documents:
-                Document.objects.create(complaint=complaint, file=document)
-
-            return Response(complaint_serializer.data, status=status.HTTP_201_CREATED)
-        else:
-            return Response(complaint_serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+        except ValidationError as e:
+            return Response({'detail': str(e)}, status=status.HTTP_400_BAD_REQUEST)
+        except Exception as e:
+            return Response({'detail': str(e)}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
         
 class ComplaintDashboardView(RetrieveUpdateDestroyAPIView):
     serializer_class = ComplaintSerializer

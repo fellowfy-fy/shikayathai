@@ -58,7 +58,7 @@ const FileComplaintForm = () => {
     if (!auth?.name) {
       try {
         // Register user if not authenticated
-        const registrationResponse = await axios.post("api/register/", {
+        const registrationResponse = await axios.post("register/", {
           name: userName,
           email: userEmail,
         });

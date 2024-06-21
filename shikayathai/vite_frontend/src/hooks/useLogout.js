@@ -7,7 +7,7 @@ const useLogout = () => {
     const logout = async () => {
         setAuth({});
         try {
-            const response = await api.post('/api/logout/', {
+            const response = await api.post('/logout/', {
                 withCredentials: true,
             });
             console.log(response)
