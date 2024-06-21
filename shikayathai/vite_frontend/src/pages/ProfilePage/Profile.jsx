@@ -119,15 +119,15 @@ function Profile() {
     <h2 className="text-2xl font-bold text-[#001A45] mb-4">Profile</h2>
     <div className="flex flex-col items-start w-full">
     <div className="flex items-center w-full mb-4">
-     <img src={photoPreview || auth.userpic} alt="Profile" className="rounded-full w-24 h-24 object-cover" />
+     <img src={photoPreview || auth.userpic} alt="Profile" className="rounded-full lg:w-24 lg:h-24 w-14 h-14  object-cover" />
      <input type="file" id="photo-upload" onChange={handlePhotoChange} className="ml-2 text-sm text-[#001A45] p-2 border border-[#001A45] rounded hidden" />
       <button 
-       className="bg-[#001A45] text-white font-medium py-2 px-4 rounded-[12px] focus:outline-none focus:ring-2 focus:ring-blue-500 hover:bg-blue-700 ml-2"
+       className="border border-[#001A45] text-[#001A45] font-bold py-4 lg:px-24 px-12 rounded-[12px] ml-6"
        onClick={() => document.getElementById('photo-upload').click()}>
        Choose a photo
      </button>
     </div>
-      <div className="flex justify-between w-full">
+      <div className="flex justify-between w-full lg:flex-nowrap flex-wrap">
         <div className="w-full mr-2">
         <label className="block font-bold text-[#001A45]">Name</label>
         <input type="name" value={name} onChange={(e) => setName(e.target.value)}                 className="mt-1 block w-full px-3 py-2 border h-[44px] border-[#001A45] rounded-[12px] border-opacity-50 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 placeholder-opacity-30"
