@@ -1,14 +1,14 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { useModal } from "../../context/ModalContext";
-import CompanyForm from "../CompanyForm/CompanyForm";
+import FileComplaintForm from '../FileComplaintForm/FileComplaintForm';
 import aboba from "../../assets/aboba.svg";
 
 const OrganizationSection = () => {
   const { showModal } = useModal();
 
   const handleCreateClick = () => {
-    showModal(<CompanyForm />);
+    showModal(<FileComplaintForm />);
   };
 
   return (

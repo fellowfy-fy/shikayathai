@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect } from 'react';
+import { useState, useRef, useEffect } from 'react';
 import { useModal } from '../../context/ModalContext';
 import api from '../../api/axios';
 import useAuth from '../../hooks/useAuth';
@@ -9,10 +9,10 @@ import linkedinIcon from '../../assets/ico-li.svg';
 import close from '../../assets/close.svg';
 import RegistrationComponent from "../RegistrationComponent/RegistrationComponent.jsx";
 
-const LOGIN_URL = '/api/login/';
+const LOGIN_URL = '/login/';
 
 const LoginComponent = () => {
-  const { hideModal } = useModal();
+  const { hideModal, showModal, setIsVisible } = useModal();
   const { setAuth } = useAuth();
   const navigate = useNavigate();
   const location = useLocation();
@@ -52,12 +52,7 @@ const LoginComponent = () => {
     }
   };
 
-  const handleGitHubLogin = () => {
-    window.location.href = 'http://127.0.0.1:8000/accounts/github/login/';
-  };
-
   const handleRegistrationClick = () => {
-    setIsVisible(false);
     showModal(<RegistrationComponent />);
   };
 

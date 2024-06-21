@@ -93,15 +93,17 @@ class CreateUserView(ListCreateAPIView):
         else:
             password = ''.join(random.choices(string.ascii_uppercase + string.digits, k=8))
         if not name:
-            raise ValidationError({'username': 'Username is required.'})
+            raise ValidationError({'message': 'Username is required.'})
         if not password:
-            raise ValidationError({'password': 'Password is required.'})
+            raise ValidationError({'message': 'Password is required.'})
         if not email:
-            raise ValidationError({'email': 'Email is required.'})
+            raise ValidationError({'message': 'Email is required.'})
 
         # Check if user already exists
         if User.objects.filter(name=name).exists():
-            raise ValidationError({'username': 'Username already exists.'})
+            raise ValidationError({'message': 'Username already exists.'})
+        if User.objects.filter(email=email).exists():
+            raise ValidationError({'message': 'Username with this email already exists.'})
 
         # Create the user
         user = User.objects.create_user(name=name, password=password, email=email)

@@ -30,7 +30,7 @@ const UsersComplaints = () => {
         <Link className="mt-2 text-blue-600 hover:text-blue-800" to="edit">edit profile</Link>
       </div>
       <h2 className="text-xl font-bold mt-8 mb-4">My complaints</h2>
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+      <div className="flex flex-row gap-4">
         {complaints.map(complaint => (
           <FrameComponent key={complaint.id} data={complaint} />
         ))}
