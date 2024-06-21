@@ -127,7 +127,7 @@ const FileComplaintForm = () => {
 
   return (
     <div className="fixed inset-0 bg-gray-500 bg-opacity-50 flex justify-center items-center p-4">
-    <div className="relative bg-white p-6 rounded-2xl shadow-lg w-full max-w-[800px] h-auto overflow-hidden">
+    <div className="relative bg-white p-6 rounded-[32px] shadow-lg w-full max-w-[800px] h-auto overflow-hidden">
       <div className="flex justify-between items-center mb-4">
         <h5 className="text-lg font-unbounded font-bold text-[#001A45]">Fill in the contact details</h5>
         <button
