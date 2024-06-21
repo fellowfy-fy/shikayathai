@@ -21,7 +21,7 @@ const LoginComponent = () => {
   const [password, setPassword] = useState('');
   const [errMsg, setErrMsg] = useState('');
   const errRef = useRef();
-  const [persist, setPersist] = useState(false);
+  const [persist, setPersist] = useState(true);
 
   useEffect(() => {
     errRef.current?.focus();
@@ -56,10 +56,6 @@ const LoginComponent = () => {
     window.location.href = 'http://127.0.0.1:8000/accounts/github/login/';
   };
 
-  const togglePersist = () => {
-    setPersist((prev) => !prev);
-  };
-
   const handleRegistrationClick = () => {
     setIsVisible(false);
     showModal(<RegistrationComponent />);
@@ -78,17 +74,6 @@ const LoginComponent = () => {
         <form onSubmit={handleSubmit} className="space-y-4">
         <div className="flex gap-4">
             <div className="w-1/2">
-              <label htmlFor="name" className="block text-[#001A45] text-[24px] font-inter font-bold">Name</label>
-              <input
-                type="password"
-                className="mt-1 block w-full px-3 py-2 border h-[44px] border-[#001A45] rounded-[12px] border-opacity-50 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
-                id="password"
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-                required
-              />
-            </div>
-            <div className="w-1/2">
               <label htmlFor="email" className="block text-[#001A45] text-[24px] font-inter font-bold">Email</label>
               <input
                 type="email"
@@ -100,20 +85,21 @@ const LoginComponent = () => {
                 autoFocus
               />
             </div>
+            <div className="w-1/2">
+              <label htmlFor="name" className="block text-[#001A45] text-[24px] font-inter font-bold">Password</label>
+              <input
+                type="password"
+                className="mt-1 block w-full px-3 py-2 border h-[44px] border-[#001A45] rounded-[12px] border-opacity-50 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
+                id="password"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                required
+              />
+            </div>
           </div>
           <button type="submit" className="w-full h-[55px] justify-center rounded-[12px] text-[18px] font-medium text-[#001A45] bg-[#C9FF57] hover:bg-[#B5F62B]">
             Login
           </button>
-          <div className="mb-3 form-check">
-              <input
-                type="checkbox"
-                className="form-check-input"
-                id="persist"
-                onChange={togglePersist}
-                checked={persist}
-              />
-              <label className="form-check-label" htmlFor="persist">Trust This Device</label>
-            </div>
         </form>
         <div>
             <label className="block mt-[20px] text-[24px] font-inter font-bold text-[#001A45]">Or log in via social media</label>
