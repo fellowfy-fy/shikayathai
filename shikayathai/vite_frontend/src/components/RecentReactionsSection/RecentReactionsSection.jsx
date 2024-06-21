@@ -32,18 +32,18 @@ function RecentReactionsSection() {
   }, []);
 
   return (
-    <div className="text-center px-8 pt-10 bg-white relative">
-      <h2 className="text-4xl font-bold text-[#001A45] font-unbounded mb-4">
+    <div className="text-left md:text-center pl-[24px] md:ml-[120px] pt-10 bg-white relative">
+      <h2 className="text-[24px] md:text-[32px] pr-[24px] md:pr-[120px] font-bold text-[#001A45] font-unbounded mb-4">
         Recent Reactions
       </h2>
-      <Link to="complaints" className="text-[#001A45]">
+      <Link to="complaints" className="text-[#001A45] pr-[24px] md:pr-[120px]">
         Watch all
       </Link>
       {requests.length > 0 ? (
         <div className="relative">
           <button
             onClick={() => scroll('left')}
-            className="absolute left-5 top-1/2 transform -translate-y-1/2 bg-gray-200 p-2 rotate-180 rounded-[16px] w-[40px] h-[40px] z-10"
+            className="absolute left-5 top-1/2 transform -translate-y-1/2 bg-white p-2 rotate-180 rounded-[16px] w-[40px] h-[40px] z-10"
           >
             <img src={arrow} alt="Scroll Left" />
           </button>
@@ -56,13 +56,13 @@ function RecentReactionsSection() {
           </div>
           <button
             onClick={() => scroll('right')}
-            className="absolute right-5 top-1/2 transform -translate-y-1/2 bg-gray-200 p-2 rounded-[16px] w-[40px] h-[40px]"
+            className="absolute right-5 top-1/2 transform -translate-y-1/2 bg-white p-2 rounded-[16px] w-[40px] h-[40px]"
           >
             <img src={arrow} alt="Scroll Right" />
           </button>
         </div>
       ) : (
-        <p>No recent reactions available.</p>
+        <p className="text-[#001A45] pr-[24px] md:pr-[120px]" >No recent reactions available.</p>
       )}
     </div>
   );
