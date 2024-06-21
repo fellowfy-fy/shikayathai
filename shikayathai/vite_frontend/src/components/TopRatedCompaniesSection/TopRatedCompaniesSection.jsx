@@ -23,8 +23,8 @@ const TopRatedCompaniesSection = () => {
   }
 
   return (
-    <section className="text-left md:text-center px-[24px] md:mx-[120px] py-[40px] md:py[80px]">
-      <h2 className="text-[24px] md:text-[32px] font-unbounded font-bold text-[#001A45] mb-4">
+    <section className="text-left sm:text-center px-[24px] sm:mx-[120px] py-[40px] sm:py[80px]">
+      <h2 className="text-[24px] sm:text-[32px] font-unbounded font-bold text-[#001A45] mb-4">
         Top rated companies
       </h2>
       <nav>

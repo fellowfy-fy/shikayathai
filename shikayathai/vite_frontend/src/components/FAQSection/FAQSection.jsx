@@ -4,9 +4,9 @@ const FAQSection = () => (
   <section className="bg-white py-[20px] md:py[80px]">
     <div className="text-left md:text-center mb-7.5">
       <div>
-        <b className="text-[24px] md:text-[32px] text-[#001A45] font-unbounded px-[24px] md:mx-[120px]">FAQ</b>
+        <b className="text-[24px] sm:text-[32px] text-[#001A45] font-unbounded px-[24px] sm:mx-[120px]">FAQ</b>
       </div>
-      <div className="text-[18px] md:text-[24px] text-[#001A45] mt-2.5 text-left md:text-center px-[24px] md:mx-[120px]">Your Guide to Getting Heard</div>
+      <div className="text-[18px] sm:text-[24px] text-[#001A45] mt-2.5 text-left md:text-center px-[24px] sm:mx-[120px]">Your Guide to Getting Heard</div>
     </div>
     <div className="ml-2 mr-2 mx-[24px] sm:mx-[120px] bg-white p-5">
       <div className="bg-[#f4f4f4] p-5 mb-5 rounded-lg">
