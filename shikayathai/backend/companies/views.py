@@ -1,6 +1,6 @@
 from .serializers import CompanySerializer
 from rest_framework.permissions import AllowAny
-from rest_framework.generics import RetrieveUpdateDestroyAPIView, ListCreateAPIView, ListAPIView
+from rest_framework.generics import RetrieveUpdateDestroyAPIView, ListCreateAPIView, ListAPIView, RetrieveAPIView
 from .models import Company
 
 class CompanyDashboardView(RetrieveUpdateDestroyAPIView):
@@ -36,3 +36,8 @@ class ListCompanyView(ListAPIView):
     
     def get_queryset(self):
         return Company.objects.all()
+
+class CompanyDetailView(RetrieveAPIView):
+    queryset = Company.objects.all()
+    serializer_class = CompanySerializer
+    permission_classes = [AllowAny]

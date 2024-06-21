@@ -1,14 +1,11 @@
 import { useEffect, useState } from "react";
-import { useModal } from "../../context/ModalContext";
 import axios from "../../api/axios";
 import navigationArrow from "../../assets/navigationArrow.svg";
 import loopa from "../../assets/loopa.svg";
-import CompanyForm from "../../components/CompanyForm/CompanyForm";
 import CompanyComponent from "./CompanyComponent";
 
 function Brands() {
   const [companies, setCompanies] = useState([]);
-  const { showModal } = useModal();
 
   useEffect(() => {
     const fetchCompanies = async () => {
@@ -21,10 +18,7 @@ function Brands() {
     };
     fetchCompanies();
   }, []);
-
-  const handleFileComplaintClick = () => {
-    showModal(<CompanyForm />);
-  };
+  
 
   return (
     <div className="mx-[24px] sm:mx-[120px] mt-2 text-[#001A45]">

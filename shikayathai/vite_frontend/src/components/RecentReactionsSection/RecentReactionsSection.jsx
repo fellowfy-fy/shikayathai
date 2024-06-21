@@ -1,5 +1,5 @@
 import { useEffect, useState, useRef } from "react";
-import FrameComponent from "../FrameComponent/FrameComponent.jsx";
+import FrameSolvedComponent from "../FrameComponent/FrameSolvedComponent.jsx";
 import api from "../../api/axios";
 import { Link } from "react-router-dom";
 import arrow from "../../assets/arrow.svg";
@@ -22,7 +22,7 @@ function RecentReactionsSection() {
   useEffect(() => {
     const fetchRequests = async () => {
       try {
-        const response = await api.get("/complaints/list/");
+        const response = await api.get("/complaints/list/solved/");
         setRequests(response.data.results);
       } catch (error) {
         console.error("Failed to fetch requests:", error);
@@ -50,7 +50,7 @@ function RecentReactionsSection() {
           <div className="overflow-x-auto scrollbar-hide" ref={scrollContainerRef}>
             <div className="flex space-x-8">
               {requests.map((request, index) => (
-                <FrameComponent key={index} data={request} className="min-w-[16rem]" />
+                <FrameSolvedComponent key={index} data={request} className="min-w-[16rem]" />
               ))}
             </div>
           </div>

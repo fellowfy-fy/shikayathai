@@ -95,6 +95,16 @@ class ListComplaintsView(ListAPIView):
     def get_queryset(self):
         return Complaint.objects.all().order_by('-created_at')
 
+class ListSolvedComplaintsView(ListAPIView):
+    serializer_class = ComplaintSerializer
+    permission_classes = [AllowAny]
+    pagination_class = PageNumberPagination
+    
+    def get_queryset(self):
+        queryset = Complaint.objects.filter(resolution_rating__isnull=False).order_by('-created_at')
+        
+        return queryset
+
 class UserComplaintsView(ListAPIView):
     serializer_class = ComplaintSerializer
     permission_classes = [IsAuthenticated]
