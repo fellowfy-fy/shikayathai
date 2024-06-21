@@ -4,7 +4,7 @@ const IntroSection = () => (
   <section className="md:px-[120px] px-[24px] py-[20px] md:pt-40 md:pb-20 bg-white text-left md:text-center">
     <div className="mb-8">
       <h1 className="text-[40px] md:text-[64px] font-unbounded font-bold text-[#001A45]">{`Welcome to ${BRAND_NAME}!`}</h1>
-      <p className="text-[16] md:text-[24] text-[#001A45] font-inter font-light mt-2">
+      <p className="text-[16] md:text-[24] text-[#001A45] font-inter font-medium mt-2">
         Here, we make sure your complaints get heard and fixed, fast. File Your Complaint Easily:
       </p>
     </div>

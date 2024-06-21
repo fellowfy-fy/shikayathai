@@ -38,8 +38,8 @@ function RecentRequestSection() {
 
 
   return (
-    <div className="text-left md:text-center pl-[24px] md:ml-[120px] pt-10 bg-white relative">
-      <h2 className="text-[24px] md:text-[32px] pr-[24px] md:pr-[120px] font-bold text-[#001A45] font-unbounded mb-4">
+    <div className="text-left sm:text-center sm:py-[80px] pl-[24px] sm:ml-[120px] pt-10 bg-white relative">
+      <h2 className="text-[24px] sm:text-[32px] pr-[24px] sm:pr-[120px] font-bold text-[#001A45] font-unbounded mb-4">
         Recent Requests
       </h2>
       <Link to="complaints" className="text-[#001A45] pr-[24px] md:pr-[120px]">
@@ -62,13 +62,13 @@ function RecentRequestSection() {
           </div>
           <button
             onClick={() => scroll('right')}
-            className="absolute right-5 top-1/2 transform -translate-y-1/2 bg-white p-2 rounded-[16px] w-[40px] h-[40px]"
+            className="absolute right-[24px] sm:right-[120px] top-1/2 transform -translate-y-1/2 bg-white p-2 rounded-[16px] w-[40px] h-[40px]"
           >
             <img src={arrow} />
           </button>
         </div>
       ) : (
-        <p className="text-[#001A45] pr-[24px] md:pr-[120px]"> No recent requests available.</p>
+        <p className="text-[#001A45] pr-[24px] sm:pr-[120px]"> No recent requests available.</p>
       )}
     </div>
   );

@@ -182,9 +182,17 @@ const FileComplaintForm = () => {
           )}
           
           <div className="mb-3">
-            <label htmlFor="company" className="block font-bold mb-[4px] font-inter text-[24px] text-[#001A45]">
-              Company Name
-            </label>
+            <div className="flex gap-4 mb-3">
+              <label htmlFor="company" className="font-bold mb-[4px] font-inter text-[24px] text-[#001A45]">
+                 Company Name
+                <p
+                  className="cursor-pointer font-inter font-light text-[16px] text-blue-600 hover:underline"
+                  onClick={() => setShowAddCompanyFields(true)}
+                >
+                  Can't find your company? Add new
+                </p>
+              </label>
+            </div>
             <input
               type="text"
               className="block w-full px-3 py-2 border h-[44px] border-[#001A45] rounded-[12px] border-opacity-50 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 placeholder-opacity-30"
@@ -208,14 +216,11 @@ const FileComplaintForm = () => {
               </ul>
             )}
           </div>
-          <p
-            className="cursor-pointer text-blue-600 hover:underline"
-            onClick={() => setShowAddCompanyFields(true)}
-          >
-            Can't find your company? Add new
-          </p>
           {showAddCompanyFields && (
             <>
+              <p className="block font-medium mb-[4px] font-inter text-[23px] text-[#001A45]">
+                fill in the company information
+              </p>
               <div className="mb-3">
                 <label htmlFor="brandPhone" className="block font-bold mb-[4px] font-inter text-[24px] text-[#001A45]">
                   Brand Phone
@@ -297,6 +302,8 @@ const FileComplaintForm = () => {
             <label htmlFor="privateDetails" className="block font-bold mb-[4px] font-inter text-[24px] text-[#001A45]">
               Private Details
             </label>
+            <p className="text-sm mb-2 font-inter text-[#001A45]">
+            any private details that will help Company to identify you case resolve your issue as soon as possible. E.g. phone number, email id etc.            </p>
             <textarea
               className="block w-full px-3 py-2 border border-[#001A45] rounded-[12px] border-opacity-50 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 font-inter text-[#001A45] placeholder-opacity-30"
                 placeholder="Additional private details"
