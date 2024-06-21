@@ -8,6 +8,7 @@ import Layout from "./Layout.jsx";
 import Profile from "./pages/ProfilePage/Profile.jsx";
 import ModalComponent from "./components/ModalComponent.jsx";
 import ComplaintPage from "./pages/ComplaintPage/ComplaintPage.jsx";
+import CompanyPage from "./pages/CompanyPage/CompanyPage.jsx";
 import PersistLogin from "./components/PersistLogin.jsx";
 import UsersComplaints from "./pages/UsersComplaints.jsx";
 import './styles/global.css'
@@ -24,6 +25,7 @@ function App() {
             <Route path="brands" element={<Brands />} />
             <Route path="complaints" element={<Complaints />} />
             <Route path="/complaints/:id" element={<ComplaintPage />} />
+            <Route path="/companies/:id" element={<CompanyPage />} />
           </Route>
           <Route path="*" element={<NotFound />} />
         </Route>
