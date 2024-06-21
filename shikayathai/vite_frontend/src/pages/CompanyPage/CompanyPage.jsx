@@ -23,7 +23,7 @@ const CompanyPage = () => {
     fetchCompany();
   }, [id]);
 
-  console.lo
+  console.lo;
 
   if (!company) {
     return <div>Loading...</div>;
@@ -34,9 +34,13 @@ const CompanyPage = () => {
       <div className="mx-[24px] sm:mx-[120px] mt-2 text-[#001A45]">
         {/* 1 line */}
         <div className="flex flex-row gap-2 mb-10">
-          <a href="/" className="text-[#001A45] hover:underline">Home</a>
+          <a href="/" className="text-[#001A45] hover:underline">
+            Home
+          </a>
           <img src={navigationArrow} />
-          <a href="/brands" className="text-[#001A45] hover:underline">All brands</a>
+          <a href="/brands" className="text-[#001A45] hover:underline">
+            All brands
+          </a>
           <img src={navigationArrow} />
           <span className="font-bold">{company.name}</span>
         </div>
@@ -48,7 +52,9 @@ const CompanyPage = () => {
           <div className="w-[64px] h-[64px] rounded-full bg-purple-200 text-white text-[20px] font-inter font-bold flex items-center justify-center mr-2">
             {company.name.charAt(0)}
           </div>
-          <div className="font- inter font-bold text-[32px] text-[#001A45] " >{company.name}</div>
+          <div className="font- inter font-bold text-[32px] text-[#001A45] ">
+            {company.name}
+          </div>
         </div>
         {/* Rating and Reviews */}
         <div className="flex flex-row text-sm gap-2 mb-3">
@@ -70,26 +76,27 @@ const CompanyPage = () => {
       </div>
 
       {/* Complaints  */}
-      <div className="mx-[120px] mt-2 text-[#001A45]">
-      <div className="flex flex-col">
-        <h1 className="text-2xl font-bold">Complaints</h1>
-        <div className="flex flex-row mt-[12px] gap-2">
-          <p className="font-bold">{company.complaints.length} complaints</p>
-          <p className="opacity-70">Over the past year</p>
+      <div className="lg:mx-[120px] mt-2 text-[#001A45]">
+        <div className="flex flex-col">
+          <h1 className="text-2xl font-bold">Complaints</h1>
+          <div className="flex flex-row mt-[12px] gap-2">
+            <p className="font-bold">{company.complaints.length} complaints</p>
+            <p className="opacity-70">Over the past year</p>
+          </div>
+          {/* Filter */}
+          <div className="mt-[24px] flex flex-row gap-2 text-base font-bold">
+            <img src={filtericon} />
+            <p>Filter</p>
+          </div>
         </div>
-        {/* Filter */}
-        <div className="mt-[24px] flex flex-row gap-2 text-base font-bold">
-          <img src={filtericon} />
-          <p>Filter</p>
+
+        {/* Complaints Components */}
+        <div className="flex flex-row gap-4 mt-8 flex-wrap">
+          {company.complaints.map((complaint, index) => (
+            <ComplaintComponent key={index} complaint={complaint} />
+          ))}
         </div>
       </div>
-
-      {/* Complaints Components */}
-      <div className="flex flex-row gap-4 mt-8">
-        {company.complaints.map((complaint, index) => (
-          <ComplaintComponent key={index} complaint={complaint} />
-        ))}
-      </div></div>
     </div>
   );
 };
