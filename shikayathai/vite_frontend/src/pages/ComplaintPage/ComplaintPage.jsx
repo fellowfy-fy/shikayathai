@@ -120,7 +120,7 @@ const ComplaintDetail = () => {
             </div>
           </div>
         </div>
-        <h1 className="text-5xl font-bold text-[#001A45] pl-3 whitespace-pre-wrap break-all mb-6">
+        <h1 className="text-5xl font-bold text-[#001A45] whitespace-pre-wrap break-all mb-6">
           {complaint.title}
         </h1>
         <div className="flex gap-6 lg:flex-row flex-col items-start">
@@ -170,7 +170,7 @@ const ComplaintDetail = () => {
               </div>
             </div>
           ) : (
-            <span></span>
+            <></>
           )}
           <div className="flex-1">
             {complaint.resolution_rating ? (

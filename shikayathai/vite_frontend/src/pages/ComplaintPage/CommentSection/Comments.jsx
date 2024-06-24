@@ -3,6 +3,8 @@ import { useState } from "react";
 import { useParams } from "react-router-dom";
 import useAuth from "../../../hooks/useAuth";
 import api from "../../../api/axios";
+import { useModal } from "../../../context/ModalContext";
+import LoginComponent from "../../../components/LoginComponent/LoginComponent";
 
 const options = {
   year: "numeric",
@@ -14,6 +16,8 @@ const options = {
 };
 
 const Comments = ({ initialComments }) => {
+  const { showModal } = useModal();
+
   const { id } = useParams();
   const { auth } = useAuth();
   const [comments, setComments] = useState(initialComments);
@@ -41,6 +45,9 @@ const Comments = ({ initialComments }) => {
     } catch (err) {
       console.log(err);
     }
+  };
+  const handleLoginClick = () => {
+    showModal(<LoginComponent />);
   };
 
   return (
@@ -99,7 +106,10 @@ const Comments = ({ initialComments }) => {
                   </button>
                 </>
               ) : (
-                <button className="bg-[#C9FF57] text-[#001A45] py-2 px-4 rounded-lg">
+                <button
+                  className="bg-[#C9FF57] text-[#001A45] py-2 px-4 rounded-lg"
+                  onClick={handleLoginClick}
+                >
                   Login to comment
                 </button>
               )}

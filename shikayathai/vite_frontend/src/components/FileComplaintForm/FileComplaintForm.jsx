@@ -67,7 +67,9 @@ const FileComplaintForm = () => {
         auth.name = name;
         auth.access = access;
       } catch (error) {
-        setError(error.response?.data?.message || "Registration error occurred");
+        setError(
+          error.response?.data?.message || "Registration error occurred"
+        );
         return;
       }
     }
@@ -91,13 +93,15 @@ const FileComplaintForm = () => {
           Authorization: `Bearer ${auth?.access}`,
         },
       });
-      const linkid = response.data.id
+      const linkid = response.data.id;
       const complaintLink = `http://localhost/complaints/${linkid}`;
       setIsVisible(false);
       if (!auth.email) {
         setAuth({});
       }
-      showModal(<FacebookShareComponent link={complaintLink} linkid={linkid}/>);
+      showModal(
+        <FacebookShareComponent link={complaintLink} linkid={linkid} />
+      );
     } catch (error) {
       setError(error.response?.data?.message || "An error occurred");
     }
@@ -183,8 +187,8 @@ const FileComplaintForm = () => {
               </div>
             )}
 
-            <div className="flex gap-4 mb-3">
-              <div className="w-1/2">
+            <div className="mb-3">
+              <div className="w-full">
                 <label
                   htmlFor="company"
                   className="block font-bold mb-[4px] font-inter text-[24px] text-[#001A45]"
@@ -220,7 +224,7 @@ const FileComplaintForm = () => {
                   Can't find your company? Add new
                 </p>
               </div>
-              <div className="w-1/2">
+              <div className="w-full">
                 <label
                   htmlFor="title"
                   className="block font-bold mb-[4px] font-inter text-[24px] text-[#001A45]"
@@ -229,7 +233,7 @@ const FileComplaintForm = () => {
                 </label>
                 <input
                   type="text"
-                  className="block px-3 py-2 border h-[44px] border-[#001A45] rounded-[12px] border-opacity-50 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 hover:border-[#0450CF] font-inter text-[#001A45] placeholder-opacity-30"
+                  className="block px-3 py-2 border h-[44px] border-[#001A45] rounded-[12px] border-opacity-50 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 hover:border-[#0450CF] font-inter text-[#001A45] placeholder-opacity-30 w-full"
                   placeholder="Title of Your complaint"
                   id="title"
                   value={title}
@@ -302,7 +306,11 @@ const FileComplaintForm = () => {
                 Complaint Description
               </label>
               <p className="text-sm mb-2 font-inter text-[#001A45]">
-                Include any details that will help Company to identify your case and resolve your issue as soon as possible. E.g. order id, receipt number, payment amount etc. Please note that the complaint description is public, please don’t include any personal details.
+                Include any details that will help Company to identify your case
+                and resolve your issue as soon as possible. E.g. order id,
+                receipt number, payment amount etc. Please note that the
+                complaint description is public, please don’t include any
+                personal details.
                 <button
                   onClick={handleInfoClick}
                   className="underline text-blue-600 hover:text-blue-800 ml-1"
@@ -327,7 +335,9 @@ const FileComplaintForm = () => {
                 Private Details
               </label>
               <p className="text-sm mb-2 font-inter text-[#001A45]">
-                Any private details that will help Company to identify your case and resolve your issue as soon as possible. E.g. phone number, email id etc.
+                Any private details that will help Company to identify your case
+                and resolve your issue as soon as possible. E.g. phone number,
+                email id etc.
               </p>
               <textarea
                 className="block w-full px-3 py-2 border border-[#001A45] rounded-[12px] border-opacity-50 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 hover:border-[#0450CF] placeholder-opacity-30"
@@ -345,14 +355,19 @@ const FileComplaintForm = () => {
                 Photos and Images
               </label>
               <p className="text-sm font-inter text-[#001A45]">
-                Please attach any valuable images or photos: payment screenshot, the photo of the broken product etc. 
+                Please attach any valuable images or photos: payment screenshot,
+                the photo of the broken product etc.
               </p>
-              <p className="text-sm mb-2 font-inter text-[#001A45]">Please note that the photos are public.</p>
+              <p className="text-sm mb-2 font-inter text-[#001A45]">
+                Please note that the photos are public.
+              </p>
               <input
                 type="file"
                 className="block w-[312px] px-3 py-2 border h-[56px] border-[#001A45] rounded-[12px] border-opacity-50 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 hover:border-[#0450CF]"
                 id="photos"
-                onChange={(e) => handleFileChange(e, setPhotos, setPhotoPreviews)}
+                onChange={(e) =>
+                  handleFileChange(e, setPhotos, setPhotoPreviews)
+                }
                 multiple
               />
               {photoPreviews.length > 0 && (
