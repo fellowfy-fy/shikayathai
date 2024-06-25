@@ -36,15 +36,12 @@ def send_password_email(user_email, password):
 
 
 User = get_user_model()
-load_dotenv()
-USERPIC_SITE = os.getenv("USERPIC_SITE")
 
 
-
-def get_userpic_url(user):
+def get_userpic_url(request, user):
     if user.userpic:
-        return f"{USERPIC_SITE}{user.userpic.url}"
-    return f"{USERPIC_SITE}{settings.MEDIA_URL}default/userpic.png"
+        return request.build_absolute_uri(f"{user.userpic.url}")
+    return request.build_absolute_uri("default/userpic.png")
 
 class UserDashboardView(RetrieveUpdateDestroyAPIView):
     serializer_class = UserUpdateSerializer
@@ -76,7 +73,7 @@ class UserDashboardView(RetrieveUpdateDestroyAPIView):
         response = {
             'name': user.name,
             'email': user.email,
-            'userpic': get_userpic_url(user),
+            'userpic': get_userpic_url(request, user),
         }
         return Response(response, status=status.HTTP_200_OK)
 
@@ -113,25 +110,8 @@ class CreateUserView(ListCreateAPIView):
 
         return Response({'name': user.name, 'access': access_token}, status=status.HTTP_201_CREATED)
 
-class RefreshAccessTokenView(TokenRefreshView):
-    
-    def post(self, request, *args, **kwargs):
-        refresh_token = request.COOKIES.get('refresh')
-        if not refresh_token:
-            return Response({'detail': 'Refresh token not found'}, status=400)
-
-        try:
-            refresh = RefreshToken(refresh_token)
-            new_access_token = str(refresh.access_token)
-            response = Response({
-                'access': new_access_token,
-            })
-            return response
-        except Exception as e:
-            return Response({'detail': 'Invalid refresh token'}, status=400)
-
 class LoginView(ListCreateAPIView):
-    permission_classes = []
+    permission_classes = [AllowAny]
 
     def post(self, request, *args, **kwargs):
         serializer = LoginSerializer(data=request.data)
@@ -147,14 +127,10 @@ class LoginView(ListCreateAPIView):
                 response = Response({
                     'name': user.name,
                     'email': email,          
-                    'userpic': get_userpic_url(user),
-                    'access': access_token
+                    'userpic': get_userpic_url(request, user),
+                    'access': access_token,
+                    'refresh': refresh_token
                 })
-                if persist:
-                    response.set_cookie('access', access_token, httponly=True, secure=True, samesite='None')
-                    response.set_cookie('refresh', refresh_token, httponly=True, secure=True, samesite='None')
-                else:
-                    response.set_cookie('access', access_token, httponly=True, secure=True, samesite='None')
                 return response
             else:
                 return Response({'detail': 'Invalid credentials'}, status=status.HTTP_401_UNAUTHORIZED)

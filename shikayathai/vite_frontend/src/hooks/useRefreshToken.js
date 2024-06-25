@@ -1,19 +1,21 @@
-import api from '../api/axios';
-import useAuth from './useAuth';
+import api from "../api/axios";
+import useAuth from "./useAuth";
 
 const useRefreshToken = () => {
-    const { setAuth } = useAuth();
+  const { setAuth } = useAuth();
+  const refreshToken = localStorage.getItem("refresh_token");
 
-    const refresh = async () => {
-        const response = await api.post('/token/refresh/', {
-            withCredentials: true
-        });
-        setAuth({
-                access: response.data.access,
-            });
-        return response.data.access;
-    }
-    return refresh;
+  const refresh = async () => {
+    const response = await api.post("/token/refresh/", {
+      refresh: refreshToken,
+    });
+    console.log(response);
+    setAuth({
+      access: response.data.access,
+    });
+    return response.data.access;
+  };
+  return refresh;
 };
 
 export default useRefreshToken;
