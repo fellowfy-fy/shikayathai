@@ -8,6 +8,7 @@ import debounce from "lodash/debounce";
 import "../../styles/global.css";
 import "./FileComplaintForm.css";
 import close from "../../assets/close.svg";
+import document from "../../assets/document.svg";
 
 const FileComplaintForm = () => {
   const { showModal, hideModal } = useModal();
@@ -149,8 +150,8 @@ const FileComplaintForm = () => {
         <div className="overflow-auto max-h-[70vh]">
           <form onSubmit={handleSubmit} className="mt-4">
             {!auth?.name && (
-              <div className="flex gap-4 mb-3">
-                <div className="w-1/2">
+              <div className="lg:flex lg:gap-4 mb-3">
+                <div className="lg:w-1/2 w-full mb-3">
                   <label
                     htmlFor="userName"
                     className="block font-bold mb-[4px] font-inter text-[24px] text-[#001A45]"
@@ -167,7 +168,7 @@ const FileComplaintForm = () => {
                     required
                   />
                 </div>
-                <div className="w-1/2">
+                <div className="lg:w-1/2 w-full">
                   <label
                     htmlFor="userEmail"
                     className="block font-bold mb-[4px] font-inter text-[24px] text-[#001A45]"
@@ -187,8 +188,8 @@ const FileComplaintForm = () => {
               </div>
             )}
 
-            <div className="mb-3">
-              <div className="w-full">
+            <div className="mb-3 lg:flex lg:gap-4">
+              <div className="w-full lg:w-1/2 mb-3">
                 <label
                   htmlFor="company"
                   className="block font-bold mb-[4px] font-inter text-[24px] text-[#001A45]"
@@ -224,7 +225,7 @@ const FileComplaintForm = () => {
                   Can't find your company? Add new
                 </p>
               </div>
-              <div className="w-full">
+              <div className="lg:w-1/2 w-full">
                 <label
                   htmlFor="title"
                   className="block font-bold mb-[4px] font-inter text-[24px] text-[#001A45]"
@@ -356,20 +357,28 @@ const FileComplaintForm = () => {
               </label>
               <p className="text-sm font-inter text-[#001A45]">
                 Please attach any valuable images or photos: payment screenshot,
-                the photo of the broken product etc.
+                the photo of the broken product, etc.
               </p>
               <p className="text-sm mb-2 font-inter text-[#001A45]">
                 Please note that the photos are public.
               </p>
-              <input
-                type="file"
-                className="block w-[312px] px-3 py-2 border h-[56px] border-[#001A45] rounded-[12px] border-opacity-50 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 hover:border-[#0450CF]"
-                id="photos"
-                onChange={(e) =>
-                  handleFileChange(e, setPhotos, setPhotoPreviews)
-                }
-                multiple
-              />
+              <div className="relative">
+                <input
+                  type="file"
+                  className="hidden"
+                  id="photos"
+                  onChange={(e) =>
+                    handleFileChange(e, setPhotos, setPhotoPreviews)
+                  }
+                  multiple
+                />
+                <label
+                  htmlFor="photos"
+                  className="w-full lg:w-1/2 h-[56px] px-3 py-2 border border-[#001A45] rounded-[12px] border-opacity-50text-center cursor-pointer flex items-center justify-center font-semibold"
+                >
+                  Add Photos
+                </label>
+              </div>
               {photoPreviews.length > 0 && (
                 <div className="flex flex-wrap gap-2 mt-2 font-inter text-[#001A45] ">
                   {photoPreviews.map((preview, index) => (
@@ -377,7 +386,7 @@ const FileComplaintForm = () => {
                       key={index}
                       src={preview}
                       alt={`Preview ${index}`}
-                      className="w-[80px] h-[80px] object-cover rounded-2xl "
+                      className="w-[80px] h-[80px] object-cover"
                     />
                   ))}
                 </div>
@@ -393,18 +402,30 @@ const FileComplaintForm = () => {
               <p className="text-sm mb-2 font-inter text-[#001A45]">
                 Please attach any documents. All the documents are private.
               </p>
-              <input
-                type="file"
-                className="block w-[312px] px-3 py-2 border h-[56px] border-[#001A45] rounded-[12px] border-opacity-50 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 hover:border-[#0450CF]"
-                id="documents"
-                onChange={(e) => handleFileChange(e, setDocuments)}
-                multiple
-              />
+              <div className="relative">
+                <input
+                  type="file"
+                  className="hidden"
+                  id="documents"
+                  onChange={(e) => handleFileChange(e, setDocuments)}
+                  multiple
+                />
+                <label
+                  htmlFor="documents"
+                  className="w-full h-[56px] px-3 py-2 border border-[#001A45] rounded-[12px] lg:w-1/2 border-opacity-50text-center cursor-pointer flex items-center justify-center font-semibold"
+                >
+                  Add Document
+                </label>
+              </div>
               {documents.length > 0 && (
-                <ul className="list-disc pl-5 mt-2 font-inter text-[#001A45] ">
+                <ul className="list-none mt-2 font-semibold font-inter text-[#001A45] ">
                   {documents.map((doc, index) => (
-                    <li key={index} className="text-sm">
-                      {doc.name}
+                    <li
+                      key={index}
+                      className="text-lg flex gap-2 border border-[#001A454D] mb-2 rounded-xl p-3 w-1/2"
+                    >
+                      <img src={document} />
+                      <span>{doc.name}</span>
                     </li>
                   ))}
                 </ul>
