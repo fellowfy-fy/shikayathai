@@ -62,7 +62,7 @@ const LoginComponent = () => {
   };
 
   return (
-    <div className="fixed inset-0 bg-gray-500 bg-opacity-75 flex justify-center items-center">
+    <div className="fixed inset-0 bg-gray-500 bg-opacity-75 flex justify-center items-center z-20">
       <div className="bg-white px-[24px] w-[800px] h-[513px] rounded-[32px] shadow-xl">
         <div className="modal-header flex justify-between items-center pb-3">
           <h5 className="modal-title mt-[76px] text-[#001A45] text-[32px] font-inter font-bold">

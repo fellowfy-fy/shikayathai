@@ -37,7 +37,7 @@ const ResolvedMessage = (rating) => {
 
   return (
     <div className="fixed inset-0 bg-gray-500 bg-opacity-75 flex justify-center items-center">
-      <div className="bg-white p-6 rounded-lg shadow-xl w-full max-w-md">
+      <div className="bg-white p-6 shadow-xl  w-[800px] mx-6 rounded-[32px]">
         <div className="flex flex-row-reverse items-center pb-3">
           <button onClick={hideModal} className="text-lg font-semibold">
             <img src={closeIcon} />
@@ -46,11 +46,16 @@ const ResolvedMessage = (rating) => {
 
         {/* Textarea */}
         <div>
-          <h1>Express your satisfaction by thanking the brand.</h1>
-          <p>Your Thank You Message</p>
+          <h1 className="font-inter font-semibold text-2xl mb-5">
+            Express your satisfaction by thanking the brand.
+          </h1>
+          <p className="font-inter font-bold text-lg mb-2">
+            Your Thank You Message
+          </p>
           <textarea
-            className="w-full p-2 border rounded-lg"
+            className="w-full p-2 border rounded-lg mb-5 border-[#001A45B2] border-opacity-70"
             value={comment}
+            placeholder="Placeholder"
             onChange={(e) => setComment(e.target.value)}
           />
         </div>

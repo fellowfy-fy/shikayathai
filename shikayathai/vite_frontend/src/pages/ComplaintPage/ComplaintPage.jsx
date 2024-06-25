@@ -49,7 +49,9 @@ const ComplaintDetail = () => {
   };
 
   const handleResolved = () => {
-    showModal(<ResolvedRating id={complaint.id} />);
+    showModal(
+      <ResolvedRating id={complaint.id} company_name={complaint.company_name} />
+    );
   };
 
   const renderStars = () => {

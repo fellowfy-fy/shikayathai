@@ -4,10 +4,12 @@ import star from "../../assets/star.svg";
 import ResolvedMessage from "./ResolvedMessage.jsx";
 import { useState } from "react";
 
-const ResolvedRating = (id) => {
+const ResolvedRating = (id, { company_name }) => {
   const { hideModal, showModal } = useModal();
   const [rating, setRating] = useState(0);
-
+  const company = company_name;
+  console.log("Hello");
+  console.log(company_name);
   const handleRatingClick = (value) => {
     setRating(value);
   };
@@ -15,7 +17,6 @@ const ResolvedRating = (id) => {
   const handleNext = () => {
     showModal(<ResolvedMessage rating={rating} id={id} />);
   };
-
   const renderStars = () => {
     return [20, 40, 60, 80, 100].map((starValue) => (
       <button key={starValue} onClick={() => handleRatingClick(starValue)}>
@@ -31,7 +32,7 @@ const ResolvedRating = (id) => {
 
   return (
     <div className="fixed inset-0 bg-gray-500 bg-opacity-75 flex justify-center items-center">
-      <div className="bg-white p-6 rounded-lg shadow-xl w-full max-w-md">
+      <div className="bg-white p-6 shadow-xl w-[800px] rounded-[32px] mx-6">
         <div className="flex flex-row-reverse items-center pb-3">
           <button onClick={hideModal} className="text-lg font-semibold">
             <img src={closeIcon} />
@@ -40,12 +41,14 @@ const ResolvedRating = (id) => {
 
         {/* Rating */}
         <div>
-          <h1>
-            Are you satisfied with the result of your GymCool brand complaint?
+          <h1 className="font-inter font-semibold text-2xl mb-5">
+            Are you satisfied with the result of your {company} brand complaint?
           </h1>
-          <p>1 Star: I am not happy at all</p>
-          <p>5 Star: I am very pleased</p>
-          <div className="flex flex-row gap-1">{renderStars()}</div>
+          <div className="font-inter font-medium text-lg mb-5">
+            <p>1 Star: I am not happy at all</p>
+            <p>5 Star: I am very pleased</p>
+          </div>
+          <div className="flex flex-row gap-1 mb-5">{renderStars()}</div>
         </div>
 
         {/* Button */}

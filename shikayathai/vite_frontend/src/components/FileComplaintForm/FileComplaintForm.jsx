@@ -126,7 +126,7 @@ const FileComplaintForm = () => {
   if (!isVisible) return null;
 
   return (
-    <div className="fixed inset-0 bg-gray-500 bg-opacity-50 flex justify-center items-center p-4">
+    <div className="fixed inset-0 bg-gray-500 bg-opacity-50 flex justify-center items-center p-4 z-20">
       <div className="relative bg-white p-6 rounded-[32px] shadow-lg w-full max-w-[800px] h-auto overflow-hidden">
         <div className="flex justify-between items-center mb-4">
           <h5 className="text-[23px] font-unbounded font-bold text-[#001A45]">

@@ -20,7 +20,7 @@ const CopyShare = ({ link, linkid }) => {
   };
 
   return (
-    <div className="fixed inset-0 bg-gray-600 bg-opacity-50 flex justify-center items-center">
+    <div className="fixed inset-0 bg-gray-600 bg-opacity-50 flex justify-center items-center z-20">
       <div className="bg-white p-4 rounded-[32px] max-w-[800px] w-full relative">
         <div className="w-[257px] h-4 flex justify-between items-center z-10 ">
           {/* Fully Opaque Part */}

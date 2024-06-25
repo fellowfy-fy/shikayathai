@@ -1,11 +1,11 @@
 import { useModal } from "../../context/ModalContext";
-import linkedin from "../../assets/linkedinLogo.svg"
-import close from "../../assets/close.svg"
+import linkedin from "../../assets/linkedinLogo.svg";
+import close from "../../assets/close.svg";
 import { useNavigate } from "react-router-dom";
 
 const LinkedInShareComponent = ({ link, linkid }) => {
   const { hideModal } = useModal();
-  const navigate = useNavigate()
+  const navigate = useNavigate();
 
   const shareOnLinkedIn = () => {
     const url = `https://www.linkedin.com/shareArticle?mini=true&url=${encodeURIComponent(link)}`;
@@ -14,11 +14,11 @@ const LinkedInShareComponent = ({ link, linkid }) => {
 
   const handleSkip = () => {
     hideModal();
-    navigate(`/complaints/${linkid}`)
+    navigate(`/complaints/${linkid}`);
   };
 
   return (
-    <div className="fixed inset-0 bg-gray-600 bg-opacity-50 flex justify-center items-center">
+    <div className="fixed inset-0 bg-gray-600 bg-opacity-50 flex justify-center items-center z-20">
       <div className="bg-white p-4 rounded-[32px] max-w-[800px] w-full relative">
         <div className="w-[257px] h-4 flex justify-between items-center z-10 ">
           {/* Fully Opaque Part */}
@@ -43,15 +43,18 @@ const LinkedInShareComponent = ({ link, linkid }) => {
         </button>
         <div className="text-sm md:text-base leading-relaxed p-4 mt-5 text-[#03132F]">
           <p className="font-unbounded font-bold text-2xl">
-          Share your complaint with others in LinkedIn
+            Share your complaint with others in LinkedIn
           </p>
-          <p>Share your complaint on social networks, the more people see it, the more chances there are for its speedy resolution</p>
+          <p>
+            Share your complaint on social networks, the more people see it, the
+            more chances there are for its speedy resolution
+          </p>
         </div>
         <button
           className="lg:h-[56px]  w-full py-2 mt-4 bg-[#001A45] text-white rounded-xl transition duration-150 ease-in-out flex flex-row justify-center items-center gap-2 font-inter text-lg hover:bg-opacity-70 active:bg-black"
           onClick={shareOnLinkedIn}
         >
-        <img src={linkedin} />
+          <img src={linkedin} />
           Share
         </button>
         <button
