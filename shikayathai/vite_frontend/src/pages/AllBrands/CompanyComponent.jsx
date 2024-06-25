@@ -13,17 +13,16 @@ const CompanyComponent = ({ company }) => {
   };
 
   return (
-    <div
-      className="bg-[#001A450D] bg-opacity-5 rounded-2xl p-4 w-[25rem] my-2"
-      onClick={handleReadMoreClick}
-    >
+    <div className="bg-[#001A450D] bg-opacity-5 rounded-2xl p-4 w-[25rem] my-2">
       {/* Company Logo and Name*/}
       <div className="flex flex-row mb-2">
         <div className="w-8 h-8 rounded-full bg-[#5ECDF0] text-white text-xl font-bold flex items-center justify-center mr-2">
           {company.name.charAt(0)}
           {company.name.charAt(1)}
         </div>
-        <div>{company.name}</div>
+        <div onClick={handleReadMoreClick} className="hover:cursor-pointer">
+          {company.name}
+        </div>
       </div>
       {/* Rating and Reviews */}
       <div className="flex flex-row text-sm gap-2">

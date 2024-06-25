@@ -19,6 +19,7 @@ import ResolvedRating from "./ResolvedRating.jsx";
 import useAuth from "../../hooks/useAuth.js";
 import "react-medium-image-zoom/dist/styles.css";
 import navigationArrow from "../../assets/navigationArrow.svg";
+import { useNavigate } from "react-router-dom";
 
 const options = {
   year: "numeric",
@@ -35,6 +36,7 @@ const ComplaintDetail = () => {
   const [complaint, setComplaint] = useState(null);
   const { showModal } = useModal();
   const [thumbnails, setThumbnails] = useState([]);
+  const navigate = useNavigate();
 
   const scrollContainerRef = useRef(null);
 
@@ -81,6 +83,14 @@ const ComplaintDetail = () => {
     return <div>Loading...</div>;
   }
 
+  const handleCompanyClick = () => {
+    if (complaint?.company) {
+      navigate(`/companies/${complaint.company}`);
+    } else {
+      console.log("No company ID available for navigation.");
+    }
+  };
+
   return (
     <div>
       <div className="p-6 bg-white rounded-lg mx-auto md:ml-[120px] md:mr-[120px]">
@@ -114,7 +124,10 @@ const ComplaintDetail = () => {
               <div className="w-5 h-5 rounded-full bg-purple-200 text-white text-xs font-bold flex justify-center mr-2 col-span-1">
                 {complaint.company_name.charAt(0)}
               </div>
-              <p className="text-sm text-gray-600 col-span-5">
+              <p
+                className="text-sm text-gray-600 col-span-5 hover:cursor-pointer"
+                onClick={handleCompanyClick}
+              >
                 {complaint.company_name}
               </p>
             </div>
