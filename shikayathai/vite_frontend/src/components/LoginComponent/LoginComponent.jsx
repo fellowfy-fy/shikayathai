@@ -83,8 +83,8 @@ const LoginComponent = () => {
           To create complaints and track their status
         </p>
         <form onSubmit={handleSubmit} className="space-y-4">
-          <div className="flex gap-4">
-            <div className="w-1/2">
+          <div className="lg:flex gap-4">
+            <div className="lg:w-1/2 w-full">
               <label
                 htmlFor="email"
                 className="block text-[#001A45] text-[24px] font-inter font-bold"
@@ -102,7 +102,7 @@ const LoginComponent = () => {
                 autoFocus
               />
             </div>
-            <div className="w-1/2">
+            <div className="lg:w-1/2 w-full">
               <label
                 htmlFor="name"
                 className="block text-[#001A45] text-[24px] font-inter font-bold"
