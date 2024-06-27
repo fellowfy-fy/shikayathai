@@ -48,7 +48,7 @@ const RegistrationComponent = () => {
 
   return (
     <div className="fixed inset-0 bg-gray-500 bg-opacity-75 flex justify-center items-center z-20">
-      <div className="bg-white px-[24px] lg:w-[800px] lg:h-[610px] lg:rounded-[32px] lg:shadow-xl h-auto overflow-hidden">
+      <div className="bg-white px-[24px] lg:w-[800px] lg:h-[610px] lg:rounded-[32px] h-full lg:shadow-xl overflow-hidden">
         <div className="modal-header flex justify-between items-center pb-3 overflow-auto">
           <h5 className="modal-title mt-[76px] text-[#001A45] text-[32px] font-inter font-bold">
             Create an account
