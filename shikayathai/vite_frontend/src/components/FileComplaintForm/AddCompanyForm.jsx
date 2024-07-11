@@ -61,10 +61,13 @@ const AddCompanyForm = ({ onBack, onSubmit, companyData, setCompanyData }) => {
   return (
     <div className="fixed inset-0 bg-gray-500 bg-opacity-50 flex justify-center items-center p-4 z-20">
       <div className="relative bg-white p-6 rounded-[32px] shadow-lg w-full max-w-[800px] h-auto overflow-hidden">
-        <div className="flex justify-between items-center mb-4">
+        <div className="flex-col justify-between items-center my-4">
           <h5 className="text-[23px] font-unbounded font-bold text-[#001A45]">
             Fill in the company information
           </h5>
+          <p className="text-xl mb-2 font-inter text-[#001A45]">
+            so that we can find this company faster
+          </p>
           <button
             className="absolute top-6 right-6 text-lg font-bold"
             onClick={hideModal}

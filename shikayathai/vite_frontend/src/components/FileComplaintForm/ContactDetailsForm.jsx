@@ -81,7 +81,7 @@ const ContactDetailsForm = ({ complaintData, onBack }) => {
             </label>
           </div>
           <div>
-            <p className="text-sm mb-2 font-inter text-[#001A45]">
+            <p className="text-xl mb-2 font-inter text-[#001A45]">
               Fill in the contact details so that we can send information about
               complaint review
             </p>
