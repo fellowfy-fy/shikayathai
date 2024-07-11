@@ -1,7 +1,8 @@
 import { useModal } from "../../context/ModalContext";
-import CopyShare from "../CopyShare/CopyShare";
 import close from "../../assets/close.svg";
 import facebook from "../../assets/facebookLogo.svg";
+import copy from "../../assets/ico-copy.svg";
+import linkedin from "../../assets/linkedinLogo.svg";
 
 const FacebookShareComponent = ({ link, linkid }) => {
   const { hideModal, showModal } = useModal();
@@ -10,9 +11,16 @@ const FacebookShareComponent = ({ link, linkid }) => {
     const url = `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(link)}`;
     window.open(url, "_blank");
   };
+  const shareOnLinkedIn = () => {
+    const url = `https://www.linkedin.com/shareArticle?mini=true&url=${encodeURIComponent(link)}`;
+    window.open(url, "_blank");
+  };
 
-  const handleSkip = () => {
-    showModal(<CopyShare link={link} linkid={linkid} />);
+  const handleCopy = () => {
+    navigator.clipboard.writeText(link).then(() => {
+      setCopied(true);
+      setTimeout(() => setCopied(false), 2000);
+    });
   };
 
   return (
@@ -23,22 +31,21 @@ const FacebookShareComponent = ({ link, linkid }) => {
           <div className="absolute top-[1.90rem] left-[25px] w-[90px] h-1 bg-[#0450CF] z-10"></div>
 
           {/* Semi-Transparent Part */}
-          <div className="absolute top-[1.90rem] left-[25px]  w-[250px] h-1 bg-[#f2f6fd]"></div>
+          <div className="absolute top-[1.90rem] left-[25px]  w-[250px] h-1 bg-[#0450CF]"></div>
 
           {/* Dots */}
           <div className="absolute left-6 top-6 w-[257px] flex justify-between items-center z-30">
             <div className="rounded-full bg-[#0450CF] w-4 h-4 z-20"></div>
             <div className="rounded-full bg-[#0450CF] w-4 h-4 z-20"></div>
-            <div className="rounded-full bg-[#f2f6fd] w-4 h-4 z-50"></div>
-            <div className="rounded-full bg-[#f2f6fd] w-4 h-4"></div>
+            <div className="rounded-full bg-[#0450CF] w-4 h-4 z-50"></div>
           </div>
+          <button
+            className="absolute top-6 right-6 text-lg font-bold"
+            onClick={hideModal}
+          >
+            <img src={close} alt="Close" />
+          </button>
         </div>
-        <button
-          className="absolute top-6 right-6 text-lg font-bold"
-          onClick={hideModal}
-        >
-          <img src={close} />
-        </button>
         <div className="text-sm md:text-base leading-relaxed p-4 mt-5 text-[#03132F]">
           <p className="font-unbounded font-bold text-2xl">
             Share your complaint with others in Facebook
@@ -48,16 +55,32 @@ const FacebookShareComponent = ({ link, linkid }) => {
             more chances there are for its speedy resolution
           </p>
         </div>
-        <button
-          className="lg:h-[56px]  w-full py-2 mt-4 bg-[#001A45] text-white rounded-xl transition duration-150 ease-in-out flex flex-row justify-center items-center gap-2 font-inter text-lg hover:bg-opacity-70 active:bg-black"
-          onClick={shareOnFacebook}
-        >
-          <img src={facebook} />
-          Share
-        </button>
+        <div className="w-full relative p-3 border rounded-[12px] border-[#001A45B2] border-opacity-70 mt-5">
+          <input type="text" readOnly value={link} className="link-input" />
+          <button className="absolute right-3" onClick={handleCopy}>
+            <img src={copy} />
+          </button>
+        </div>
+        <div className="flex gap-4">
+          {" "}
+          <button
+            className="lg:h-[56px]  w-full py-2 mt-4 bg-[#001A45] text-white rounded-xl transition duration-150 ease-in-out flex flex-row justify-center items-center gap-2 font-inter text-lg hover:bg-opacity-70 active:bg-black"
+            onClick={shareOnFacebook}
+          >
+            <img src={facebook} />
+            Share
+          </button>
+          <button
+            className="lg:h-[56px]  w-full py-2 mt-4 bg-[#001A45] text-white rounded-xl transition duration-150 ease-in-out flex flex-row justify-center items-center gap-2 font-inter text-lg hover:bg-opacity-70 active:bg-black"
+            onClick={shareOnLinkedIn}
+          >
+            <img src={linkedin} />
+            Share
+          </button>
+        </div>
         <button
           className="lg:h-[56px] w-full py-4 mt-5 bg-white border border-[#001A45] text-[#001A45] rounded-xl transition duration-150 ease-in-out font-inter hover:border-opacity-70 hover:text-opacity-70 active:border-opacity-70 active:text-opacity-70 active:bg-opacity-5"
-          onClick={handleSkip}
+          onClick={hideModal}
         >
           Skip
         </button>
