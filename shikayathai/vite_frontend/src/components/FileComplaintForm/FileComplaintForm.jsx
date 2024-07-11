@@ -74,21 +74,6 @@ const FileComplaintForm = () => {
     setShowAddCompanyFields(false);
   };
 
-  const refreshToken = async () => {
-    try {
-      const response = await axios.post("token/refresh/", {
-        refresh: auth?.refresh,
-      });
-      setAuth((prev) => ({
-        ...prev,
-        access: response.data.access,
-      }));
-    } catch (error) {
-      console.error("Error refreshing token:", error);
-      setAuth({});
-    }
-  };
-
   const handleSubmit = async (event) => {
     event.preventDefault();
 
@@ -104,7 +89,6 @@ const FileComplaintForm = () => {
     documents.forEach((document) => formData.append("documents", document));
 
     try {
-      await refreshToken(); // Refresh the token before making the request
       const response = await axios.post("complaints/create/", formData, {
         headers: {
           "Content-Type": "multipart/form-data",

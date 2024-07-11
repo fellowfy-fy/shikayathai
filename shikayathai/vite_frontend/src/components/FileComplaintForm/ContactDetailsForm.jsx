@@ -20,8 +20,7 @@ const ContactDetailsForm = ({ complaintData, onBack }) => {
         name: userName,
         email: userEmail,
       });
-      const { name, access, refresh } = registrationResponse.data;
-      setAuth({ name, access, refresh });
+      const { name, access } = registrationResponse.data;
 
       const formData = new FormData();
       formData.append("author", name);

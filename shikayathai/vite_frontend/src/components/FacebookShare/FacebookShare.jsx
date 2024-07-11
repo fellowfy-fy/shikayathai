@@ -1,3 +1,4 @@
+import React, { useState } from "react";
 import { useModal } from "../../context/ModalContext";
 import close from "../../assets/close.svg";
 import facebook from "../../assets/facebookLogo.svg";
@@ -6,11 +7,13 @@ import linkedin from "../../assets/linkedinLogo.svg";
 
 const FacebookShareComponent = ({ link, linkid }) => {
   const { hideModal, showModal } = useModal();
+  const [copied, setCopied] = useState(false); // State to track copy status
 
   const shareOnFacebook = () => {
     const url = `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(link)}`;
     window.open(url, "_blank");
   };
+
   const shareOnLinkedIn = () => {
     const url = `https://www.linkedin.com/shareArticle?mini=true&url=${encodeURIComponent(link)}`;
     window.open(url, "_blank");
@@ -56,25 +59,34 @@ const FacebookShareComponent = ({ link, linkid }) => {
           </p>
         </div>
         <div className="w-full relative p-3 border rounded-[12px] border-[#001A45B2] border-opacity-70 mt-5">
-          <input type="text" readOnly value={link} className="link-input" />
+          <input
+            type="text"
+            readOnly
+            value={link}
+            className="link-input w-1/2"
+          />
           <button className="absolute right-3" onClick={handleCopy}>
-            <img src={copy} />
+            <img src={copy} alt="Copy" />
           </button>
+          {copied && (
+            <span className="absolute right-10 top-3 text-green-500">
+              Copied!
+            </span>
+          )}
         </div>
         <div className="flex gap-4">
-          {" "}
           <button
             className="lg:h-[56px]  w-full py-2 mt-4 bg-[#001A45] text-white rounded-xl transition duration-150 ease-in-out flex flex-row justify-center items-center gap-2 font-inter text-lg hover:bg-opacity-70 active:bg-black"
             onClick={shareOnFacebook}
           >
-            <img src={facebook} />
+            <img src={facebook} alt="Facebook" />
             Share
           </button>
           <button
             className="lg:h-[56px]  w-full py-2 mt-4 bg-[#001A45] text-white rounded-xl transition duration-150 ease-in-out flex flex-row justify-center items-center gap-2 font-inter text-lg hover:bg-opacity-70 active:bg-black"
             onClick={shareOnLinkedIn}
           >
-            <img src={linkedin} />
+            <img src={linkedin} alt="LinkedIn" />
             Share
           </button>
         </div>

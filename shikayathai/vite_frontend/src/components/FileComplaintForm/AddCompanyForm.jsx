@@ -14,22 +14,7 @@ const AddCompanyForm = ({ onBack, onSubmit, companyData, setCompanyData }) => {
     companyData.brandWebsite || ""
   );
   const [error, setError] = useState(null);
-  const { auth, setAuth } = useAuth();
-
-  const refreshToken = async () => {
-    try {
-      const response = await axios.post("token/refresh/", {
-        refresh: auth?.refresh,
-      });
-      setAuth((prev) => ({
-        ...prev,
-        access: response.data.access,
-      }));
-    } catch (error) {
-      console.error("Error refreshing token:", error);
-      setAuth({});
-    }
-  };
+  const { auth } = useAuth();
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -43,7 +28,6 @@ const AddCompanyForm = ({ onBack, onSubmit, companyData, setCompanyData }) => {
     console.log(jsonData);
 
     try {
-      await refreshToken();
       const response = await axios.post("companies/create/", jsonData, {
         headers: {
           "Content-Type": "application/json",
