@@ -1,6 +1,7 @@
-from .serializers import CompanySerializer
-from rest_framework.permissions import AllowAny
+from django.db.models import Q
 from rest_framework.generics import RetrieveUpdateDestroyAPIView, ListCreateAPIView, ListAPIView, RetrieveAPIView
+from rest_framework.permissions import AllowAny
+from .serializers import CompanySerializer
 from .models import Company
 
 class CompanyDashboardView(RetrieveUpdateDestroyAPIView):
@@ -35,7 +36,16 @@ class ListCompanyView(ListAPIView):
     permission_classes = [AllowAny]
     
     def get_queryset(self):
-        return Company.objects.all()
+        queryset = Company.objects.all()
+        search_query = self.request.query_params.get('search', None)
+        if search_query:
+            queryset = queryset.filter(
+                Q(name__icontains=search_query) | 
+                Q(email__icontains=search_query) |
+                Q(website__icontains=search_query) |
+                Q(phone__icontains=search_query)
+            )
+        return queryset
 
 class CompanyDetailView(RetrieveAPIView):
     queryset = Company.objects.all()

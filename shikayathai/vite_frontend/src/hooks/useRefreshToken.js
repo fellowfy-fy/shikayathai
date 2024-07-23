@@ -9,7 +9,6 @@ const useRefreshToken = () => {
     const response = await api.post("/token/refresh/", {
       refresh: refreshToken,
     });
-    console.log(response);
     setAuth({
       access: response.data.access,
     });

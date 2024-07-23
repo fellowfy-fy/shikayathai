@@ -24,7 +24,7 @@ const FileComplaintForm = () => {
   const [photos, setPhotos] = useState([]);
   const [documents, setDocuments] = useState([]);
   const [companies, setCompanies] = useState([]);
-  const [showAddCompanyFields, setShowAddCompanyFields] = useState(false);
+  const [companyExists, setCompanyExists] = useState(true);
   const [error, setError] = useState(null);
   const [photoPreviews, setPhotoPreviews] = useState([]);
   const { auth, setAuth } = useAuth();
@@ -38,25 +38,27 @@ const FileComplaintForm = () => {
       fetchCompanies(company);
     } else {
       setCompanies([]);
+      setCompanyExists(true); // Reset to true when the input is cleared
     }
   }, [company]);
+
+  useEffect(() => {
+    // Set the title to the first 10 characters of the description
+    setTitle(description.substring(0, 10));
+  }, [description]);
 
   const fetchCompanies = useCallback(
     debounce(async (query) => {
       try {
         const response = await axios.get(`companies/list/?search=${query}`);
         setCompanies(response.data.results);
+        setCompanyExists(response.data.results.length > 0);
       } catch (error) {
         console.error("Error fetching companies:", error);
       }
     }, 300),
     []
   );
-
-  const handleNextStep = (event) => {
-    event.preventDefault();
-    setStep(2);
-  };
 
   const handleFileChange = (event, setFiles, setPreviews) => {
     const files = Array.from(event.target.files);
@@ -68,14 +70,8 @@ const FileComplaintForm = () => {
     }
   };
 
-  const handleCompanySelect = (companyName) => {
-    setCompany(companyName);
-    setCompanies([]);
-    setShowAddCompanyFields(false);
-  };
-
-  const handleSubmit = async (event) => {
-    event.preventDefault();
+  const handleSubmit = async () => {
+    event?.preventDefault();
 
     const formData = new FormData();
     formData.append("author", auth?.name);
@@ -97,6 +93,8 @@ const FileComplaintForm = () => {
       });
       const linkid = response.data.id;
       const complaintLink = `http://localhost/complaints/${linkid}`;
+      console.log("YES");
+      setStep(5);
       showModal(
         <FacebookShareComponent link={complaintLink} linkid={linkid} />
       );
@@ -104,8 +102,37 @@ const FileComplaintForm = () => {
       setError(error.response?.data?.message || "An error occurred");
     }
   };
+  const handleNextStep = (event) => {
+    event.preventDefault();
+    if (!companyExists && step === 1) {
+      setStep(2);
+    } else if (!auth?.name && step === 1) {
+      setStep(3);
+    } else {
+      handleSubmit();
+    }
+  };
+  const handleAddCompanySubmit = (companyData) => {
+    setCompany(companyData.company);
+    setBrandPhone(companyData.brandPhone);
+    setBrandEmail(companyData.brandEmail);
+    setBrandWebsite(companyData.brandWebsite);
+    setCompanyExists(true);
+    if (!auth?.name) {
+      setStep(3);
+    } else {
+      handleSubmit();
+    }
+  };
+  const handleContactDetailsSubmit = () => {
+    handleSubmit();
+  };
 
-  if (!auth?.name && step === 2) {
+  useEffect(() => {
+    console.log(step);
+  }, [step]);
+
+  if (!auth?.name && step === 3) {
     return (
       <ContactDetailsForm
         complaintData={{
@@ -119,22 +146,18 @@ const FileComplaintForm = () => {
           documents,
         }}
         onBack={() => setStep(1)}
+        onSubmit={handleContactDetailsSubmit}
+        companyExists={companyExists}
       />
     );
-  }
-
-  if (showAddCompanyFields) {
+  } else if (!companyExists && step === 2) {
     return (
       <AddCompanyForm
-        onBack={() => setShowAddCompanyFields(false)}
-        onSubmit={handleSubmit}
-        companyData={{ company, brandPhone, brandEmail, brandWebsite }}
-        setCompanyData={({ company, brandPhone, brandEmail, brandWebsite }) => {
-          setCompany(company);
-          setBrandPhone(brandPhone);
-          setBrandEmail(brandEmail);
-          setBrandWebsite(brandWebsite);
+        companyData={{
+          company,
         }}
+        onBack={() => setStep(1)}
+        onSubmit={handleAddCompanySubmit}
       />
     );
   }
@@ -168,10 +191,7 @@ const FileComplaintForm = () => {
           </div>
         )}
         <div className="overflow-auto max-h-[70vh]">
-          <form
-            onSubmit={auth?.name ? handleSubmit : handleNextStep}
-            className="mt-4"
-          >
+          <form onSubmit={handleNextStep} className="mt-4">
             <div className="mb-3">
               <label
                 htmlFor="company"
@@ -188,43 +208,8 @@ const FileComplaintForm = () => {
                 onChange={(e) => setCompany(e.target.value)}
                 required
               />
-              {companies.length > 0 && (
-                <ul className="list-group mt-2">
-                  {companies.map((comp) => (
-                    <li
-                      key={comp.id}
-                      className="list-group-item cursor-pointer p-2 border-b"
-                      onClick={() => handleCompanySelect(comp.name)}
-                    >
-                      {comp.name}
-                    </li>
-                  ))}
-                </ul>
-              )}
-              <p
-                className="cursor-pointer font-inter font-light text-[16px] text-blue-600 hover:underline mt-1"
-                onClick={() => setShowAddCompanyFields(true)}
-              >
-                Can't find your company? Add new
-              </p>
             </div>
-            <div className="w-full mb-4">
-              <label
-                htmlFor="title"
-                className="block font-bold mb-[4px] font-inter text-[24px] text-[#001A45]"
-              >
-                Title
-              </label>
-              <input
-                type="text"
-                className="block px-3 py-2 border h-[44px] border-[#001A45] rounded-[12px] border-opacity-50 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 hover:border-[#0450CF] font-inter text-[#001A45] placeholder-opacity-30 w-full"
-                placeholder="Title of Your complaint"
-                id="title"
-                value={title}
-                onChange={(e) => setTitle(e.target.value)}
-                required
-              />
-            </div>
+
             <div className="mb-3">
               <label
                 htmlFor="description"

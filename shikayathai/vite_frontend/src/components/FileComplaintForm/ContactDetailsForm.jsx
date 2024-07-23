@@ -1,11 +1,16 @@
-import React, { useState } from "react";
+import { useState, useEffect } from "react";
 import { useModal } from "../../context/ModalContext";
 import axios from "../../api/axios";
 import useAuth from "../../hooks/useAuth";
 import close from "../../assets/close.svg";
 import FacebookShareComponent from "../FacebookShare/FacebookShare";
 
-const ContactDetailsForm = ({ complaintData, onBack }) => {
+const ContactDetailsForm = ({
+  complaintData,
+  onBack,
+  onSubmit,
+  companyExists,
+}) => {
   const { showModal, hideModal } = useModal();
   const [userName, setUserName] = useState("");
   const [userEmail, setUserEmail] = useState("");

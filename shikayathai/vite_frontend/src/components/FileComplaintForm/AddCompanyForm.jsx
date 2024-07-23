@@ -3,18 +3,17 @@ import { useModal } from "../../context/ModalContext";
 import close from "../../assets/close.svg";
 import useAuth from "../../hooks/useAuth";
 import axios from "../../api/axios";
-import FileComplaintForm from "./FileComplaintForm";
+import FacebookShareComponent from "../FacebookShare/FacebookShare";
 
-const AddCompanyForm = ({ onBack, onSubmit, companyData, setCompanyData }) => {
-  const { hideModal, showModal } = useModal();
-  const [company, setCompany] = useState(companyData.company || "");
-  const [brandPhone, setBrandPhone] = useState(companyData.brandPhone || "");
-  const [brandEmail, setBrandEmail] = useState(companyData.brandEmail || "");
+const AddCompanyForm = ({ onBack, onSubmit, companyData, link, linkid }) => {
+  const { showModal, hideModal } = useModal();
+  const [company, setCompany] = useState(companyData?.company || "");
+  const [brandPhone, setBrandPhone] = useState(companyData?.brandPhone || "");
+  const [brandEmail, setBrandEmail] = useState(companyData?.brandEmail || "");
   const [brandWebsite, setBrandWebsite] = useState(
-    companyData.brandWebsite || ""
+    companyData?.brandWebsite || ""
   );
   const [error, setError] = useState(null);
-  const { auth } = useAuth();
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -25,18 +24,15 @@ const AddCompanyForm = ({ onBack, onSubmit, companyData, setCompanyData }) => {
       email: brandEmail,
       website: brandWebsite,
     };
-    console.log(jsonData);
 
     try {
       const response = await axios.post("companies/create/", jsonData, {
         headers: {
           "Content-Type": "application/json",
-          Authorization: `Bearer ${auth?.access}`,
         },
       });
       const companyId = response.data.id;
       onSubmit({ companyId, company, brandPhone, brandEmail, brandWebsite });
-      showModal(<FileComplaintForm />);
     } catch (error) {
       setError(error.response?.data?.message || "An error occurred");
     }
