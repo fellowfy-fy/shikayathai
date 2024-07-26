@@ -22,7 +22,7 @@ const Complaints = () => {
   }, []);
 
   return (
-    <div className="mx-[24px] md:mx-[120px] mt-2 text-[#1c1e22]">
+    <div className="mx-[24px] lg:mx-[120px] mt-2 text-[#1c1e22]">
       {/* 1 line */}
       <div className="flex flex-row gap-2 mb-10">
         <Link to="/" className="text-[#001A45] hover:underline">

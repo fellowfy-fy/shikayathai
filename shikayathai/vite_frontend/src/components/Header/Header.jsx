@@ -24,7 +24,7 @@ const Header = () => {
   };
 
   return (
-    <header className="bg-[rgb(0,26,69)] text-white lg:h-12 lg:w-full lg:flex lg:items-center lg:justify-center">
+    <header className="bg-[rgb(0,26,69)] text-white md:h-12 md:w-full md:flex md:items-center md:justify-center">
       <nav className="container  h-full flex items-center justify-between w-full">
         <Link className="flex items-center" to="/">
           <img src={logo} alt="Logo" className="w-6 mr-2" />
@@ -34,7 +34,7 @@ const Header = () => {
         </Link>
 
         <div
-          className="hidden lg:flex lg:items-center lg:justify-center w-full"
+          className="hidden md:flex md:items-center lg:justify-center w-full"
           id="navbarNav"
         >
           <ul className="flex justify-center items-center flex-grow">
@@ -95,7 +95,7 @@ const Header = () => {
           )}
         </div>
 
-        <div className="lg:hidden flex items-center">
+        <div className="md:hidden flex items-center">
           <button
             onClick={toggleMobileMenu}
             className="text-white focus:outline-none"
@@ -119,7 +119,7 @@ const Header = () => {
       </nav>
 
       {isMobileMenuOpen && (
-        <div className="lg:hidden">
+        <div className="md:hidden">
           <ul className="flex flex-col gap-[11px] py-[24px] items-left px-[24px] bg-[rgb(0,26,69)] text-white w-full">
             <li>
               <Link

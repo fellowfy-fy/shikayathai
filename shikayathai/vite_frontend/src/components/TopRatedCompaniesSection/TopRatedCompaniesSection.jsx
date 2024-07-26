@@ -23,12 +23,12 @@ const TopRatedCompaniesSection = () => {
   }
 
   return (
-    <section className="text-left sm:text-center px-[24px] sm:mx-[120px] py-[40px] sm:py[80px]">
+    <section className="text-left lg:text-center px-[24px] lg:px-[120px] py-[40px] sm:py[80px]">
       <h2 className="text-[24px] sm:text-[32px] font-unbounded font-bold text-[#001A45] mb-4">
         Top rated companies
       </h2>
       <nav>
-        <ul className="flex justify-left md:justify-center mb-8">
+        <ul className="flex justify-left lg:justify-center mb-8">
           <li>
             <Link
               to="/brands"
@@ -39,7 +39,7 @@ const TopRatedCompaniesSection = () => {
           </li>
         </ul>
       </nav>
-      <div className="flex flex-wrap justify-center gap-[8px]">
+      <div className="flex flex-wrap lg:justify-center gap-[8px]">
         {companies.map((company, index) => (
           <CompanyComponent key={index} company={company} />
         ))}

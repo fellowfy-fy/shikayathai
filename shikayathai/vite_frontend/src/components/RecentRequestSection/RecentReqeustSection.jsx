@@ -8,15 +8,13 @@ function RecentRequestSection() {
   const [requests, setRequests] = useState([]);
   const scrollContainerRef = useRef(null);
 
-
-  
   const scroll = (direction) => {
     if (scrollContainerRef.current) {
       const { current: scrollContainer } = scrollContainerRef;
-      if (direction === 'left') {
-        scrollContainer.scrollBy({ left: -200, behavior: 'smooth' });
+      if (direction === "left") {
+        scrollContainer.scrollBy({ left: -200, behavior: "smooth" });
       } else {
-        scrollContainer.scrollBy({ left: 200, behavior: 'smooth' });
+        scrollContainer.scrollBy({ left: 200, behavior: "smooth" });
       }
     }
   };
@@ -34,40 +32,51 @@ function RecentRequestSection() {
     fetchRequests();
   }, []);
 
-
-
   return (
-    <div className="text-left sm:text-center sm:py-[80px] pl-[24px] sm:ml-[120px] pt-10 bg-white relative">
+    <div className="text-left xl:text-center sm:py-[80px] pl-[24px] xl:ml-[120px] pt-10 bg-white relative">
       <h2 className="text-[24px] sm:text-[32px] pr-[24px] sm:pr-[120px] font-bold text-[#001A45] font-unbounded mb-4">
         Recent Requests
       </h2>
-      <Link to="complaints" className="text-[#001A45] pr-[24px] sm:pr-[120px] hover:underline">
-        Watch all 
+      <Link
+        to="complaints"
+        className="text-[#001A45] pr-[24px] sm:pr-[120px] hover:underline"
+      >
+        Watch all
       </Link>
       {requests.length > 0 ? (
         <div className="relative">
           <button
-            onClick={() => scroll('left')}
+            onClick={() => scroll("left")}
             className="absolute left-5 top-1/2 transform -translate-y-1/2 bg-white p-2 rotate-180 rounded-[16px] w-[40px] h-[40px] z-10 hidden lg:block"
           >
             <img src={arrow} />
           </button>
-          <div className="overflow-x-auto scrollbar-hide" ref={scrollContainerRef}>
+          <div
+            className="overflow-x-auto scrollbar-hide"
+            ref={scrollContainerRef}
+          >
             <div className="flex space-x-2 sm:space-x-8">
               {requests.map((request, index) => (
-                <FrameComponent key={index} data={request} className="min-w-[16rem]"/>
+                <FrameComponent
+                  key={index}
+                  data={request}
+                  className="min-w-[16rem]"
+                />
               ))}
             </div>
           </div>
           <button
-            onClick={() => scroll('right')}
+            onClick={() => scroll("right")}
             className="absolute right-[24px] sm:right-[120px] top-1/2 transform -translate-y-1/2 bg-white p-2 rounded-[16px] w-[40px] h-[40px] hidden lg:block"
           >
             <img src={arrow} />
           </button>
         </div>
       ) : (
-        <p className="text-[#001A45] pr-[24px] sm:pr-[120px]"> No recent requests available.</p>
+        <p className="text-[#001A45] pr-[24px] sm:pr-[120px]">
+          {" "}
+          No recent requests available.
+        </p>
       )}
     </div>
   );

@@ -3,7 +3,7 @@ import womanImage from "../assets/woman.png";
 
 const WhyFreeMob = () => {
   return (
-    <section className="flex flex-col items-start px-[24px] pt-[40px] gap-6 bg-[#CBFFBE] w-full h-[816px]">
+    <section className="flex flex-col items-start px-[24px] pt-[40px] pb-[268px] gap-6 bg-[#CBFFBE] w-full relative">
       <div className="flex flex-col items-start gap-3 w-full">
         <div className="flex flex-col items-start gap-4 w-full">
           <h1 className="text-[#001A45] font-unbounded font-bold text-[28px] leading-[35px]">
@@ -31,7 +31,7 @@ const WhyFreeMob = () => {
       <img
         src={womanImage}
         alt="Woman smiling"
-        className="relative w-[258px] h-[258px] -bottom-12"
+        className="absolute bottom-0 right-[1px] w-[258px] h-[258px]"
       />
     </section>
   );

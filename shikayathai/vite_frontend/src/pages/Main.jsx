@@ -26,10 +26,10 @@ const Main = () => {
   return (
     <main className="main">
       <div>
-        <div className="hidden lg:block">
+        <div className="hidden md:block">
           <HeroSection onFileComplaintClick={toggleFormVisibility} />
         </div>
-        <div className="lg:hidden">
+        <div className="md:hidden">
           <HeroMob />
           <ExtraMob onFileComplaintClick={toggleFormVisibility} />
         </div>
@@ -38,19 +38,19 @@ const Main = () => {
       <IntroSection />
 
       <div>
-        <div className="hidden lg:block">
+        <div className="hidden xl:block">
           <IntroSection2 />
         </div>
-        <div className="lg:hidden">
+        <div className="xl:hidden">
           <IntroSection2Mob />
         </div>
       </div>
 
       <div>
-        <div className="hidden lg:block">
+        <div className="hidden xl:block">
           <WhyFreeSection />
         </div>
-        <div className="lg:hidden">
+        <div className="xl:hidden">
           <WhyFreeMob />
         </div>
       </div>
