@@ -1,12 +1,14 @@
 import React, { useState } from "react";
 import { useModal } from "../../context/ModalContext";
 import close from "../../assets/close.svg";
+import loader from "../../assets/loader.svg";
 import useAuth from "../../hooks/useAuth";
 import axios from "../../api/axios";
 import FacebookShareComponent from "../FacebookShare/FacebookShare";
 
 const AddCompanyForm = ({ onBack, onSubmit, companyData, link, linkid }) => {
   const { showModal, hideModal } = useModal();
+  const { auth } = useAuth();
   const [company, setCompany] = useState(companyData?.company || "");
   const [brandPhone, setBrandPhone] = useState(companyData?.brandPhone || "");
   const [brandEmail, setBrandEmail] = useState(companyData?.brandEmail || "");
@@ -14,9 +16,11 @@ const AddCompanyForm = ({ onBack, onSubmit, companyData, link, linkid }) => {
     companyData?.brandWebsite || ""
   );
   const [error, setError] = useState(null);
+  const [loading, setLoading] = useState(false);
 
   const handleSubmit = async (event) => {
     event.preventDefault();
+    setLoading(true);
 
     const jsonData = {
       name: company,
@@ -35,6 +39,8 @@ const AddCompanyForm = ({ onBack, onSubmit, companyData, link, linkid }) => {
       onSubmit({ companyId, company, brandPhone, brandEmail, brandWebsite });
     } catch (error) {
       setError(error.response?.data?.message || "An error occurred");
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -140,9 +146,16 @@ const AddCompanyForm = ({ onBack, onSubmit, companyData, link, linkid }) => {
             </button>
             <button
               type="submit"
-              className="w-[48%] h-[55px] hover:bg-[#C9FF57] text-[#001A45] bg-[#B5F62B] active:bg-[#A9E922] text-[18px] font-semibold py-2 px-4 rounded-[12px]"
+              className="w-[48%] h-[55px] bg-[#B5F62B] active:bg-[#A9E922] text-[18px] font-semibold py-2 px-4 rounded-[12px] flex items-center justify-center"
+              disabled={loading}
             >
-              Send
+              {loading ? (
+                <img src={loader} alt="Loading" className="w-6 h-6" />
+              ) : auth?.name ? (
+                "Send"
+              ) : (
+                "Next"
+              )}
             </button>
           </div>
         </form>

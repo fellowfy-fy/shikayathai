@@ -1,8 +1,9 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { useModal } from "../../context/ModalContext";
 import axios from "../../api/axios";
-import useAuth from "../../hooks/useAuth";
 import close from "../../assets/close.svg";
+import loader from "../../assets/loader.svg";
+import useAuth from "../../hooks/useAuth";
 import FacebookShareComponent from "../FacebookShare/FacebookShare";
 
 const ContactDetailsForm = ({
@@ -15,10 +16,12 @@ const ContactDetailsForm = ({
   const [userName, setUserName] = useState("");
   const [userEmail, setUserEmail] = useState("");
   const [error, setError] = useState(null);
+  const [loading, setLoading] = useState(false);
   const { auth, setAuth } = useAuth();
 
   const handleSubmit = async (event) => {
     event.preventDefault();
+    setLoading(true);
 
     try {
       const registrationResponse = await axios.post("register/", {
@@ -53,8 +56,11 @@ const ContactDetailsForm = ({
       );
     } catch (error) {
       setError(error.response?.data?.message || "An error occurred");
+    } finally {
+      setLoading(false);
     }
   };
+
   return (
     <div className="fixed inset-0 bg-gray-500 bg-opacity-50 flex justify-center items-center p-4 z-20">
       <div className="relative bg-white p-6 rounded-[32px] shadow-lg w-full max-w-[800px] h-auto overflow-hidden">
@@ -136,9 +142,14 @@ const ContactDetailsForm = ({
           <div className="flex-col">
             <button
               type="submit"
-              className="w-full h-[55px] hover:bg-[#C9FF57] text-[#001A45] bg-[#B5F62B] active:bg-[#A9E922] text-[18px] font-semibold mb-5 px-4 rounded-[12px]"
+              className="w-full h-[55px] bg-[#B5F62B] active:bg-[#A9E922] text-[#001A45] text-[18px] font-semibold mb-5 px-4 rounded-[12px] flex items-center justify-center"
+              disabled={loading}
             >
-              Send
+              {loading ? (
+                <img src={loader} alt="Loading" className="w-6 h-6" />
+              ) : (
+                "Send"
+              )}
             </button>
             <button
               type="button"
