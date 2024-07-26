@@ -29,7 +29,7 @@ const HeroSection = () => {
   };
 
   return (
-    <section className="bg-[#FFD2BE] w-full rounded-bl-[30px] rounded-br-[30px] px-5 sm:px-24 md:px-30 pt-6 relative overflow-hidden">
+    <section className="bg-[#FFD2BE] w-full rounded-b-[30px] px-5 sm:px-24 md:px-30 pt-6 overflow-hidden">
       <div className="flex flex-col sm:flex-row items-start justify-between relative z-10">
         <div className="lg:pb-[106px] z-10 text-[#001A45]">
           <h1 className="flex flex-col text-[32px] lg:text-[55px] xl:text-[70px] 2xl:text-[120px] font-unbounded font-bold leading-tight">
@@ -62,7 +62,7 @@ const HeroSection = () => {
           <img
             className={`${
               windowWidth < 1830 ? "max-w-[600px]" : "max-w-[816px]"
-            } w-full h-auto object-contain mt-auto absolute right-0 bottom-0 z-20`}
+            } w-full h-auto mt-auto absolute right-0 bottom-0 z-20`}
             src={getImageSrc()}
             alt="Happy couple with smartphones"
           />
