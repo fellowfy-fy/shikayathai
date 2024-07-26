@@ -50,15 +50,36 @@ const FileComplaintForm = () => {
   const fetchCompanies = useCallback(
     debounce(async (query) => {
       try {
+        // Fetch all companies from the API
         const response = await axios.get(`companies/list/?search=${query}`);
-        setCompanies(response.data.results);
-        setCompanyExists(response.data.results.length > 0);
+        const allCompanies = response.data.results;
+
+        // Filter out companies that start with "The " and match the user's query
+        const filteredCompanies = allCompanies
+          .filter(
+            (comp) =>
+              !comp.name.startsWith("The ") &&
+              comp.name.toLowerCase().startsWith(query.toLowerCase())
+          )
+          .sort((a, b) => a.name.localeCompare(b.name)); // Optional: sort alphabetically
+
+        setCompanies(filteredCompanies);
+        setCompanyExists(filteredCompanies.length > 0);
       } catch (error) {
         console.error("Error fetching companies:", error);
       }
     }, 300),
     []
   );
+
+  const handleCompanyChange = (e) => {
+    setCompany(e.target.value);
+  };
+
+  const handleCompanySelect = (companyName) => {
+    setCompany(companyName);
+    setCompanies([]); // Clear the suggestions
+  };
 
   const handleFileChange = (event, setFiles, setPreviews) => {
     const files = Array.from(event.target.files);
@@ -102,6 +123,7 @@ const FileComplaintForm = () => {
       setError(error.response?.data?.message || "An error occurred");
     }
   };
+
   const handleNextStep = (event) => {
     event.preventDefault();
     if (!companyExists && step === 1) {
@@ -112,6 +134,7 @@ const FileComplaintForm = () => {
       handleSubmit();
     }
   };
+
   const handleAddCompanySubmit = (companyData) => {
     setCompany(companyData.company);
     setBrandPhone(companyData.brandPhone);
@@ -124,6 +147,7 @@ const FileComplaintForm = () => {
       handleSubmit();
     }
   };
+
   const handleContactDetailsSubmit = () => {
     handleSubmit();
   };
@@ -190,8 +214,8 @@ const FileComplaintForm = () => {
             {error}
           </div>
         )}
-        <div className="overflow-auto max-h-[70vh]">
-          <form onSubmit={handleNextStep} className="mt-4">
+        <div className="max-w-[750px]">
+          <form onSubmit={handleNextStep}>
             <div className="mb-3">
               <label
                 htmlFor="company"
@@ -199,15 +223,33 @@ const FileComplaintForm = () => {
               >
                 Company Name
               </label>
+              <p className="text-sm mb-2 font-inter text-[#001A45]">
+                Please enter the name of the company you are complaining about.
+              </p>
               <input
                 type="text"
-                className="block w-full px-3 py-2 border h-[44px] border-[#001A45] rounded-[12px] border-opacity-50 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 hover:border-[#0450CF] placeholder-opacity-30"
-                placeholder="Company"
                 id="company"
                 value={company}
-                onChange={(e) => setCompany(e.target.value)}
+                onChange={handleCompanyChange}
+                placeholder="Search for company"
+                className="block w-full px-3 py-2 border border-[#001A45] rounded-[12px] border-opacity-50 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 hover:border-[#0450CF] placeholder-opacity-30"
                 required
               />
+              {companies.length > 0 && (
+                <div className="absolute z-10 mt-2 w-[750px] bg-white border border-[#ccc] rounded-lg shadow-lg max-h-[200px] overflow-auto">
+                  <ul className="list-none p-0 m-0">
+                    {companies.map((comp) => (
+                      <li
+                        key={comp.id}
+                        className="p-2 hover:bg-gray-100 cursor-pointer"
+                        onClick={() => handleCompanySelect(comp.name)}
+                      >
+                        {comp.name}
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              )}
             </div>
 
             <div className="mb-3">
@@ -218,10 +260,10 @@ const FileComplaintForm = () => {
                 Complaint Description
               </label>
               <p className="text-sm mb-2 font-inter text-[#001A45]">
-                Include any details that will help Company to identify your case
-                and resolve your issue as soon as possible. E.g. order id,
-                receipt number, payment amount etc. Please note that the
-                complaint description is public, please don’t include any
+                Include any details that will help the company identify your
+                case and resolve your issue as soon as possible. E.g. order id,
+                receipt number, payment amount, etc. Please note that the
+                complaint description is public, so please don’t include any
                 personal details.
                 <button
                   onClick={handleInfoClick}
@@ -248,7 +290,7 @@ const FileComplaintForm = () => {
               </label>
               <p className="text-sm font-inter text-[#001A45]">
                 Please attach any valuable images or photos: payment screenshot,
-                the photo of the broken product, etc.
+                photo of the broken product, etc.
               </p>
               <p className="text-sm mb-2 font-inter text-[#001A45]">
                 Please note that the photos are public.
@@ -265,7 +307,7 @@ const FileComplaintForm = () => {
                 />
                 <label
                   htmlFor="photos"
-                  className="w-full lg:w-1/2 h-[56px] px-3 py-2 border border-[#001A45] rounded-[12px] border-opacity-50text-center cursor-pointer flex items-center justify-center font-semibold"
+                  className="w-full lg:w-1/2 h-[56px] px-3 py-2 border border-[#001A45] rounded-[12px] text-center cursor-pointer flex items-center justify-center font-semibold"
                 >
                   Add Photos
                 </label>
@@ -303,7 +345,7 @@ const FileComplaintForm = () => {
                 />
                 <label
                   htmlFor="documents"
-                  className="w-full h-[56px] px-3 py-2 border border-[#001A45] rounded-[12px] lg:w-1/2 border-opacity-50text-center cursor-pointer flex items-center justify-center font-semibold"
+                  className="w-full h-[56px] px-3 py-2 border border-[#001A45] rounded-[12px] lg:w-1/2 text-center cursor-pointer flex items-center justify-center font-semibold"
                 >
                   Add Document
                 </label>
