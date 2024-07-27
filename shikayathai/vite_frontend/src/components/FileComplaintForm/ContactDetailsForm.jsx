@@ -50,7 +50,7 @@ const ContactDetailsForm = ({
         },
       });
       const linkid = response.data.id;
-      const complaintLink = `http://localhost/complaints/${linkid}`;
+      const complaintLink = `https://shikayathai.com/complaints/${linkid}`;
       showModal(
         <FacebookShareComponent link={complaintLink} linkid={linkid} />
       );

@@ -113,7 +113,7 @@ const FileComplaintForm = () => {
         },
       });
       const linkid = response.data.id;
-      const complaintLink = `http://localhost/complaints/${linkid}`;
+      const complaintLink = `https://shikayathai.com/complaints/${linkid}`;
       console.log("YES");
       setStep(5);
       showModal(
