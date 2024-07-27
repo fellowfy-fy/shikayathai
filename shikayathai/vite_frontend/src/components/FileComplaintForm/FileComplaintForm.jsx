@@ -188,7 +188,7 @@ const FileComplaintForm = () => {
 
   return (
     <div className="fixed inset-0 bg-gray-500 bg-opacity-50 flex justify-center items-center p-4 z-20">
-      <div className="relative bg-white p-6 rounded-[32px] shadow-lg w-full max-w-[800px] h-auto overflow-hidden">
+      <div className="relative bg-white p-6 rounded-[32px] shadow-lg w-full max-w-[800px] h-auto overflow-hidden max-h-[80vh] overflow-y-auto">
         <div className="w-[257px] py-5 h-4 flex justify-between items-center z-10 ">
           <div className="absolute top-[1.90rem] left-[25px] w-[90px] h-1 bg-[#f2f6fd] z-10"></div>
           <div className="absolute top-[1.90rem] left-[25px]  w-[250px] h-1 bg-[#f2f6fd]"></div>

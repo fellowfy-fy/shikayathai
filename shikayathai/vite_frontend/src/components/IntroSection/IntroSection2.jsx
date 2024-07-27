@@ -12,7 +12,7 @@ const IntroSection2 = () => {
   };
 
   return (
-    <section className="sm:px-30 px-[120px] py-5 sm:pt-40 sm:pb-20 bg-white">
+    <section className="sm:px-30 px-[120px] py-5 sm:pt-40 sm:pb-20 bg-white scale-20">
       <div className="mb-8 text-center">
         <h1 className="text-[64px] font-unbounded font-bold text-[#001A45]">
           How it works?
@@ -23,9 +23,9 @@ const IntroSection2 = () => {
         </p>
       </div>
 
-      <div className="flex flex-col md:flex-row justify-center items-center text-center flex-wrap">
+      <div className="flex flex-row justify-center items-center text-center">
         <div className="flex flex-col items-center mt-24">
-          <div className="w-[120px] h-[120px] text-[48px] rounded-full bg-[#CBFFBE] text-[#598E4B] font-unbounded font-bold mb-2 flex items-center justify-center">
+          <div className="lg:w-[90px] lg:h-[90px] xl:w-[120px] xl:h-[120px] text-[48px] rounded-full bg-[#CBFFBE] text-[#598E4B] font-unbounded font-bold mb-2 flex items-center justify-center">
             1
           </div>
           <h3 className="text-xl sm:text-3xl font-inter font-bold mb-2 text-[#001A45] text-center">
@@ -38,10 +38,10 @@ const IntroSection2 = () => {
         <img
           src={arrow_up}
           alt="Arrow up"
-          className="left-[432px] top-0 w-[240px] h-[47px]"
+          className="w-[240px] h-[47px] self-start mt-[100px]"
         />
         <div className="flex flex-col items-center mt-24 md:mt-36">
-          <div className="w-[120px] h-[120px] text-[48px] rounded-full bg-[#CBFFBE] text-[#598E4B] font-unbounded font-bold mb-2 flex items-center justify-center">
+          <div className="lg:w-[90px] lg:h-[90px] xl:w-[120px] xl:h-[120px] text-[48px] rounded-full bg-[#CBFFBE] text-[#598E4B] font-unbounded font-bold mb-2 flex items-center justify-center">
             2
           </div>
           <h3 className="text-xl sm:text-3xl font-inter font-bold mb-2 text-[#001A45] text-center">
@@ -52,9 +52,13 @@ const IntroSection2 = () => {
             the company and making your case public.
           </p>
         </div>
-        <img src={arrow_down} alt="Arrow down" className="w-[240px] h-[47px]" />
+        <img
+          src={arrow_down}
+          alt="Arrow down"
+          className="w-[240px] h-[47px] self-end mb-[100px]"
+        />
         <div className="flex flex-col items-center mt-24">
-          <div className="w-[120px] h-[120px] text-[48px] rounded-full bg-[#CBFFBE] text-[#598E4B] font-unbounded font-bold mb-2 flex items-center justify-center">
+          <div className="lg:w-[90px] lg:h-[90px] xl:w-[120px] xl:h-[120px] text-[48px] rounded-full bg-[#CBFFBE] text-[#598E4B] font-unbounded font-bold mb-2 flex items-center justify-center">
             3
           </div>
           <h3 className="text-xl sm:text-3xl font-inter font-bold mb-2 text-[#001A45] text-center">

@@ -26,6 +26,10 @@ const FacebookShareComponent = ({ link, linkid }) => {
     });
   };
 
+  const handleSkip = () => {
+    window.location.href = link; // Redirect to the copied link
+  };
+
   return (
     <div className="fixed inset-0 bg-gray-600 bg-opacity-50 flex justify-center items-center z-20">
       <div className="bg-white p-4 rounded-[32px] max-w-[800px] w-full relative">
@@ -92,7 +96,7 @@ const FacebookShareComponent = ({ link, linkid }) => {
         </div>
         <button
           className="lg:h-[56px] w-full py-4 mt-5 bg-white border border-[#001A45] text-[#001A45] rounded-xl transition duration-150 ease-in-out font-inter hover:border-opacity-70 hover:text-opacity-70 active:border-opacity-70 active:text-opacity-70 active:bg-opacity-5"
-          onClick={hideModal}
+          onClick={handleSkip}
         >
           Skip
         </button>

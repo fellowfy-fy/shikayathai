@@ -24,7 +24,7 @@ const IntroSection2Mob = () => {
       <div>
         <div className="flex flex-col items-start gap-6 w-full">
           <div className="flex flex-row items-start gap-3 w-full">
-            <div className="w-6 h-6 bg-[#FFD2BE] rounded-full"></div>
+            <div className="w-6 h-6 bg-[#FFD2BE] rounded-full shrink-0"></div>
             <div className="flex flex-col gap-2 flex-grow">
               <h3 className="font-inter font-bold text-xl leading-6 text-[#001A45]">
                 Describe Your Issue:
@@ -36,7 +36,7 @@ const IntroSection2Mob = () => {
           </div>
 
           <div className="flex flex-row items-start gap-3 w-full">
-            <div className="w-6 h-6 bg-[#FFD2BE] rounded-full"></div>
+            <div className="w-6 h-6 bg-[#FFD2BE] rounded-full shrink-0"></div>
             <div className="flex flex-col gap-2 flex-grow">
               <h3 className="font-inter font-bold text-xl leading-6 text-[#001A45]">
                 Submit:
@@ -49,7 +49,7 @@ const IntroSection2Mob = () => {
           </div>
 
           <div className="flex flex-row items-start gap-3 w-full">
-            <div className="w-6 h-6 bg-[#FFD2BE] rounded-full"></div>
+            <div className="w-6 h-6 bg-[#FFD2BE] rounded-full shrink-0"></div>
             <div className="flex flex-col gap-2 flex-grow">
               <h3 className="font-inter font-bold text-xl leading-6 text-[#001A45]">
                 See Results:
