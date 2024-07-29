@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { useModal } from "../../context/ModalContext";
 import FileComplaintForm from "../FileComplaintForm/FileComplaintForm.jsx";
-import hero_1 from "../../assets/hero_1.svg";
-import hero_mob from "../../assets/hero_mob.svg";
+import hero_1 from "../../assets/hero_1.webp";
+import hero_mob from "../../assets/hero_mob.webp";
 
 const HeroSection = () => {
   const { showModal } = useModal();

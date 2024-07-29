@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import hero_mob from "../../assets/hero_mob.svg";
+import hero_mob from "../../assets/hero_mob.webp";
 
 const HeroMob = () => {
   const handleResize = () => {
