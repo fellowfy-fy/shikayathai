@@ -54,9 +54,6 @@ const SuccessBanner = ({ id }) => {
           >
             <img src={facebookIcon} alt="Facebook" />
           </button>
-          <button className="w-[64px] h-[64px] bg-transparent mr-[8px]">
-            <img src={googleIcon} alt="Google" />
-          </button>
           <button
             className="w-[64px] h-[64px] bg-transparent mr-[8px]"
             onClick={shareOnLinkedIn}
