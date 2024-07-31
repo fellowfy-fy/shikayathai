@@ -5,6 +5,8 @@ __pycache__/
 *.pyc
 virtenv/
 .DS_store
+.DS_Store
 media/
 migrations/
 venv/
+shikayathai/backend/ENV/
