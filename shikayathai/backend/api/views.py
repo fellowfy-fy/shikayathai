@@ -96,9 +96,6 @@ class CreateUserView(ListCreateAPIView):
         if not email:
             raise ValidationError({'message': 'Email is required.'})
 
-        # Check if user already exists
-        if User.objects.filter(name=name).exists():
-            raise ValidationError({'message': 'Username already exists.'})
         if User.objects.filter(email=email).exists():
             raise ValidationError({'message': 'Username with this email already exists.'})
 

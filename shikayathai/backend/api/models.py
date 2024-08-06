@@ -27,7 +27,7 @@ class User(AbstractBaseUser, PermissionsMixin):
             instance.name,
             "userpic.png")
     
-    name = models.CharField(max_length=255, unique=True)
+    name = models.CharField(max_length=255)
     email = models.EmailField(unique=True)
     userpic = models.ImageField(upload_to=userpic_path, default='default/userpic.png')
     is_active = models.BooleanField(default=True)
